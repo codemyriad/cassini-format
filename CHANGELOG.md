@@ -5,7 +5,9 @@ a file by its `CASSINI_FORMAT` tag.
 
 ## v3 — `org.cassini.portable-meeting/3` (2026-08-29)
 
-Current producer format.
+Current producer format. The number is contested: the format freeze written the
+day before proposed publishing the renamed format as `<name>/2`, which `/3` now
+cuts across. See [freeze item 6](design/format-freeze-2026-08-28.md#6-publish-as-version-2-must).
 
 * Recording identity moves from decoded PCM to the compressed Opus audio:
   `integrity.matchPolicy = exact-opus-audio-v1`, digest in
@@ -15,6 +17,8 @@ Current producer format.
 * The digest excludes `OpusTags` and Ogg framing, so it survives a
   metadata-only remux and is not self-referential.
 * Manifest and OpusTag layout are unchanged from v2.
+* `containerSha256` dropped. `matchPolicy` survives and the freeze proposal
+  wants it gone.
 
 ## v2 — `org.cassini.portable-meeting/2` (2026-05-12)
 
