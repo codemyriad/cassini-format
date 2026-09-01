@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cassini.local/spec/cassini-portable-meeting-manifest-v2.schema.json",
   "title": "Cassini Portable Meeting Manifest v2",
+  "description": "This schema is deliberately open. Every object below accepts members it does not declare, except integrity and every payloadRef, and a consumer MUST ignore a manifest member it does not recognise, at any depth, rather than treat its presence as an error. Those two objects are the exception because everything in them is an instruction, for reassembling bytes or for deciding whether this audio and this transcript belong together, so an unrecognised member there is a decode or verification failure and not a lost hint. Adding a member to either one is a new major version. Being open does not mean the file may be anything: every member this schema does declare keeps the type and the meaning declared here.",
   "type": "object",
-  "additionalProperties": false,
   "required": [
     "kind",
     "version",
@@ -15,7 +15,7 @@
     "transcripts"
   ],
   "properties": {
-    "kind": { "const": "cassini-portable-meeting" },
+    "kind": { "const": "cassini-portable-meeting", "description": "The literal string that says this document is a portable meeting manifest. It does not vary, in any version of the format." },
     "version": { "const": 2 },
     "profile": { "const": "ogg-opus" },
     "meeting": { "$ref": "#/$defs/meeting" },
@@ -36,7 +36,7 @@
     },
     "provenance": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. A new kind of provenance is the likeliest addition of all: meetingSummary, attribution and wordTimings were each exactly that, and each cost a version bump under a closed schema.",
       "properties": {
         "speechToText": {
           "type": "object",
@@ -65,7 +65,7 @@
   "$defs": {
     "meeting": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. Meeting metadata is open-ended by nature, and nothing in it is load-bearing for decoding, so a member a consumer does not recognise is ignored.",
       "required": ["id", "title", "createdAtUtc", "durationMs"],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
@@ -84,7 +84,7 @@
     },
     "audio": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. Descriptive, not instructional: it restates what the Ogg stream already says, so a consumer that ignores a member it does not recognise loses nothing.",
       "required": ["container", "codec", "sampleRate", "channels", "sampleCount", "durationMs"],
       "properties": {
         "container": { "const": "ogg" },
@@ -98,6 +98,7 @@
     "integrity": {
       "type": "object",
       "additionalProperties": false,
+      "description": "CLOSED. A member here that a consumer does not recognise is a verification failure and not a hint: a consumer that ignored an unrecognised digest field would report a file as verified while ignoring the field that defines its identity. Adding a member to this object is a new major version, and that is the deliberate price of the open-world rule everywhere else.",
       "required": ["matchPolicy", "pcmFormat", "pcmSha256", "sampleRate", "channels", "sampleCount", "durationMs"],
       "properties": {
         "matchPolicy": { "const": "exact-pcm" },
@@ -112,7 +113,7 @@
     },
     "speaker": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. The two-string speaker is deliberate, but a colour or an external identity is a hint and not an instruction, so a member a consumer does not recognise is ignored.",
       "required": ["id", "label"],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
@@ -121,7 +122,7 @@
     },
     "transcriptEntry": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. Everything load-bearing is in required, so a missing or misspelled one is still an error, and anything else is a hint a consumer may ignore.",
       "required": ["id", "role", "format", "payloadRef"],
       "properties": {
         "id": { "$ref": "#/$defs/transcriptId" },
@@ -131,12 +132,13 @@
         "language": { "type": "string" },
         "wordCount": { "type": "integer", "minimum": 0 },
         "createdAtUtc": { "type": "string", "format": "date-time" },
+        "sourceTranscriptId": { "$ref": "#/$defs/transcriptId", "description": "The transcript this one was derived from. Expected on human-corrected and translation entries; a raw-asr entry MUST NOT carry it. The id must name a transcript this file declares." },
         "payloadRef": { "$ref": "#/$defs/payloadRef" }
       }
     },
     "readableTranscriptEntry": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. Same grounds as transcriptEntry: everything load-bearing is in required, so a missing or misspelled one is still an error, and anything else is a hint a consumer may ignore.",
       "required": ["id", "role", "format", "sourceTranscriptId", "payloadRef"],
       "properties": {
         "id": { "$ref": "#/$defs/transcriptId" },
@@ -144,18 +146,21 @@
         "default": { "type": "boolean" },
         "format": { "type": "string", "minLength": 1 },
         "language": { "type": "string" },
-        "sourceTranscriptId": { "$ref": "#/$defs/transcriptId" },
+        "wordCount": { "type": "integer", "minimum": 0 },
+        "sourceTranscriptId": { "$ref": "#/$defs/transcriptId", "description": "The entry this readable rendering was made from. Required here. The id must name a transcript this file declares, in either array." },
         "createdAtUtc": { "type": "string", "format": "date-time" },
         "payloadRef": { "$ref": "#/$defs/payloadRef" }
       }
     },
     "transcriptId": {
       "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$"
+      "pattern": "^[a-z0-9][a-z0-9-]{0,31}$",
+      "description": "Lowercase, and no underscore. A transcript's tag prefix is its id upper-cased with - replaced by _, so raw-asr and raw_asr would both address CASSINI_TX_RAW_ASR_PAYLOAD_: two entries, one chunk set, one body lost with no error anywhere."
     },
     "payloadRef": {
       "type": "object",
       "additionalProperties": false,
+      "description": "CLOSED. A member here that a consumer does not recognise is a decode failure and not a hint: everything in this object is an instruction for reassembling bytes, and a consumer that ignored one would build the wrong bytes and then fail the digest it was given. Adding a member to this object is a new major version.",
       "required": ["prefix", "chunkCount", "sha256", "rawBytes", "gzipBytes", "mime", "encoding"],
       "properties": {
         "prefix": {
@@ -172,7 +177,7 @@
     },
     "processingStep": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. Every member is optional and every member is a note about how one stage ran, so a consumer ignores what it does not recognise.",
       "properties": {
         "backend": { "type": "string" },
         "engine": { "type": "string" },
@@ -187,7 +192,7 @@
     },
     "attributionProvenance": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. The five required counters are what a consumer needs to read the record; a sixth statistic is a hint.",
       "required": ["ran", "mode", "wordsMeasured", "wordsFlagged", "wordsDropped"],
       "properties": {
         "ran": { "type": "boolean", "description": "Whether the cross-track attribution stage ran against this file's default raw transcript." },
@@ -201,16 +206,15 @@
     },
     "wordTimingProvenance": {
       "type": "object",
-      "additionalProperties": false,
       "required": ["endsBoundedByAudio"],
-      "description": "How the producer decided where each word ends. Absent on files produced before the rule changed, and on files whose speech recognizer makes no such guarantee. Absent means only that the guarantee was not made: the ends may be token-derived, in which case a word's end came from its last token including a trailing punctuation mark \u2014 a mark the recognizer stamps at the next acoustic onset, so such a word can run for seconds while its speaker is silent \u2014 or they may be sound and simply undeclared. A consumer keys off presence: absent means those ends are unvouched-for and a repair that clips an over-long word is appropriate; present means they were measured against the speaker's own audio and clipping them destroys correct timing.",
+      "description": "How the producer decided where each word ends. Absent on files produced before the rule changed, and on files whose speech recognizer makes no such guarantee. Absent means only that the guarantee was not made: the ends may be token-derived, in which case a word's end came from its last token including a trailing punctuation mark \u2014 a mark the recognizer stamps at the next acoustic onset, so such a word can run for seconds while its speaker is silent \u2014 or they may be sound and simply undeclared. A consumer keys off presence: absent means those ends are unvouched-for and a repair that clips an over-long word is appropriate; present means they were measured against the speaker's own audio and clipping them destroys correct timing. Open: one required boolean, and the object is built around presence rather than exhaustiveness.",
       "properties": {
         "endsBoundedByAudio": { "type": "boolean", "description": "True when each word's end was measured against its own speaker's track rather than taken from its last token's timestamp." }
       }
     },
     "chapter": {
       "type": "object",
-      "additionalProperties": false,
+      "description": "Open. endMs was added at v2 and made every v1 chapter that already carried it invalid, which is the bug this rule exists to prevent.",
       "required": ["startMs", "title"],
       "properties": {
         "startMs": { "type": "integer", "minimum": 0 },

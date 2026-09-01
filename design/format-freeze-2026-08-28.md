@@ -2,10 +2,9 @@
 
 Date: 2026-08-28
 Status: proposal, mostly outstanding
-Source: <https://silvio-cassini-format-freeze.pgs.sh/> (drafted with Claude Code
-over two multi-agent review passes of the gocassini repo, each finding put
-through an adversarial verification pass; the measured claims were re-run in a
-checkout)
+Source: <https://silvio-cassini-format-freeze.pgs.sh/> (two review passes over
+the gocassini repo, each finding put through an adversarial verification pass;
+the measured claims were re-run in a checkout)
 
 Publishing the format freezes it. Tag names, the manifest schema and the media
 types become someone else's compatibility problem the moment a third party
@@ -16,7 +15,7 @@ by rerunning the measurements.
 
 ## 1. Hash the audio packets, not decoded PCM (must)
 
-**Landed** in `org.cassini.portable-meeting/3` on 2026-08-29 as
+**Landed** in `org.cassini.portable-meeting/1` on 2026-08-29 as
 `exact-opus-audio-v1`. See [`../spec/cassini-opus-audio-integrity-v1.md`](../spec/cassini-opus-audio-integrity-v1.md).
 
 The reason it had to change: Opus decoders don't guarantee bit-exact output, and
@@ -123,7 +122,7 @@ exactly what makes this rename risky.
 
 ## 6. Publish as version 2 (must)
 
-**Contradicted by what shipped.** gocassini went to `org.cassini.portable-meeting/3`
+**Contradicted by what shipped.** gocassini went to `org.cassini.portable-meeting/1`
 on 2026-08-29, a day after this was written.
 
 Files already in users' hands say `org.cassini.portable-meeting/1` and `/2`. If

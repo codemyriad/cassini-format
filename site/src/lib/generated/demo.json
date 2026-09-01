@@ -1,0 +1,4618 @@
+{
+	"generatedFrom": "lantern-festival.opus",
+	"bytes": 1898866,
+	"audio": {
+		"codec": "opus",
+		"sampleRate": 48000,
+		"channels": 1
+	},
+	"tagNames": [
+		"CASSINI_AUDIO_CHANNELS",
+		"CASSINI_AUDIO_DURATION_MS",
+		"CASSINI_AUDIO_MATCH_POLICY",
+		"CASSINI_AUDIO_OPUS_SHA256",
+		"CASSINI_AUDIO_SAMPLE_COUNT",
+		"CASSINI_AUDIO_SAMPLE_RATE",
+		"CASSINI_CREATED_AT",
+		"CASSINI_DECODE_HINT",
+		"CASSINI_FORMAT",
+		"CASSINI_MEETING_ID",
+		"CASSINI_PAYLOAD_000",
+		"CASSINI_PAYLOAD_CHUNK_COUNT",
+		"CASSINI_PAYLOAD_ENCODING",
+		"CASSINI_PAYLOAD_GZIP_BYTES",
+		"CASSINI_PAYLOAD_MIME",
+		"CASSINI_PAYLOAD_RAW_BYTES",
+		"CASSINI_PAYLOAD_SCHEMA",
+		"CASSINI_PAYLOAD_SHA256",
+		"CASSINI_PROCESSED_AT",
+		"CASSINI_PROFILE",
+		"CASSINI_RECORDED_AT_LOCAL",
+		"CASSINI_SPEAKER_COUNT",
+		"CASSINI_TRANSCRIPT_DEFAULT",
+		"CASSINI_TRANSCRIPT_IDS",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_000",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_001",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_002",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_ENCODING",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_GZIP_BYTES",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_MIME",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_RAW_BYTES",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_SHA256",
+		"DATE",
+		"TITLE",
+		"comment",
+		"encoder"
+	],
+	"commentCount": 37,
+	"chunkTagCount": 4,
+	"readableTags": {
+		"CASSINI_AUDIO_CHANNELS": "1",
+		"CASSINI_AUDIO_DURATION_MS": "239713",
+		"CASSINI_AUDIO_MATCH_POLICY": "exact-opus-audio-v1",
+		"CASSINI_AUDIO_OPUS_SHA256": "8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
+		"CASSINI_AUDIO_SAMPLE_COUNT": "11506248",
+		"CASSINI_AUDIO_SAMPLE_RATE": "48000",
+		"CASSINI_CREATED_AT": "2026-04-15T09:12:00Z",
+		"CASSINI_DECODE_HINT": "Concatenate CASSINI_PAYLOAD_000..N for the manifest; for a transcript body concatenate CASSINI_TX_<ID>_PAYLOAD_000..N. Each chunk set: base64url decode, gzip decompress, parse UTF-8 JSON.",
+		"CASSINI_FORMAT": "org.cassini.portable-meeting/1",
+		"CASSINI_MEETING_ID": "mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
+		"CASSINI_PAYLOAD_CHUNK_COUNT": "1",
+		"CASSINI_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
+		"CASSINI_PAYLOAD_GZIP_BYTES": "1142",
+		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
+		"CASSINI_PAYLOAD_RAW_BYTES": "2127",
+		"CASSINI_PAYLOAD_SCHEMA": "https://cassini.local/spec/cassini-portable-meeting-manifest-v1.schema.json",
+		"CASSINI_PAYLOAD_SHA256": "71acf97b24223f24be67d9dc7f469593d127f65368fb0aab259d56e8273e0f95",
+		"CASSINI_PROCESSED_AT": "2026-04-15T09:12:00Z",
+		"CASSINI_PROFILE": "ogg-opus",
+		"CASSINI_RECORDED_AT_LOCAL": "2026-04-15T11:12:00",
+		"CASSINI_SPEAKER_COUNT": "6",
+		"CASSINI_TRANSCRIPT_DEFAULT": "raw-asr",
+		"CASSINI_TRANSCRIPT_IDS": "raw-asr",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT": "3",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_GZIP_BYTES": "8098",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_MIME": "application/vnd.cassini.transcript-words+json",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_RAW_BYTES": "45837",
+		"CASSINI_TX_RAW_ASR_PAYLOAD_SHA256": "bcfe6a717171545ef264e1bcf66aba6f014bc25445267c35a206179c12a8c68d",
+		"comment": "Cassini portable meeting file. Decode CASSINI_PAYLOAD_*: base64url -> gzip -> UTF-8 JSON.",
+		"DATE": "2026-04-15T09:12:00Z",
+		"encoder": "Lavf62.3.100",
+		"TITLE": "Lantern Festival Booth Run-through"
+	},
+	"sampleChunkTag": {
+		"key": "CASSINI_PAYLOAD_000",
+		"value": "H4sIAAAAAAAA_6xWXY_bthL9KwO-5F5E8kqyrbWVJ-cLyL27SWA7N7ctCmNEjizGEkcgKe-6gf97QdnuelEU7UOwL0vyeM7wzOGxv4udNkoUQqJz2ui4Y-uxbChuibw2WxGJPVmn2YhiHInOcqUbEoXg7TbmrnciEhdo8V3oUKv1282M0up2Mp_LXE2rEmczOS7VvMznJNVYUVomt0iJrKp8mk4zOZ9kckrzeZJnKkllKUUkvPYD0x0aT9bAe3Je77GB18y-hmVvYl9b7re1iIS0hJ7Uwn_xUhQiS7I8TiZxOl0n8yLNiiT5WUTCkmSrAuyOJTbPgWl6AorhmpKc-9t6qrfoNZt7J4psPL9Nx8dIYK80BzEkG4_akD3JFbpkRaHcWTiHbdfQEj2JYjJLkiQSskZjqHGiSC_nb7g3XhRpOk3ybDL7C1ZtPG2t9ofA3KKX9WdutDyIQtAjSj8MKx56i_epiIYeFmG5qjGb5qIQP2BmP_JGriPckXWi-OVsLNftNq22KCLRYElhfvfaIrypyYhjdIVqiK9Ad8SwZOf0c1BJ5gr0mgy8107WZJ_D0FwTLgzCPVtsyD2HGcb6CveRsYbP6Kl5DvvWh08-4f4T1vBphxVbcfw1Et6icdLqzl_d3OJDjM4GC_PwKJ42FFXYN14U3vYUiYpti_7pRY8e2Co3GkYe_j1rn-fzf_poOjw0jGpJVbBWZ6nSj6IQbxar1YePHzbr_2-Wi6-bxWq5-bz46e7T4u0mOL3uze7MNY6Eu3islBXleJuGv-lkSlWWTygtZZXnWGJeJemklNl0Mplm-a0cTzFL8vR2LtMMZzKfqaAAPrw-eHKimExn49tIbH_T3XlnlsxnkWh1GzTCrmu0HIx1szdqdFHkSeF4EOflN8fBCWQkqyHIRImO8klvm5eh-MveV7MBdAwT6izvyaCRFARxHZGs17ymRx_Wl8kU30WJckdDvJ7oSMWVfvS9pYFtqw1dRe9pcqCoZSh73SgK421ZDT4xbAhiMAwnwthz7OnRwwM6sL0ZnLDXcqjY9YPDzLbHbdgYjO64t8Px6mB8TV5LOHcTgWEPCKd41GYLaNSwt1gtgXvf9X4E65pg0AvQEviaYE-2RK9bcJIMWs1wuif8q0ZryLmby4G7cTU_SHQUN6c4j6tznI_26ShoC9rAls9i_PvVQDDEFWgHvkZ_KW4JFZQH-C_v2HI8y-5hvV5FEATas5YEHVk4p0cErX4kBYofzAju3y1WX5bv3hZAKGtwtG3J-BcOnEfr790NGXXvIvC4IwOV5XZow5JRZMm-cMAPBkJGqL4hqNieOzuRvXDgLcrdCN6-W37438CzJ3sYZPszS4hs23ET3iBo47Qi0N5d2oLOcvg61mywaQ7gGTyHvhoyW1-P4CtbBV632mz_mImlii1B12DvdNkQlL0fJtkSut6SegVP9h2yYX0uoB0oanRJNoTWAbB0oQnP4PAAjkfXPwVEizvaPD2km0wcj8fj7wEAAP__8Uwn3U8IAAA"
+	},
+	"manifest": {
+		"kind": "cassini-portable-meeting",
+		"version": 3,
+		"profile": "ogg-opus",
+		"meeting": {
+			"id": "mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
+			"title": "Lantern Festival Booth Run-through",
+			"createdAtUtc": "2026-04-15T09:12:00Z",
+			"recordedAtLocal": "2026-04-15T11:12:00",
+			"processedAtUtc": "2026-04-15T09:12:00Z",
+			"durationMs": 239713
+		},
+		"audio": {
+			"container": "ogg",
+			"codec": "opus",
+			"sampleRate": 48000,
+			"channels": 1,
+			"sampleCount": 11506248,
+			"durationMs": 239713
+		},
+		"integrity": {
+			"matchPolicy": "exact-opus-audio-v1",
+			"opusAudioSha256": "8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
+			"sampleRate": 48000,
+			"channels": 1,
+			"sampleCount": 11506248,
+			"durationMs": 239713
+		},
+		"speakers": [
+			{
+				"id": "spk_mira",
+				"label": "Mira Chen"
+			},
+			{
+				"id": "spk_leo",
+				"label": "Leo Rossi"
+			},
+			{
+				"id": "spk_ben",
+				"label": "Ben Fischer"
+			},
+			{
+				"id": "spk_ana",
+				"label": "Ana Morales"
+			},
+			{
+				"id": "spk_noah",
+				"label": "Noah Patel"
+			},
+			{
+				"id": "spk_jules",
+				"label": "Jules Okafor"
+			}
+		],
+		"transcripts": [
+			{
+				"id": "raw-asr",
+				"role": "raw-asr",
+				"default": true,
+				"format": "cassini.words.v1",
+				"wordCount": 669,
+				"createdAtUtc": "2026-04-15T09:12:00Z",
+				"payloadRef": {
+					"prefix": "CASSINI_TX_RAW_ASR_PAYLOAD_",
+					"chunkCount": 3,
+					"sha256": "bcfe6a717171545ef264e1bcf66aba6f014bc25445267c35a206179c12a8c68d",
+					"rawBytes": 45837,
+					"gzipBytes": 8098,
+					"mime": "application/vnd.cassini.transcript-words+json",
+					"encoding": "base64url+gzip+utf8json"
+				}
+			}
+		],
+		"provenance": {
+			"speechToText": {
+				"raw-asr": {
+					"backend": "scripted-fixture",
+					"engine": "cassini-format demo builder",
+					"model": "none - no speech-to-text was run",
+					"device": "cpu",
+					"language": "en",
+					"source": "Synthetic fixture, not a recording and not ASR output. The words are the verbatim scenario script (harness/scenarios/showcase-lantern-festival.v1.json in gocassini); the audio is that script read by Kokoro-82M TTS, one voice per speaker, mixed down. MEASURED: each segment's startMs/endMs, taken from the renderer's own schedule for that speaker's track. DERIVED: every word's startMs/endMs, interpolated inside its segment proportionally to token length. Word timings are therefore plausible but not measured; provenance.wordTimings is deliberately absent to say so.",
+					"version": "make_transcript/2"
+				}
+			}
+		}
+	},
+	"manifestBytes": 2127,
+	"manifestSha256": "71acf97b24223f24be67d9dc7f469593d127f65368fb0aab259d56e8273e0f95",
+	"transcript": {
+		"id": "raw-asr",
+		"role": "raw-asr",
+		"format": "cassini.words.v1",
+		"wordCount": 669,
+		"rawBytes": 45837,
+		"gzipBytes": 8098,
+		"chunkCount": 3
+	},
+	"speakers": {
+		"spk_mira": "Mira Chen",
+		"spk_leo": "Leo Rossi",
+		"spk_ben": "Ben Fischer",
+		"spk_ana": "Ana Morales",
+		"spk_noah": "Noah Patel",
+		"spk_jules": "Jules Okafor"
+	},
+	"turns": [
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 900,
+			"endMs": 9583,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 900,
+					"endMs": 1410,
+					"text": "Morning."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 1410,
+					"endMs": 1774,
+					"text": "Sorry,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 1774,
+					"endMs": 1992,
+					"text": "two"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 1992,
+					"endMs": 2356,
+					"text": "goals"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 2356,
+					"endMs": 2720,
+					"text": "today:"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 2720,
+					"endMs": 3011,
+					"text": "lock"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 3011,
+					"endMs": 3229,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 3229,
+					"endMs": 3593,
+					"text": "booth"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 3593,
+					"endMs": 4322,
+					"text": "run-through"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 4322,
+					"endMs": 4540,
+					"text": "for"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 4540,
+					"endMs": 5123,
+					"text": "Friday's"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 5123,
+					"endMs": 5633,
+					"text": "lantern"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 5633,
+					"endMs": 6216,
+					"text": "festival"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 6216,
+					"endMs": 6434,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 6434,
+					"endMs": 6725,
+					"text": "make"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 6725,
+					"endMs": 7016,
+					"text": "sure"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 7016,
+					"endMs": 7453,
+					"text": "nobody"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 7453,
+					"endMs": 7598,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 7598,
+					"endMs": 7962,
+					"text": "still"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 7962,
+					"endMs": 8472,
+					"text": "demoing"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 8472,
+					"endMs": 8763,
+					"text": "last"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 8763,
+					"endMs": 9200,
+					"text": "week's"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 9200,
+					"endMs": 9583,
+					"text": "build."
+				}
+			],
+			"text": "Morning. Sorry, two goals today: lock the booth run-through for Friday's lantern festival and make sure nobody is still demoing last week's build."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 7700,
+			"endMs": 11753,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 7700,
+					"endMs": 7953,
+					"text": "And"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 7953,
+					"endMs": 8459,
+					"text": "please,"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 8459,
+					"endMs": 8796,
+					"text": "this"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 8796,
+					"endMs": 9133,
+					"text": "time,"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 9133,
+					"endMs": 9639,
+					"text": "nobody"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 9639,
+					"endMs": 9976,
+					"text": "says"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 9976,
+					"endMs": 10313,
+					"text": "beta"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 10313,
+					"endMs": 10566,
+					"text": "out"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 10566,
+					"endMs": 10903,
+					"text": "loud"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 10903,
+					"endMs": 11071,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 11071,
+					"endMs": 11324,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 11324,
+					"endMs": 11753,
+					"text": "mayor."
+				}
+			],
+			"text": "And please, this time, nobody says beta out loud to the mayor."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 12230,
+			"endMs": 18865,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 12230,
+					"endMs": 12304,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 12304,
+					"endMs": 12676,
+					"text": "fixed"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 12676,
+					"endMs": 12899,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 12899,
+					"endMs": 12973,
+					"text": "Q"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 12973,
+					"endMs": 13047,
+					"text": "R"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 13047,
+					"endMs": 13345,
+					"text": "code"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 13345,
+					"endMs": 13568,
+					"text": "bug"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 13568,
+					"endMs": 13866,
+					"text": "from"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 13866,
+					"endMs": 14238,
+					"text": "issue"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 14238,
+					"endMs": 14461,
+					"text": "two"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 14461,
+					"endMs": 14684,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 14684,
+					"endMs": 14982,
+					"text": "four."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 14982,
+					"endMs": 15205,
+					"text": "The"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 15205,
+					"endMs": 15503,
+					"text": "iPad"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 15503,
+					"endMs": 15726,
+					"text": "was"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 15726,
+					"endMs": 16247,
+					"text": "caching"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 16247,
+					"endMs": 16470,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 16470,
+					"endMs": 16693,
+					"text": "old"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 16693,
+					"endMs": 17289,
+					"text": "redirect"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 17289,
+					"endMs": 17512,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 17512,
+					"endMs": 17959,
+					"text": "making"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 17959,
+					"endMs": 18108,
+					"text": "me"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 18108,
+					"endMs": 18406,
+					"text": "look"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 18406,
+					"endMs": 18865,
+					"text": "cursed."
+				}
+			],
+			"text": "I fixed the Q R code bug from issue two one four. The iPad was caching the old redirect and making me look cursed."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 18030,
+			"endMs": 24835,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 18030,
+					"endMs": 18251,
+					"text": "You"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 18251,
+					"endMs": 18472,
+					"text": "did"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 18472,
+					"endMs": 18767,
+					"text": "look"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 18767,
+					"endMs": 19210,
+					"text": "cursed."
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 19210,
+					"endMs": 19505,
+					"text": "Also"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 19505,
+					"endMs": 19726,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 19726,
+					"endMs": 20021,
+					"text": "sign"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 20021,
+					"endMs": 20390,
+					"text": "still"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 20390,
+					"endMs": 20685,
+					"text": "says"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 20685,
+					"endMs": 20980,
+					"text": "open"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 20980,
+					"endMs": 21127,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 21127,
+					"endMs": 21422,
+					"text": "five"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 21422,
+					"endMs": 21865,
+					"text": "thirty."
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 21865,
+					"endMs": 22234,
+					"text": "Doors"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 22234,
+					"endMs": 22455,
+					"text": "are"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 22455,
+					"endMs": 22602,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 22602,
+					"endMs": 22897,
+					"text": "five,"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 22897,
+					"endMs": 23192,
+					"text": "soft"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 23192,
+					"endMs": 23561,
+					"text": "start"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 23561,
+					"endMs": 23708,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 23708,
+					"endMs": 24003,
+					"text": "four"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 24003,
+					"endMs": 24446,
+					"text": "thirty,"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 24446,
+					"endMs": 24835,
+					"text": "right?"
+				}
+			],
+			"text": "You did look cursed. Also the sign still says open at five thirty. Doors are at five, soft start at four thirty, right?"
+		},
+		{
+			"speaker": "spk_noah",
+			"label": "Noah Patel",
+			"startMs": 24960,
+			"endMs": 34965,
+			"words": [
+				{
+					"speaker": "spk_noah",
+					"startMs": 24960,
+					"endMs": 25463,
+					"text": "Correct."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 25463,
+					"endMs": 25750,
+					"text": "Crew"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 25750,
+					"endMs": 26037,
+					"text": "call"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 26037,
+					"endMs": 26180,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 26180,
+					"endMs": 26467,
+					"text": "four"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 26467,
+					"endMs": 26970,
+					"text": "fifteen"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 26970,
+					"endMs": 27113,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 27113,
+					"endMs": 27544,
+					"text": "Friday,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 27544,
+					"endMs": 27903,
+					"text": "April"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 27903,
+					"endMs": 28694,
+					"text": "seventeenth."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 28694,
+					"endMs": 29125,
+					"text": "Public"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 29125,
+					"endMs": 29484,
+					"text": "opens"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 29484,
+					"endMs": 29627,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 29627,
+					"endMs": 29914,
+					"text": "five."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 29914,
+					"endMs": 30417,
+					"text": "Weather"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 30417,
+					"endMs": 30704,
+					"text": "says"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 30704,
+					"endMs": 31063,
+					"text": "light"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 31063,
+					"endMs": 31350,
+					"text": "wind,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 31350,
+					"endMs": 31709,
+					"text": "which"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 31709,
+					"endMs": 31852,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 31852,
+					"endMs": 32139,
+					"text": "fine"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 32139,
+					"endMs": 32570,
+					"text": "unless"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 32570,
+					"endMs": 32785,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 32785,
+					"endMs": 33144,
+					"text": "paper"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 33144,
+					"endMs": 33647,
+					"text": "lantern"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 33647,
+					"endMs": 33934,
+					"text": "wall"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 33934,
+					"endMs": 34293,
+					"text": "turns"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 34293,
+					"endMs": 34580,
+					"text": "into"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 34580,
+					"endMs": 34651,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 34651,
+					"endMs": 34965,
+					"text": "kite."
+				}
+			],
+			"text": "Correct. Crew call is four fifteen on Friday, April seventeenth. Public opens at five. Weather says light wind, which is fine unless the paper lantern wall turns into a kite."
+		},
+		{
+			"speaker": "spk_jules",
+			"label": "Jules Okafor",
+			"startMs": 34470,
+			"endMs": 44667,
+			"words": [
+				{
+					"speaker": "spk_jules",
+					"startMs": 34470,
+					"endMs": 34547,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 34547,
+					"endMs": 34858,
+					"text": "need"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 34858,
+					"endMs": 35091,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 35091,
+					"endMs": 35480,
+					"text": "clean"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 35480,
+					"endMs": 35791,
+					"text": "line"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 35791,
+					"endMs": 36024,
+					"text": "for"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 36024,
+					"endMs": 36646,
+					"text": "partners."
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 36646,
+					"endMs": 37346,
+					"text": "Something"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 37346,
+					"endMs": 37890,
+					"text": "shorter"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 37890,
+					"endMs": 38201,
+					"text": "than"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 38201,
+					"endMs": 38901,
+					"text": "immersive"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 38901,
+					"endMs": 39835,
+					"text": "neighborhood"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 39835,
+					"endMs": 40224,
+					"text": "story"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 40224,
+					"endMs": 40613,
+					"text": "booth"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 40613,
+					"endMs": 40924,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 40924,
+					"endMs": 41546,
+					"text": "adaptive"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 41546,
+					"endMs": 41935,
+					"text": "audio."
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 41935,
+					"endMs": 42402,
+					"text": "Nobody"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 42402,
+					"endMs": 42635,
+					"text": "can"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 42635,
+					"endMs": 42868,
+					"text": "say"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 42868,
+					"endMs": 43179,
+					"text": "that"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 43179,
+					"endMs": 43568,
+					"text": "while"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 43568,
+					"endMs": 44112,
+					"text": "holding"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 44112,
+					"endMs": 44667,
+					"text": "noodles."
+				}
+			],
+			"text": "I need one clean line for partners. Something shorter than immersive neighborhood story booth with adaptive audio. Nobody can say that while holding noodles."
+		},
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 44830,
+			"endMs": 51550,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 44830,
+					"endMs": 45059,
+					"text": "Use"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 45059,
+					"endMs": 45364,
+					"text": "make"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 45364,
+					"endMs": 45440,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 45440,
+					"endMs": 45745,
+					"text": "tiny"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 45745,
+					"endMs": 46126,
+					"text": "night"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 46126,
+					"endMs": 46584,
+					"text": "market"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 46584,
+					"endMs": 46965,
+					"text": "story,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 46965,
+					"endMs": 47270,
+					"text": "send"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 47270,
+					"endMs": 47422,
+					"text": "it"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 47422,
+					"endMs": 47574,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 47574,
+					"endMs": 47879,
+					"text": "your"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 47879,
+					"endMs": 48413,
+					"text": "friends,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 48413,
+					"endMs": 48794,
+					"text": "leave"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 48794,
+					"endMs": 49328,
+					"text": "smiling."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 49328,
+					"endMs": 49480,
+					"text": "It"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 49480,
+					"endMs": 49632,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 49632,
+					"endMs": 49708,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 49708,
+					"endMs": 50166,
+					"text": "little"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 50166,
+					"endMs": 50547,
+					"text": "corny,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 50547,
+					"endMs": 50776,
+					"text": "but"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 50776,
+					"endMs": 50928,
+					"text": "in"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 50928,
+					"endMs": 51004,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 51004,
+					"endMs": 51309,
+					"text": "good"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 51309,
+					"endMs": 51550,
+					"text": "way."
+				}
+			],
+			"text": "Use make a tiny night market story, send it to your friends, leave smiling. It is a little corny, but in a good way."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 51410,
+			"endMs": 57341,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 51410,
+					"endMs": 51805,
+					"text": "Corny"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 51805,
+					"endMs": 51963,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 51963,
+					"endMs": 52279,
+					"text": "fine."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 52279,
+					"endMs": 52990,
+					"text": "Corporate"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 52990,
+					"endMs": 53148,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 53148,
+					"endMs": 53385,
+					"text": "not."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 53385,
+					"endMs": 53543,
+					"text": "We"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 53543,
+					"endMs": 53780,
+					"text": "are"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 53780,
+					"endMs": 54017,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 54017,
+					"endMs": 54570,
+					"text": "folding"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 54570,
+					"endMs": 54965,
+					"text": "table"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 54965,
+					"endMs": 55281,
+					"text": "away"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 55281,
+					"endMs": 55597,
+					"text": "from"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 55597,
+					"endMs": 55992,
+					"text": "being"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 55992,
+					"endMs": 56071,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 56071,
+					"endMs": 56545,
+					"text": "school"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 56545,
+					"endMs": 57341,
+					"text": "fundraiser."
+				}
+			],
+			"text": "Corny is fine. Corporate is not. We are one folding table away from being a school fundraiser."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 58020,
+			"endMs": 67172,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 58020,
+					"endMs": 58667,
+					"text": "Speaking"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 58667,
+					"endMs": 58828,
+					"text": "of"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 58828,
+					"endMs": 59070,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 59070,
+					"endMs": 59474,
+					"text": "table,"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 59474,
+					"endMs": 59716,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 59716,
+					"endMs": 60120,
+					"text": "final"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 60120,
+					"endMs": 60524,
+					"text": "print"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 60524,
+					"endMs": 60847,
+					"text": "file"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 60847,
+					"endMs": 61008,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 61008,
+					"endMs": 62141,
+					"text": "lantern-booth-v7"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 62141,
+					"endMs": 62383,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 62383,
+					"endMs": 62625,
+					"text": "pdf."
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 62625,
+					"endMs": 63110,
+					"text": "Please"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 63110,
+					"endMs": 63433,
+					"text": "stop"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 63433,
+					"endMs": 63999,
+					"text": "opening"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 63999,
+					"endMs": 64160,
+					"text": "v5"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 64160,
+					"endMs": 64402,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 64402,
+					"endMs": 64887,
+					"text": "asking"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 64887,
+					"endMs": 65129,
+					"text": "why"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 65129,
+					"endMs": 65371,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 65371,
+					"endMs": 65694,
+					"text": "moon"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 65694,
+					"endMs": 66179,
+					"text": "mascot"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 66179,
+					"endMs": 66583,
+					"text": "looks"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 66583,
+					"endMs": 67172,
+					"text": "seasick."
+				}
+			],
+			"text": "Speaking of the table, the final print file is lantern-booth-v7 dot pdf. Please stop opening v5 and asking why the moon mascot looks seasick."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 68130,
+			"endMs": 72866,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 68130,
+					"endMs": 68445,
+					"text": "Wait,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 68445,
+					"endMs": 68602,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 68602,
+					"endMs": 68759,
+					"text": "v7"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 68759,
+					"endMs": 68995,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 68995,
+					"endMs": 69231,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 69231,
+					"endMs": 69546,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 69546,
+					"endMs": 69782,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 69782,
+					"endMs": 70255,
+					"text": "bigger"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 70255,
+					"endMs": 70333,
+					"text": "Q"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 70333,
+					"endMs": 70411,
+					"text": "R"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 70411,
+					"endMs": 70726,
+					"text": "code,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 70726,
+					"endMs": 70883,
+					"text": "or"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 70883,
+					"endMs": 71119,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 71119,
+					"endMs": 71355,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 71355,
+					"endMs": 71749,
+					"text": "where"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 71749,
+					"endMs": 71985,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 71985,
+					"endMs": 72221,
+					"text": "map"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 72221,
+					"endMs": 72457,
+					"text": "pin"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 72457,
+					"endMs": 72866,
+					"text": "moved?"
+				}
+			],
+			"text": "Wait, is v7 the one with the bigger Q R code, or the one where the map pin moved?"
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 71530,
+			"endMs": 74197,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 71530,
+					"endMs": 71940,
+					"text": "Bigger"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 71940,
+					"endMs": 72008,
+					"text": "Q"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 72008,
+					"endMs": 72076,
+					"text": "R"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 72076,
+					"endMs": 72349,
+					"text": "code,"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 72349,
+					"endMs": 72759,
+					"text": "warmer"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 72759,
+					"endMs": 73169,
+					"text": "yellow,"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 73169,
+					"endMs": 73442,
+					"text": "less"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 73442,
+					"endMs": 73920,
+					"text": "haunted"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 73920,
+					"endMs": 74197,
+					"text": "moon."
+				}
+			],
+			"text": "Bigger Q R code, warmer yellow, less haunted moon."
+		},
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 74560,
+			"endMs": 79872,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 74560,
+					"endMs": 74872,
+					"text": "Good."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 74872,
+					"endMs": 75106,
+					"text": "Ben,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 75106,
+					"endMs": 75418,
+					"text": "walk"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 75418,
+					"endMs": 75574,
+					"text": "us"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 75574,
+					"endMs": 76120,
+					"text": "through"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 76120,
+					"endMs": 76354,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 76354,
+					"endMs": 76822,
+					"text": "actual"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 76822,
+					"endMs": 77134,
+					"text": "flow"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 77134,
+					"endMs": 77290,
+					"text": "as"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 77290,
+					"endMs": 77446,
+					"text": "if"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 77446,
+					"endMs": 77524,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 77524,
+					"endMs": 78148,
+					"text": "stranger"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 78148,
+					"endMs": 78538,
+					"text": "walks"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 78538,
+					"endMs": 78694,
+					"text": "up"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 78694,
+					"endMs": 79006,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 79006,
+					"endMs": 79318,
+					"text": "zero"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 79318,
+					"endMs": 79872,
+					"text": "context."
+				}
+			],
+			"text": "Good. Ben, walk us through the actual flow as if a stranger walks up with zero context."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 80250,
+			"endMs": 88655,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 80250,
+					"endMs": 80518,
+					"text": "Okay."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 80518,
+					"endMs": 80786,
+					"text": "They"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 80786,
+					"endMs": 81054,
+					"text": "scan"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 81054,
+					"endMs": 81255,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 81255,
+					"endMs": 81523,
+					"text": "code,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 81523,
+					"endMs": 81791,
+					"text": "land"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 81791,
+					"endMs": 81925,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 81925,
+					"endMs": 82193,
+					"text": "demo"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 82193,
+					"endMs": 82394,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 82394,
+					"endMs": 83133,
+					"text": "lanternlane"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 83133,
+					"endMs": 83334,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 83334,
+					"endMs": 83804,
+					"text": "example"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 83804,
+					"endMs": 84140,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 84140,
+					"endMs": 84476,
+					"text": "hello,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 84476,
+					"endMs": 84744,
+					"text": "pick"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 84744,
+					"endMs": 85080,
+					"text": "three"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 85080,
+					"endMs": 85550,
+					"text": "prompts,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 85550,
+					"endMs": 85953,
+					"text": "record"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 85953,
+					"endMs": 86020,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 86020,
+					"endMs": 86826,
+					"text": "twenty-second"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 86826,
+					"endMs": 87162,
+					"text": "story,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 87162,
+					"endMs": 87363,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 87363,
+					"endMs": 87564,
+					"text": "get"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 87564,
+					"endMs": 87631,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 87631,
+					"endMs": 88101,
+					"text": "digital"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 88101,
+					"endMs": 88655,
+					"text": "keepsake."
+				}
+			],
+			"text": "Okay. They scan the code, land on demo dot lanternlane dot example slash hello, pick three prompts, record a twenty-second story, and get a digital keepsake."
+		},
+		{
+			"speaker": "spk_jules",
+			"label": "Jules Okafor",
+			"startMs": 89390,
+			"endMs": 98158,
+			"words": [
+				{
+					"speaker": "spk_jules",
+					"startMs": 89390,
+					"endMs": 89689,
+					"text": "That"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 89689,
+					"endMs": 90213,
+					"text": "already"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 90213,
+					"endMs": 90662,
+					"text": "sounds"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 90662,
+					"endMs": 91111,
+					"text": "better"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 91111,
+					"endMs": 91410,
+					"text": "than"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 91410,
+					"endMs": 92384,
+					"text": "postcard-style"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 92384,
+					"endMs": 92908,
+					"text": "summary."
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 92908,
+					"endMs": 93357,
+					"text": "People"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 93357,
+					"endMs": 93656,
+					"text": "hear"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 93656,
+					"endMs": 94255,
+					"text": "postcard"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 94255,
+					"endMs": 94479,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 94479,
+					"endMs": 94853,
+					"text": "think"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 94853,
+					"endMs": 95377,
+					"text": "printer,"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 95377,
+					"endMs": 95601,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 95601,
+					"endMs": 95750,
+					"text": "we"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 95750,
+					"endMs": 95974,
+					"text": "are"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 95974,
+					"endMs": 96723,
+					"text": "absolutely"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 96723,
+					"endMs": 96947,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 96947,
+					"endMs": 97546,
+					"text": "bringing"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 97546,
+					"endMs": 97620,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 97620,
+					"endMs": 98158,
+					"text": "printer."
+				}
+			],
+			"text": "That already sounds better than postcard-style summary. People hear postcard and think printer, and we are absolutely not bringing a printer."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 97500,
+			"endMs": 99740,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 97500,
+					"endMs": 98246,
+					"text": "Please"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 98246,
+					"endMs": 98619,
+					"text": "God,"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 98619,
+					"endMs": 98867,
+					"text": "no"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 98867,
+					"endMs": 99740,
+					"text": "printer."
+				}
+			],
+			"text": "Please God, no printer."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 100040,
+			"endMs": 107016,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 100040,
+					"endMs": 100351,
+					"text": "Right."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 100351,
+					"endMs": 100662,
+					"text": "After"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 100662,
+					"endMs": 100911,
+					"text": "that,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 100911,
+					"endMs": 101097,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 101097,
+					"endMs": 101595,
+					"text": "optional"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 101595,
+					"endMs": 101844,
+					"text": "text"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 101844,
+					"endMs": 102280,
+					"text": "message"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 102280,
+					"endMs": 102529,
+					"text": "says"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 102529,
+					"endMs": 102778,
+					"text": "your"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 102778,
+					"endMs": 103214,
+					"text": "lantern"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 103214,
+					"endMs": 103525,
+					"text": "story"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 103525,
+					"endMs": 103649,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 103649,
+					"endMs": 103960,
+					"text": "ready,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 103960,
+					"endMs": 104146,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 104146,
+					"endMs": 104332,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 104332,
+					"endMs": 104643,
+					"text": "weird"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 104643,
+					"endMs": 105203,
+					"text": "insurance"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 105203,
+					"endMs": 105701,
+					"text": "sentence"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 105701,
+					"endMs": 105950,
+					"text": "that"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 105950,
+					"endMs": 106136,
+					"text": "was"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 106136,
+					"endMs": 106447,
+					"text": "stuck"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 106447,
+					"endMs": 106571,
+					"text": "in"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 106571,
+					"endMs": 107016,
+					"text": "staging."
+				}
+			],
+			"text": "Right. After that, the optional text message says your lantern story is ready, not the weird insurance sentence that was stuck in staging."
+		},
+		{
+			"speaker": "spk_noah",
+			"label": "Noah Patel",
+			"startMs": 107740,
+			"endMs": 117767,
+			"words": [
+				{
+					"speaker": "spk_noah",
+					"startMs": 107740,
+					"endMs": 107891,
+					"text": "We"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 107891,
+					"endMs": 108270,
+					"text": "still"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 108270,
+					"endMs": 108573,
+					"text": "need"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 108573,
+					"endMs": 109104,
+					"text": "offline"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 109104,
+					"endMs": 109711,
+					"text": "fallback."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 109711,
+					"endMs": 109862,
+					"text": "If"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 109862,
+					"endMs": 110089,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 110089,
+					"endMs": 110620,
+					"text": "network"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 110620,
+					"endMs": 110999,
+					"text": "drops,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 110999,
+					"endMs": 111226,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 111226,
+					"endMs": 111605,
+					"text": "staff"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 111605,
+					"endMs": 112060,
+					"text": "tablet"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 112060,
+					"endMs": 112515,
+					"text": "should"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 112515,
+					"endMs": 112818,
+					"text": "open"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 112818,
+					"endMs": 113501,
+					"text": "local-demo"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 113501,
+					"endMs": 113728,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 113728,
+					"endMs": 114031,
+					"text": "html"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 114031,
+					"endMs": 114258,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 114258,
+					"endMs": 114561,
+					"text": "save"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 114561,
+					"endMs": 115320,
+					"text": "recordings"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 115320,
+					"endMs": 115471,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 115471,
+					"endMs": 115850,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 115850,
+					"endMs": 116077,
+					"text": "tmp"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 116077,
+					"endMs": 116456,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 116456,
+					"endMs": 116987,
+					"text": "lantern"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 116987,
+					"endMs": 117366,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 117366,
+					"endMs": 117767,
+					"text": "queue."
+				}
+			],
+			"text": "We still need offline fallback. If the network drops, the staff tablet should open local-demo dot html and save recordings to slash tmp slash lantern slash queue."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 117750,
+			"endMs": 120267,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 117750,
+					"endMs": 118001,
+					"text": "Can"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 118001,
+					"endMs": 118168,
+					"text": "we"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 118168,
+					"endMs": 118419,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 118419,
+					"endMs": 118670,
+					"text": "say"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 118670,
+					"endMs": 119089,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 119089,
+					"endMs": 119340,
+					"text": "tmp"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 119340,
+					"endMs": 119507,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 119507,
+					"endMs": 119758,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 119758,
+					"endMs": 120267,
+					"text": "public?"
+				}
+			],
+			"text": "Can we not say slash tmp to the public?"
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 119330,
+			"endMs": 123810,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 119330,
+					"endMs": 120348,
+					"text": "Absolutely"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 120348,
+					"endMs": 120653,
+					"text": "not."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 120653,
+					"endMs": 120958,
+					"text": "The"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 120958,
+					"endMs": 121568,
+					"text": "public"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 121568,
+					"endMs": 121975,
+					"text": "gets"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 121975,
+					"endMs": 122484,
+					"text": "magic."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 122484,
+					"endMs": 122687,
+					"text": "We"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 122687,
+					"endMs": 122992,
+					"text": "get"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 122992,
+					"endMs": 123501,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 123501,
+					"endMs": 123810,
+					"text": "tmp."
+				}
+			],
+			"text": "Absolutely not. The public gets magic. We get slash tmp."
+		},
+		{
+			"speaker": "spk_jules",
+			"label": "Jules Okafor",
+			"startMs": 124010,
+			"endMs": 134655,
+			"words": [
+				{
+					"speaker": "spk_jules",
+					"startMs": 124010,
+					"endMs": 124353,
+					"text": "Also,"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 124353,
+					"endMs": 124696,
+					"text": "tiny"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 124696,
+					"endMs": 125039,
+					"text": "note,"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 125039,
+					"endMs": 125296,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 125296,
+					"endMs": 126068,
+					"text": "volunteer"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 126068,
+					"endMs": 126583,
+					"text": "script"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 126583,
+					"endMs": 127012,
+					"text": "reads"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 127012,
+					"endMs": 127355,
+					"text": "like"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 127355,
+					"endMs": 127955,
+					"text": "airport"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 127955,
+					"endMs": 128470,
+					"text": "safety"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 128470,
+					"endMs": 129500,
+					"text": "instructions."
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 129500,
+					"endMs": 129843,
+					"text": "Line"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 129843,
+					"endMs": 130272,
+					"text": "three"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 130272,
+					"endMs": 130615,
+					"text": "says"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 130615,
+					"endMs": 131301,
+					"text": "maintain"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 131301,
+					"endMs": 131901,
+					"text": "forward"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 131901,
+					"endMs": 132330,
+					"text": "queue"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 132330,
+					"endMs": 133016,
+					"text": "progress."
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 133016,
+					"endMs": 133531,
+					"text": "Nobody"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 133531,
+					"endMs": 133960,
+					"text": "talks"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 133960,
+					"endMs": 134303,
+					"text": "like"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 134303,
+					"endMs": 134655,
+					"text": "that."
+				}
+			],
+			"text": "Also, tiny note, the volunteer script reads like airport safety instructions. Line three says maintain forward queue progress. Nobody talks like that."
+		},
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 135340,
+			"endMs": 141185,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 135340,
+					"endMs": 135591,
+					"text": "Fair."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 135591,
+					"endMs": 136030,
+					"text": "Replace"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136030,
+					"endMs": 136155,
+					"text": "it"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136155,
+					"endMs": 136406,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136406,
+					"endMs": 136531,
+					"text": "if"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136531,
+					"endMs": 136845,
+					"text": "there"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136845,
+					"endMs": 136970,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 136970,
+					"endMs": 137032,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 137032,
+					"endMs": 137283,
+					"text": "line,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 137283,
+					"endMs": 137660,
+					"text": "invite"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 137660,
+					"endMs": 138037,
+					"text": "people"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 138037,
+					"endMs": 138162,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 138162,
+					"endMs": 138476,
+					"text": "start"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 138476,
+					"endMs": 138978,
+					"text": "thinking"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 138978,
+					"endMs": 139292,
+					"text": "about"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 139292,
+					"endMs": 139606,
+					"text": "their"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 139606,
+					"endMs": 139920,
+					"text": "three"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 139920,
+					"endMs": 140359,
+					"text": "prompts"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 140359,
+					"endMs": 140673,
+					"text": "while"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 140673,
+					"endMs": 140924,
+					"text": "they"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 140924,
+					"endMs": 141185,
+					"text": "wait."
+				}
+			],
+			"text": "Fair. Replace it with if there is a line, invite people to start thinking about their three prompts while they wait."
+		},
+		{
+			"speaker": "spk_noah",
+			"label": "Noah Patel",
+			"startMs": 141620,
+			"endMs": 147380,
+			"words": [
+				{
+					"speaker": "spk_noah",
+					"startMs": 141620,
+					"endMs": 141828,
+					"text": "And"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 141828,
+					"endMs": 142036,
+					"text": "add"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 142036,
+					"endMs": 142105,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 142105,
+					"endMs": 142382,
+					"text": "line"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 142382,
+					"endMs": 142728,
+					"text": "about"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 142728,
+					"endMs": 143005,
+					"text": "kids."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 143005,
+					"endMs": 143143,
+					"text": "If"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 143143,
+					"endMs": 143420,
+					"text": "they"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 143420,
+					"endMs": 143628,
+					"text": "are"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 143628,
+					"endMs": 143974,
+					"text": "under"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 143974,
+					"endMs": 144529,
+					"text": "thirteen,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 144529,
+					"endMs": 144667,
+					"text": "we"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 144667,
+					"endMs": 144944,
+					"text": "need"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 144944,
+					"endMs": 145152,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 145152,
+					"endMs": 145707,
+					"text": "postcard"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 145707,
+					"endMs": 146192,
+					"text": "version"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 146192,
+					"endMs": 146469,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 146469,
+					"endMs": 146607,
+					"text": "no"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 146607,
+					"endMs": 146953,
+					"text": "phone"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 146953,
+					"endMs": 147380,
+					"text": "number."
+				}
+			],
+			"text": "And add a line about kids. If they are under thirteen, we need the postcard version with no phone number."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 147780,
+			"endMs": 154052,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 147780,
+					"endMs": 147845,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 147845,
+					"endMs": 148041,
+					"text": "can"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 148041,
+					"endMs": 148302,
+					"text": "make"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 148302,
+					"endMs": 148563,
+					"text": "that"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 148563,
+					"endMs": 148824,
+					"text": "more"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 148824,
+					"endMs": 149281,
+					"text": "obvious"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 149281,
+					"endMs": 149411,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 149411,
+					"endMs": 149803,
+					"text": "screen."
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 149803,
+					"endMs": 150129,
+					"text": "Right"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 150129,
+					"endMs": 150325,
+					"text": "now"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 150325,
+					"endMs": 150521,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 150521,
+					"endMs": 150978,
+					"text": "privacy"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 150978,
+					"endMs": 151239,
+					"text": "note"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 151239,
+					"endMs": 151369,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 151369,
+					"endMs": 152087,
+					"text": "technically"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 152087,
+					"endMs": 152544,
+					"text": "correct"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 152544,
+					"endMs": 152740,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 152740,
+					"endMs": 153458,
+					"text": "spiritually"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 153458,
+					"endMs": 154052,
+					"text": "invisible."
+				}
+			],
+			"text": "I can make that more obvious on screen. Right now the privacy note is technically correct and spiritually invisible."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 154810,
+			"endMs": 159247,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 154810,
+					"endMs": 155144,
+					"text": "That"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 155144,
+					"endMs": 155311,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 155311,
+					"endMs": 155562,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 155562,
+					"endMs": 156064,
+					"text": "nicest"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 156064,
+					"endMs": 156315,
+					"text": "way"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 156315,
+					"endMs": 156817,
+					"text": "anyone"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 156817,
+					"endMs": 157068,
+					"text": "has"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 157068,
+					"endMs": 157402,
+					"text": "ever"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 157402,
+					"endMs": 157904,
+					"text": "called"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 157904,
+					"endMs": 158322,
+					"text": "legal"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 158322,
+					"endMs": 158656,
+					"text": "text"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 158656,
+					"endMs": 159247,
+					"text": "useless."
+				}
+			],
+			"text": "That is the nicest way anyone has ever called legal text useless."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 159330,
+			"endMs": 167501,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 159330,
+					"endMs": 159556,
+					"text": "One"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 159556,
+					"endMs": 160009,
+					"text": "actual"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 160009,
+					"endMs": 160311,
+					"text": "risk."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 160311,
+					"endMs": 160537,
+					"text": "The"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 160537,
+					"endMs": 160763,
+					"text": "old"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 160763,
+					"endMs": 161141,
+					"text": "audio"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 161141,
+					"endMs": 162124,
+					"text": "normalization"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 162124,
+					"endMs": 162350,
+					"text": "bug"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 162350,
+					"endMs": 162728,
+					"text": "still"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 162728,
+					"endMs": 163106,
+					"text": "clips"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 163106,
+					"endMs": 163257,
+					"text": "if"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 163257,
+					"endMs": 163862,
+					"text": "somebody"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 163862,
+					"endMs": 164315,
+					"text": "shouts"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 164315,
+					"endMs": 164920,
+					"text": "directly"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 164920,
+					"endMs": 165222,
+					"text": "into"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 165222,
+					"endMs": 165448,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 165448,
+					"endMs": 165750,
+					"text": "iPad."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 165750,
+					"endMs": 165901,
+					"text": "It"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 165901,
+					"endMs": 166052,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 166052,
+					"endMs": 166278,
+					"text": "way"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 166278,
+					"endMs": 166731,
+					"text": "better,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 166731,
+					"endMs": 166957,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 166957,
+					"endMs": 167501,
+					"text": "perfect."
+				}
+			],
+			"text": "One actual risk. The old audio normalization bug still clips if somebody shouts directly into the iPad. It is way better, not perfect."
+		},
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 167720,
+			"endMs": 169491,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 167720,
+					"endMs": 167941,
+					"text": "How"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 167941,
+					"endMs": 168605,
+					"text": "imperfect"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 168605,
+					"endMs": 168752,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 168752,
+					"endMs": 168973,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 168973,
+					"endMs": 169491,
+					"text": "perfect?"
+				}
+			],
+			"text": "How imperfect is not perfect?"
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 169790,
+			"endMs": 177043,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 169790,
+					"endMs": 170337,
+					"text": "Festival"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 170337,
+					"endMs": 170952,
+					"text": "imperfect,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 170952,
+					"endMs": 171157,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 171157,
+					"endMs": 171635,
+					"text": "demo-day"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 171635,
+					"endMs": 172250,
+					"text": "imperfect."
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 172250,
+					"endMs": 172386,
+					"text": "If"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 172386,
+					"endMs": 172864,
+					"text": "someone"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 172864,
+					"endMs": 173342,
+					"text": "screams"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 173342,
+					"endMs": 173547,
+					"text": "woo"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 173547,
+					"endMs": 173820,
+					"text": "into"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 173820,
+					"endMs": 174025,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 174025,
+					"endMs": 174230,
+					"text": "mic,"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 174230,
+					"endMs": 174435,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 174435,
+					"endMs": 174982,
+					"text": "waveform"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 174982,
+					"endMs": 175255,
+					"text": "gets"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 175255,
+					"endMs": 175733,
+					"text": "crunchy"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 175733,
+					"endMs": 175938,
+					"text": "for"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 175938,
+					"endMs": 176280,
+					"text": "about"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 176280,
+					"endMs": 176553,
+					"text": "half"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 176553,
+					"endMs": 176621,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 176621,
+					"endMs": 177043,
+					"text": "second."
+				}
+			],
+			"text": "Festival imperfect, not demo-day imperfect. If someone screams woo into the mic, the waveform gets crunchy for about half a second."
+		},
+		{
+			"speaker": "spk_jules",
+			"label": "Jules Okafor",
+			"startMs": 177680,
+			"endMs": 181157,
+			"words": [
+				{
+					"speaker": "spk_jules",
+					"startMs": 177680,
+					"endMs": 178312,
+					"text": "Honestly,"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 178312,
+					"endMs": 178628,
+					"text": "that"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 178628,
+					"endMs": 179102,
+					"text": "sounds"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 179102,
+					"endMs": 179260,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 179260,
+					"endMs": 179655,
+					"text": "brand"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 179655,
+					"endMs": 179892,
+					"text": "for"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 179892,
+					"endMs": 179971,
+					"text": "a"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 179971,
+					"endMs": 180524,
+					"text": "lantern"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 180524,
+					"endMs": 181157,
+					"text": "festival."
+				}
+			],
+			"text": "Honestly, that sounds on brand for a lantern festival."
+		},
+		{
+			"speaker": "spk_noah",
+			"label": "Noah Patel",
+			"startMs": 181320,
+			"endMs": 190984,
+			"words": [
+				{
+					"speaker": "spk_noah",
+					"startMs": 181320,
+					"endMs": 181749,
+					"text": "Please"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 181749,
+					"endMs": 182106,
+					"text": "write"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 182106,
+					"endMs": 182392,
+					"text": "down"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 182392,
+					"endMs": 182821,
+					"text": "backup"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 182821,
+					"endMs": 183322,
+					"text": "battery"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 183322,
+					"endMs": 183751,
+					"text": "counts"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 183751,
+					"endMs": 184180,
+					"text": "before"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 184180,
+					"endMs": 184323,
+					"text": "we"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 184323,
+					"endMs": 184609,
+					"text": "joke"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 184609,
+					"endMs": 185253,
+					"text": "ourselves"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 185253,
+					"endMs": 185539,
+					"text": "into"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 185539,
+					"endMs": 186040,
+					"text": "failure."
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186040,
+					"endMs": 186111,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186111,
+					"endMs": 186397,
+					"text": "have"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186397,
+					"endMs": 186611,
+					"text": "six"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186611,
+					"endMs": 186682,
+					"text": "U"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186682,
+					"endMs": 186753,
+					"text": "S"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186753,
+					"endMs": 186824,
+					"text": "B"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186824,
+					"endMs": 186895,
+					"text": "C"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 186895,
+					"endMs": 187252,
+					"text": "packs,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 187252,
+					"endMs": 187466,
+					"text": "two"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 187466,
+					"endMs": 188110,
+					"text": "extension"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 188110,
+					"endMs": 188467,
+					"text": "reels,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 188467,
+					"endMs": 188681,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 188681,
+					"endMs": 188895,
+					"text": "one"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 188895,
+					"endMs": 189396,
+					"text": "adapter"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 189396,
+					"endMs": 189682,
+					"text": "that"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 189682,
+					"endMs": 190254,
+					"text": "everyone"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 190254,
+					"endMs": 190540,
+					"text": "will"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 190540,
+					"endMs": 190984,
+					"text": "forget."
+				}
+			],
+			"text": "Please write down backup battery counts before we joke ourselves into failure. I have six U S B C packs, two extension reels, and one adapter that everyone will forget."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 190680,
+			"endMs": 195160,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 190680,
+					"endMs": 190753,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 190753,
+					"endMs": 190899,
+					"text": "am"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 190899,
+					"endMs": 191119,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 191119,
+					"endMs": 191853,
+					"text": "forgetting"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 191853,
+					"endMs": 192073,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 192073,
+					"endMs": 192587,
+					"text": "adapter."
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 192587,
+					"endMs": 192660,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 192660,
+					"endMs": 192806,
+					"text": "am"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 192806,
+					"endMs": 193246,
+					"text": "taping"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 193246,
+					"endMs": 193392,
+					"text": "it"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 193392,
+					"endMs": 193538,
+					"text": "to"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 193538,
+					"endMs": 193758,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 193758,
+					"endMs": 194125,
+					"text": "table"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 194125,
+					"endMs": 194418,
+					"text": "with"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 194418,
+					"endMs": 194564,
+					"text": "my"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 194564,
+					"endMs": 194857,
+					"text": "name"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 194857,
+					"endMs": 195003,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 195003,
+					"endMs": 195160,
+					"text": "it."
+				}
+			],
+			"text": "I am not forgetting the adapter. I am taping it to the table with my name on it."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 194380,
+			"endMs": 197239,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 194380,
+					"endMs": 194675,
+					"text": "Put"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 194675,
+					"endMs": 194872,
+					"text": "my"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 194872,
+					"endMs": 195266,
+					"text": "name"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 195266,
+					"endMs": 195463,
+					"text": "on"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 195463,
+					"endMs": 195660,
+					"text": "it"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 195660,
+					"endMs": 195955,
+					"text": "too."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 195955,
+					"endMs": 196546,
+					"text": "Shared"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 196546,
+					"endMs": 197239,
+					"text": "custody."
+				}
+			],
+			"text": "Put my name on it too. Shared custody."
+		},
+		{
+			"speaker": "spk_mira",
+			"label": "Mira Chen",
+			"startMs": 197660,
+			"endMs": 213105,
+			"words": [
+				{
+					"speaker": "spk_mira",
+					"startMs": 197660,
+					"endMs": 198151,
+					"text": "Final"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 198151,
+					"endMs": 198741,
+					"text": "checks."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 198741,
+					"endMs": 199331,
+					"text": "Friday,"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 199331,
+					"endMs": 199822,
+					"text": "April"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 199822,
+					"endMs": 200904,
+					"text": "seventeenth."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 200904,
+					"endMs": 201297,
+					"text": "Crew"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 201297,
+					"endMs": 201493,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 201493,
+					"endMs": 201886,
+					"text": "four"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 201886,
+					"endMs": 202574,
+					"text": "fifteen."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 202574,
+					"endMs": 202967,
+					"text": "Soft"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 202967,
+					"endMs": 203458,
+					"text": "start"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 203458,
+					"endMs": 203654,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 203654,
+					"endMs": 204047,
+					"text": "four"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 204047,
+					"endMs": 204637,
+					"text": "thirty."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 204637,
+					"endMs": 205227,
+					"text": "Public"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 205227,
+					"endMs": 205423,
+					"text": "at"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 205423,
+					"endMs": 205816,
+					"text": "five."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 205816,
+					"endMs": 206209,
+					"text": "Demo"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 206209,
+					"endMs": 206307,
+					"text": "U"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 206307,
+					"endMs": 206405,
+					"text": "R"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 206405,
+					"endMs": 206503,
+					"text": "L"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 206503,
+					"endMs": 206896,
+					"text": "demo"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 206896,
+					"endMs": 207191,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 207191,
+					"endMs": 208273,
+					"text": "lanternlane"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 208273,
+					"endMs": 208568,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 208568,
+					"endMs": 209256,
+					"text": "example"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 209256,
+					"endMs": 209747,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 209747,
+					"endMs": 210238,
+					"text": "hello."
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 210238,
+					"endMs": 210729,
+					"text": "Print"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 210729,
+					"endMs": 211122,
+					"text": "file"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 211122,
+					"endMs": 212499,
+					"text": "lantern-booth-v7"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 212499,
+					"endMs": 212794,
+					"text": "dot"
+				},
+				{
+					"speaker": "spk_mira",
+					"startMs": 212794,
+					"endMs": 213105,
+					"text": "pdf."
+				}
+			],
+			"text": "Final checks. Friday, April seventeenth. Crew at four fifteen. Soft start at four thirty. Public at five. Demo U R L demo dot lanternlane dot example slash hello. Print file lantern-booth-v7 dot pdf."
+		},
+		{
+			"speaker": "spk_ben",
+			"label": "Ben Fischer",
+			"startMs": 213120,
+			"endMs": 216917,
+			"words": [
+				{
+					"speaker": "spk_ben",
+					"startMs": 213120,
+					"endMs": 213319,
+					"text": "And"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 213319,
+					"endMs": 213718,
+					"text": "branch"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 213718,
+					"endMs": 214117,
+					"text": "hotfix"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 214117,
+					"endMs": 214450,
+					"text": "slash"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 214450,
+					"endMs": 215449,
+					"text": "kiosk-offline-two"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 215449,
+					"endMs": 215782,
+					"text": "needs"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 215782,
+					"endMs": 216181,
+					"text": "review"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 216181,
+					"endMs": 216580,
+					"text": "before"
+				},
+				{
+					"speaker": "spk_ben",
+					"startMs": 216580,
+					"endMs": 216917,
+					"text": "lunch."
+				}
+			],
+			"text": "And branch hotfix slash kiosk-offline-two needs review before lunch."
+		},
+		{
+			"speaker": "spk_jules",
+			"label": "Jules Okafor",
+			"startMs": 217980,
+			"endMs": 223719,
+			"words": [
+				{
+					"speaker": "spk_jules",
+					"startMs": 217980,
+					"endMs": 218068,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 218068,
+					"endMs": 218421,
+					"text": "will"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 218421,
+					"endMs": 219039,
+					"text": "rewrite"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 219039,
+					"endMs": 219303,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 219303,
+					"endMs": 220097,
+					"text": "volunteer"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 220097,
+					"endMs": 220538,
+					"text": "sheet"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 220538,
+					"endMs": 220714,
+					"text": "in"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 220714,
+					"endMs": 221155,
+					"text": "human"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 221155,
+					"endMs": 221861,
+					"text": "language"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 221861,
+					"endMs": 222125,
+					"text": "and"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 222125,
+					"endMs": 222478,
+					"text": "send"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 222478,
+					"endMs": 222654,
+					"text": "v3"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 222654,
+					"endMs": 223183,
+					"text": "before"
+				},
+				{
+					"speaker": "spk_jules",
+					"startMs": 223183,
+					"endMs": 223719,
+					"text": "eleven."
+				}
+			],
+			"text": "I will rewrite the volunteer sheet in human language and send v3 before eleven."
+		},
+		{
+			"speaker": "spk_noah",
+			"label": "Noah Patel",
+			"startMs": 223880,
+			"endMs": 230536,
+			"words": [
+				{
+					"speaker": "spk_noah",
+					"startMs": 223880,
+					"endMs": 223949,
+					"text": "I"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 223949,
+					"endMs": 224226,
+					"text": "will"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 224226,
+					"endMs": 224503,
+					"text": "post"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 224503,
+					"endMs": 224711,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 224711,
+					"endMs": 225127,
+					"text": "load-in"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 225127,
+					"endMs": 225751,
+					"text": "checklist"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 225751,
+					"endMs": 225889,
+					"text": "in"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 225889,
+					"endMs": 226097,
+					"text": "the"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 226097,
+					"endMs": 226513,
+					"text": "folder"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 226513,
+					"endMs": 226929,
+					"text": "called"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 226929,
+					"endMs": 227691,
+					"text": "festival-ops"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 227691,
+					"endMs": 227968,
+					"text": "dash"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 227968,
+					"endMs": 228314,
+					"text": "final,"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 228314,
+					"endMs": 228660,
+					"text": "which"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 228660,
+					"endMs": 229006,
+					"text": "means"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 229006,
+					"endMs": 229144,
+					"text": "it"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 229144,
+					"endMs": 229282,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 229282,
+					"endMs": 229975,
+					"text": "definitely"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 229975,
+					"endMs": 230183,
+					"text": "not"
+				},
+				{
+					"speaker": "spk_noah",
+					"startMs": 230183,
+					"endMs": 230536,
+					"text": "final."
+				}
+			],
+			"text": "I will post the load-in checklist in the folder called festival-ops dash final, which means it is definitely not final."
+		},
+		{
+			"speaker": "spk_ana",
+			"label": "Ana Morales",
+			"startMs": 230840,
+			"endMs": 233272,
+			"words": [
+				{
+					"speaker": "spk_ana",
+					"startMs": 230840,
+					"endMs": 231020,
+					"text": "No"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 231020,
+					"endMs": 231380,
+					"text": "file"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 231380,
+					"endMs": 231830,
+					"text": "named"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 231830,
+					"endMs": 232280,
+					"text": "final"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 232280,
+					"endMs": 232460,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 232460,
+					"endMs": 232820,
+					"text": "ever"
+				},
+				{
+					"speaker": "spk_ana",
+					"startMs": 232820,
+					"endMs": 233272,
+					"text": "final."
+				}
+			],
+			"text": "No file named final is ever final."
+		},
+		{
+			"speaker": "spk_leo",
+			"label": "Leo Rossi",
+			"startMs": 234050,
+			"endMs": 239085,
+			"words": [
+				{
+					"speaker": "spk_leo",
+					"startMs": 234050,
+					"endMs": 234437,
+					"text": "Great."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 234437,
+					"endMs": 234591,
+					"text": "We"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 234591,
+					"endMs": 234823,
+					"text": "are"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 234823,
+					"endMs": 235442,
+					"text": "prepared,"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 235442,
+					"endMs": 235829,
+					"text": "which"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 235829,
+					"endMs": 235983,
+					"text": "is"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 235983,
+					"endMs": 236757,
+					"text": "suspicious."
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 236757,
+					"endMs": 236989,
+					"text": "End"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 236989,
+					"endMs": 237531,
+					"text": "meeting"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 237531,
+					"endMs": 237995,
+					"text": "before"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 237995,
+					"endMs": 238537,
+					"text": "reality"
+				},
+				{
+					"speaker": "spk_leo",
+					"startMs": 238537,
+					"endMs": 239085,
+					"text": "notices."
+				}
+			],
+			"text": "Great. We are prepared, which is suspicious. End meeting before reality notices."
+		}
+	],
+	"firstWords": [
+		{
+			"speaker": "spk_mira",
+			"startMs": 900,
+			"endMs": 1410,
+			"text": "Morning."
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 1410,
+			"endMs": 1774,
+			"text": "Sorry,"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 1774,
+			"endMs": 1992,
+			"text": "two"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 1992,
+			"endMs": 2356,
+			"text": "goals"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 2356,
+			"endMs": 2720,
+			"text": "today:"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 2720,
+			"endMs": 3011,
+			"text": "lock"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 3011,
+			"endMs": 3229,
+			"text": "the"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 3229,
+			"endMs": 3593,
+			"text": "booth"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 3593,
+			"endMs": 4322,
+			"text": "run-through"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 4322,
+			"endMs": 4540,
+			"text": "for"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 4540,
+			"endMs": 5123,
+			"text": "Friday's"
+		},
+		{
+			"speaker": "spk_mira",
+			"startMs": 5123,
+			"endMs": 5633,
+			"text": "lantern"
+		}
+	]
+}

@@ -9,8 +9,9 @@ care will simply ignore them.
 The best plain-language description of it is
 [`design/public-page-draft-2026-08-28.md`](design/public-page-draft-2026-08-28.md),
 drafted as the format's future public page. Start there if you want to know what
-the format *is*. [`SPEC.md`](SPEC.md) is what it currently *does*, which is not
-the same thing yet.
+the format *is*. [`SPEC.md`](SPEC.md) is the contract, and
+[`ERRATA.md`](ERRATA.md) is where the reference implementation has not caught up
+with it.
 
 This repository is the specification, the schemas and the open decisions. The
 implementation lives in [gocassini](https://github.com/codemyriad/gocassini),
@@ -33,11 +34,15 @@ both a tool and a conformance check.
 
 ## what's here
 
-* [`SPEC.md`](SPEC.md) — the format as shipped, v1 through v3, with the
-  rationale and the rejected alternatives kept in place
+* [`SPEC.md`](SPEC.md) — the format as shipped: the machinery every version
+  shares, then the current manifest, then v2 and v1, with the rationale and the
+  rejected alternatives kept in place
 * [`spec/`](spec/) — the JSON Schemas for the manifest (v1, v2, v3), plus
   [`cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md),
-  the byte-level definition of the audio digest
+  the byte-level definition of the audio digest, and
+  [`cassini-words-v1.md`](spec/cassini-words-v1.md), the transcript body
+* [`site/`](site/) — the public website, built from the files above rather than
+  from a copy of them
 * [`design/format-freeze-2026-08-28.md`](design/format-freeze-2026-08-28.md) —
   **read this before implementing anything.** Ten changes wanted before the
   format is published, most of them still outstanding
@@ -55,7 +60,7 @@ and so on). The second is a JSON manifest, gzipped, base64url-encoded, and split
 across numbered tags:
 
 ```text
-CASSINI_FORMAT=org.cassini.portable-meeting/3
+CASSINI_FORMAT=org.cassini.portable-meeting/1
 CASSINI_PAYLOAD_ENCODING=base64url+gzip+utf8json
 CASSINI_PAYLOAD_CHUNK_COUNT=52
 CASSINI_PAYLOAD_SHA256=743fc2d2...
@@ -100,19 +105,25 @@ the last chance to fix things, and a review on 2026-08-28 found ten of them.
 [`design/format-freeze-2026-08-28.md`](design/format-freeze-2026-08-28.md) has
 all of it. The three I would not publish without:
 
-* **The integrity rules are wrong about the lifecycle.** They were written to
-  catch edited audio. In practice the audio never changes and the transcript
-  does, because reprocessing with a fixed Cassini is the normal life of a file.
-  Rule 3 makes discarding the transcript a MUST on any mismatch, and it was
-  firing on every shipped file over a 312-sample pre-skip. A reader should keep
-  the transcript and label it unverified.
-* **The schemas can't grow.** `additionalProperties: false` appears 13 times in
-  the v3 schema and nothing says what a reader does with a member it doesn't
-  recognise, so any field nobody has thought of yet is a major version bump.
-* **`cassini.words.v1` is defined nowhere.** The transcript body format, the
-  actual payload, the thing an implementer most needs, exists in the repo only
-  as a string value, and the Go producer and the JS viewer disagree about the
-  shape it names. That schema has to be written before any of this ships.
+* ~~**The integrity rules are wrong about the lifecycle.**~~ Fixed.
+  [`SPEC.md`](SPEC.md) now defines six trust states and none of them discards
+  the transcript; the hard check sits in the producer, which can refuse to ship.
+  The old rule 3 was written to catch edited audio, and in practice the audio
+  never changes and the transcript does. It was firing on every shipped v1 file
+  over a 312-sample pre-skip.
+* ~~**The schemas can't grow.**~~ Fixed. Only `integrity` and `payloadRef` are
+  closed now, because every member of those is an instruction rather than a
+  hint, and the spec requires a consumer to ignore anything else it does not
+  recognise.
+* ~~**`cassini.words.v1` is defined nowhere.**~~ Written up in
+  [`spec/cassini-words-v1.md`](spec/cassini-words-v1.md) with a schema, from the
+  producer's own structs and checked against real files. One schema covers both a
+  v1 file's inline `manifest.transcript` and a v2/v3 chunk-set body, because they
+  turned out to be the same document type. The disagreement the freeze note
+  points at is real but narrower than it sounds: the Go producer writes an
+  envelope (`format`, `language`, `wordCount`) that the JS viewer never reads,
+  and the two genuinely differ only on the *readable* body, which no shipped file
+  contains.
 
 The wire name is also unsettled: `CASSINI_` everywhere, `cairn/2` in the public
 page draft, and a real argument for just keeping CASSINI. See
@@ -122,7 +133,9 @@ and until that decision lands nothing should be.
 One thing we lose today and want back: when several participant tracks get mixed
 into one, the map of which time range came from which source is discarded.
 Keeping it would help anyone who wants to re-diarize the audio later. That is
-what the open `payloads[]` in freeze item 3 is for.
+what `payloads[]` is reserved for; nothing writes one yet, and under the
+ignore-what-you-do-not-recognise rule a reader written today will skip it when
+something does.
 
 And two questions from the [2026-03 research
 brief](design/research-brief-2026-03-17.md) that nobody has answered:

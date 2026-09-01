@@ -1,0 +1,11 @@
+{
+  "speakers": [
+    {"id": "spk_a", "label": "Ada"},
+    {"id": "spk_b", "label": "Ben"}
+  ],
+  "items": [
+    {"speaker": "spk_a", "startMs": 0,  "endMs": 20, "text": "One"},
+    {"speaker": "spk_a", "startMs": 20, "endMs": 40, "text": "two."},
+    {"speaker": "spk_b", "startMs": 40, "endMs": 60, "text": "Three."}
+  ]
+}

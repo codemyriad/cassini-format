@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
+.gstack/
+
+# .opus files are ignored by default so that a real recording dropped in this
+# directory never gets committed by accident. The two places that hold
+# deliberate, synthetic, publishable files are excepted.
 *.opus
+!site/static/demo/*.opus
+!spec/conformance/opus/*.opus

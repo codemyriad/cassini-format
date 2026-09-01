@@ -5,13 +5,24 @@ implement. So this repository is split three ways.
 
 | what | licence | file |
 |---|---|---|
-| spec prose: `SPEC.md`, `CHANGELOG.md`, `README.md`, `design/*` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
+| spec prose: `SPEC.md`, `CHANGELOG.md`, `README.md`, `design/*`, `site/src/content/*` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
 | schemas, examples and test vectors: `spec/*.json`, `spec/examples/*` | CC0-1.0 | [LICENSE-CC0-1.0.txt](LICENSE-CC0-1.0.txt) |
-| `tools/cassini-extract.py` | CC0-1.0 | reference code, meant to be copied |
+| the byte-and-JSON layout documents: `spec/cassini-opus-audio-integrity-v1.md`, `spec/cassini-words-v1.md` | CC0-1.0 | see below |
+| reference code, meant to be copied: `tools/*` | CC0-1.0 | |
+| the demo files: `site/static/demo/*` | CC0-1.0 | test vectors; see below |
 
-`spec/cassini-opus-audio-integrity-v1.md` is prose that defines a byte layout.
-It is CC0 with the schemas, not CC-BY with the prose, because an implementer
-should be able to transcribe the algorithm without an attribution obligation.
+The two layout documents are prose, but they are CC0 with the schemas rather
+than CC-BY with the prose, because an implementer should be able to transcribe
+an algorithm or a field table without an attribution obligation.
+
+The demo files are test vectors that happen to be listenable. Their content is
+synthetic: a fictional meeting from
+[gocassini](https://github.com/codemyriad/gocassini)'s test harness, read by
+[Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache-2.0, no
+attribution obligation on model output). The fixture is relicensed here from its
+AGPL-3.0 home by the same author, deliberately, so that a conformance vector
+carries no licence question. `site/static/demo/README.md` records how they were
+made.
 
 The Cassini implementation stays AGPL-3.0 in
 [gocassini](https://github.com/codemyriad/gocassini). Nothing here changes that.

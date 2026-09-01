@@ -204,7 +204,7 @@ were spent while the format lived inside Cassini, as
 the prefix renamed; readers treat the old identifiers as aliases and read all
 three.
 
-(Note added 2026-09-01: `org.cassini.portable-meeting/3` shipped the day after
+(Note added 2026-09-01: `org.cassini.portable-meeting/1` shipped the day after
 this was written, so the numbering here needs redeciding. See freeze item 6.)
 
 Readers ignore tags and manifest members they don't recognise. A reader that
@@ -218,6 +218,5 @@ AGPL-3.0). The spec text will be CC-BY-4.0 and the schemas and test vectors CC0,
 so anyone can implement the format without asking anyone's permission, which is
 the point of writing it down.
 
-Drafted with Claude Code and edited by me. The decode pipeline above was run
-against a real (pre-rename) file, with `CASSINI_` in place of `CAIRN_`, before
-it went on this page.
+The decode pipeline above was run against a real (pre-rename) file, with
+`CASSINI_` in place of `CAIRN_`, before it went on this page.

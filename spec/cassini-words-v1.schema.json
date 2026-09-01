@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cassini.local/spec/cassini-words-v1.schema.json",
+  "title": "Cassini transcript body (cassini.words.v1)",
+  "description": "The decompressed body of a CASSINI_TX_<ID>_PAYLOAD_* chunk set, and of a v1 file's inline manifest.transcript. Deliberately open: a consumer that meets an unknown member ignores it.",
+  "type": "object",
+  "required": ["format", "wordCount", "items"],
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "cassini.words.v1",
+      "description": "The body format id. A label, not a discriminator: the manifest entry already said which body this is."
+    },
+    "language": {
+      "type": "string",
+      "description": "BCP-47 tag or bare language code. The Go producer omits it when unknown; a JavaScript repacker in the reference tree writes an empty string instead, and real v1 files carry that. Treat absent and empty as the same thing: nobody said."
+    },
+    "wordCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Equal to items.length. A convenience for a reader that wants the count before parsing the array; items wins on disagreement."
+    },
+    "items": {
+      "description": "One item per word, in speaker-turn order and NOT sorted by startMs: across a speaker change startMs can go backwards, because overlapping speech keeps each speaker's words together. Sorting by time destroys the turns. null is accepted as empty because a Go encoder emits it for a nil slice.",
+      "oneOf": [
+        { "type": "array", "items": { "$ref": "#/$defs/item" } },
+        { "type": "null" }
+      ]
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "required": ["speaker", "startMs", "endMs", "text"],
+      "properties": {
+        "speaker": {
+          "type": "string",
+          "description": "Matches an id in the manifest's speakers[]. An unmatched id is still transcript content."
+        },
+        "startMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Milliseconds from the start of the audio program, on the same 48 kHz-derived clock as the manifest's durationMs."
+        },
+        "endMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "text": {
+          "type": "string",
+          "description": "The token as spoken, punctuation attached, no surrounding whitespace. Joining items with a single space reconstructs the prose."
+        },
+        "attributionGapDb": {
+          "type": "number",
+          "description": "How far the loudest OTHER participant's microphone sat above its own noise floor compared with the attributed speaker's, in dB, at this word. Present exactly on the words the attribution stage measured. A measured 0 is written, so a missing key means not measured and MUST NOT be read as zero."
+        },
+        "lowConfidenceSpeaker": {
+          "const": true,
+          "description": "Written only when true; a confidently attributed word omits the key. The word remains canonical transcript content."
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
