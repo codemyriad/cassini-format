@@ -41,9 +41,6 @@ CASSINI_DECODE_HINT=Concatenate CASSINI_PAYLOAD_000..N for the manifest; …
 The words MUST, SHOULD and MAY are used as in RFC 2119. Everything else is
 explanation.
 
-> [`ERRATA.md`](ERRATA.md) lists where the reference implementation does not yet
-> do what this document says. Read it before implementing.
-
 <!-- spec:part v1 -->
 
 ## Implementing this

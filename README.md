@@ -16,8 +16,6 @@ built from this repository.
   ([`cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md));
   the [conformance suite](spec/conformance/); and the
   [private drafts](spec/drafts/) that came before version 1.
-* [`ERRATA.md`](ERRATA.md): where the reference implementations still lag the
-  specification, and a few facts about real files.
 * [`tools/`](tools/): small readers and a producer in Python and JavaScript,
   standard library only, meant to be copied.
 * [`site/`](site/): the website, and under `site/static/demo/` a real file to

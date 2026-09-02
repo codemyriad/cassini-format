@@ -20,9 +20,7 @@ export async function GET() {
 > CASSINI_PAYLOAD_000..N tags. Current wire version: ${site.formatId}.
 
 If you are writing a reader or a producer, take ${origin}/llms-full.txt instead.
-It is this whole specification flattened into one document. The specification is
-the rule; the errata in it record where the reference implementations still lag
-it and a few facts about real files.
+It is this whole specification flattened into one document.
 
 ## Specification
 

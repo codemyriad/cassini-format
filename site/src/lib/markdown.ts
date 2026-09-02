@@ -37,7 +37,6 @@ function rewriteHref(href: string): string | null {
 	if (file === 'SPEC.md') return `/spec/document/${anchor}`;
 	if (file === 'README.md') return `/${anchor}`;
 	if (file === 'CHANGELOG.md') return `/status/${anchor}`;
-	if (file === 'ERRATA.md') return `/errata/${anchor}`;
 	// The two standalone spec documents have shorter route names than filenames.
 	if (file === 'cassini-opus-audio-integrity-v1.md') return `/spec/audio-integrity/${anchor}`;
 	if (file === 'cassini-words-v1.md') return `/spec/words-v1/${anchor}`;

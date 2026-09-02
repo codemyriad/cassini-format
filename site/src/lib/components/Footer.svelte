@@ -13,7 +13,6 @@
 					<li><a href="{base}/spec/words-v1/">Transcript body</a></li>
 					<li><a href="{base}/spec/audio-integrity/">Audio digest</a></li>
 					<li><a href="{base}/schema/">JSON Schemas</a></li>
-					<li><a href="{base}/errata/">Errata</a></li>
 					<li>
 						<a href="https://github.com/codemyriad/cassini-format/tree/main/spec/conformance"
 							rel="noreferrer">Conformance vectors</a
@@ -40,8 +39,7 @@
 				</p>
 				<p>
 					One implementation is not an ecosystem.
-					<a href="{base}/status/">What is open</a> ·
-					<a href="{base}/errata/">where the software still lags the document</a>
+					<a href="{base}/status/">What is open</a>
 				</p>
 			</div>
 		</div>

@@ -65,10 +65,10 @@ A warning is a vector where the reader reported a different error code than the
 suite names, or missed a SHOULD; the reader cannot be wrong there. A failure is
 a reader disagreeing with a rule that exists.
 
-The one failure is a rule no reader follows yet, listed in
-[`../../ERRATA.md`](../../ERRATA.md): a transcript body whose chunk set is
-damaged is unavailable, and the file is not (006). Every reader still calls the
-whole file invalid.
+The one failure is a rule no reader follows yet: a transcript body whose chunk
+set is damaged makes that transcript unavailable, and does not make the file
+invalid (006, and [Resolving a transcript](../../SPEC.md#resolving-a-transcript)).
+Every reader still calls the whole file invalid.
 
 The gocassini figure is the branch of
 [gocassini#234](https://github.com/codemyriad/gocassini/pull/234), which

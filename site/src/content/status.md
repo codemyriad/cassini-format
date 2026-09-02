@@ -12,11 +12,13 @@ to any of them is a new major version.
 
 ## What the software still owes the specification
 
-Rules the document states that the reference readers do not follow yet: padded
-base64url is refused by one of them, none of them bounds the decompression, and
-the six trust-state names are not the names they print. All of it is in
-[the errata](/errata/), with the evidence. The gocassini change that writes
-`version: 1` and the `scripted` role is an open pull request.
+The document is ahead of the code in a few places: padded base64url is refused
+by one reader, none of them yet bounds the decompression against the declared
+`RAW_BYTES`, and the six trust-state names are not the names they print. The
+[conformance suite](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance)
+is where each of those shows up as a warning, and it is the thing to run against
+your own reader. The gocassini change that writes `version: 1` and the
+`scripted` role is an open pull request.
 
 ## Open
 

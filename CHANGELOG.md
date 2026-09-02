@@ -74,8 +74,6 @@ what the schemas accept.
     [`design/rollout-plan-v1.md`](design/rollout-plan-v1.md); it was a CLI
     delivery plan inside a format specification, and it named commands that do
     not exist.
-* An errata list, [`ERRATA.md`](ERRATA.md). It now records the other direction:
-  rules `SPEC.md` states that the reference readers do not follow yet.
 * [`spec/conformance/`](spec/conformance/): 22 vectors, a language-agnostic
   index and a harness, so "does my reader conform" has an answer. Running it
   found three disagreements between the reference implementation and these

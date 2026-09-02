@@ -17,9 +17,6 @@ const siteContent = contentSource;
 
 /**
  * The whole specification as one document, for handing to a model in one paste.
- *
- * Order matters: the errata come before SPEC.md, because they record where
- * the reference implementations lag the rules.
  */
 export async function GET() {
 
@@ -33,17 +30,16 @@ Spec text CC BY 4.0. Schemas, test vectors and example code CC0.
 
 WHAT THIS IS
 
-Everything needed to write a reader or a producer, in one file: the errata, the
+Everything needed to write a reader or a producer, in one file: the
 specification, the transcript body format, the audio digest contract, both
 implementation guides, every JSON Schema, and the actual tag dump of a real file
 you can download and check against.
 
 HOW TO USE IT
 
-The specification is the rule. The errata record where the reference
-implementations still lag it and a few facts about real files. The standards
-this format inherits, and which sections, are listed at the top of the
-specification; nothing here restates them.
+The specification is the rule. The standards this format inherits, and which
+sections, are listed at the top of the specification; nothing here restates
+them.
 
 A REAL FILE TO CHECK AGAINST
 
@@ -52,9 +48,6 @@ A REAL FILE TO CHECK AGAINST
   ${Object.keys(demo.speakers).length} speakers, ${demo.transcript?.wordCount} word-timed items.
   How it was made: ${origin}/demo/README.md
 `);
-
-	parts.push(rule('ERRATA — read this before the specification'));
-	parts.push(await readRepoFile('ERRATA.md'));
 
 	parts.push(rule('WHAT A REAL FILE ACTUALLY CONTAINS'));
 	parts.push(

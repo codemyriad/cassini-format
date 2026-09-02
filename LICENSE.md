@@ -5,7 +5,7 @@ So this repository is split three ways.
 
 | what | licence | file |
 |---|---|---|
-| spec prose: `SPEC.md`, `ERRATA.md`, `CHANGELOG.md`, `README.md`, `design/*`, `site/src/content/*`, `spec/drafts/*.md` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
+| spec prose: `SPEC.md`, `CHANGELOG.md`, `README.md`, `design/*`, `site/src/content/*`, `spec/drafts/*.md` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
 | schemas, drafts' schemas, and the conformance suite: `spec/*.json`, `spec/drafts/*.json`, `spec/conformance/**` | CC0-1.0 | [LICENSE-CC0-1.0.txt](LICENSE-CC0-1.0.txt) |
 | the byte-and-JSON layout documents: `spec/cassini-opus-audio-integrity-v1.md`, `spec/cassini-words-v1.md` | CC0-1.0 | see below |
 | reference code, meant to be copied: `tools/*`, and the site's code under `site/` other than its content | CC0-1.0 | |

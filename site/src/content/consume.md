@@ -63,16 +63,11 @@ ffprobe -v error -show_entries stream_tags -of json meeting.opus \
 
 Better than waiting for me to write one in your language.
 [`/llms-full.txt`](/llms-full.txt) is this whole specification in one 100 KB
-document: errata first, then the spec, the body format, the digest contract, both
-guides, every schema, and the real tag dump of the file the front page links to.
-Hand it over, then check the result against
-[that file](/demo/lantern-festival.opus).
-
-The errata come first on purpose. They are short, and they are where the
-reference readers still disagree with the spec — padding, the inflate bound, the
-state names — so a model reading them knows which side to implement. If
-something written from the bundle still gets it wrong, that is a bug in the
-bundle and I want to hear about it.
+document: the spec, the body format, the digest contract, both guides, every
+schema, and the real tag dump of the file the front page links to. Hand it over,
+then check the result against [that file](/demo/lantern-festival.opus). If
+something written from the bundle gets it wrong, that is a bug in the bundle and
+I want to hear about it.
 
 Then check it against the [conformance vectors](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance):
 22 files covering the edges, with a harness that takes a reader in any language.

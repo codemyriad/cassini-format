@@ -11,7 +11,7 @@ Recommended shape: each transcript body lives in its **own OpusTag chunk set** w
 
 ## Motivation
 
-[D-277 — Swap STT model to canary-1b-v2](https://linear.app/code-myriad/issue/D-277) requires publishing the new transcript "next to the parakeet one for side-by-side inspection" as part of its Definition of Done. Today the only ways to do that are two `.opus` files or a sidecar JSON — neither matches the format's "one file, plays anywhere" promise.
+Swapping the STT model to canary-1b-v2 requires publishing the new transcript "next to the parakeet one for side-by-side inspection" as part of its Definition of Done. Today the only ways to do that are two `.opus` files or a sidecar JSON — neither matches the format's "one file, plays anywhere" promise.
 
 The same shape covers four other cases that have come up: keeping the previous engine's transcript when we swap STT models (audit + regression review for free); multiple cleanup-LLM runs against the same raw ASR; a human-corrected transcript alongside raw ASR; and multilingual recordings (e.g. an Italian transcript + a machine-translated English transcript).
 
@@ -166,7 +166,7 @@ Order matters under the strict profile: v2-capable viewer ships before producers
 1. **Spec & schema.** v2 schema JSON, v2 section in `docs/portable-meeting-format.md`, no code yet.
 2. **Consumer.** Viewer detects `version: 2` and uses the new loader path. Ships to production before any producer emits v2. v1 files still work via the synthesized-array shim.
 3. **Producer v2 emission (feature-flagged off by default).** Recorder can emit v2 files with one transcript; flag stays off in production until the v2 viewer is live.
-4. **Producer multi-transcript.** Bundle reader accepts multiple word-transcript inputs; wire to D-277's side-by-side artifact. Flip the feature flag.
+4. **Producer multi-transcript.** Bundle reader accepts multiple word-transcript inputs; wire to the side-by-side artifact. Flip the feature flag.
 5. **Viewer switch/compare UI.** Transcript switcher first, diff view later. Design-led.
 
 A companion build plan covering file-level changes, test coverage, and parallelization lives in the gocassini implementation repo as `docs/proposals/multi-transcription-format-plan.md`.
@@ -184,8 +184,5 @@ A companion build plan covering file-level changes, test coverage, and paralleli
 - v1 spec: `docs/portable-meeting-format.md`
 - v1 schema: `spec/cassini-portable-meeting-manifest-v1.schema.json`
 - Research brief on format direction: `file-format-report.md`
-- [D-277](https://linear.app/code-myriad/issue/D-277) — driving motivation
-- [D-257](https://linear.app/code-myriad/issue/D-257) — pattern for adding manifest fields safely
-- [D-267](https://linear.app/code-myriad/issue/D-267) — capacity discussion, future-shape compatible
 - Producer code: `cassini-go-recorder/internal/portable/manifest.go`, `internal/cassini/portable_meeting.go`
 - Consumer code: `cassini-viewer/src/viewer/portable.ts`, `src/viewer/loadArtifact.ts`
