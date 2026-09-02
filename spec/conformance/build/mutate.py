@@ -131,8 +131,6 @@ m = decode_set(one, "CASSINI_PAYLOAD_")
 m["version"] = 99
 c = replace_set(one, "CASSINI_PAYLOAD_", m, MANIFEST_MIME)
 c = edit(c, "CASSINI_FORMAT", "org.cassini.portable-meeting/99")
-c = edit(c, "CASSINI_PAYLOAD_SCHEMA",
-         "https://cassini.local/spec/cassini-portable-meeting-manifest-v99.schema.json")
 write(OUT + "001-minimal-v1.opus", "015-unknown-major-version.opus", c)
 
 # --- 016  two transcripts, exactly one flagged default ----------------------
@@ -162,18 +160,62 @@ write(OUT + "001-minimal-v1.opus", "017-dangling-transcript-id.opus", c)
 # octets. These two carry the SAME comments with the SAME values in the SAME
 # size of packet, and differ only in the order they are written, which is the
 # whole argument for putting descriptors first.
+#
+# The bulk has to be incompressible, or gzip folds it away and the header never
+# reaches the window. A SHA-256 chain is deterministic on every platform.
+def incompressible(n, seed=b"cassini-conformance-018"):
+    out, h = bytearray(), seed
+    while len(out) < n:
+        h = hashlib.sha256(h).digest()
+        out += h
+    return bytes(out[:n])
+
 m = decode_set(one, "CASSINI_PAYLOAD_")
 m["attachments"] = [{"id": "bulk", "mime": "application/octet-stream",
-                     "contentBase64": "A" * 46000}]
+                     "contentBase64": base64.b64encode(incompressible(48_000)).decode()}]
 big = replace_set(one, "CASSINI_PAYLOAD_", m, MANIFEST_MIME)
 
 def chunky(name):
     return name.startswith("CASSINI_PAYLOAD_") and name[-3:].isdigit()
 
-write(OUT + "001-minimal-v1.opus", "018-oversize-opustags.opus",
-      sorted(big))                                   # ASCII order: chunks first
-write(OUT + "001-minimal-v1.opus", "021-descriptors-first.opus",
-      sorted(big, key=lambda kv: (chunky(kv[0]), kv[0])))
+def descriptor(name):
+    """A load-bearing comment that is not a numbered chunk: CASSINI_FORMAT and
+    the six descriptors of each chunk set. Chunk tags past the window are
+    unavoidable once the header is bigger than the window; descriptors past it
+    are a producer's choice."""
+    return name == "CASSINI_FORMAT" or (
+        name.startswith(("CASSINI_PAYLOAD_", "CASSINI_TX_")) and not name[-3:].isdigit())
+
+WINDOW = 61_440
+
+def past_window(comments, vendor="cassini-pack.py"):
+    """Comments not wholly inside the first WINDOW octets of the OpusTags
+    packet, laid out per RFC 7845 5.2: magic, vendor, count, then each comment
+    as a 4-byte length and its bytes."""
+    at = 8 + 4 + len(vendor.encode()) + 4
+    total, descriptors = 0, 0
+    for n, v in comments:
+        at += 4 + len(f"{n}={v}".encode())
+        if at > WINDOW:
+            total += 1
+            descriptors += descriptor(n)
+    return at, total, descriptors
+
+ascii_order = sorted(big)
+desc_first = sorted(big, key=lambda kv: (chunky(kv[0]), kv[0]))
+size, past18, bear18 = past_window(ascii_order)
+size21, past21, bear21 = past_window(desc_first)
+assert size == size21 > WINDOW, f"OpusTags packet is {size} octets, not past {WINDOW}"
+assert int(dict(big)["CASSINI_PAYLOAD_CHUNK_COUNT"]) > 1, "manifest must span several chunks"
+assert sorted(ascii_order) == sorted(desc_first) and ascii_order != desc_first
+assert bear18 > 0 and bear21 == 0, (bear18, bear21)
+print(f"018/021: {size} octets, {len(big)} comments; past the window: "
+      f"{past18} ({bear18} descriptors) in 018, {past21} ({bear21} descriptors) in 021")
+
+write(OUT + "001-minimal-v1.opus", "018-oversize-opustags.opus", ascii_order)
+write(OUT + "001-minimal-v1.opus", "021-descriptors-first.opus", desc_first)
+assert open(OUT + "018-oversize-opustags.opus", "rb").read() != \
+       open(OUT + "021-descriptors-first.opus", "rb").read()
 
 # --- 019  the manifest chunk count claims one more chunk than exists -------
 c = edit(one, "CASSINI_PAYLOAD_CHUNK_COUNT", "2")
@@ -185,9 +227,10 @@ write(OUT + "001-minimal-v1.opus", "019-manifest-chunk-count-too-high.opus", c)
 # 003's multi-chunk set is the transcript body, not the manifest.
 DUP = "CASSINI_TX_RAW_ASR_PAYLOAD_001"
 JUNK = "Xn9" * 40
-real = dict(three)[DUP]
-head = [(n, v) for n, v in three if n != DUP]
+at = next(k for k, (n, _) in enumerate(three) if n == DUP)
+real = three[at][1]
+head, tail = three[:at], three[at + 1:]         # the repeat stays in place
 write(OUT + "003-multichunk-v1.opus", "020-duplicate-chunk-differing.opus",
-      head + [(DUP, JUNK), (DUP, real)])
+      head + [(DUP, JUNK), (DUP, real)] + tail)
 write(OUT + "003-multichunk-v1.opus", "022-duplicate-chunk-junk-last.opus",
-      head + [(DUP, real), (DUP, JUNK)])
+      head + [(DUP, real), (DUP, JUNK)] + tail)

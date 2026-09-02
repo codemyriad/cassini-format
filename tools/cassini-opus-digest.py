@@ -3,7 +3,7 @@
 
 Written from spec/cassini-opus-audio-integrity-v1.md alone, with no reference to
 the Go implementation, and byte-identical to it. Standard library only: no
-ffmpeg, no Opus decoder. Points the spec left open are marked SPEC-GAP.
+ffmpeg, no Opus decoder.
 
     python3 tools/cassini-opus-digest.py meeting.opus
 
@@ -15,9 +15,8 @@ SPDX-License-Identifier: CC0-1.0
 """
 import hashlib, json, struct, sys
 
-# SPEC-GAP: the spec says the parser "validates the Ogg structure and CRC" but
-# never names the CRC parameters. From the Ogg container spec: poly 0x04c11db7,
-# init 0, no reflection, no final xor. (Not zlib's crc32, which is reflected.)
+# The Ogg page CRC, as spec/cassini-opus-audio-integrity-v1.md states it:
+# poly 0x04c11db7, init 0, no reflection, no final xor. Not zlib's crc32.
 CRC = []
 for _i in range(256):
     _r = _i << 24
@@ -112,7 +111,7 @@ def compute(path):
             if n == 255:
                 continue                                 # packet continues
             if index == 0:                               # 2. OpusHead
-                if partial[:8] != b"OpusHead" or partial[8] != 1:
+                if len(partial) < 19 or partial[:8] != b"OpusHead" or partial[8] != 1:
                     raise ValueError("first packet is not an Opus v1 identification header")
                 channels, pre_skip = partial[9], struct.unpack_from("<H", partial, 10)[0]
                 canon = bytearray(partial)
@@ -139,6 +138,8 @@ def compute(path):
         raise ValueError(f"final granule {final_granule - (1 << 64)} is negative")
     if final_granule < pre_skip:
         raise ValueError(f"final granule {final_granule} is below pre-skip {pre_skip}")
+    if decoded < pre_skip:
+        raise ValueError(f"{decoded} decoded samples is below pre-skip {pre_skip}")
 
     # Sum packet durations, subtract pre-skip, clamp to the muxer's own view.
     sample_count = min(decoded - pre_skip, final_granule - pre_skip)

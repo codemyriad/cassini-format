@@ -7,7 +7,9 @@ The adapter is any command that takes one .opus path and prints one observation
 JSON object on stdout. Nothing else about the reader is assumed, so this script
 is the whole harness for a reader written in any language.
 
-Exit 0 when every MUST assertion for the declared profile passed.
+Exit 0 when every MUST assertion for the declared profile passed. Exit 1 on a
+failed assertion; exit 2 when the suite or the adapter asks for something this
+harness cannot check, which is never reported as a pass.
 SPDX-License-Identifier: CC0-1.0"""
 import argparse, hashlib, json, pathlib, shlex, subprocess, sys
 
@@ -23,7 +25,33 @@ def codes(items):
 
 
 # Assertions an adapter may never opt out of: they are the whole point.
-LOAD_BEARING = {"classification", "payloadTrust", "audioTrust", "errors"}
+LOAD_BEARING = {"state", "classification", "payloadTrust", "audioTrust", "errors"}
+PROFILES = ("metadata", "full")
+EXPECT_KEYS = set(SCALARS) | {"transcriptIds", "speakerIds", "wordCounts", "errors",
+                              "warnings", "sameContentAs", "mustNot"}
+MUST_NOT = {"emit-transcript", "report-payload-verified", "report-audio-verified",
+            "fail", "discard-transcript", "present-as-current",
+            "sum-word-counts-across-transcripts"}
+
+
+def refuse(msg):
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
+
+def validate_suite(doc):
+    """Refuse to run a suite that asks for something this harness cannot check.
+    A silently ignored expectation is a pass nobody earned."""
+    for v in doc["vectors"]:
+        for e in [v["expect"]] + v.get("alsoAcceptable", []):
+            unknown = set(e) - EXPECT_KEYS
+            if unknown:
+                refuse(f"{v['id']}: expectation keys this harness does not check: {sorted(unknown)}")
+            bad = set(e.get("mustNot", [])) - MUST_NOT
+            if bad:
+                refuse(f"{v['id']}: mustNot rules this harness does not implement: {sorted(bad)}")
+        if not set(v["profiles"]) <= set(PROFILES):
+            refuse(f"{v['id']}: unknown profile in {v['profiles']}")
 
 
 def check(expect, obs, profile, index):
@@ -111,6 +139,13 @@ def check(expect, obs, profile, index):
             fail.append("mustNot report-audio-verified")
         if rule == "fail" and obs.get("classification") in ("damaged-metadata", "crash"):
             fail.append("mustNot fail: reader refused a readable file")
+        if rule == "discard-transcript" and not obs.get("wordCounts"):
+            fail.append("mustNot discard-transcript: reader dropped a transcript "
+                        "whose only fault is that the audio no longer matches")
+        if rule == "present-as-current" and (obs.get("classification") == "cassini"
+                                             or obs.get("wordCounts")):
+            fail.append("mustNot present-as-current: reader presented a version it "
+                        "does not implement as if it understood it")
         if rule == "sum-word-counts-across-transcripts":
             # Alternative transcripts describe the SAME speech. Adding their word
             # counts together describes no meeting that ever happened. A summary
@@ -137,6 +172,7 @@ def main():
     a = ap.parse_args()
 
     doc = json.loads(pathlib.Path(a.suite).read_text())
+    validate_suite(doc)
     index = {v["id"]: v for v in doc["vectors"]}
     results, hard = [], 0
     for v in doc["vectors"]:
@@ -151,6 +187,9 @@ def main():
             obs = {"classification": "crash",
                    "errors": [{"code": "adapter-produced-no-observation"}]}
         profile = a.profile or obs.get("profile", "metadata")
+        if profile not in PROFILES:
+            refuse(f"{v['file']}: adapter declared profile {profile!r}; "
+                   f"this suite knows {list(PROFILES)}")
         if profile not in v["profiles"]:
             results.append((v["id"], "skip", ["not in profile " + profile]))
             continue

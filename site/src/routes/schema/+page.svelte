@@ -33,10 +33,12 @@
 	<div class="two">
 		<div>
 			<p>
-				Each schema declares its own identity as a URL under this site, and that is where it is
-				served from. A <code>$ref</code> between schemas resolves against it, and every file
-				written carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader
-				holding only the file can still find the schema it claims to follow.
+				Each schema declares its own identity as a URL under
+				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves the same bytes at
+				that path, so the <code>$id</code> resolves once the site is at that domain. A
+				<code>$ref</code> between schemas resolves against it, and every file written carries the
+				same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader holding only the file
+				can still find the schema it claims to follow.
 			</p>
 			<p>
 				That identity is a wire string. It is in the bytes of every file, so it is not something

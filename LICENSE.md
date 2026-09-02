@@ -1,14 +1,14 @@
 # Licensing
 
-Freeze item 7: a spec licensed AGPL-3.0 is a standard nobody can safely
-implement. So this repository is split three ways.
+A specification licensed AGPL-3.0 is a standard nobody can safely implement.
+So this repository is split three ways.
 
 | what | licence | file |
 |---|---|---|
-| spec prose: `SPEC.md`, `CHANGELOG.md`, `README.md`, `design/*`, `site/src/content/*` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
-| schemas, examples and test vectors: `spec/*.json`, `spec/examples/*` | CC0-1.0 | [LICENSE-CC0-1.0.txt](LICENSE-CC0-1.0.txt) |
+| spec prose: `SPEC.md`, `ERRATA.md`, `CHANGELOG.md`, `README.md`, `design/*`, `site/src/content/*`, `spec/drafts/*.md` | CC-BY-4.0 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) |
+| schemas, drafts' schemas, and the conformance suite: `spec/*.json`, `spec/drafts/*.json`, `spec/conformance/**` | CC0-1.0 | [LICENSE-CC0-1.0.txt](LICENSE-CC0-1.0.txt) |
 | the byte-and-JSON layout documents: `spec/cassini-opus-audio-integrity-v1.md`, `spec/cassini-words-v1.md` | CC0-1.0 | see below |
-| reference code, meant to be copied: `tools/*` | CC0-1.0 | |
+| reference code, meant to be copied: `tools/*`, and the site's code under `site/` other than its content | CC0-1.0 | |
 | the demo files: `site/static/demo/*` | CC0-1.0 | test vectors; see below |
 
 The two layout documents are prose, but they are CC0 with the schemas rather
@@ -29,9 +29,9 @@ The Cassini implementation stays AGPL-3.0 in
 
 ## Patent non-assertion
 
-No patent claims are asserted against implementations of this format. If that
-ever needs to be a real legal instrument rather than a sentence, it should be
-replaced with the [W3C Software and Document Notice and
+This is a statement of intent, not a licence: no patent claims are asserted
+against implementations of this format. If it ever needs to be a real legal
+instrument, it should be replaced with the [W3C Software and Document Notice and
 License](https://www.w3.org/copyright/software-license/) or an equivalent.
 
 ## The name is not the product

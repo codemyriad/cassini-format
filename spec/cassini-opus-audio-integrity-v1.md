@@ -74,7 +74,8 @@ packet MUST carry a frame count, that count MUST NOT be zero, and a packet MUST
 NOT exceed 120 ms. A packet that breaks any of those makes the file invalid.
 
 The playable sample count is the sum of packet durations, minus `preSkip`,
-clamped to `finalGranule − preSkip` when that is smaller. The clamp is what lets
+clamped to `finalGranule − preSkip` when that is smaller. A sum below
+`preSkip` makes the file invalid. The clamp is what lets
 a real end trim change the identity while a muxer's granule quirk does not.
 
 Duration in milliseconds is `sampleCount × 1000 / 48000` in integer
@@ -87,7 +88,9 @@ A rejection means the digest cannot be computed. To a consumer that is
 still plays if the decoder can play it.
 
 The parser accepts one non-chained Ogg logical stream with one or two Opus
-channels. It rejects a malformed `OpusHead`, a malformed packet, a CRC failure,
+channels. It rejects a malformed `OpusHead` (shorter than 19 bytes, wrong
+magic, version above 15), a malformed packet (empty, or breaking a TOC rule
+above; framing beyond the TOC is not validated), a CRC failure,
 a sequence gap, an invalid continuation, a multiplexed or chained stream, a
 truncated packet, a missing end-of-stream flag, and an invalid final granule.
 

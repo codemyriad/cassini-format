@@ -8,7 +8,7 @@ python3 run-conformance.py --adapter 'node adapters/adapter-js.mjs'
 ```
 
 ```console
-16 pass, 4 warn, 0 fail, 2 skip, of 22
+17 pass, 3 warn, 0 fail, 2 skip, of 22
 ```
 
 An adapter is any command that takes one file path and prints one observation
@@ -39,48 +39,40 @@ id with no chunk set, and a comment header larger than the 61,440 octets
 [RFC 7845 §5.2](https://www.rfc-editor.org/rfc/rfc7845#section-5.2) lets a reader
 ignore.
 
-Vectors 018 and 021 are the pair worth reading first. They carry the same 48
-comments with the same values in the same 65,351-octet packet, and differ only in
+Vectors 018 and 021 are the pair worth reading first. They carry the same 49
+comments with the same values in the same 68,032-octet packet, and differ only in
 write order:
 
 ```
-018-oversize-opustags     65,351 octets   24 comments past the limit, 17 load-bearing
-021-descriptors-first     65,351 octets    3 comments past the limit,  0 load-bearing
+018-oversize-opustags     68,032 octets   25 comments past the limit, 11 of them descriptors
+021-descriptors-first     68,032 octets    4 comments past the limit, all numbered chunks
 ```
 
-That is the whole argument for writing descriptor tags before chunk tags, in two
-files.
+Once a header is bigger than the window some chunk tags must fall past it. The
+descriptors need not, and that is the whole argument for writing them first.
+`build/mutate.py` asserts all four numbers when it generates the pair.
 
 ## Where the readers stand today
 
 ```
-tools/cassini-extract.py            13 pass,  7 warn, 0 fail, 2 skip
-tools/cassini-extract.py + digest   15 pass,  7 warn, 0 fail, 0 skip
-tools/cassini-read.js               16 pass,  4 warn, 0 fail, 2 skip
-cassini inspect (gocassini)          8 pass,  6 warn, 8 fail, 0 skip
+tools/cassini-extract.py            14 pass,  6 warn, 0 fail, 2 skip
+tools/cassini-extract.py + digest   16 pass,  6 warn, 0 fail, 0 skip
+tools/cassini-read.js               17 pass,  3 warn, 0 fail, 2 skip
+cassini inspect (gocassini #234)    12 pass,  9 warn, 1 fail, 0 skip
 ```
 
-Those eight failures are fixed by
-[gocassini#230](https://github.com/codemyriad/gocassini/pull/230), which takes
-the reference reader to 12 pass, 10 warn, 0 fail. Until it merges, the numbers
-above are what `origin/main` scores.
+A warning is a vector where the reader reported a different error code than the
+suite names, or missed a SHOULD; the reader cannot be wrong there. A failure is
+a reader disagreeing with a rule that exists.
 
-A warning is a vector where the specification has decided nothing yet, so the
-reader cannot be wrong. A failure is a reader disagreeing with a rule that exists.
+The one failure is a rule no reader follows yet, listed in
+[`../../ERRATA.md`](../../ERRATA.md): a transcript body whose chunk set is
+damaged is unavailable, and the file is not (006). Every reader still calls the
+whole file invalid.
 
-The reference implementation's eight failures come from four causes, all listed
-in [`../../ERRATA.md`](../../ERRATA.md):
-
-* it refuses padded base64url, which the specification's own worked example
-  produces (vector 004)
-* it takes a transcript's chunk count from the tag rather than from
-  `payloadRef.chunkCount`, so it fails on files this repository's other readers
-  decode (007, 008)
-* it reports `ok` on files whose transcript it cannot reach, because the word
-  count it prints is the one the manifest claims rather than one it counted
-  (005, 006, 020, 022)
-* it adds the word counts of alternative transcripts together, so a three-word
-  meeting carrying two transcripts of it reports six (016)
+The gocassini figure is the branch of
+[gocassini#234](https://github.com/codemyriad/gocassini/pull/234), which
+writes and reads `/1`; `origin/main` still says `/3` and fails nineteen.
 
 ## The trust state
 
@@ -90,9 +82,14 @@ in [`../../ERRATA.md`](../../ERRATA.md):
 `stale-audio`, `ok`. It is the thing two readers must agree on when they
 describe one file.
 
-The `classification` / `payloadTrust` / `audioTrust` triple is kept alongside it
-because it carries more detail, and an adapter that reports only the triple still
-validates.
+Every adapter must report it. The `classification` / `payloadTrust` /
+`audioTrust` triple is kept alongside it because it carries more detail.
+
+Two rules the vectors lean on. A repeated load-bearing tag, anywhere, makes the
+file `invalid-cassini-metadata` (005, 020, 022). A transcript body whose chunk
+set is missing or fails its checks makes that transcript unavailable and leaves
+the file's state alone (006): the reader reports the manifest's transcripts,
+no word count for the broken one, and an error naming it.
 
 How much work a reader did changes which state is correct, and the harness knows
 this. A reader on the `metadata` profile never looks at the audio, so it cannot
@@ -101,6 +98,15 @@ requires `unverified`, a reader that did check the audio and found it sound may
 report `ok`: it did strictly more than was asked. `stale-audio` is never
 accepted in place of `unverified`, because that is a real disagreement rather
 than extra diligence.
+
+## What the harness refuses
+
+The harness exits 2, and reports no pass, when the adapter declares a profile it
+does not know, or when `index.json` asks for an expectation key or a `mustNot`
+rule it does not implement. `state`, `classification`, `payloadTrust`,
+`audioTrust` and `errors` cannot be listed in `omits`. A reader that reports an
+error code other than the one the suite names, but reports one, gets a warning,
+not a failure.
 
 ## Adding a vector
 

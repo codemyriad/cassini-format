@@ -1,156 +1,76 @@
 # cassini-format
 
-A Cassini portable meeting is an ordinary `.opus` file. Double-click it and any
-audio player plays it, because that is all it is: Ogg Opus, 48 kHz. But it also
-carries the full word-timestamped transcript, the speakers, and a record of
-which models produced what, embedded in the OpusTags where players that don't
-care will simply ignore them.
+A Cassini portable meeting is an ordinary `.opus` file. Any player plays it,
+because that is all it is: Ogg Opus, 48 kHz. It also carries its own
+word-timestamped transcript, the speakers, and a record of what produced the
+text, in the OpusTags header, where a player that does not care ignores them.
 
-The best plain-language description of it is
-[`design/public-page-draft-2026-08-28.md`](design/public-page-draft-2026-08-28.md),
-drafted as the format's future public page. Start there if you want to know what
-the format *is*. [`SPEC.md`](SPEC.md) is the contract, and
-[`ERRATA.md`](ERRATA.md) is where the reference implementation has not caught up
-with it.
+The website is <https://cassini-format.codemyriad.io/>. Everything on it is
+built from this repository.
 
-This repository is the specification, the schemas and the open decisions. The
-implementation lives in [gocassini](https://github.com/codemyriad/gocassini),
-which records, transcribes and packs these files. The two were the same repo
-until now; I split the format out because a format that only one program can
-read isn't really a format.
+## What is here
 
-Try it on a file:
+* [`SPEC.md`](SPEC.md): the specification. Version 1, published 2026-09-02.
+* [`spec/`](spec/): the two JSON Schemas; the transcript body
+  ([`cassini-words-v1.md`](spec/cassini-words-v1.md)); the audio digest
+  ([`cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md));
+  the [conformance suite](spec/conformance/); and the
+  [private drafts](spec/drafts/) that came before version 1.
+* [`ERRATA.md`](ERRATA.md): where the reference implementations still lag the
+  specification, and a few facts about real files.
+* [`tools/`](tools/): small readers and a producer in Python and JavaScript,
+  standard library only, meant to be copied.
+* [`site/`](site/): the website, and under `site/static/demo/` a real file to
+  check against.
+* [`design/`](design/): the notes the decisions were made from. Historical.
+* [`LICENSE.md`](LICENSE.md): CC-BY-4.0 prose, CC0 everything an implementer
+  copies.
+
+## Try it on a file
 
 ```bash
-tools/cassini-extract.py meeting.opus --tags     # the descriptor tags
-tools/cassini-extract.py meeting.opus --list     # which transcripts are inside
-tools/cassini-extract.py meeting.opus            # the whole manifest as JSON
+tools/cassini-extract.py meeting.opus --tags   # the descriptor tags
+tools/cassini-extract.py meeting.opus --list   # which transcripts are inside
+tools/cassini-extract.py meeting.opus          # the manifest as JSON
+tools/cassini-read-pure.py meeting.opus        # no ffprobe: parses the container itself
 ```
 
-That script is about 180 lines of Python and it shells out to `ffprobe`. It
-doesn't import anything Cassini-specific, on purpose: if the format is really
-self-describing, a reader should be writable from the tags alone. Consider it
-both a tool and a conformance check.
+## The shape of it
 
-## what's here
-
-* [`SPEC.md`](SPEC.md) — the format as shipped: the machinery every version
-  shares, then the current manifest, then v2 and v1, with the rationale and the
-  rejected alternatives kept in place
-* [`spec/`](spec/) — the JSON Schemas for the manifest (v1, v2, v3), plus
-  [`cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md),
-  the byte-level definition of the audio digest, and
-  [`cassini-words-v1.md`](spec/cassini-words-v1.md), the transcript body
-* [`site/`](site/) — the public website, built from the files above rather than
-  from a copy of them
-* [`design/format-freeze-2026-08-28.md`](design/format-freeze-2026-08-28.md) —
-  **read this before implementing anything.** Ten changes wanted before the
-  format is published, most of them still outstanding
-* [`design/naming.md`](design/naming.md) — the wire name is not decided
-* [`design/`](design/) — also the multi-transcript proposal that became v2, the
-  2026-03 research brief, and the operator's sealing rules
-* [`tools/`](tools/) — the reference extractor
-* [`LICENSE.md`](LICENSE.md) — CC-BY-4.0 prose, CC0 schemas and tools
-
-## the shape of it, in one screen
-
-Metadata rides in two layers. The first is plain Vorbis comments a human can
-read in `ffprobe` output (`TITLE`, `CASSINI_SPEAKER_COUNT`, `CASSINI_STT_MODEL`,
-and so on). The second is a JSON manifest, gzipped, base64url-encoded, and split
-across numbered tags:
+Two layers of metadata. The first is plain comments any tool shows: `TITLE`,
+`CASSINI_SPEAKER_COUNT`, `CASSINI_AUDIO_OPUS_SHA256`. The second is a JSON
+manifest, gzipped, base64url-encoded and split across numbered comments. Each
+transcript body is a second such payload under its own prefix.
 
 ```text
 CASSINI_FORMAT=org.cassini.portable-meeting/1
 CASSINI_PAYLOAD_ENCODING=base64url+gzip+utf8json
-CASSINI_PAYLOAD_CHUNK_COUNT=52
-CASSINI_PAYLOAD_SHA256=743fc2d2...
-CASSINI_DECODE_HINT=Concatenate CASSINI_PAYLOAD_000..N, base64url decode, gzip decompress, parse UTF-8 JSON.
-CASSINI_PAYLOAD_000=H4sIAAAAAAAAA6y9XZPsxpEl-F...
+CASSINI_PAYLOAD_CHUNK_COUNT=1
+CASSINI_PAYLOAD_SHA256=a4d048386f81bd4b...
+CASSINI_PAYLOAD_000=H4sIAAAAAAAC_61W227jNhD9...
+CASSINI_TX_SCRIPT_PAYLOAD_CHUNK_COUNT=3
+CASSINI_TX_SCRIPT_PAYLOAD_000=H4sIAAAAAAAC_...
+CASSINI_DECODE_HINT=Concatenate CASSINI_PAYLOAD_000..N for the manifest; ...
 ```
 
-`CASSINI_DECODE_HINT` is there because I wanted someone poking at one of these
-files with `ffprobe` and no documentation to still get the transcript out. It is
-not load-bearing for any consumer. It's a message in a bottle.
+`CASSINI_DECODE_HINT` is there so that someone with `ffprobe` and no
+documentation still gets the transcript out. A message in a bottle.
 
-Three design commitments run through the whole thing:
+Three commitments run through it:
 
-* **Progressive enhancement.** If a player understands nothing, it still plays
-  the audio. If a reader understands the tags, it gets everything.
-* **Keep what a better model could use later.** The raw ASR words survive even
-  after an LLM cleans them up, along with the provenance saying which engine,
-  which model, which device produced each layer. The cleanup of 2026 will look
-  bad in 2028; the timestamps won't.
-* **The digest binds the transcript to the recording.** Not a seal, and not
-  proof of authenticity: anyone who rewrites the transcript can recompute every
-  hash. It answers one question, "is this transcript describing this
-  recording?", and it catches accidents rather than adversaries.
+* **Progressive enhancement.** A player that understands nothing plays the
+  audio. A reader that understands the tags gets everything.
+* **Keep what a better model could use later.** The words a recogniser
+  produced survive next to any cleanup, with provenance saying what made each.
+* **The digest is a join key, not a seal.** A SHA-256 over the Opus packets
+  says whether this transcript describes this recording. It catches accidents,
+  not adversaries.
 
-That last one is where v3 differs from v1 and v2. v1 hashed decoded PCM, which
-meant a consumer had to decode the entire file to check identity, and it turned
-out not even to be stable: the two Opus decoders inside one ffmpeg binary
-produce different PCM for the same file, so meeting identity depended on which
-decoder you linked. v3 hashes the compressed Opus packets instead, with a
-canonical byte stream defined in
-[`spec/cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md).
-It deliberately excludes `OpusTags`, because otherwise writing the digest into
-the file would change the digest. v2, in between, is what let one file hold
-several transcripts of the same audio (parakeet next to canary, raw next to
-human-corrected) without duplicating the recording.
+## Implementations
 
-## status: pre-freeze, and that is the whole point
+The reference producer is [gocassini](https://github.com/codemyriad/gocassini),
+which records, transcribes and packs these files. The readers in `tools/` and
+on the site are the others. If you build one, say so: a format that only one
+program reads is not really a format.
 
-Publishing freezes a format. Every tag name and schema field becomes someone
-else's compatibility problem the moment a third party implements it. So this is
-the last chance to fix things, and a review on 2026-08-28 found ten of them.
-[`design/format-freeze-2026-08-28.md`](design/format-freeze-2026-08-28.md) has
-all of it. The three I would not publish without:
-
-* ~~**The integrity rules are wrong about the lifecycle.**~~ Fixed.
-  [`SPEC.md`](SPEC.md) now defines six trust states and none of them discards
-  the transcript; the hard check sits in the producer, which can refuse to ship.
-  The old rule 3 was written to catch edited audio, and in practice the audio
-  never changes and the transcript does. It was firing on every shipped v1 file
-  over a 312-sample pre-skip.
-* ~~**The schemas can't grow.**~~ Fixed. Only `integrity` and `payloadRef` are
-  closed now, because every member of those is an instruction rather than a
-  hint, and the spec requires a consumer to ignore anything else it does not
-  recognise.
-* ~~**`cassini.words.v1` is defined nowhere.**~~ Written up in
-  [`spec/cassini-words-v1.md`](spec/cassini-words-v1.md) with a schema, from the
-  producer's own structs and checked against real files. One schema covers both a
-  v1 file's inline `manifest.transcript` and a v2/v3 chunk-set body, because they
-  turned out to be the same document type. The disagreement the freeze note
-  points at is real but narrower than it sounds: the Go producer writes an
-  envelope (`format`, `language`, `wordCount`) that the JS viewer never reads,
-  and the two genuinely differ only on the *readable* body, which no shipped file
-  contains.
-
-The wire name is also unsettled: `CASSINI_` everywhere, `cairn/2` in the public
-page draft, and a real argument for just keeping CASSINI. See
-[`design/naming.md`](design/naming.md). Nothing has been renamed in a file yet,
-and until that decision lands nothing should be.
-
-One thing we lose today and want back: when several participant tracks get mixed
-into one, the map of which time range came from which source is discarded.
-Keeping it would help anyone who wants to re-diarize the audio later. That is
-what `payloads[]` is reserved for; nothing writes one yet, and under the
-ignore-what-you-do-not-recognise rule a reader written today will skip it when
-something does.
-
-And two questions from the [2026-03 research
-brief](design/research-brief-2026-03-17.md) that nobody has answered:
-
-* Should this build on an existing standard rather than invent tags? WebVTT,
-  TTML, SYLT in ID3, Podcasting 2.0, TextGrid and RTTM all overlap with parts of
-  what we do. I did not do that survey properly before writing v1. I might be
-  reinventing something with a worse name.
-* Should it stay Ogg Opus only, or become container-agnostic with per-container
-  profiles? FLAC or M4A would suit some other use cases (lectures, songs with
-  synced lyrics, audiobooks) better.
-
-## contributing
-
-Issues and PRs welcome, especially on the freeze list and the two open questions
-above. If you have built something that reads or writes these files, I'd like to
-hear about it, because right now the answer to "who else implements this" is
-nobody.
+Issues and pull requests welcome.

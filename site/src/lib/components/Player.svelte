@@ -60,10 +60,12 @@
 					4,
 					read.transcript ? 'ok' : 'fail',
 					read.transcript
-						? `${read.transcript.entry?.id ?? 'inline'} — ${read.transcript.words.length} words${
+						? `${read.transcript.entry.id} — ${read.transcript.words.length} words${
 								read.verified.transcript ? ', digest matches' : ''
 							}`
-						: 'no transcript recovered'
+						: read.unavailable
+							? `${read.unavailable.entry.id} could not be loaded`
+							: 'no transcript recovered'
 				);
 				result = read;
 			} catch (e) {
@@ -92,22 +94,54 @@
 		new Map((result?.manifest?.speakers ?? []).map((s, i) => [s.id, i]))
 	);
 
+	// File order is speaker-turn order, not time order: across a speaker change
+	// startMs goes backwards. Rendering keeps file order; lookup by time needs
+	// its own index, sorted by startMs and holding the file position.
+	const byTime = $derived.by(() => {
+		const words = result?.transcript?.words ?? [];
+		return words.map((w, i) => ({ startMs: w.startMs, i })).sort((a, b) => a.startMs - b.startMs);
+	});
+
 	const activeWord = $derived.by(() => {
 		const words = result?.transcript?.words;
-		if (!words) return -1;
-		// The words are in order, so a scan from a bisect is plenty.
+		if (!words || !byTime.length) return -1;
 		let lo = 0;
-		let hi = words.length - 1;
+		let hi = byTime.length - 1;
 		let found = -1;
 		while (lo <= hi) {
 			const mid = (lo + hi) >> 1;
-			if (words[mid].startMs <= timeMs) {
+			if (byTime[mid].startMs <= timeMs) {
 				found = mid;
 				lo = mid + 1;
 			} else hi = mid - 1;
 		}
-		if (found >= 0 && timeMs > words[found].endMs + 900) return -1;
-		return found;
+		if (found < 0) return -1;
+		// Several words can start before now; take the one still being said,
+		// or the latest to start if none is.
+		let pick = byTime[found].i;
+		for (let k = found; k >= 0 && byTime[found].startMs - byTime[k].startMs < 3000; k--) {
+			const w = words[byTime[k].i];
+			if (w.startMs <= timeMs && timeMs <= w.endMs) {
+				pick = byTime[k].i;
+				break;
+			}
+		}
+		if (timeMs > words[pick].endMs + 900) return -1;
+		return pick;
+	});
+
+	const stateLine = $derived.by(() => {
+		if (!result) return '';
+		switch (result.state) {
+			case 'unverified':
+				return 'unverified: the manifest and transcript digests match; the audio digest is not checked in the browser.';
+			case 'invalid-cassini-metadata':
+				return 'invalid-cassini-metadata: the metadata could not be reconstructed. The recording still plays.';
+			case 'unknown-cassini-format':
+				return 'unknown-cassini-format: metadata in a version this reader does not implement. The recording still plays.';
+			default:
+				return result.state;
+		}
 	});
 
 	function seekTo(ms: number) {
@@ -153,14 +187,14 @@
 	{#if error}
 		<p class="err">The reader stopped: {error}. The file is still playable as audio.</p>
 	{/if}
+	{#if result}
+		<p class="state" data-state={result.state}>{stateLine}</p>
+	{/if}
 	{#if result?.warnings.length}
 		<ul class="warn">
-			{#each result.warnings as warning (warning.code + warning.message)}
+			{#each result.warnings as warning, i (i)}
 				<li>{warning.message}</li>
 			{/each}
-			<li class="warn__note">
-				Damaged metadata over valid audio. The recording still plays, which is the point.
-			</li>
 		</ul>
 	{/if}
 
@@ -186,7 +220,7 @@
 			}}
 		>
 			<div class="fill" style:width="{duration ? (timeMs / 1000 / duration) * 100 : 0}%"></div>
-			{#each turns as turn (turn.startMs)}
+			{#each turns as turn, i (i)}
 				<span
 					class="tick"
 					style:left="{duration ? (turn.startMs / 1000 / duration) * 100 : 0}%"
@@ -212,7 +246,7 @@
 
 	<div class="transcript" bind:this={scroller}>
 		{#if result?.manifest}
-			{#each turns as turn (turn.startMs)}
+			{#each turns as turn, ti (ti)}
 				{@const live = activeWord >= 0 && turn.words.includes(result.transcript!.words[activeWord])}
 				<div class="turn" data-active={live}>
 					<button
@@ -225,7 +259,7 @@
 						<span class="nm">{turn.label}</span>
 					</button>
 					<p>
-						{#each turn.words as word (word.startMs)}<button
+						{#each turn.words as word, wi (wi)}<button
 								class="w"
 								type="button"
 								data-active={result.transcript!.words[activeWord] === word}
@@ -303,17 +337,24 @@
 		}
 	}
 
+	.state {
+		margin: 0;
+		padding: 0.6rem 1rem;
+		border-bottom: 1px solid var(--rule);
+		color: var(--fg-4);
+		font-size: 12px;
+		max-width: none;
+	}
+	.state[data-state='invalid-cassini-metadata'],
+	.state[data-state='unknown-cassini-format'] {
+		color: var(--amber);
+	}
 	.warn {
 		margin: 0;
 		padding: 0.8rem 1rem 0.8rem 2.1rem;
 		border-bottom: 1px solid var(--rule);
 		color: var(--amber);
 		font-size: 12.5px;
-	}
-	.warn__note {
-		color: var(--fg-4);
-		list-style: none;
-		margin-left: -1.1rem;
 	}
 	.err {
 		margin: 0;

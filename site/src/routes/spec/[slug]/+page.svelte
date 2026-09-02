@@ -30,9 +30,6 @@
 						{v.label}<span>{v.status}</span>
 					</a>
 				{/each}
-				<a href="{base}/spec/document/" class:on={data.slug === 'document'}>
-					full document<span>all versions</span>
-				</a>
 			</div>
 		{/if}
 	{/snippet}

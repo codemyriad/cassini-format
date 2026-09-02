@@ -12,7 +12,7 @@ the rest.
 
 The metadata has two layers. The first is plain comments any tool can show. The
 second is a JSON manifest, gzipped, base64url-encoded and split across numbered
-comments so the header stays readable. Each transcript body is a second such
+comments so the header stays inspectable. Each transcript body is a second such
 payload under its own prefix. A SHA-256 over the Opus packets ties the transcript
 to the recording.
 
@@ -25,13 +25,13 @@ CASSINI_FORMAT=org.cassini.portable-meeting/1
 CASSINI_PROFILE=ogg-opus
 CASSINI_PAYLOAD_ENCODING=base64url+gzip+utf8json
 CASSINI_PAYLOAD_CHUNK_COUNT=1
-CASSINI_PAYLOAD_SHA256=98cba376921f3ebf171d…
-CASSINI_PAYLOAD_000=H4sIAAAAAAAC_61W247bNhD9lYFe2iKWV…
-CASSINI_TRANSCRIPT_IDS=raw-asr
-CASSINI_TRANSCRIPT_DEFAULT=raw-asr
-CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT=3
-CASSINI_TX_RAW_ASR_PAYLOAD_SHA256=bcfe6a717171545ef264…
-CASSINI_TX_RAW_ASR_PAYLOAD_000=H4sIAAAAAAAC_…
+CASSINI_PAYLOAD_SHA256=a4d048386f81bd4b2814…
+CASSINI_PAYLOAD_000=H4sIAAAAAAAC_61W227jNhD9lYFe2mIt…
+CASSINI_TRANSCRIPT_IDS=script
+CASSINI_TRANSCRIPT_DEFAULT=script
+CASSINI_TX_SCRIPT_PAYLOAD_CHUNK_COUNT=3
+CASSINI_TX_SCRIPT_PAYLOAD_SHA256=bcfe6a717171545ef264…
+CASSINI_TX_SCRIPT_PAYLOAD_000=H4sIAAAAAAAC_…
 CASSINI_AUDIO_OPUS_SHA256=8e1f7499c6d5fba88c3b…
 CASSINI_MEETING_ID=mtg_8e1f7499c6d5fba8…
 CASSINI_SPEAKER_COUNT=6
@@ -53,7 +53,10 @@ Read these in order. Each settles something the next assumes.
 1. This document: the tags, the chunk transport, the manifest, and what a
    consumer does in each state it can end in.
 2. [`spec/cassini-portable-meeting-manifest-v1.schema.json`](spec/cassini-portable-meeting-manifest-v1.schema.json):
-   the manifest. Where this prose and the schema disagree, the schema is right.
+   the manifest. The schema is normative for the structure it expresses; this
+   prose is normative for everything the schema cannot say, such as rules that
+   span two members. A contradiction between them is a bug in this repository,
+   not a rule; report it.
 3. [`spec/cassini-words-v1.md`](spec/cassini-words-v1.md): the transcript body,
    which is what a `CASSINI_TX_<ID>_PAYLOAD_` chunk set decodes to.
 4. [`spec/cassini-opus-audio-integrity-v1.md`](spec/cassini-opus-audio-integrity-v1.md):
@@ -145,9 +148,11 @@ not recognise is: ignore it and carry on.
 
 Two objects are closed: `integrity`, and every `payloadRef`. Every member of
 those is an instruction for reassembling bytes or deciding whether audio and
-transcript belong together, so an unrecognised member there is a failure, not
-a lost hint. Adding a member to either is a new major version. The schemas say
-the same.
+transcript belong together, so an unrecognised member there is not a lost
+hint. Adding a member to either is a new major version, and the schemas reject
+one. A consumer that meets one in `integrity` cannot know what a match would
+mean and reports [`unverified`](#unverified); in a `payloadRef` it treats that
+transcript as unavailable.
 
 **Private use.** Tag names beginning `X_` and the manifest member `x` are
 reserved for private data and will never be defined here.
@@ -157,8 +162,8 @@ reserved for private data and will never be defined here.
   `_`: `X_EXAMPLE_COM_TICKET=OPS-14`.
 - The manifest member `x` is an object keyed by that domain:
   `"x": {"example.com": {"ticket": "OPS-14"}}`. Private data goes under `x`
-  and nowhere else, so a tool publishing a recording outside the organisation
-  can strip all of it with one deletion.
+  and nowhere else. A tool publishing a recording outside the organisation
+  strips private data by deleting `x` and every `X_*` tag.
 - Consumers MUST ignore private data they do not own. A tool that edits `x`
   MUST recompute `CASSINI_PAYLOAD_SHA256` and `CASSINI_PAYLOAD_RAW_BYTES`.
 
@@ -275,6 +280,8 @@ when its value is known: absent, never empty.
 | `CASSINI_ROOM_NAME` | `meeting.roomName` (no longer written; still read) |
 | `CASSINI_JOB_ID` | `meeting.jobId` |
 | `CASSINI_ATTEMPT_NUMBER` | `meeting.attemptNumber` |
+| `CASSINI_PROCESSED_AT` | `meeting.processedAtUtc` |
+| `CASSINI_RECORDED_AT_LOCAL` | `meeting.recordedAtLocal` |
 
 Producers SHOULD also write `TITLE`, `DATE` and a one-line `DESCRIPTION` saying
 how to decode the payload, so that ordinary tools show something useful.
@@ -326,8 +333,10 @@ Rules, the same for every chunk set:
   makes the set unreadable; a consumer MUST NOT concatenate across a gap.
 - A chunk name MUST appear once. A consumer that sees a repeat MUST treat the
   set as unreadable.
-- Chunk tags numbered past `CHUNK_COUNT-1` are ignored. A tool that shortened a
-  payload may have left them.
+- Chunk tags numbered past `CHUNK_COUNT-1` are ignored, but a repeat among
+  them is still a repeat. A tool replacing a chunk set MUST delete every
+  numbered tag under that prefix first; a stale chunk is old text left in a
+  file that was meant to lose it.
 - Values are concatenated in numeric index order with no separator, then
   decoded once. A single chunk is not decodable on its own.
 - Producers SHOULD keep each chunk to 4096 characters. Nothing depends on it;
@@ -353,18 +362,35 @@ The one encoding defined is `base64url+gzip+utf8json`:
 4. split across the numbered tags.
 
 Producers MUST write unpadded. Consumers MUST accept both padded and unpadded,
-and MUST strip ASCII whitespace before deciding how much padding to add: a
-comment value may legally contain a newline.
+and MUST strip ASCII whitespace (space, tab, CR, LF) before deciding how much
+padding to add: a comment value may legally contain a newline.
+
+Strictness, so that two readers agree on what is damaged:
+
+- A decimal tag value is `0|[1-9][0-9]*`, at most 2^53−1. Anything else is
+  malformed.
+- base64url is strict: a byte outside the alphabet, padding anywhere but the
+  end, or non-zero trailing bits is a decode failure (RFC 4648 §3.5).
+- One gzip member, nothing after it.
+- UTF-8 decoding is fatal on an invalid sequence. A JSON object with a
+  repeated member name is malformed.
 
 `RAW_BYTES` is a bound, not decoration. A gzip stream can claim to be small and
 inflate to gigabytes. Consumers MUST stop inflating once the output exceeds the
-declared `RAW_BYTES` and treat the result as damaged. Where nothing is declared,
-a consumer MUST apply a ceiling of its own.
+declared `RAW_BYTES` and treat the result as damaged. The declared value is
+untrusted: a consumer MUST also apply a ceiling of its own, and MUST bound the
+comment count, chunk count and JSON depth it will accept. Producers SHOULD keep
+every chunk set under 64 MiB decompressed; a consumer MAY reject one above
+that.
 
 A consumer MUST check the declared `SHA256` before believing any field of the
-result. An absent digest is not a passed check; the file is `unverified`.
+result. For the manifest, an absent digest is a missing required tag and the
+file is `invalid-cassini-metadata`. For a body, it makes that transcript
+unavailable.
 
 A consumer MUST NOT decode a chunk set whose `ENCODING` it does not implement.
+For the manifest that is `invalid-cassini-metadata`; for a body, that
+transcript is unavailable.
 
 ## The manifest
 
@@ -404,14 +430,16 @@ Required:
 
 Optional:
 
-- `recordedAtLocal`: wall-clock time at the recording site. Deliberately not
-  constrained to UTC; the local time is the point.
-- `processedAtUtc`.
+- `recordedAtLocal`: wall-clock time at the recording site,
+  `YYYY-MM-DDTHH:MM:SS`, no offset and no zone. It is a label, not an
+  instant: consumers MUST NOT convert it to one.
+- `processedAtUtc`: RFC 3339 UTC.
+- `summary`: a short plain-text summary of the meeting, for display.
 - `language`: BCP-47. The reference producer never writes it.
 - `roomId`: a one-way derivation of the room's identity, `rm_<16 lowercase
   hex>`. Never the identity itself: a Nextcloud Talk conversation token is also
   the link that joins the conversation, and this file travels. Producers MUST
-  NOT write a raw room token anywhere in the file.
+  NOT write a raw room token in any tag or manifest member.
 - `roomName`: no longer written, still read. A display name is editable and a
   published recording is not.
 - `jobId`, `attemptNumber`: the producer job, and which attempt, 1-based. A
@@ -473,16 +501,20 @@ file.
   one that carries the record.
 
 A processing step has only optional strings: `backend`, `engine`, `model`,
-`device`, `language`, `source`, `version`. Producers MUST NOT record a service
-endpoint in one: no URL, no hostname. This file is cleartext to everyone who
-receives it.
+`device`, `language`, `source`, `version`. Producers MUST NOT put a URL or a
+hostname in any of them. This file is cleartext to everyone who receives it.
 
 ### `chapters`, `summary`, `attachments`
 
-All optional. `chapters` entries carry `startMs`, `endMs`, `title`. `summary`
-is metadata about a summary, not the summary; the summary itself travels as an
-attachment named `summary.md`. An attachment's `contentBase64` is **standard
-base64, not base64url**: the one place the alphabet differs.
+All optional. `chapters` entries carry `startMs`, `endMs`, `title`.
+
+An attachment is `{ "name", "mime", "contentBase64" }`: a file name unique
+within the array, its media type, and its bytes in **standard base64, not
+base64url**, the one place the alphabet differs. A consumer MUST ignore an
+entry it cannot decode. `summary` is metadata about a summary (the reference
+producer writes `format`, `model`, `backend`); the summary itself is the
+attachment named `summary.md`. Attachments are for small things: they sit
+inside the manifest chunk set and count against its bound.
 
 ### Transcripts and their chunk sets
 
@@ -578,8 +610,8 @@ this format defines.
    [Chunk sets](#chunk-sets).
 4. **Decode and verify it.** Bound the inflate, then check the digest and byte
    counts. [Payload encoding](#payload-encoding).
-5. **Read the manifest.** Check `kind` and `version`. Ignore what you do not
-   recognise. [Embedded manifest](#embedded-manifest).
+5. **Read the manifest.** Check `kind`, `version` and `profile`. Ignore what
+   you do not recognise. [Embedded manifest](#embedded-manifest).
 6. **Resolve which transcript to show.** Next section.
 7. **Decode its body.** Its chunk set, by steps 3 and 4, with `payloadRef` as
    the record. The body is [`spec/cassini-words-v1.md`](spec/cassini-words-v1.md).
@@ -593,13 +625,22 @@ one small chunk set away and a body may be many.
 
 ### Resolving a transcript
 
-There are three slots: words, readable, display. A consumer fills each from the
-matching array, filtered by `role`, in this order:
+There are three slots. A consumer fills each from the entries of one array
+with one set of roles:
+
+| Slot | Array | Roles | Body `format` |
+|---|---|---|---|
+| words | `transcripts[]` | `raw-asr`, `human-corrected`, `translation`, `scripted` | `cassini.words.v1` |
+| readable | `readableTranscripts[]` | `readable-cleanup` | as the entry says |
+| display | `readableTranscripts[]` | `display` | as the entry says |
+
+For each slot, in this order:
 
 1. the first entry whose `default` is `true`;
 2. failing that, the first entry.
 
 Array order is therefore normative. Zero flagged defaults is a legal file.
+`CASSINI_TRANSCRIPT_DEFAULT` is the id this rule selects for the words slot.
 
 When showing a readable transcript beside the words, a consumer SHOULD prefer
 the entry whose `sourceTranscriptId` names the words it is showing.
@@ -609,11 +650,14 @@ MUST ignore an id in the tag that is not in the manifest, and MUST ignore a
 default that names no entry. Where tag and flag both resolve and disagree, the
 manifest wins.
 
-An entry whose chunk set is missing or fails its checks makes that transcript
-unavailable, not the file. The other transcripts, the speakers and the meeting
-are still good, and the trust state below is unaffected: it describes the
-manifest and the audio, not a body. The consumer MUST say which transcript it
-could not load, and `ok` with no transcript on screen is a legal outcome.
+Beside the file's trust state, each selected transcript is **available** or
+**unavailable**. A body whose chunk set is missing a chunk, whose count, byte
+counts or digest disagree, or whose decode fails is unavailable, and the file's
+state is unaffected: the state describes the manifest and the audio. The other
+transcripts, the speakers and the meeting are still good. The consumer MUST say
+which transcript it could not load, and `ok` with no transcript on screen is a
+legal outcome. A repeated tag is different: it is evidence the file was edited,
+and [the comment-vector rule](#reading-the-comment-vector) applies.
 
 ### Trust and integrity
 
@@ -653,9 +697,13 @@ the file carries metadata in a version it cannot read.
 
 #### `invalid-cassini-metadata`
 
-The descriptor is incomplete, a chunk is missing or repeated, the count does not
-match, the decode fails, the digest does not match, the JSON does not parse,
-`kind` is wrong, or `version` disagrees with `CASSINI_FORMAT`.
+The manifest cannot be trusted at all. A required `CASSINI_PAYLOAD_*` tag is
+missing or malformed; a load-bearing tag is repeated; a manifest chunk is
+missing; the count, byte counts or digest disagree; the decode, the UTF-8 or
+the JSON fails; `kind` or `profile` is wrong; `version` disagrees with
+`CASSINI_FORMAT`; a required member is missing or of the wrong type. A
+malformed optional member is not on this list: it is ignored as if absent.
+The consumer MUST NOT show any manifest field.
 
 #### `unverified`
 
@@ -673,7 +721,8 @@ forbids outright.
 
 #### `stale-audio`
 
-The digest or a shape field disagrees with the manifest. This usually means the
+The digest, or `channels`, `sampleCount` or `durationMs` computed from the
+stream, disagrees with `integrity`. Any one mismatch is enough. This usually means the
 file was reprocessed or remuxed, not tampered with. The consumer MUST NOT
 delete, hide or refuse to render the transcript, MUST NOT make the user
 re-import the file, and SHOULD offer plain playback as an alternative. It SHOULD
@@ -686,7 +735,8 @@ The transcript is shown as it was written; it may describe a different recording
 
 #### `ok`
 
-Every check performed passed, and the audio digest was one of them.
+Every manifest check passed, the audio digest and shape were computed from
+the stream, and every one of them matched.
 
 #### Where the hard check lives
 

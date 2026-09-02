@@ -19,7 +19,9 @@ returns nothing. And `ffprobe` renames `DESCRIPTION` to `comment`.
 
 ## The payload, in one pipeline
 
-No script, no library:
+No script, no library. This is for looking, not for a reader: it takes the
+chunks it can see, three digits only, and checks nothing. A reader joins exactly
+`CHUNK_COUNT` chunks by index and verifies the digest.
 
 ```bash
 ffprobe -v error -show_entries stream_tags -of json meeting.opus \
@@ -74,9 +76,9 @@ bundle and I want to hear about it.
 
 Then check it against the [conformance vectors](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance):
 22 files covering the edges, with a harness that takes a reader in any language.
-The three readers in this repository pass with no hard failures. The reference Go
-implementation has three, two of them on files these readers decode fine, which
-is what a suite is for.
+The three readers in this repository pass with no hard failures. The reference
+Go implementation fails one: a transcript body missing a chunk, which it treats
+as a broken file rather than a missing transcript. That is what a suite is for.
 
 ## The algorithm
 
@@ -150,9 +152,10 @@ if (file.cassini) {
 }
 ```
 
-`verified: { manifest, transcript }` comes back alongside the data. `true` means
-the digest matched, `null` means nothing claimed one, `false` means it
-disagreed. That last one is not a reason to throw anything away.
+`state` comes back alongside the data, one of the six below. `verified:
+{ manifest, transcript }` says what was checked: `true` matched, `null` nothing
+claimed one, `false` disagreed. A manifest that disagrees is not shown at all;
+a transcript that disagrees comes back as `unavailable` with the reason.
 
 ## Say which of the six states you ended in
 
@@ -170,11 +173,17 @@ spec so that two readers describe one file the same way:
 | `stale-audio` | readable, checked, does not match | show the transcript, labelled, offer plain audio |
 | `ok` | readable, checked, matches | open it as a meeting |
 
-Discarding the transcript is never one of the answers. The rule that used to say
-so was written to catch edited audio, and that is not what happens to these
-files: the audio stays put and the transcript gets replaced, because
-reprocessing with a better model is the normal life of one. It fired on every
-shipped v1 file over a 312-sample pre-skip.
+Three digests, three different consequences:
+
+* The **manifest** digest fails: the manifest is not used, not even a field of
+  it. `invalid-cassini-metadata`; the audio plays.
+* A **transcript body** digest fails: that transcript is unavailable. The
+  meeting, the speakers and the other transcripts are still good, and the
+  file's state does not change.
+* The **audio** digest fails: keep the transcript and label it. `stale-audio`
+  is what happens when a file is reprocessed or remuxed, which is the normal
+  life of one. Discarding the transcript here is the one thing a reader must
+  not do.
 
 If you never verify the audio, you are still conforming — a reader that pulls
 only the front of the file over a range request cannot. Report `unverified` and
@@ -196,12 +205,12 @@ corrupted payload, a truncated download. Not someone who wants to lie to you.
   So `raw-asr` and `raw_asr` collide. Do not use `_`.
 * **`CASSINI_TRANSCRIPT_IDS` is sorted; `manifest.transcripts[]` is not.** Same
   ids, different order. Neither is wrong.
-* **A very large comment header may arrive incomplete.**
-  [RFC 7845 §5.2](https://www.rfc-editor.org/rfc/rfc7845#section-5.2) lets you
-  ignore comments past the first 61,440 octets, and ASCII sorting can push the
-  descriptors past that line on a long recording. If `CHUNK_COUNT` is missing on
-  a file that plainly has chunk tags, this is why. Count the tags you can see,
-  and say that you did.
+* **A comment header can be large.**
+  [RFC 7845 §5.2](https://www.rfc-editor.org/rfc/rfc7845#section-5.2) lets a
+  generic reader ignore comments past the first 61,440 octets. A Cassini reader
+  may not: on a long recording the tags that make the file decodable sit past
+  that mark. Read the whole `OpusTags` packet, and over HTTP fetch more until
+  you have it.
 * **The summary tags are an incomplete copy.** A file carries no
   `CASSINI_WORD_COUNT`, no `CASSINI_TRANSCRIPT_LANGUAGE`, no `CASSINI_STT_*`,
   whatever the spec says. Read the manifest.

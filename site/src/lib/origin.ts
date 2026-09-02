@@ -4,10 +4,11 @@ import { base } from '$app/paths';
  * The site's public URL, for the two plain-text files that get handed to a model
  * or pasted somewhere the host is lost.
  *
- * The deploy target is not decided, so this defaults to relative paths, which
- * are correct everywhere. Set SITE_URL at build time to make them absolute:
+ * The site lives at https://cassini-format.codemyriad.io. Without SITE_URL
+ * the build falls back to relative paths, which are correct on any preview
+ * host. The published build sets it:
  *
- *   SITE_URL=https://example.com npm run build
+ *   SITE_URL=https://cassini-format.codemyriad.io npm run build
  *
  * At prerender time SvelteKit reports url.origin as http://sveltekit-prerender,
  * which must never reach a published file.

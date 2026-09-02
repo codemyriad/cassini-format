@@ -12,8 +12,9 @@
 	<p class="eyebrow eyebrow--plain">Design notes</p>
 	<h1>The arguments that produced the format.</h1>
 	<p class="lede">
-		A spec tells you what to write; these tell you why, which is what matters when you have to decide
-		something it did not anticipate. Working documents, kept as written, dates and all.
+		A spec tells you what to write; these tell you why. Working documents, kept as written, dates
+		and all, and not normative: where one disagrees with the spec, the spec wins, and the
+		disagreement is worth reporting.
 	</p>
 
 	<ol class="list">

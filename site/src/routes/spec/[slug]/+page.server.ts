@@ -21,32 +21,26 @@ export const entries = () => [
 	{ slug: 'audio-integrity' }
 ];
 
-async function specPart(name: string) {
-	const { parts } = await splitSpec();
-	const text = parts.get(name);
-	if (!text) throw error(500, `SPEC.md no longer carries a <!-- spec:part ${name} --> marker`);
-	return text;
-}
-
 const PAGES: Record<string, Page> = {
 	v1: {
 		title: 'Cassini portable meeting, version 1',
 		kicker: 'Specification · current',
-		lede: 'What a producer writes and a consumer reads: the container, the tags, the manifest, and what a reader owes the person in front of it.',
+		lede: 'What a producer writes and a consumer reads: the container, the tags, the manifest, and what a reader owes the person in front of it. The whole document, rationale included.',
 		source: 'SPEC.md',
 		meta: [
 			{ label: 'Wire id', value: 'org.cassini.portable-meeting/1' },
-			{ label: 'Status', value: 'current' },
+			{ label: 'Status', value: 'published 2026-09-02' },
 			{ label: 'Media type', value: 'audio/ogg' }
 		],
-		markdown: () => specPart('v1')
+		markdown: async () => (await splitSpec()).raw
 	},
+	// The same document at its older address. Kept so that links do not break.
 	document: {
-		title: 'The specification document, in full',
-		kicker: 'Specification · one page',
-		lede: 'SPEC.md as it stands, rationale and rejected alternatives included.',
+		title: 'Cassini portable meeting, version 1',
+		kicker: 'Specification · current',
+		lede: 'The specification, whole. The same page as /spec/v1/.',
 		source: 'SPEC.md',
-		meta: [{ label: 'Covers', value: 'the published format' }],
+		meta: [{ label: 'Wire id', value: 'org.cassini.portable-meeting/1' }],
 		markdown: async () => (await splitSpec()).raw
 	},
 	'words-v1': {
@@ -90,11 +84,7 @@ export async function load({ params }) {
 				extraMeta.push(...meta);
 				return renderMarkdown(body, standalone);
 			})()
-		: await renderMarkdown(await page.markdown(), 'SPEC.md', {
-						// The per-version pages are cuts of one document, so a cross-reference
-						// may land in a section that is not on this page.
-						anchorFallback: params.slug === 'document' ? undefined : '/spec/document/'
-				});
+		: await renderMarkdown(await page.markdown(), 'SPEC.md');
 
 	return {
 		slug: params.slug,

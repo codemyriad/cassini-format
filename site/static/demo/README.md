@@ -7,12 +7,12 @@ meeting, for anything that wants a smaller file.
 
 | file | bytes | duration | speakers | words | OpusTags comments |
 |---|---|---|---|---|---|
-| `lantern-festival.opus` | 1,898,866 | 239,713 ms | 6 | 669 | 37 |
-| `lantern-festival-excerpt.opus` | 356,883 | 44,813 ms | 6 | 136 | 35 |
+| `lantern-festival.opus` | 1,898,861 | 239,713 ms | 6 | 669 | 37 |
+| `lantern-festival-excerpt.opus` | 356,885 | 44,813 ms | 6 | 136 | 35 |
 
 ```
-sha256(lantern-festival.opus)          1b7556c7929bd74bd2db471a4fe5dcd117431af66f3e086c70fca57c28b35733
-sha256(lantern-festival-excerpt.opus)  b36c7377753826990b1d2f6564ec6c52241cbb256c80714cf7e86942164a5522
+sha256(lantern-festival.opus)          a42b090be33c483a1e29ff1c3a7b93f46094f8a8794430b216b7878ec718c6b3
+sha256(lantern-festival-excerpt.opus)  544339473ebae816bfe4c4e854e685995fd00bd7ddcdfe8bc42b0613c4df603f
 
 meeting id, full     mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc
 meeting id, excerpt  mtg_7ffa3ecfdaad5c6dc14e2b93c9a25073eb53b18ae512071afd650ef0f81fd3ad
@@ -110,13 +110,17 @@ be dishonest to demo it with numbers that were invented.
 * **Derived:** every individual word's start and end. They are interpolated
   inside their segment, proportionally to token length.
 
-The file says so itself. Decode the manifest and read
-`provenance.speechToText["raw-asr"]`: the backend is `scripted-fixture`, the
-model is `none - no speech-to-text was run`, and the `source` field spells out
-which timings are measured and which are derived. `provenance.wordTimings` is
-deliberately absent, which is how the format says "nobody measured these".
+No speech-to-text ran at any point. The words are the script, verbatim, so the
+one transcript in each file has id `script` and role `scripted`: authored text
+the recording was made from, not a guess at it. `CASSINI_TRANSCRIPT_DEFAULT`
+and `CASSINI_TRANSCRIPT_IDS` say `script`, and the body sits under
+`CASSINI_TX_SCRIPT_PAYLOAD_*`.
 
-No speech-to-text ran at any point. The words are the script, verbatim.
+The manifest carries no `provenance.speechToText`, because none ran. How the
+fixture was built (renderer, voices, which timings are measured) is recorded
+under the private-use member, `x["cassini-format.codemyriad.io"].fixture`, as a
+processing step. `provenance.wordTimings` is deliberately absent, which is how
+the format says "nobody measured these".
 
 ## Licence
 

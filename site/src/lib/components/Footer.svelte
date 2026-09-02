@@ -35,13 +35,13 @@
 			<div class="status">
 				<p class="eyebrow eyebrow--plain">Status</p>
 				<p>
-					Shipped and load-bearing: every meeting gocassini records is written this way, and the
-					wire strings in <code>{site.formatId}</code> are stable.
+					Version 1, published 2026-09-02. Every meeting gocassini records is written this way,
+					and the wire strings in <code>{site.formatId}</code> are stable.
 				</p>
 				<p>
-					No formal freeze yet, and one implementation is not an ecosystem.
-					<a href="{base}/status/">What is undecided</a> ·
-					<a href="{base}/errata/">where the document disagrees with the software</a>
+					One implementation is not an ecosystem.
+					<a href="{base}/status/">What is open</a> ·
+					<a href="{base}/errata/">where the software still lags the document</a>
 				</p>
 			</div>
 		</div>

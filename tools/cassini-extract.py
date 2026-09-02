@@ -6,13 +6,13 @@ manifest, and optionally a transcript body, without any Cassini-specific
 library. It follows only what the tags themselves declare, so it doubles as a
 check that a producer's file is genuinely self-describing.
 
-Handles the published format, and the draft shape that inlined its transcript
-sets). Verifies every declared payload SHA-256 and byte count. It does NOT
-verify the audio digest — that is tools/cassini-opus-digest.py, which needs no
-external tool at all.
+Verifies every declared payload SHA-256 and byte count. It does NOT verify the
+audio digest — that is tools/cassini-opus-digest.py, which needs no external
+tool at all. It also cannot see a repeated tag name: ffprobe folds duplicates
+into one value, so that check is left to a reader that parses OpusTags itself,
+such as tools/cassini-read-pure.py.
 
-Requires ffprobe on PATH. For a reader with no external dependencies see
-tools/cassini-read-pure.py.
+Requires ffprobe on PATH.
 
 Usage:
   cassini-extract.py FILE                 # print the manifest as JSON
@@ -28,7 +28,6 @@ SPDX-License-Identifier: CC0-1.0
 import argparse
 import base64
 import binascii
-import gzip
 import hashlib
 import json
 import os
@@ -37,11 +36,8 @@ import sys
 import zlib
 
 SUPPORTED_ENCODINGS = {"base64url+gzip+utf8json"}
-KNOWN_FORMATS = {
-    "org.cassini.portable-meeting/1",
-    "org.cassini.portable-meeting/2",
-    "org.cassini.portable-meeting/1",
-}
+KNOWN_FORMATS = {"org.cassini.portable-meeting/1"}
+INFLATE_CEILING = 64 << 20   # a chunk set never legitimately inflates past this
 
 
 class CassiniError(Exception):
@@ -50,6 +46,20 @@ class CassiniError(Exception):
 
 class PlainAudio(Exception):
     """The file carries no CASSINI_FORMAT tag: it is ordinary Opus audio."""
+
+
+class DuplicateTag(CassiniError):
+    """A load-bearing CASSINI_* tag appears twice. ffprobe joins repeated
+    comments with ';', a byte no base64url chunk or hex digest can contain, so
+    for those tags the join is proof of the repeat. The file is
+    invalid-cassini-metadata."""
+
+
+class UnknownFormat(CassiniError):
+    """CASSINI_FORMAT names a major version this tool does not implement.
+
+    The state is unknown-cassini-format: play the audio, present no transcript.
+    """
 
 
 def read_tags(path):
@@ -122,6 +132,8 @@ def decode_chunks(tags, prefix, count, encoding, expect_sha256=None,
         key = f"{prefix}{i:03d}"
         if key not in tags:
             raise CassiniError(f"missing payload chunk {key}")
+        if ";" in tags[key]:
+            raise DuplicateTag(f"repeated tag {key}")
         parts.append(tags[key])
     # A Vorbis comment value is arbitrary UTF-8 and may legally contain
     # whitespace. Go's encoding/base64 skips \r and \n, so the reference
@@ -139,13 +151,26 @@ def decode_chunks(tags, prefix, count, encoding, expect_sha256=None,
         raise CassiniError(
             f"{prefix}*: gzip byte count mismatch: declared {expect_gzip}, got {len(raw)}"
         )
+    # Inflate no further than the declared size, and never past the ceiling:
+    # the declared value is untrusted and a small payload can inflate to
+    # gigabytes. Overrun is a mismatch, not a crash.
+    limit = min(expect_raw if expect_raw is not None else INFLATE_CEILING, INFLATE_CEILING)
     try:
-        body = gzip.decompress(raw)
-    except (OSError, EOFError, zlib.error) as exc:
-        # zlib.error is not an OSError. A corrupted payload lands here, and the
-        # spec says a malformed payload is damaged metadata over valid audio,
-        # not a crash.
+        inflater = zlib.decompressobj(16 + zlib.MAX_WBITS)
+        body = inflater.decompress(raw, limit + 1)
+        if not inflater.eof and not inflater.unconsumed_tail and len(body) <= limit:
+            raise CassiniError(f"{prefix}*: gzip stream is truncated")
+        if inflater.unused_data:
+            raise CassiniError(f"{prefix}*: bytes follow the gzip stream")
+    except zlib.error as exc:
+        # A corrupted payload lands here, and the spec says a malformed
+        # payload is damaged metadata over valid audio, not a crash.
         raise CassiniError(f"{prefix}*: gzip decompress failed: {exc}") from None
+    if len(body) > limit:
+        raise CassiniError(
+            f"{prefix}*: payload inflates past {limit} bytes; "
+            f"declared {expect_raw if expect_raw is not None else 'nothing'}"
+        )
 
     if expect_raw is not None and len(body) != expect_raw:
         raise CassiniError(
@@ -170,8 +195,11 @@ def load_manifest(tags):
         # as plain audio." Not an error; there is simply nothing to extract.
         raise PlainAudio()
     if fmt.lower() not in KNOWN_FORMATS:
-        print(f"warning: unknown CASSINI_FORMAT {fmt!r}; decoding anyway",
-              file=sys.stderr)
+        raise UnknownFormat(
+            f"unknown-cassini-format: CASSINI_FORMAT is {fmt!r}; this tool "
+            f"implements org.cassini.portable-meeting/1 only, so it presents "
+            f"no transcript. The audio still plays."
+        )
 
     manifest = decode_chunks(
         tags,
@@ -189,59 +217,34 @@ def load_manifest(tags):
 
 
 def transcript_entries(manifest):
-    """The transcript index: transcripts plus any readable ones beside them.
-
-    A published manifest always carries `transcripts`. The inline-`transcript`
-    shape belonged to a pre-publication draft that never left the project, and
-    the draft reused the identifier this version now uses, so presence of the
-    array is what tells them apart rather than the version number.
-    """
-    entries = list(manifest.get("transcripts", [])) + list(
-        manifest.get("readableTranscripts", [])
-    )
-    if entries:
-        return entries
-    # A draft-shaped manifest. Adapt it so its content is still reachable.
-    out = []
-    for key, role in (("transcript", "raw-asr"),
-                      ("readableTranscript", "readable-cleanup"),
-                      ("displayTranscript", "display")):
-        body = manifest.get(key)
-        if body:
-            out.append({"id": key, "role": role, "inline": True,
-                        "wordCount": body.get("wordCount")})
-    return out
+    """Every body the file carries: the word-timed transcripts, then the
+    readable ones. Listing and checking want all of them; resolution does not,
+    see default_transcript_id."""
+    return list(manifest.get("transcripts") or []) + list(
+        manifest.get("readableTranscripts") or [])
 
 
 def default_transcript_id(tags, manifest):
-    """Resolve which transcript a viewer should show.
-
-    SPEC.md: the manifest is the record and the tags are the copy, so the
-    manifest's `default: true` wins. CASSINI_TRANSCRIPT_DEFAULT is the cheap
-    copy for tools that have not decoded the payload yet; a disagreement is
-    worth reporting because the reference Go reader prefers the tag and will
-    therefore show a different transcript.
-    """
-    entries = transcript_entries(manifest)
+    """Resolve the words slot: the first `transcripts[]` entry flagged default,
+    else the first entry. Array order is normative. CASSINI_TRANSCRIPT_DEFAULT
+    is a copy, so it never decides; a disagreement is reported."""
+    entries = list(manifest.get("transcripts") or [])
     if not entries:
         return None
-    flagged = next((e.get("id") for e in entries if e.get("default")), None)
+    chosen = next((e.get("id") for e in entries if e.get("default")), None) \
+        or entries[0].get("id")
     tagged = (tags.get("CASSINI_TRANSCRIPT_DEFAULT") or "").strip() or None
-    if flagged and tagged and flagged != tagged:
+    if tagged and tagged != chosen:
         print(f"warning: CASSINI_TRANSCRIPT_DEFAULT={tagged!r} disagrees with the "
-              f"manifest default {flagged!r}; believing the manifest",
+              f"manifest's resolution {chosen!r}; believing the manifest",
               file=sys.stderr)
-    return flagged or tagged or entries[0].get("id")
+    return chosen
 
 
 def load_transcript(tags, manifest, wanted):
     for entry in transcript_entries(manifest):
         if entry.get("id") != wanted:
             continue
-        if entry.get("inline"):
-            # v1 keeps the body inside the manifest itself, under its own
-            # top-level key, so there is nothing to decode.
-            return manifest[wanted]
         ref = entry.get("payloadRef") or {}
         return decode_chunks(
             tags,
@@ -284,10 +287,13 @@ def run(args):
     if args.check:
         print(f"manifest\tok\tkind={manifest.get('kind')} "
               f"version={manifest.get('version')} profile={manifest.get('profile')}")
-        for entry in transcript_entries(manifest):
+        entries = transcript_entries(manifest)
+        for entry in entries:
             body = load_transcript(tags, manifest, entry["id"])
             print(f"{entry['id']}\tok\t{len(body.get('items', []))} items")
-        print("all declared sha256 and byte counts match")
+        print(f"checked: the manifest and {len(entries)} transcript payload(s), "
+              f"sha256 and byte counts. Not checked: the audio digest "
+              f"(tools/cassini-opus-digest.py).")
         return
 
     if args.transcript is not None:
@@ -321,6 +327,9 @@ def main():
     except PlainAudio:
         print(f"{args.file}: plain audio (no CASSINI_FORMAT tag)", file=sys.stderr)
         return 0
+    except UnknownFormat as exc:
+        print(f"{args.file}: {exc}", file=sys.stderr)
+        return 2
     except CassiniError as exc:
         print(f"{args.file}: {exc}", file=sys.stderr)
         return 1

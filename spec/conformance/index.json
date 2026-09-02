@@ -6,7 +6,7 @@
   "notCovered": [
     "the two pre-publication draft formats, which were never public"
   ],
-  "updated": "2026-09-01",
+  "updated": "2026-09-02",
   "profiles": {
     "metadata": "Decodes the tags and the chunk sets and verifies every declared payload SHA-256 and byte count. Does not read the audio. Such a reader reports audioTrust 'not-checked' and never 'verified'.",
     "full": "Everything a metadata reader does, plus exact-opus-audio-v1 over the compressed audio packets."
@@ -47,10 +47,6 @@
           "spk_b"
         ],
         "audioOpusSha256": "3504435d6e7c677c862313ffdb0ced1d0678b7bf3b8c33fd903b89a848c076a8",
-        "manifestEquals": "decoded/001-minimal-v1.manifest.json",
-        "transcriptEquals": {
-          "raw-asr": "decoded/001-minimal-v1.transcript.json"
-        },
         "errors": [],
         "warnings": [],
         "state": "ok"
@@ -111,10 +107,6 @@
           "raw-asr": 900
         },
         "audioOpusSha256": "0925ee8942a13b409a6fd4c2a13056a9ad02b6af3214d383a91eb7dbb2f99aee",
-        "manifestEquals": "decoded/003-multichunk-v1.manifest.json",
-        "transcriptEquals": {
-          "raw-asr": "decoded/003-multichunk-v1.transcript.json"
-        },
         "errors": [],
         "warnings": [],
         "state": "ok"
@@ -193,13 +185,18 @@
         "full"
       ],
       "summary": "Chunk 001 of a three-chunk transcript set is absent; 000 and 002 are present.",
-      "rationale": "A hole in the middle, not a truncation. The count still says three.",
+      "rationale": "A hole in the middle, not a truncation. The count still says three. The manifest is intact, so the file is readable: this transcript is unavailable and the reader must say so, and must not fill its word count from the manifest's claim.",
       "spec": [
-        "SPEC.md#chunk-sets"
+        "SPEC.md#chunk-sets",
+        "SPEC.md#resolving-a-transcript"
       ],
       "expect": {
-        "classification": "damaged-metadata",
-        "payloadTrust": "unverified",
+        "classification": "cassini",
+        "payloadTrust": "verified",
+        "transcriptIds": [
+          "raw-asr"
+        ],
+        "wordCounts": {},
         "errors": [
           {
             "code": "chunk-missing",
@@ -207,10 +204,9 @@
           }
         ],
         "mustNot": [
-          "emit-transcript",
-          "report-declared-word-count-as-decoded"
+          "emit-transcript"
         ],
-        "state": "invalid-cassini-metadata"
+        "state": "ok"
       }
     },
     {
@@ -470,9 +466,10 @@
         "full"
       ],
       "summary": "CASSINI_FORMAT=org.cassini.portable-meeting/99 and manifest.version=99.",
-      "rationale": "A reader may decode a future version, but it must not present the content as if it understood the version.",
+      "rationale": "A reader MUST NOT present a transcript from a version it does not implement, however well the bytes decode. It plays the audio and says the file carries metadata it cannot read.",
       "spec": [
-        "SPEC.md#file-identification"
+        "SPEC.md#file-identification",
+        "SPEC.md#unknown-cassini-format"
       ],
       "decides": "unknown-version-behaviour",
       "expect": {
@@ -480,22 +477,11 @@
         "formatId": "org.cassini.portable-meeting/99",
         "payloadTrust": "unverified",
         "mustNot": [
+          "emit-transcript",
           "present-as-current"
         ],
         "state": "unknown-cassini-format"
-      },
-      "alsoAcceptable": [
-        {
-          "classification": "cassini",
-          "manifestVersion": 99,
-          "warnings": [
-            {
-              "code": "unsupported-version"
-            }
-          ],
-          "state": "unverified"
-        }
-      ]
+      }
     },
     {
       "id": "016-two-transcripts",
@@ -571,14 +557,14 @@
     {
       "id": "018-oversize-opustags",
       "file": "opus/018-oversize-opustags.opus",
-      "bytes": 3195,
-      "sha256": "6df33c72cacaf6206532fcf05d15f1ae922763b9b0514ea7bbedf9b2e7b2d385",
+      "bytes": 68458,
+      "sha256": "cbcee81cd0f284ebd01872b7f1ff8e39226d648613c35192c5d9e0199d878844",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
         "full"
       ],
-      "summary": "A 65,351-octet OpusTags packet, inflated by a 46 KB attachments[] entry. 24 comments fall past octet 61,440, including CASSINI_PAYLOAD_CHUNK_COUNT and CASSINI_PAYLOAD_SHA256.",
+      "summary": "A 68,032-octet OpusTags packet: a 48 KB incompressible attachments[] entry pushes the manifest to 16 chunks. In ASCII order 25 of 49 comments fall past octet 61,440, among them CASSINI_PAYLOAD_CHUNK_COUNT and CASSINI_PAYLOAD_SHA256.",
       "rationale": "RFC 7845 5.2 lets an implementation ignore comments not fully inside the first 61,440 octets. A reader that exercises that MAY sees CASSINI_FORMAT and nothing it needs to act on it.",
       "spec": [
         "RFC7845#section-5.2",
@@ -668,15 +654,15 @@
     {
       "id": "021-descriptors-first",
       "file": "opus/021-descriptors-first.opus",
-      "bytes": 3195,
-      "sha256": "6df33c72cacaf6206532fcf05d15f1ae922763b9b0514ea7bbedf9b2e7b2d385",
+      "bytes": 68458,
+      "sha256": "33b7239e8a579dde4de34a2b1518af59ea303c8b85f19113e6866e31abf9baf0",
       "derivedFrom": "018-oversize-opustags",
       "profiles": [
         "metadata",
         "full"
       ],
-      "summary": "Byte-identical comment set to 018 in a different write order: every descriptor before every chunk tag. Same 65,351-octet packet.",
-      "rationale": "The control for 018 and the demonstration of the proposed producer rule. Load-bearing comments past octet 61,440: 17 in 018, 0 here.",
+      "summary": "The same 49 comments as 018 in a different write order: CASSINI_FORMAT, then every other non-chunk tag, then the numbered chunks. Same 68,032-octet packet.",
+      "rationale": "The control for 018 and the demonstration of the comment-order recommendation. Comments past octet 61,440: 25 in 018, 11 of them descriptors; 4 here, all numbered chunks, no descriptor.",
       "spec": [
         "RFC7845#section-5.2"
       ],
@@ -723,7 +709,7 @@
     }
   ],
   "vocabulary": {
-    "note": "state is the normative name from SPEC.md 'Trust and integrity'. The classification/payloadTrust/audioTrust triple is retained because it carries more detail than the single state name, and adapters that report only the triple still validate.",
+    "note": "state is the normative name from SPEC.md 'Trust and integrity' and every adapter must report it. The classification/payloadTrust/audioTrust triple is retained because it carries more detail. A failure of a transcript body's chunk set makes that transcript unavailable and leaves the state alone; a repeated load-bearing tag makes the file invalid-cassini-metadata.",
     "states": [
       "plain-audio",
       "unknown-cassini-format",
@@ -731,6 +717,15 @@
       "unverified",
       "stale-audio",
       "ok"
-    ]
+    ],
+    "mustNot": {
+      "emit-transcript": "no word count for any transcript",
+      "report-payload-verified": "payloadTrust is not 'verified'",
+      "report-audio-verified": "audioTrust is not 'verified'",
+      "fail": "classification is neither 'damaged-metadata' nor 'crash'",
+      "discard-transcript": "a word count is reported",
+      "present-as-current": "classification is not 'cassini' and no word count is reported",
+      "sum-word-counts-across-transcripts": "totalWordCount is not the sum of several transcripts' counts"
+    }
   }
 }

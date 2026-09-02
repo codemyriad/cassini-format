@@ -1,8 +1,8 @@
 The audio is ordinary Ogg Opus, so the only real work is building the tags. What
 follows is what a real file contains, measured rather than quoted.
 
-If you would rather read code, there is [a complete producer in about 200 lines
-of standard-library Python](#a-complete-producer).
+If you would rather read code, there is [a complete producer in
+standard-library Python](#a-complete-producer).
 
 ## What you are making
 
@@ -18,7 +18,7 @@ base64url-encoded and cut into numbered pieces. Nothing else.
 2. **MUST** carry `CASSINI_FORMAT=org.cassini.portable-meeting/1`. That is what
    makes it a Cassini file.
 
-3. **MUST** carry every descriptor tag:
+3. **MUST** carry every descriptor tag, each with a non-empty value:
 
    | tag | value |
    |---|---|
@@ -26,18 +26,30 @@ base64url-encoded and cut into numbered pieces. Nothing else.
    | `CASSINI_PROFILE` | `ogg-opus` |
    | `CASSINI_PAYLOAD_MIME` | `application/vnd.cassini.portable-meeting+json` |
    | `CASSINI_PAYLOAD_ENCODING` | `base64url+gzip+utf8json` |
-   | `CASSINI_PAYLOAD_SCHEMA` | the manifest schema URL |
-   | `CASSINI_PAYLOAD_CHUNK_COUNT` | decimal integer |
+   | `CASSINI_PAYLOAD_SCHEMA` | `https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json` |
+   | `CASSINI_PAYLOAD_CHUNK_COUNT` | decimal integer, 1 or more |
    | `CASSINI_PAYLOAD_SHA256` | lowercase hex, over the **decompressed** JSON |
-   | `CASSINI_PAYLOAD_RAW_BYTES` | decimal integer |
-   | `CASSINI_PAYLOAD_GZIP_BYTES` | decimal integer |
+   | `CASSINI_PAYLOAD_RAW_BYTES` | decimal integer, the decompressed length |
+   | `CASSINI_PAYLOAD_GZIP_BYTES` | decimal integer, the compressed length |
+   | `CASSINI_TRANSCRIPT_IDS` | the ids in `transcripts[]`, comma-separated, no spaces, sorted |
+   | `CASSINI_TRANSCRIPT_DEFAULT` | the id a viewer opens first |
+   | `CASSINI_TX_<UPPER_ID>_MIME` | per transcript: `application/vnd.cassini.transcript-words+json` |
+   | `CASSINI_TX_<UPPER_ID>_ENCODING` | per transcript: `base64url+gzip+utf8json` |
+   | `CASSINI_TX_<UPPER_ID>_CHUNK_COUNT` | per transcript: decimal integer |
+   | `CASSINI_TX_<UPPER_ID>_SHA256` | per transcript: lowercase hex, over the decompressed body |
+   | `CASSINI_TX_<UPPER_ID>_RAW_BYTES` | per transcript: decimal integer |
+   | `CASSINI_TX_<UPPER_ID>_GZIP_BYTES` | per transcript: decimal integer |
    | `CASSINI_AUDIO_SAMPLE_RATE` | `48000` |
    | `CASSINI_AUDIO_CHANNELS` | `1` or `2` |
-   | `CASSINI_AUDIO_SAMPLE_COUNT` | normalised playable samples |
+   | `CASSINI_AUDIO_SAMPLE_COUNT` | playable samples, as the digest spec defines them |
    | `CASSINI_AUDIO_DURATION_MS` | `sampleCount * 1000 / 48000`, truncating |
    | `CASSINI_AUDIO_MATCH_POLICY` | `exact-opus-audio-v1` |
    | `CASSINI_AUDIO_OPUS_SHA256` | lowercase hex, the audio digest |
    | `CASSINI_DECODE_HINT` | one sentence explaining the chunk sets |
+
+   The six `CASSINI_TX_*` descriptors are copies of the entry's `payloadRef`.
+   The full list, with the exact `DECODE_HINT` sentence, is in
+   [the specification](/spec/v1/#cassini-descriptor-tags).
 
 4. Build the payload in this order: compact UTF-8 JSON, gzip, base64url
    **without padding**, split. Getting the order wrong is the commonest way to
@@ -50,8 +62,10 @@ base64url-encoded and cut into numbered pieces. Nothing else.
    characters. Not an Ogg requirement; it keeps the header readable in ordinary
    tools.
 
-6. Both SHA-256s are over **decompressed** bytes, not the gzip stream and not
-   the base64 text.
+6. Each chunk-set SHA-256 is over the **decompressed** JSON bytes, not the gzip
+   stream and not the base64 text. `CASSINI_AUDIO_OPUS_SHA256` is different: it
+   is over the packet stream that [`exact-opus-audio-v1`](/spec/audio-integrity/)
+   defines.
 
 7. The manifest **MUST** have `kind`, `version`, `profile`, `meeting`, `audio`,
    `integrity`, `speakers`, `transcripts`. `kind` is the literal
@@ -134,8 +148,8 @@ That is easier than what the reference implementation does. Since the digest
 excludes `OpusTags` *and* all Ogg framing, tagging provably cannot change it, so
 there is no hash-tag-rehash loop. Compute it once.
 
-`tools/cassini-opus-digest.py` is ninety lines computing `exact-opus-audio-v1`
-from [the digest spec](/spec/audio-integrity/) alone. Run it against the file the
+`tools/cassini-opus-digest.py` computes `exact-opus-audio-v1` from
+[the digest spec](/spec/audio-integrity/) alone. Run it against the file the
 front page links to:
 
 ```bash
@@ -166,16 +180,25 @@ rule is written down properly, and it is worth more than my opinion.
 # still a playable Opus file. If this fails, nothing else matters.
 ffmpeg -v error -i meeting.opus -f null -
 
-# the manifest decodes and validates
+# the manifest and the transcript body decode and validate
 python3 tools/cassini-extract.py meeting.opus > manifest.json
-python3 -c "import json,jsonschema; jsonschema.validate(
-  json.load(open('manifest.json')),
-  json.load(open('spec/cassini-portable-meeting-manifest-v1.schema.json')))"
+python3 tools/cassini-extract.py meeting.opus --transcript > body.json
+python3 -c "import json,jsonschema
+v = lambda d, s: jsonschema.validate(json.load(open(d)), json.load(open(s)),
+                                     format_checker=jsonschema.FormatChecker())
+v('manifest.json', 'spec/cassini-portable-meeting-manifest-v1.schema.json')
+v('body.json', 'spec/cassini-words-v1.schema.json')"
+
+# the tags mirror the manifest, and the audio digest is the one in the file
+python3 tools/cassini-extract.py meeting.opus --check
+python3 tools/cassini-opus-digest.py meeting.opus
 
 # an independent reader agrees with you
-python3 tools/cassini-extract.py meeting.opus --tags
-python3 tools/cassini-extract.py meeting.opus --list
+python3 tools/cassini-read-pure.py meeting.opus
 ```
 
-With gocassini built, `cassini inspect meeting.opus` is the fourth check, and the
-one that catches a disagreement between your digest and the reference one.
+The schemas check shape. The cross-field rules, one default per slot, a
+`sourceTranscriptId` that names a declared transcript, `integrity` equal to
+`audio`, are prose, and `--check` is where they are tested. With gocassini
+built, `cassini inspect meeting.opus` is the last check, and the one that
+catches a disagreement between your digest and the reference one.

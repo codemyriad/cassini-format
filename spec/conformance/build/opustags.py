@@ -9,7 +9,7 @@ SPDX-License-Identifier: CC0-1.0
 """
 import importlib.util, pathlib, struct, sys
 
-TOOLS = pathlib.Path("/home/silvio/dev/cassini-format/tools")
+TOOLS = pathlib.Path(__file__).resolve().parents[3] / "tools"
 _spec = importlib.util.spec_from_file_location("cassini_pack", TOOLS / "cassini-pack.py")
 pack = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(pack)

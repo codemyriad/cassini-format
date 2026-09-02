@@ -10,8 +10,8 @@
 
 <Doc
 	title="Where the format actually stands"
-	kicker="Status · 2026-09-01"
-	lede="Shipped and load-bearing, with a short list of things I would fix before calling it frozen."
+	kicker="Status · 2026-09-02"
+	lede="Version 1, published. What is stable, what the reference implementations still owe it, and what is open."
 	html={data.html}
 	headings={data.headings}
 />

@@ -1,7 +1,9 @@
 # Changelog
 
-Versions of the format itself, not of this repository. Each one is identified in
-a file by its `CASSINI_FORMAT` tag.
+Versions of the format itself, not of this repository. Version 1 is the first
+published one. The three before it were private drafts used inside Cassini,
+and two of them also called themselves `/1` on the wire; [`spec/drafts/`](spec/drafts/)
+says how a reader tells them apart.
 
 ## Specification changes that are not format changes
 
@@ -79,7 +81,13 @@ what the schemas accept.
   found three disagreements between the reference implementation and these
   documents, two of them in files this repository's own readers decode fine.
 
-## v3 — `org.cassini.portable-meeting/1` (2026-08-29)
+## Version 1 — `org.cassini.portable-meeting/1` (published 2026-09-02)
+
+The published format. Everything below this heading that was written as
+"v3" describes it: the last private draft became version 1 unchanged, plus
+the `scripted` role.
+
+## Private draft 3 — `org.cassini.portable-meeting/1` (2026-08-29)
 
 Current producer format. The number is contested: the format freeze written the
 day before proposed publishing the renamed format as `<name>/2`, which `/3` now
@@ -96,7 +104,7 @@ cuts across. See [freeze item 6](design/format-freeze-2026-08-28.md#6-publish-as
 * `containerSha256` dropped. `matchPolicy` survives and the freeze proposal
   wants it gone.
 
-## v2 — `org.cassini.portable-meeting/2` (2026-05-12)
+## Private draft 2 — `org.cassini.portable-meeting/2` (2026-05-12)
 
 Legacy writer format; readers still support it.
 
@@ -111,7 +119,7 @@ Legacy writer format; readers still support it.
 * `CASSINI_TRANSCRIPT_IDS` and `CASSINI_TRANSCRIPT_DEFAULT` make the set
   discoverable from `ffprobe` alone.
 
-## v1 — `org.cassini.portable-meeting/1` (2026-03)
+## Private draft 1 — `org.cassini.portable-meeting/1` (2026-03)
 
 The original: Ogg Opus, one transcript, manifest gzipped and base64url-encoded
 across `CASSINI_PAYLOAD_000..N`, identity as a SHA-256 of decoded s16le PCM

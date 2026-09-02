@@ -13,8 +13,8 @@ compressed audio page verbatim and patching just the sequence number and CRC.
 exact-opus-audio-v1 excludes OpusTags and all Ogg framing, so the digest is
 provably unchanged by tagging — unlike the reference Go producer there is no
 hash / retag / re-hash fix-point loop to converge. Written from SPEC.md and
-spec/cassini-opus-audio-integrity-v1.md alone; the output passes the reference
-inspector, the reference extractor and the JSON Schema.
+spec/cassini-opus-audio-integrity-v1.md alone; the output passes the JSON
+Schema, the reference extractor and cassini-opus-digest.py.
 
 SPDX-License-Identifier: CC0-1.0
 """
@@ -27,7 +27,7 @@ DESCRIPTION = ("Cassini portable meeting file. Decode CASSINI_PAYLOAD_*: "
 DECODE_HINT = ("Concatenate CASSINI_PAYLOAD_000..N for the manifest; for a transcript "
                "body concatenate CASSINI_TX_<ID>_PAYLOAD_000..N. Each chunk set: "
                "base64url decode, gzip decompress, parse UTF-8 JSON.")
-# Ids that would collide with a v1 descriptor tag name.
+# Ids that would collide with a descriptor tag name.
 RESERVED_IDS = {"payload", "format", "audio", "meeting", "integrity", "transcript",
                 "provenance", "summary", "attachments", "speakers"}
 
@@ -85,12 +85,17 @@ def parse(data):
         # the one that completes it belongs to the audio.
         if index > 2:
             audio_pages.append(page)
-    if head is None or head[:8] != b"OpusHead":
+    if head is None or head[:8] != b"OpusHead" or len(head) < 19 or head[8] != 1:
         raise ValueError("not an Ogg Opus stream")
     return head, audio, audio_pages, serial
 
 
-def packet_samples(pkt):                     # RFC 6716 3.1, at Opus's 48 kHz clock
+def packet_samples(pkt):
+    """Samples at 48 kHz from the TOC byte: RFC 6716 3.1, frame count 3.2.5.
+    A code-3 packet with no frame count, a zero frame count or more than
+    120 ms is malformed, and the file is refused rather than given zero."""
+    if not pkt:
+        raise ValueError("empty Opus packet")
     toc = pkt[0]
     if toc & 0x80:
         spf = (48000 << ((toc >> 3) & 0x03)) // 400
@@ -99,7 +104,18 @@ def packet_samples(pkt):                     # RFC 6716 3.1, at Opus's 48 kHz cl
     else:
         code = (toc >> 3) & 0x03
         spf = 48000 * 60 // 1000 if code == 3 else (48000 << code) // 100
-    return spf * ({0: 1, 1: 2, 2: 2}.get(toc & 0x03) or (pkt[1] & 0x3F))
+    if toc & 0x03 == 3:
+        if len(pkt) < 2:
+            raise ValueError("code-3 Opus packet has no frame-count byte")
+        frames = pkt[1] & 0x3F
+        if frames == 0:
+            raise ValueError("code-3 Opus packet declares zero frames")
+    else:
+        frames = 1 if toc & 0x03 == 0 else 2
+    total = spf * frames
+    if total > 48000 * 120 // 1000:
+        raise ValueError(f"Opus packet is {total} samples, over the 120 ms limit")
+    return total
 
 
 def audio_digest(head, audio, final_granule):
@@ -114,6 +130,8 @@ def audio_digest(head, audio, final_granule):
         decoded += packet_samples(pkt)
         h.update(b"A" + struct.pack("<Q", len(pkt)) + pkt)
     pre_skip = struct.unpack_from("<H", head, 10)[0]
+    if decoded < pre_skip or final_granule < pre_skip:
+        raise ValueError("the stream is shorter than its own pre-skip")
     samples = min(decoded - pre_skip, final_granule - pre_skip)
     h.update(b"E" + struct.pack("<QQ", len(audio), samples))
     return h.hexdigest(), samples
@@ -161,7 +179,7 @@ def chunk_tags(prefix, mime, raw, gz, chunks, sha):
 
 def pack(src, transcript_path, out, title, created_at, tx_id="raw-asr",
          recorded_at_local=None):
-    if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,31}", tx_id) or tx_id in RESERVED_IDS:
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,31}", tx_id) or tx_id in RESERVED_IDS:
         raise ValueError(f"invalid transcript id {tx_id!r}")
     prefix = "CASSINI_TX_" + tx_id.upper().replace("-", "_") + "_PAYLOAD_"
 
@@ -184,7 +202,7 @@ def pack(src, transcript_path, out, title, created_at, tx_id="raw-asr",
     shape = {"sampleRate": 48000, "channels": channels,
              "sampleCount": samples, "durationMs": duration_ms}
     manifest = {
-        "kind": "cassini-portable-meeting", "version": 3, "profile": "ogg-opus",
+        "kind": "cassini-portable-meeting", "version": 1, "profile": "ogg-opus",
         "meeting": {"id": "mtg_" + opus_sha, "title": title,
                     "createdAtUtc": created_at, "durationMs": duration_ms},
         "audio": dict(container="ogg", codec="opus", **shape),

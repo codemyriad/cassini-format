@@ -19,13 +19,15 @@ whoever called the reader. Three gaps:
 
 * `cassini inspect` resolves all six and prints the fourth as
   `integrity-unverified`. Same state, different spelling.
-* The browser viewer never verifies the audio, and cannot as written: it renders
-  the transcript from a byte-range request before the audio has been
-  downloaded. That is a conforming reader the moment it says **unverified**
-  where it presents the metadata, and it does not say it yet.
-* The viewer throws on a `CASSINI_FORMAT` major version it does not implement.
-  The document requires it to play the audio and report
-  `unknown-cassini-format`.
+* The browser viewer never verifies the audio: it renders the transcript from a
+  byte-range request before the audio has been downloaded. It says
+  **unverified** where it presents the metadata, which is what makes that
+  conforming.
+* `cassini inspect` calls the whole file `invalid-cassini-metadata` when a
+  transcript body is missing a chunk. [Resolving a
+  transcript](SPEC.md#resolving-a-transcript) makes that transcript
+  unavailable and leaves the file's state alone. Conformance vector 006 is
+  that case; it is the one vector the Go reader fails.
 
 ## Nothing bounds the decompression
 
@@ -42,7 +44,7 @@ a browser tab that is a crash on a file that fits in an email.
 The producer writes unpadded (`base64.RawURLEncoding`), which is what the
 document requires. The document also requires a consumer to accept padded input,
 and `cassini inspect --transcript` fails on conformance vector
-`004-padded-base64url-v3` with `illegal base64 data at input byte 762`.
+`004-padded-base64url-v1` with `illegal base64 data at input byte 762`.
 
 Two readers also compute the padding from the length before stripping
 whitespace, so a chunk value containing a newline decodes on some inputs and not

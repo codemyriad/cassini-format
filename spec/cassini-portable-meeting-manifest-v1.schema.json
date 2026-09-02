@@ -94,10 +94,32 @@
       }
     },
     "summary": {
-      "type": "object"
+      "type": "object",
+      "description": "Metadata about the summary attachment, not the summary."
     },
     "attachments": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "mime",
+          "contentBase64"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mime": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentBase64": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -121,14 +143,18 @@
         },
         "createdAtUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
         },
         "recordedAtLocal": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
+          "description": "Wall-clock time at the recording site, no offset. A label, not an instant."
         },
         "processedAtUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
         },
         "durationMs": {
           "type": "integer",
@@ -156,7 +182,8 @@
           "description": "Which attempt of that job produced this artifact, 1-based. Absent when unknown. There is no separate attempt id: an attempt's identity is the pair (jobId, attemptNumber)."
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "description": "A short plain-text summary of the meeting, for display."
         }
       }
     },
@@ -420,12 +447,6 @@
         "language": {
           "type": "string"
         },
-        "baseUrl": {
-          "type": "string"
-        },
-        "host": {
-          "type": "string"
-        },
         "source": {
           "type": "string"
         },
@@ -481,17 +502,17 @@
       "required": [
         "endsBoundedByAudio"
       ],
-      "description": "How the producer decided where each word ends. Absent on files produced before the rule changed, and on files whose speech recognizer makes no such guarantee. Absent means only that the guarantee was not made: the ends may be token-derived, in which case a word's end came from its last token including a trailing punctuation mark \u2014 a mark the recognizer stamps at the next acoustic onset, so such a word can run for seconds while its speaker is silent \u2014 or they may be sound and simply undeclared. A consumer keys off presence: absent means those ends are unvouched-for and a repair that clips an over-long word is appropriate; present means they were measured against the speaker's own audio and clipping them destroys correct timing. Open: one required boolean, and the object is built around presence rather than exhaustiveness.",
+      "description": "How the producer decided where each word ends. Absent on files produced before the rule changed, and on files whose speech recognizer makes no such guarantee. Absent means only that the guarantee was not made: the ends may be token-derived, in which case a word's end came from its last token including a trailing punctuation mark — a mark the recognizer stamps at the next acoustic onset, so such a word can run for seconds while its speaker is silent — or they may be sound and simply undeclared. A consumer keys off presence: absent means those ends are unvouched-for and a repair that clips an over-long word is appropriate; present means they were measured against the speaker's own audio and clipping them destroys correct timing. Open: one required boolean, and the object is built around presence rather than exhaustiveness.",
       "properties": {
         "endsBoundedByAudio": {
-          "type": "boolean",
-          "description": "True when each word's end was measured against its own speaker's track rather than taken from its last token's timestamp."
+          "description": "True when each word's end was measured against its own speaker's track rather than taken from its last token's timestamp.",
+          "const": true
         }
       }
     },
     "chapter": {
       "type": "object",
-      "description": "Open. endMs was added at v2 and made every v1 chapter that already carried it invalid, which is the bug this rule exists to prevent.",
+      "description": "Open.",
       "required": [
         "startMs",
         "title"

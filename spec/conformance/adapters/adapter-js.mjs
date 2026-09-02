@@ -44,8 +44,10 @@ try {
       wordCounts: r.transcript ? { [r.transcript.entry?.id ?? 'transcript']: r.transcript.words.length } : {},
       speakerIds: (r.manifest?.speakers ?? []).map((s) => s.id),
       // The reader names its own reasons; the adapter just passes them through.
-      errors: bad ? r.warnings.map((w) => ({ code: w.code, message: w.message })) : [],
-      warnings: bad ? [] : r.warnings.map((w) => ({ code: w.code, message: w.message })),
+      // An unavailable transcript is reported as an error too: the file is
+      // fine, but the reader must say which body it could not load.
+      errors: r.warnings.filter((w) => bad || r.unavailable).map((w) => ({ code: w.code, message: w.message })),
+      warnings: r.warnings.filter((w) => !(bad || r.unavailable)).map((w) => ({ code: w.code, message: w.message })),
     });
   }
 } catch (e) {

@@ -29,11 +29,6 @@
 		</a>
 	</div>
 
-	<p class="also">
-		Or <a href="{base}/spec/document/">the whole document on one page</a>, rationale and rejected
-		alternatives included.
-	</p>
-
 	<p class="eyebrow">The pieces a version points at</p>
 	<div class="grid grid--2">
 		<a class="v" href="{base}/spec/words-v1/">
@@ -53,7 +48,7 @@
 	</div>
 
 	<p class="eyebrow">Schemas</p>
-	<p class="lede">CC0, served from this site at a stable URL. Copy them into your project.</p>
+	<p class="lede">CC0, served from this site at the URL each one declares. Copy them into your project.</p>
 	<div class="schemas">
 		{#each data.schemas as s (s.file)}
 			<a href="{base}/schema/{s.file}">
@@ -64,7 +59,8 @@
 		{/each}
 	</div>
 	<p class="also">
-		<a href="{base}/schema/">Why the <code>$id</code> in those files does not resolve yet</a>.
+		Each schema's <code>$id</code> is its URL under <code>cassini-format.codemyriad.io</code>, and
+		<a href="{base}/schema/">this site serves it there</a>.
 	</p>
 
 	<p class="eyebrow">Licence</p>

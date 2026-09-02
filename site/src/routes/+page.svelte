@@ -8,7 +8,10 @@
 
 	const kb = (n: number) => `${Math.round(n / 1024).toLocaleString()} KB`;
 	const mb = (n: number) => `${(n / 1024 / 1024).toFixed(2)} MB`;
-	const mins = (ms: number) => `${Math.floor(ms / 60000)}:${String(Math.round((ms % 60000) / 1000)).padStart(2, '0')}`;
+	const mins = (ms: number) => {
+		const total = Math.round(ms / 1000);
+		return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
+	};
 	const pct = $derived(((data.demo.gzipBytes / data.demo.bytes) * 100).toFixed(1));
 </script>
 
@@ -58,6 +61,37 @@
 </section>
 
 <section class="shell band">
+	<p class="eyebrow">Three commitments</p>
+	<div class="grid grid--3">
+		<div class="cell">
+			<p class="n">01</p>
+			<h3>It degrades to audio</h3>
+			<p>
+				Understand nothing and you still play the recording. Understand the tags and you get
+				everything. The worst case is hearing a meeting without seeing the words.
+			</p>
+		</div>
+		<div class="cell">
+			<p class="n">02</p>
+			<h3>Keep what a better model could use</h3>
+			<p>
+				The raw ASR words survive the cleanup that rewrites them, next to provenance naming the
+				engine, model and device. The cleanup of 2026 will look bad in 2028. The original words
+				and their timings stay available for whatever replaces it.
+			</p>
+		</div>
+		<div class="cell">
+			<p class="n">03</p>
+			<h3>The digest binds transcript to recording</h3>
+			<p>
+				A SHA-256 over the Opus packets, answering one question: is this transcript describing this
+				recording? It catches accidents, not adversaries. A join key, not a seal.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="shell band">
 	<p class="eyebrow">See for yourself</p>
 	<div class="two">
 		<div>
@@ -99,10 +133,16 @@
 <section class="shell band">
 	<p class="eyebrow">Try it on the actual file</p>
 	<p class="lede">
-		No prepared transcript. The player fetches the same <code>.opus</code> you can download, walks its
-		Ogg pages in JavaScript, reassembles the chunks, inflates them with
-		<code>DecompressionStream</code>, checks both SHA-256 digests, and plays. If the format works,
-		this works.
+		Nothing is loaded from anywhere else. The player fetches the same <code>.opus</code> you can
+		download, walks its Ogg pages in JavaScript, reassembles the chunks, inflates them with
+		<code>DecompressionStream</code>, checks the manifest and transcript digests, and plays. The audio
+		digest is not checked in the browser, so the reader says <code>unverified</code>, as the spec
+		requires. If the format works, this works.
+	</p>
+	<p class="muted">
+		The words are the script the voices read, so the transcript's role is <code>scripted</code>.
+		Segment timings are measured from the render; word timings inside a segment are interpolated,
+		and the file says so.
 	</p>
 	<Player
 		src="{base}/demo/lantern-festival.opus"
@@ -111,33 +151,33 @@
 </section>
 
 <section class="shell band">
-	<p class="eyebrow">Three commitments</p>
-	<div class="grid grid--3">
+	<p class="eyebrow">Who writes and reads these</p>
+	<div class="grid grid--2">
 		<div class="cell">
-			<p class="n">01</p>
-			<h3>It degrades to audio</h3>
+			<h3>gocassini</h3>
 			<p>
-				Understand nothing and you still play the recording. Understand the tags and you get
-				everything. The worst case is hearing a meeting without seeing the words.
+				The reference implementation: records Nextcloud Talk calls, transcribes, packs. Producer and
+				reader, AGPL-3.0.
 			</p>
+			<p><a href={site.implRepo} rel="noreferrer">github.com/codemyriad/gocassini ↗</a></p>
 		</div>
 		<div class="cell">
-			<p class="n">02</p>
-			<h3>Keep what a better model could use</h3>
+			<h3>Three readers and a producer, in this repo</h3>
 			<p>
-				The raw ASR words survive the cleanup that rewrites them, next to provenance naming the
-				engine, model and device. The cleanup of 2026 will look bad in 2028. The timestamps won't.
+				A Python extractor over <code>ffprobe</code>, one that needs no external tools at all, a
+				browser reader with no dependencies, and a complete producer in stdlib Python. All CC0. The
+				producer exists because a spec you cannot implement from is not a spec.
 			</p>
-		</div>
-		<div class="cell">
-			<p class="n">03</p>
-			<h3>The digest binds transcript to recording</h3>
 			<p>
-				A SHA-256 over the Opus packets, answering one question: is this transcript describing this
-				recording? It catches accidents, not adversaries. A join key, not a seal.
+				<a href="{base}/consume/">Read one</a> · <a href="{base}/produce/">Write one</a> ·
+				<a href="{base}/llms-full.txt">the whole spec in one file</a>
 			</p>
 		</div>
 	</div>
+	<p class="muted honest">
+		The honest answer to "who else implements this" is nobody. If you build something that reads or
+		writes these files, I would like to hear about it.
+	</p>
 </section>
 
 <section class="shell band">
@@ -159,7 +199,9 @@
 		<div>
 			<p class="stat">0</p>
 			<p class="statlab">
-				new extensions, media types or codecs. The file is <code>audio/ogg</code> and stays that.
+				new extensions, outer media types or codecs. The file is <code>audio/ogg</code> and stays
+				that. The two JSON bodies inside carry their own <code>application/vnd.cassini.*+json</code>
+				names.
 			</p>
 		</div>
 	</div>
@@ -197,36 +239,6 @@
 			</p>
 		</div>
 	</div>
-</section>
-
-<section class="shell band">
-	<p class="eyebrow">Who writes and reads these</p>
-	<div class="grid grid--2">
-		<div class="cell">
-			<h3>gocassini</h3>
-			<p>
-				The reference implementation: records Nextcloud Talk calls, transcribes, packs. Producer and
-				reader, AGPL-3.0.
-			</p>
-			<p><a href={site.implRepo} rel="noreferrer">github.com/codemyriad/gocassini ↗</a></p>
-		</div>
-		<div class="cell">
-			<h3>Three readers and a producer, in this repo</h3>
-			<p>
-				A Python extractor over <code>ffprobe</code>, one that needs no external tools at all, a
-				browser reader with no dependencies, and a complete producer in stdlib Python. All CC0. The
-				producer exists because a spec you cannot implement from is not a spec.
-			</p>
-			<p>
-				<a href="{base}/consume/">Read one</a> · <a href="{base}/produce/">Write one</a> ·
-				<a href="{base}/llms-full.txt">the whole spec in one file</a>
-			</p>
-		</div>
-	</div>
-	<p class="muted honest">
-		The honest answer to "who else implements this" is nobody. If you build something that reads or
-		writes these files, I would like to hear about it.
-	</p>
 </section>
 
 <style>

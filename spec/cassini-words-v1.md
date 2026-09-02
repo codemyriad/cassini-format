@@ -43,8 +43,8 @@ member it does not recognise.
 | Member | | Rule |
 |---|---|---|
 | `speaker` | MUST | an `id` from the manifest's `speakers[]`. That entry's `label` is what a reader displays. |
-| `startMs`, `endMs` | MUST | integers, milliseconds from the start of the audio. `endMs` SHOULD be at least `startMs`. |
-| `text` | MUST | the token as spoken, punctuation attached, no surrounding space. Joining items with a single space reconstructs prose. |
+| `startMs`, `endMs` | MUST | integers, milliseconds from the start of the audio, `0 ≤ startMs ≤ endMs`. The interval is half-open: the word ends before `endMs`. An end past the audio's duration is allowed; the word ran into silence. |
+| `text` | MUST | one token, punctuation attached, no surrounding space. In a language written with spaces, joining items with one space reconstructs prose; the format carries no separator. |
 | `attributionGapDb` | MAY | see below |
 | `lowConfidenceSpeaker` | MAY | see below |
 
@@ -54,7 +54,7 @@ under an unknown speaker; do not drop it.
 ## Order
 
 Items are in **speaker-turn order**, not time order. Within one speaker's run,
-`startMs` increases. Across a speaker change it can go backwards, because people
+`startMs` never decreases; two words can share a start. Across a speaker change it can go backwards, because people
 talk over each other and each speaker's words are kept together.
 
 A consumer MUST NOT sort items by `startMs`. Sorting by time interleaves
@@ -75,7 +75,9 @@ Two optional members record how sure the attribution stage was about `speaker`.
 microphone sat above its own noise floor, compared with the attributed
 speaker's, in dB. Near zero means the attributed speaker was the loudest voice.
 Large and positive means somebody else was, and this word is a crosstalk
-candidate. The key is present exactly on the words that were measured. A
+candidate. How the producer measured it is its own business, and
+`provenance.attribution.mode` names the method; the number is evidence, not a
+defined quantity. The key is present exactly on the words that were measured. A
 measured `0` is written, so presence is the signal, and a consumer MUST NOT read
 absence as zero.
 

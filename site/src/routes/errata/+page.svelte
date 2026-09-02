@@ -8,14 +8,14 @@
 	<title>Errata — Cassini format</title>
 	<meta
 		name="description"
-		content="Every place the specification document disagrees with the software, checked against the source and against real files."
+		content="Where the reference implementations still lag the specification, checked against the source and against real files."
 	/>
 </svelte:head>
 
 <Doc
 	title="Where the document and the software disagree"
 	kicker="Errata"
-	lede="A real file is the tiebreaker. Read this before implementing: several of these otherwise produce a reader that rejects every file written today."
+	lede="The specification is the rule. This is where the reference implementations still lag it, and a few facts about real files worth knowing before you write a reader."
 	meta={data.meta}
 	html={data.html}
 	headings={data.headings}

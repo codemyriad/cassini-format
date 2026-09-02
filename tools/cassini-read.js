@@ -2,14 +2,22 @@
  * A Cassini portable meeting reader for the browser. No dependencies.
  *
  * It walks the Ogg pages, finds the OpusTags comment header, reassembles the
- * chunked payload, inflates it with the platform's own gzip, verifies both
- * SHA-256 digests, and hands back the manifest and the words.
+ * chunked payload, inflates it with the platform's own gzip, verifies the
+ * manifest and transcript digests, and hands back the manifest and the words.
+ *
+ * It never reads the audio, so the best state it can report is `unverified`.
+ * That is what the specification says a metadata-only reader must say.
  *
  * Everything it needs is in the file. That is the whole claim the format makes,
  * so this file is also the proof of it.
  *
  * SPDX-License-Identifier: CC0-1.0
  */
+const FORMAT_PREFIX = 'org.cassini.portable-meeting/';
+const KNOWN_MAJOR = 1;
+const KIND = 'cassini-portable-meeting';
+/** No declared length can raise this. A meeting transcript is kilobytes. */
+const INFLATE_CEILING = 64 * 1024 * 1024;
 const MAGIC_OGG = 0x5367674f; // "OggS", little-endian
 const CONTINUED = 0x01;
 /* -------------------------------------------------------------------------- */
@@ -85,25 +93,39 @@ function concat(parts) {
  * Field names are case-insensitive per the Vorbis comment spec, so they are
  * upper-cased on the way in. They are also not unique: the same name may appear
  * more than once, which is why this returns a multimap.
+ *
+ * A truncated vector or a comment that is not UTF-8 is a malformed header, and
+ * this throws rather than return half of it.
  */
 export function parseOpusTags(packet) {
-    const text = new TextDecoder('utf-8', { fatal: false });
-    if (text.decode(packet.subarray(0, 8)) !== 'OpusTags') {
+    const text = new TextDecoder('utf-8', { fatal: true });
+    const ascii = (b) => String.fromCharCode(...b);
+    if (packet.length < 16 || ascii(packet.subarray(0, 8)) !== 'OpusTags') {
         throw new Error('second packet is not OpusTags');
     }
     const view = new DataView(packet.buffer, packet.byteOffset, packet.byteLength);
     let at = 8;
     const vendorLen = view.getUint32(at, true);
     at += 4 + vendorLen;
+    if (at + 4 > packet.length)
+        throw new Error('OpusTags is truncated');
     const count = view.getUint32(at, true);
     at += 4;
     const tags = new Map();
-    for (let i = 0; i < count && at + 4 <= packet.length; i++) {
+    for (let i = 0; i < count; i++) {
+        if (at + 4 > packet.length)
+            throw new Error('OpusTags is truncated');
         const len = view.getUint32(at, true);
         at += 4;
         if (at + len > packet.length)
-            break;
-        const raw = text.decode(packet.subarray(at, at + len));
+            throw new Error('OpusTags is truncated');
+        let raw;
+        try {
+            raw = text.decode(packet.subarray(at, at + len));
+        }
+        catch {
+            throw new Error(`OpusTags comment ${i} is not valid UTF-8`);
+        }
         at += len;
         const eq = raw.indexOf('=');
         if (eq < 1)
@@ -118,6 +140,13 @@ export function parseOpusTags(packet) {
     return tags;
 }
 const one = (tags, key) => tags.get(key)?.[0];
+/** A decimal integer as the specification spells it: no sign, no leading zero, safe. */
+function decimal(text) {
+    if (text === undefined || !/^(0|[1-9][0-9]*)$/.test(text.trim()))
+        return undefined;
+    const n = Number(text.trim());
+    return Number.isSafeInteger(n) ? n : undefined;
+}
 /* -------------------------------------------------------------------------- */
 /* Payload                                                                     */
 /* -------------------------------------------------------------------------- */
@@ -130,16 +159,36 @@ function base64urlToBytes(text) {
         out[i] = binary.charCodeAt(i);
     return out;
 }
-async function gunzip(data) {
+/**
+ * Inflate, and stop the moment the output passes `limit`. The declared length
+ * is untrusted: it bounds the read, it never raises the ceiling.
+ */
+async function gunzip(data, limit) {
     const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream('gzip'));
+    const reader = stream.getReader();
+    const parts = [];
+    let total = 0;
     try {
-        return new Uint8Array(await new Response(stream).arrayBuffer());
+        for (;;) {
+            const { done, value } = await reader.read();
+            if (done)
+                break;
+            total += value.length;
+            if (total > limit) {
+                await reader.cancel();
+                throw new ChunkError('payload-decode-failed', `the payload inflates past its declared ${limit} bytes`);
+            }
+            parts.push(value);
+        }
     }
     catch (cause) {
+        if (cause instanceof ChunkError)
+            throw cause;
         // A corrupted payload surfaces here as a bare TypeError from the stream
         // adapter, which tells the caller nothing.
         throw new Error('gzip decompress failed: the payload is corrupt', { cause });
     }
+    return concat(parts);
 }
 async function sha256Hex(data) {
     const digest = await crypto.subtle.digest('SHA-256', data);
@@ -161,7 +210,7 @@ const issue = (e, fallback) => ({
  * Reassemble a chunk set by tag index, inflate it, and parse it.
  * Chunks are joined in numeric order, never in the order the tags happen to appear.
  */
-async function decodeChunkSet(tags, prefix, chunkCount, expectSha) {
+async function decodeChunkSet(tags, prefix, chunkCount, expectSha, rawBytes) {
     let blob = '';
     for (let i = 0; i < chunkCount; i++) {
         const key = `${prefix}${String(i).padStart(3, '0')}`;
@@ -173,10 +222,22 @@ async function decodeChunkSet(tags, prefix, chunkCount, expectSha) {
         }
         blob += values[0];
     }
-    const raw = await gunzip(base64urlToBytes(blob));
+    const limit = Math.min(rawBytes ?? INFLATE_CEILING, INFLATE_CEILING);
+    const raw = await gunzip(base64urlToBytes(blob), limit);
     const verified = expectSha ? (await sha256Hex(raw)) === expectSha.toLowerCase() : null;
-    return { value: JSON.parse(new TextDecoder().decode(raw)), verified };
+    return { value: JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(raw)), verified };
 }
+/** Any load-bearing name that appears twice makes the file invalid. */
+function repeatedLoadBearing(tags) {
+    for (const [key, values] of tags) {
+        if (values.length < 2)
+            continue;
+        if (key === 'CASSINI_FORMAT' || key.startsWith('CASSINI_PAYLOAD_') || key.startsWith('CASSINI_TX_'))
+            return key;
+    }
+    return undefined;
+}
+const WORD_ROLES = new Set(['raw-asr', 'human-corrected', 'translation', 'scripted']);
 /* -------------------------------------------------------------------------- */
 /* The reader                                                                  */
 /* -------------------------------------------------------------------------- */
@@ -188,8 +249,9 @@ export async function readCassini(buf) {
     const tags = parseOpusTags(tagsPacket);
     const formatId = one(tags, 'CASSINI_FORMAT');
     if (!formatId) {
-        // Rule 1: no Cassini metadata means this is plain audio, and that is fine.
+        // No Cassini metadata means this is plain audio, and that is fine.
         return {
+            state: 'plain-audio',
             classification: 'plain-audio',
             cassini: false,
             tags,
@@ -197,19 +259,10 @@ export async function readCassini(buf) {
             warnings
         };
     }
-    const version = Number(/\/(\d+)$/.exec(formatId)?.[1] ?? NaN);
-    const chunkCount = Number(one(tags, 'CASSINI_PAYLOAD_CHUNK_COUNT') ?? NaN);
-    if (!Number.isFinite(chunkCount))
-        throw new Error('CASSINI_PAYLOAD_CHUNK_COUNT is missing');
-    // A malformed payload is damaged metadata over valid audio, not a broken
-    // file. Report it and let the caller fall back to playing the recording.
-    let main;
-    try {
-        main = await decodeChunkSet(tags, 'CASSINI_PAYLOAD_', chunkCount, one(tags, 'CASSINI_PAYLOAD_SHA256'));
-    }
-    catch (e) {
-        warnings.push(issue(e, 'payload-decode-failed'));
+    const invalid = (w, version) => {
+        warnings.push(w);
         return {
+            state: 'invalid-cassini-metadata',
             classification: 'damaged-metadata',
             cassini: true,
             formatId,
@@ -218,93 +271,120 @@ export async function readCassini(buf) {
             verified: { manifest: false, transcript: null },
             warnings
         };
-    }
-    const manifest = main.value;
-    if (main.verified === false) {
+    };
+    // A major version this reader does not implement: play the audio, say so,
+    // and touch nothing else. The chunk transport is not promised across majors.
+    const major = formatId.startsWith(FORMAT_PREFIX)
+        ? decimal(formatId.slice(FORMAT_PREFIX.length))
+        : undefined;
+    if (major !== KNOWN_MAJOR) {
         warnings.push({
-            code: 'payload-sha256-mismatch',
-            message: 'the manifest does not match CASSINI_PAYLOAD_SHA256'
+            code: 'unsupported-version',
+            message: `${formatId} is not a version this reader implements`
         });
-    }
-    // The private drafts inlined a single transcript. The published format
-    // indexes them and puts each body in its own chunk set.
-    if (manifest.transcript?.items) {
         return {
-            classification: main.verified === false ? 'damaged-metadata' : 'cassini',
+            state: 'unknown-cassini-format',
+            classification: 'unsupported-version',
             cassini: true,
             formatId,
-            version,
+            version: major,
             tags,
-            manifest,
-            transcript: { words: manifest.transcript.items },
-            verified: { manifest: main.verified, transcript: null },
+            verified: { manifest: null, transcript: null },
             warnings
         };
     }
-    // The manifest is the record and the tag is a copy of it, so the manifest's
-    // own default flag resolves first. The tag is a fallback for when the
-    // manifest says nothing, and a disagreement between them is worth reporting
-    // but is never an error.
-    const list = manifest.transcripts ?? [];
+    const repeated = repeatedLoadBearing(tags);
+    if (repeated) {
+        return invalid({ code: 'duplicate-tag', message: `${repeated} appears ${tags.get(repeated).length} times` }, major);
+    }
+    const chunkCount = decimal(one(tags, 'CASSINI_PAYLOAD_CHUNK_COUNT'));
+    if (chunkCount === undefined || chunkCount < 1) {
+        return invalid({
+            code: 'payload-descriptor-incomplete',
+            message: 'CASSINI_PAYLOAD_CHUNK_COUNT is missing or not a positive decimal integer'
+        }, major);
+    }
+    const sha = one(tags, 'CASSINI_PAYLOAD_SHA256');
+    if (!sha) {
+        return invalid({ code: 'payload-descriptor-incomplete', message: 'CASSINI_PAYLOAD_SHA256 is missing' }, major);
+    }
+    // A malformed payload is damaged metadata over valid audio, not a broken
+    // file. Report it and let the caller fall back to playing the recording.
+    let main;
+    try {
+        main = await decodeChunkSet(tags, 'CASSINI_PAYLOAD_', chunkCount, sha, decimal(one(tags, 'CASSINI_PAYLOAD_RAW_BYTES')));
+    }
+    catch (e) {
+        return invalid(issue(e, 'payload-decode-failed'), major);
+    }
+    if (main.verified === false) {
+        // Check before believing any field. A manifest that fails its digest is
+        // not shown, not even partially.
+        return invalid({ code: 'payload-sha256-mismatch', message: 'the manifest does not match CASSINI_PAYLOAD_SHA256' }, major);
+    }
+    const manifest = main.value;
+    if (!manifest || typeof manifest !== 'object' || manifest.kind !== KIND) {
+        return invalid({ code: 'manifest-invalid', message: `manifest.kind is not ${KIND}` }, major);
+    }
+    if (manifest.version !== major) {
+        return invalid({
+            code: 'manifest-invalid',
+            message: `manifest.version ${manifest.version} disagrees with ${formatId}`
+        }, major);
+    }
+    const good = (extra) => ({
+        state: 'unverified',
+        classification: 'cassini',
+        cassini: true,
+        formatId,
+        version: major,
+        tags,
+        manifest,
+        verified: { manifest: true, transcript: null },
+        warnings,
+        ...extra
+    });
+    // The manifest is the record and the tag is a copy of it. The words slot is
+    // the first entry flagged default, failing that the first entry; the tag is
+    // only ever compared, never used to choose.
+    const list = (manifest.transcripts ?? []).filter((t) => WORD_ROLES.has(t.role));
+    const entry = list.find((t) => t.default) ?? list[0];
     const wanted = one(tags, 'CASSINI_TRANSCRIPT_DEFAULT');
-    const entry = list.find((t) => t.default) ??
-        list.find((t) => t.id === wanted) ??
-        list.find((t) => t.role === 'raw-asr') ??
-        list[0];
     if (wanted && entry && entry.id !== wanted) {
         warnings.push({
             code: 'tag-manifest-disagreement',
-            message: `CASSINI_TRANSCRIPT_DEFAULT names "${wanted}"; the manifest flags "${entry.id}". Using the manifest.`
+            message: `CASSINI_TRANSCRIPT_DEFAULT names "${wanted}"; the manifest resolves "${entry.id}". Using the manifest.`
         });
     }
     if (!entry) {
-        warnings.push({ code: 'no-transcripts', message: 'the manifest indexes no transcripts' });
-        return {
-            classification: main.verified === false ? 'damaged-metadata' : 'cassini',
-            cassini: true,
-            formatId,
-            version,
-            tags,
-            manifest,
-            verified: { manifest: main.verified, transcript: null },
-            warnings
-        };
+        warnings.push({ code: 'no-transcripts', message: 'the manifest indexes no word-timed transcript' });
+        return good({});
     }
+    // A body that will not load makes that transcript unavailable, not the file.
+    // The meeting, the speakers and the other transcripts are still good.
+    const ref = entry.payloadRef;
     let body;
     try {
-        body = await decodeChunkSet(tags, entry.payloadRef.prefix.toUpperCase(), entry.payloadRef.chunkCount, entry.payloadRef.sha256);
+        body = await decodeChunkSet(tags, ref.prefix.toUpperCase(), ref.chunkCount, ref.sha256, typeof ref.rawBytes === 'number' ? ref.rawBytes : undefined);
     }
     catch (e) {
-        // The manifest survived, so the meeting metadata is still worth showing.
-        warnings.push(issue(e, 'transcript-decode-failed'));
-        return {
-            classification: 'damaged-metadata',
-            cassini: true,
-            formatId,
-            version,
-            tags,
-            manifest,
-            verified: { manifest: main.verified, transcript: false },
-            warnings
-        };
+        const reason = issue(e, 'transcript-decode-failed');
+        warnings.push({ ...reason, message: `transcript "${entry.id}" is unavailable: ${reason.message}` });
+        return good({ unavailable: { entry, reason }, verified: { manifest: true, transcript: false } });
     }
     if (body.verified === false) {
-        warnings.push({
+        const reason = {
             code: 'transcript-sha256-mismatch',
             message: `transcript "${entry.id}" does not match its payloadRef.sha256`
-        });
+        };
+        warnings.push({ ...reason, message: `transcript "${entry.id}" is unavailable: ${reason.message}` });
+        return good({ unavailable: { entry, reason }, verified: { manifest: true, transcript: false } });
     }
-    return {
-        classification: main.verified === false || body.verified === false ? 'damaged-metadata' : 'cassini',
-        cassini: true,
-        formatId,
-        version,
-        tags,
-        manifest,
-        transcript: { entry, words: body.value.items ?? [] },
-        verified: { manifest: main.verified, transcript: body.verified },
-        warnings
-    };
+    const items = body.value?.items ?? [];
+    return good({
+        transcript: { entry, words: items },
+        verified: { manifest: true, transcript: body.verified }
+    });
 }
 /**
  * Group words into speaker turns.
