@@ -243,7 +243,9 @@
 
 <style>
 	.hero {
-		padding: clamp(3rem, 8vh, 6rem) 0 1rem;
+		/* Block only: .shell owns the inline gutter, and the `padding`
+		   shorthand would reset it to zero. */
+		padding-block: clamp(3rem, 8vh, 6rem) 1rem;
 	}
 	.kicker {
 		display: flex;
