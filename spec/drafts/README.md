@@ -29,3 +29,11 @@ samples and 7 ms larger than the audio the file actually plays. The PCM digest
 matches; only the shape disagrees. A reader that treats that as a mismatch
 reports a failure on nine files that are entirely intact, so check the digest
 and let the shape difference pass.
+
+## Retagging a draft file
+
+A tool that rewrites the tags on a draft file MUST NOT relabel its
+`CASSINI_AUDIO_MATCH_POLICY`, and MUST NOT reinterpret a PCM digest as a
+compressed-audio one. Converting a draft to the published format means
+recomputing the digest from the Opus packets, which changes the meeting id; it
+is a repack, not a retag.

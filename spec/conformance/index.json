@@ -15,8 +15,8 @@
     {
       "id": "001-minimal-v1",
       "file": "opus/001-minimal-v1.opus",
-      "bytes": 2872,
-      "sha256": "9a751c99b9884799a09264535db0577892724a78b2fefab4ff0ebe5c6bc9f72b",
+      "bytes": 2992,
+      "sha256": "77f191d135cfb1a51fa34787f83291f8aab68f019ded0896238a9c1c0d4c41fa",
       "derivedFrom": null,
       "profiles": [
         "metadata",
@@ -70,7 +70,7 @@
       "rationale": "SPEC.md:76 makes this a MUST. It shares its audio essence byte for byte with 003, so a full reader can prove the digest does not depend on the metadata: audioOpusSha256 here equals audioOpusSha256 there.",
       "spec": [
         "SPEC.md#file-identification",
-        "SPEC.md#plain-audio-no-cassini-metadata"
+        "SPEC.md#plain-audio"
       ],
       "expect": {
         "classification": "plain-audio",
@@ -85,8 +85,8 @@
     {
       "id": "003-multichunk-v1",
       "file": "opus/003-multichunk-v1.opus",
-      "bytes": 50839,
-      "sha256": "7ebf0bf5b08a2b3698d55f4d0330c98537edaeb09c16269059900a82c4bf596e",
+      "bytes": 50958,
+      "sha256": "b771a29314b258e2955171101d5ed8ef2b794e584cc2879b62057b893e3c5368",
       "derivedFrom": null,
       "profiles": [
         "metadata",
@@ -123,8 +123,8 @@
     {
       "id": "004-padded-base64url-v1",
       "file": "opus/004-padded-base64url-v1.opus",
-      "bytes": 2874,
-      "sha256": "1e08525687261cc64f66829b7189a5950e8906d389f728f186c1056e0b9459bc",
+      "bytes": 2994,
+      "sha256": "9f5026a86961cfe8f7a3ddd578f7137be9a27646fde4f3d4e927d763fa3ad2a5",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -154,8 +154,8 @@
     {
       "id": "005-duplicate-chunk-tag",
       "file": "opus/005-duplicate-chunk-tag.opus",
-      "bytes": 54986,
-      "sha256": "b954340eda4dfd8b2e150825bf9df7ed53d8e41a89d0e08a781eceb9e1829f3e",
+      "bytes": 55106,
+      "sha256": "3a03785795437f7d54398905236acd0fe811e0b2d59e51281f89fbe1d44fdeee",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -185,8 +185,8 @@
     {
       "id": "006-missing-chunk",
       "file": "opus/006-missing-chunk.opus",
-      "bytes": 46692,
-      "sha256": "04e5333162a67702715e13b8ef85c3843d856cba2bb969fa631f6ac394b81078",
+      "bytes": 46811,
+      "sha256": "164166c5c94525a0ff7af23e45486fe7ace0f442ffd4dde9b27cbef00e1ff5f6",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -216,8 +216,8 @@
     {
       "id": "007-chunk-count-too-high",
       "file": "opus/007-chunk-count-too-high.opus",
-      "bytes": 50839,
-      "sha256": "63a1405cd9f07d5a3a43159d7664ead3881e0c85c608a4b7947872fbbdaa0b90",
+      "bytes": 50958,
+      "sha256": "e058abd6a0ade702ad8ff736a943f81af5a3fb396aca55f3acb0f56a514e55ac",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -248,8 +248,8 @@
     {
       "id": "008-chunk-count-too-low",
       "file": "opus/008-chunk-count-too-low.opus",
-      "bytes": 50839,
-      "sha256": "33d942e1a5d43651c5eeb5aad3b743af9f55b4a5afc1cfcd87a4ba4067499a66",
+      "bytes": 50958,
+      "sha256": "153818418a7ea0a95d1e4ee8c5861864c42eb94fdfbc7f5b625b5dd31e042cac",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -280,8 +280,8 @@
     {
       "id": "009-bad-payload-sha256",
       "file": "opus/009-bad-payload-sha256.opus",
-      "bytes": 2872,
-      "sha256": "2ec1e11d024c6ec34a42f58361ebeeb3fe4d398bfd122dd0ab6fad094b3bbd70",
+      "bytes": 2992,
+      "sha256": "d6397e67bab522c96d645b05ebe404474bc9c3545a04d045154b822c15e6212e",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -310,8 +310,8 @@
     {
       "id": "010-stale-audio",
       "file": "opus/010-stale-audio.opus",
-      "bytes": 13545,
-      "sha256": "77bcb0e6d917e4ac36e148693c59d83fd5d331f59125f6f24962c435712aab2f",
+      "bytes": 13664,
+      "sha256": "8ac426544eae8ed08994937e68a64b7da135846e2632df3e16cda8eaf947351c",
       "derivedFrom": null,
       "profiles": [
         "full"
@@ -319,7 +319,7 @@
       "summary": "Vector 003's complete, self-consistent metadata over vector 001's audio.",
       "rationale": "The real lifecycle failure: the metadata is internally perfect and describes a different recording. Manifest and tag agree with each other and disagree with the file.",
       "spec": [
-        "SPEC.md#stale-audio-present-readable-checked-and-it-does-not-match"
+        "SPEC.md#stale-audio"
       ],
       "expect": {
         "classification": "cassini",
@@ -347,8 +347,8 @@
     {
       "id": "011-tag-manifest-disagreement",
       "file": "opus/011-tag-manifest-disagreement.opus",
-      "bytes": 2872,
-      "sha256": "7d8d81881aa00be700a06f40c5ed91a7a4b532cfee22f7ee4da4694ff38cbfb0",
+      "bytes": 2992,
+      "sha256": "9cbb2b383301303016cd6ea1c31b0185a88e51e35c40d8c96f987188ebba1b84",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "full"
@@ -378,8 +378,8 @@
     {
       "id": "012-lowercase-tag-names",
       "file": "opus/012-lowercase-tag-names.opus",
-      "bytes": 2872,
-      "sha256": "4632c4385a43473c1a0d513b4a12394a2b6cdfff370c32449ccb764a9168db0c",
+      "bytes": 2992,
+      "sha256": "a9cfa0b69502b0b9b5fde4de08ec101e4ef78f2fbee96d41be02b96941d7c8ce",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -403,8 +403,8 @@
     {
       "id": "013-mixed-case-tag-names",
       "file": "opus/013-mixed-case-tag-names.opus",
-      "bytes": 2872,
-      "sha256": "d8f86d9a08840012e27066e4e047a25b8d71bfdea2dd16814d0ccfb7f6221732",
+      "bytes": 2992,
+      "sha256": "7111edb8c588ec85a7d2a70d2bf6a30714dcc0f82e8a3cb3a1a6ed666f8b3227",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -428,8 +428,8 @@
     {
       "id": "014-unknown-manifest-member",
       "file": "opus/014-unknown-manifest-member.opus",
-      "bytes": 2944,
-      "sha256": "004e7bf7553a89ab06c46b1cacc885dcd97c43fe05f451cc348935a89553f95d",
+      "bytes": 3064,
+      "sha256": "75d9be700f7ecc483d486d54adbec868b1a6bea92f189063409e6e2237428fbb",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -462,8 +462,8 @@
     {
       "id": "015-unknown-major-version",
       "file": "opus/015-unknown-major-version.opus",
-      "bytes": 2873,
-      "sha256": "65ccccb200196c439959d41f31e910bc3374e12b4ae170bfb8d2b26f5d9fc5c4",
+      "bytes": 2993,
+      "sha256": "9c635dc05246c87aa164f795f81e12e83f6b7fefb108e7e492d37b351f00dd9d",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -500,8 +500,8 @@
     {
       "id": "016-two-transcripts",
       "file": "opus/016-two-transcripts.opus",
-      "bytes": 3635,
-      "sha256": "9594064ecdcdd713b0812d9bfd05108cbc11be82226154ccc4294d86787bc27d",
+      "bytes": 3755,
+      "sha256": "9056a91e70d48f427c5a1223ebca0f815272a652baf281b319104f89f30953c5",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -510,8 +510,7 @@
       "summary": "Two raw-asr transcripts, raw-asr (default:true) and second-pass (default:false), three words each.",
       "rationale": "The format's headline feature and nothing tests it. Also the minimal reproduction of the reference inspector summing word counts across alternative transcripts and reporting six.",
       "spec": [
-        "SPEC.md#manifest-shape-v2",
-        "SPEC.md#consumer-rules-v2"
+        "SPEC.md#transcripts-and-their-chunk-sets"
       ],
       "expect": {
         "classification": "cassini",
@@ -536,8 +535,8 @@
     {
       "id": "017-dangling-transcript-id",
       "file": "opus/017-dangling-transcript-id.opus",
-      "bytes": 2878,
-      "sha256": "5004bef275debb00e30e7a9ccb197c23be6ad4037e1ac0a5a2ebac8e4b8fd7e7",
+      "bytes": 2998,
+      "sha256": "38a76575eb398b5429dfc523d33e4267e7fc02c5db4dffb4af6c71fb42908b09",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -572,8 +571,8 @@
     {
       "id": "018-oversize-opustags",
       "file": "opus/018-oversize-opustags.opus",
-      "bytes": 3076,
-      "sha256": "39add0c7b6bd29d75bd4691204691a529debf93337d3eab83c056b2b9aa824ce",
+      "bytes": 3195,
+      "sha256": "6df33c72cacaf6206532fcf05d15f1ae922763b9b0514ea7bbedf9b2e7b2d385",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -608,8 +607,8 @@
     {
       "id": "019-manifest-chunk-count-too-high",
       "file": "opus/019-manifest-chunk-count-too-high.opus",
-      "bytes": 2872,
-      "sha256": "fdf389b23272a1bae6978631a7833a4bcc0b603f692c8b79745b512815eced36",
+      "bytes": 2992,
+      "sha256": "697b5c838e7149cf5cbc1d2bd8024ebbd7f6efff3bd6a82792d899ad206d54f9",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -638,8 +637,8 @@
     {
       "id": "020-duplicate-chunk-differing",
       "file": "opus/020-duplicate-chunk-differing.opus",
-      "bytes": 50995,
-      "sha256": "ea9735775b6c40a5a6b2ecb2fc94896df6dbd8b33ce5906e15e95e0e6d4bdfb3",
+      "bytes": 51114,
+      "sha256": "7d856d528e1e389fcc8206c5ae54de06f96ba811ba840d01566d6cdf608900e6",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -669,8 +668,8 @@
     {
       "id": "021-descriptors-first",
       "file": "opus/021-descriptors-first.opus",
-      "bytes": 3076,
-      "sha256": "20ed7a5755c174983c5cf7177acee6114385595fbee6941d5d0075c7a8656c13",
+      "bytes": 3195,
+      "sha256": "6df33c72cacaf6206532fcf05d15f1ae922763b9b0514ea7bbedf9b2e7b2d385",
       "derivedFrom": "018-oversize-opustags",
       "profiles": [
         "metadata",
@@ -694,8 +693,8 @@
     {
       "id": "022-duplicate-chunk-junk-last",
       "file": "opus/022-duplicate-chunk-junk-last.opus",
-      "bytes": 50995,
-      "sha256": "7ba275e81d92ee13255372f5d5d30fa36603a4dd8e15523657f38d651fdfba24",
+      "bytes": 51114,
+      "sha256": "7bd9947befa07b109a9b46961390dde8295f6d338067b87f7285b4af94504c54",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",

@@ -23,17 +23,10 @@ can pick up.
 
 ## Undecided
 
-**The schema `$id` does not resolve.** Every schema declares
-`https://cassini.local/spec/…`, and every file's `CASSINI_PAYLOAD_SCHEMA` repeats
-it. A placeholder from when the format lived inside one program. The schemas are
-served from this site now, but the string inside existing files still points at
-nothing, and changing it is a wire change.
-
-**Whether the format keeps the product's name.** One argument says a format meant
-to outlive one program should not be named after it. The counter is that SQLite's
-file format is named after the one product that writes it and became an archival
-format anyway, and that a rename costs nine wire strings and an alias table
-forever. It is the one decision that cannot be revised later.
+**Whether the format keeps the product's name.** Settled: it does. One argument
+said a format meant to outlive one program should not be named after it. The
+counter, which won, is that SQLite's file format is named after the one product
+that writes it and became an archival format anyway.
 [The argument in full](/design/naming/).
 
 **What a second implementation would need.** I do not know, because there isn't

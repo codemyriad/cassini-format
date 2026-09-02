@@ -1,6 +1,6 @@
 {
 	"generatedFrom": "lantern-festival.opus",
-	"bytes": 1898866,
+	"bytes": 1898870,
 	"audio": {
 		"codec": "opus",
 		"sampleRate": 48000,
@@ -60,11 +60,11 @@
 		"CASSINI_MEETING_ID": "mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
 		"CASSINI_PAYLOAD_CHUNK_COUNT": "1",
 		"CASSINI_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
-		"CASSINI_PAYLOAD_GZIP_BYTES": "1142",
+		"CASSINI_PAYLOAD_GZIP_BYTES": "1132",
 		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
 		"CASSINI_PAYLOAD_RAW_BYTES": "2127",
-		"CASSINI_PAYLOAD_SCHEMA": "https://cassini.local/spec/cassini-portable-meeting-manifest-v1.schema.json",
-		"CASSINI_PAYLOAD_SHA256": "71acf97b24223f24be67d9dc7f469593d127f65368fb0aab259d56e8273e0f95",
+		"CASSINI_PAYLOAD_SCHEMA": "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json",
+		"CASSINI_PAYLOAD_SHA256": "98cba376921f3ebf171ddc1bd11d7cbc0aa219d52638fe7c4959941a6b2634b5",
 		"CASSINI_PROCESSED_AT": "2026-04-15T09:12:00Z",
 		"CASSINI_PROFILE": "ogg-opus",
 		"CASSINI_RECORDED_AT_LOCAL": "2026-04-15T11:12:00",
@@ -84,11 +84,11 @@
 	},
 	"sampleChunkTag": {
 		"key": "CASSINI_PAYLOAD_000",
-		"value": "H4sIAAAAAAAA_6xWXY_bthL9KwO-5F5E8kqyrbWVJ-cLyL27SWA7N7ctCmNEjizGEkcgKe-6gf97QdnuelEU7UOwL0vyeM7wzOGxv4udNkoUQqJz2ui4Y-uxbChuibw2WxGJPVmn2YhiHInOcqUbEoXg7TbmrnciEhdo8V3oUKv1282M0up2Mp_LXE2rEmczOS7VvMznJNVYUVomt0iJrKp8mk4zOZ9kckrzeZJnKkllKUUkvPYD0x0aT9bAe3Je77GB18y-hmVvYl9b7re1iIS0hJ7Uwn_xUhQiS7I8TiZxOl0n8yLNiiT5WUTCkmSrAuyOJTbPgWl6AorhmpKc-9t6qrfoNZt7J4psPL9Nx8dIYK80BzEkG4_akD3JFbpkRaHcWTiHbdfQEj2JYjJLkiQSskZjqHGiSC_nb7g3XhRpOk3ybDL7C1ZtPG2t9ofA3KKX9WdutDyIQtAjSj8MKx56i_epiIYeFmG5qjGb5qIQP2BmP_JGriPckXWi-OVsLNftNq22KCLRYElhfvfaIrypyYhjdIVqiK9Ad8SwZOf0c1BJ5gr0mgy8107WZJ_D0FwTLgzCPVtsyD2HGcb6CveRsYbP6Kl5DvvWh08-4f4T1vBphxVbcfw1Et6icdLqzl_d3OJDjM4GC_PwKJ42FFXYN14U3vYUiYpti_7pRY8e2Co3GkYe_j1rn-fzf_poOjw0jGpJVbBWZ6nSj6IQbxar1YePHzbr_2-Wi6-bxWq5-bz46e7T4u0mOL3uze7MNY6Eu3islBXleJuGv-lkSlWWTygtZZXnWGJeJemklNl0Mplm-a0cTzFL8vR2LtMMZzKfqaAAPrw-eHKimExn49tIbH_T3XlnlsxnkWh1GzTCrmu0HIx1szdqdFHkSeF4EOflN8fBCWQkqyHIRImO8klvm5eh-MveV7MBdAwT6izvyaCRFARxHZGs17ymRx_Wl8kU30WJckdDvJ7oSMWVfvS9pYFtqw1dRe9pcqCoZSh73SgK421ZDT4xbAhiMAwnwthz7OnRwwM6sL0ZnLDXcqjY9YPDzLbHbdgYjO64t8Px6mB8TV5LOHcTgWEPCKd41GYLaNSwt1gtgXvf9X4E65pg0AvQEviaYE-2RK9bcJIMWs1wuif8q0ZryLmby4G7cTU_SHQUN6c4j6tznI_26ShoC9rAls9i_PvVQDDEFWgHvkZ_KW4JFZQH-C_v2HI8y-5hvV5FEATas5YEHVk4p0cErX4kBYofzAju3y1WX5bv3hZAKGtwtG3J-BcOnEfr790NGXXvIvC4IwOV5XZow5JRZMm-cMAPBkJGqL4hqNieOzuRvXDgLcrdCN6-W37438CzJ3sYZPszS4hs23ET3iBo47Qi0N5d2oLOcvg61mywaQ7gGTyHvhoyW1-P4CtbBV632mz_mImlii1B12DvdNkQlL0fJtkSut6SegVP9h2yYX0uoB0oanRJNoTWAbB0oQnP4PAAjkfXPwVEizvaPD2km0wcj8fj7wEAAP__8Uwn3U8IAAA"
+		"value": "H4sIAAAAAAAC_61W247bNhD9lYFe2iKWV9La8qVPzqVA2nUS2E7TCwpjRI0sxhIpkJR33WD_vUPaW3tRFO1DsPugIQ9nhmfODP0l2ktVRvNIoLVSybjTxmHRUNwSOal20SA6kLFSq2ieDqLO6Eo2xAf0bhfrrrcMeILOv0TS-2rdbjultJqMZjORl-OqwOlU3BblrMhnJMrbktIimSAloqrycTrOxGyUiTHNZkmelUkqCsFunXQh0h0qR0bBD2SdPGADL7V2Nax6Fbva6H5XM1gYQkflwn10gs9kSZbHyShOx5tkNk-zeZL8xihDQpvSw-60wOY5ME1PwChcU5C1_-mv7A065mZpo3l2O5ukt4-DCPtSak-G0MqhVGROdPksdUne3Zk4i23X0IoTj-ajaZIkjKhRKWpsYPu0_0r3yrGdjpmd0fRfokomaWekO_rILTpRf9CNFGxG9IDChWLFIbf4kHJwby-8ua4xG-eM-wo1-5o3sh3hnrUXzX8_C8t2-20rDXKgBgvy9VuyCa9qUtHj4ArVkL4C3ZGGlWaBPwcVfOoCekksMWlFzfV6BkN1HXChEJbaYEP2OUxprK9w79iED0xE8xz2ufcnL7gfvQ3v91hpjvsHy96gssLIzl3d3OB9jNZ4CevQFJeFkirsG6bTmZ4GEbvh6l86enjPirfDUHL_eeY-z2f_t2k6PDYayxVVXlqdoUo-MPrVYr1---7tdvPLdrX4tF2sV9sPi1_v3i9eb73S617tz7FuuZZPGitERTlOUv83Ho2pyvIRK0tUeY4F5lWSjgqRjUejcZZPxO0YsyRPJzORZjgV-bT0DOD9y6NjEuej8fR2Moh2f8ruvDJNZiynVraeI-w67oAgrJuDKodPjFwYjgM5Lz5b7ZVAivszDLKoQEv5qDfNC-_8Re-qaQA9-grxdDiQQiXIE8IyJVFv9IYenLefKsOfBYo9hfF6CkdlzNy53lCItuPZcDV6T5WDkloNRS-bknx5Wx4ZXidKK4IYlIZTwNjp2HFIuEcLpldBCQcpgseuDwpTux53fiEI3erehO31UbmaR7aAczYDdusA4TQemQFAVYY1riro3nW9G8KmJgh8ARoC9gD8MhRMbwtWMB9Gcm7hnvBtjUbxAL152uCvWt_zTSluTuM8rs7jnKU59NyCVLDTZzK--z4ECOMKpGWDmTk7Z9GWUBzhJ73XRsfTbAmbzXoAnqCDZgagIwPn6TGAVj5QCaW-V0NYvlmsP67evJ4DoajB0q4l5b6xYB0at7Q3XK2lHYDjowoqo9uQhuFlMmQYyG7Az4iS2xa4YufMTsF4n7Ul9kN4_Wb19ucQhzk6Btr-GcWPbNPpxvcgG1aWBNLZp7SAdeafY5YvNs0RnOZ_n1fD0nH1ED6xV2D6uWB_14S7U_NX12BvJb_jrCQXKtkSWi51-T1c5Btmw-bsgFlmpcmCjB9aR8DC-iQ4qsUjWD28_inAL8yetpdGusm4NR4f_wLqj3EtTwgAAA"
 	},
 	"manifest": {
 		"kind": "cassini-portable-meeting",
-		"version": 3,
+		"version": 1,
 		"profile": "ogg-opus",
 		"meeting": {
 			"id": "mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
@@ -174,7 +174,7 @@
 		}
 	},
 	"manifestBytes": 2127,
-	"manifestSha256": "71acf97b24223f24be67d9dc7f469593d127f65368fb0aab259d56e8273e0f95",
+	"manifestSha256": "98cba376921f3ebf171ddc1bd11d7cbc0aa219d52638fe7c4959941a6b2634b5",
 	"transcript": {
 		"id": "raw-asr",
 		"role": "raw-asr",

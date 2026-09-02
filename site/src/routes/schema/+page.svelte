@@ -33,17 +33,14 @@
 	<div class="two">
 		<div>
 			<p>
-				The schemas declare <code>https://cassini.local/spec/…</code>, which does not resolve. A
-				placeholder from when the format lived inside one program and nobody outside was going to
-				fetch it.
+				Each schema declares its own identity as a URL under this site, and that is where it is
+				served from. A <code>$ref</code> between schemas resolves against it, and every file
+				written carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader
+				holding only the file can still find the schema it claims to follow.
 			</p>
 			<p>
-				It matters because <code>$id</code> is what a <code>$ref</code> resolves against, and
-				because every file's <code>CASSINI_PAYLOAD_SCHEMA</code> tag repeats the same URL.
-			</p>
-			<p>
-				Changing it is a wire change, so it waits for the freeze rather than being fixed quietly
-				here. The schemas above are the ones to fetch.
+				That identity is a wire string. It is in the bytes of every file, so it is not something
+				to move casually.
 			</p>
 		</div>
 		<div class="code">

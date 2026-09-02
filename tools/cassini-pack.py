@@ -221,7 +221,7 @@ def pack(src, transcript_path, out, title, created_at, tx_id="raw-asr",
         ("CASSINI_TRANSCRIPT_IDS", tx_id),
         ("CASSINI_TRANSCRIPT_DEFAULT", tx_id),
         ("CASSINI_PAYLOAD_SCHEMA",
-         "https://cassini.local/spec/cassini-portable-meeting-manifest-v1.schema.json"),
+         "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json"),
     ]
     if recorded_at_local:
         comments.append(("CASSINI_RECORDED_AT_LOCAL", recorded_at_local))

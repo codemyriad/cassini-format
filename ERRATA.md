@@ -1,18 +1,14 @@
 # Errata
 
-Date: 2026-09-01
+Date: 2026-09-02
 
 Status: every entry checked against the reference producer's source and against a
 file on disk
 
-Where [`SPEC.md`](SPEC.md) and the software disagree. The document has been
-revised and now says what a real file contains; what is left here is the other
-direction — rules the document states that the reference implementations do not
-yet follow — plus a few facts about real files worth knowing before you write a
-reader.
-
-Each entry was checked twice: against the reference producer's source, and
-against a file on disk. Where they disagreed, the file won.
+Rules [`SPEC.md`](SPEC.md) states that the reference implementations do not yet
+follow, plus a few facts about real files worth knowing before you write a
+reader. Each entry was checked against the producer's source and against a file
+on disk.
 
 ## The six trust states are not the names the readers print
 
@@ -104,23 +100,23 @@ minimal reproduction.
 Fixed in the reference implementation by
 [gocassini#230](https://github.com/codemyriad/gocassini/pull/230), not yet merged.
 
+## Two things about transcript bodies in real files
+
+`language` is written as `""` by the JavaScript repacker in the reference tree,
+and omitted by the Go producer. The body format says to treat both as "nobody
+said"; a reader that rejects the empty string fails on real files.
+
+No shipped file carries a derived transcript. The reference producer's pack
+input has no way to set `sourceTranscriptId`, and its validator rejects a
+derived entry without one, so the `readableTranscripts` path is unreachable
+today. The shape is specified; nothing exercises it yet.
+
 ## Nothing records which program wrote the file
 
 The producer sets `ENCODER=Cassini`; ffmpeg's Ogg muxer replaces the value with
 its own, so a real file carries `encoder=Lavf62.3.100`. The tag survives, the
 information does not, and that is the fact you need to decide whether a file is
 worth reprocessing.
-
-## Transcript items are not sorted by time
-
-They are in speaker-turn order. Across a speaker change `startMs` can go
-backwards, because people talk over each other and each speaker's words stay
-together. In the demo file 7 of 669 items start earlier than the item before
-them, every one at a speaker change.
-
-Sorting by `startMs` interleaves overlapping speakers and destroys every turn.
-Read them in file order. [The body format](spec/cassini-words-v1.md) now says so; it
-previously said the opposite.
 
 ## Tag order, and a risk we accept
 

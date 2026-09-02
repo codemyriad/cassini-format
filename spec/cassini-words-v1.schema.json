@@ -1,10 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://cassini.local/spec/cassini-words-v1.schema.json",
+  "$id": "https://cassini-format.codemyriad.io/schema/cassini-words-v1.schema.json",
   "title": "Cassini transcript body (cassini.words.v1)",
   "description": "The decompressed body of a CASSINI_TX_<ID>_PAYLOAD_* chunk set, and of a v1 file's inline manifest.transcript. Deliberately open: a consumer that meets an unknown member ignores it.",
   "type": "object",
-  "required": ["format", "wordCount", "items"],
+  "required": [
+    "format",
+    "wordCount",
+    "items"
+  ],
   "properties": {
     "format": {
       "type": "string",
@@ -23,15 +27,27 @@
     "items": {
       "description": "One item per word, in speaker-turn order and NOT sorted by startMs: across a speaker change startMs can go backwards, because overlapping speech keeps each speaker's words together. Sorting by time destroys the turns. null is accepted as empty because a Go encoder emits it for a nil slice.",
       "oneOf": [
-        { "type": "array", "items": { "$ref": "#/$defs/item" } },
-        { "type": "null" }
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        {
+          "type": "null"
+        }
       ]
     }
   },
   "$defs": {
     "item": {
       "type": "object",
-      "required": ["speaker", "startMs", "endMs", "text"],
+      "required": [
+        "speaker",
+        "startMs",
+        "endMs",
+        "text"
+      ],
       "properties": {
         "speaker": {
           "type": "string",
