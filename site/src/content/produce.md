@@ -125,7 +125,7 @@ Not required. All of it is what the reference producer does.
 
 ## A complete producer
 
-`tools/cassini-pack.py` builds a valid v3 file with nothing but the Python
+`tools/cassini-pack.py` builds a valid file with nothing but the Python
 standard library. No ffmpeg, no Go. It walks the Ogg pages, computes the digest,
 builds the manifest, and rewrites only the `OpusTags` packet, copying every audio
 page across untouched and patching the page sequence numbers and CRCs.

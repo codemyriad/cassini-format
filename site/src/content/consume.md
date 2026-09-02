@@ -95,9 +95,9 @@ Eight steps, the same in every language.
    assume names are unique and upper-case, and have got away with it because the
    producer writes them that way.
 
-3. **Check `CASSINI_FORMAT`.** Absent means plain audio. Accept `/1`, `/2` and
-   `/3`. A major version you do not implement means play the audio, never error
-   on valid Opus.
+3. **Check `CASSINI_FORMAT`.** Absent means plain audio. Accept `/1`. A major
+   version you do not implement means play the audio, never error on valid
+   Opus.
 
 4. **Reassemble the manifest.** Join `CASSINI_PAYLOAD_000` through
    `CHUNK_COUNT - 1` **by index**, not by the order tags appear. Re-pad,
@@ -106,9 +106,8 @@ Eight steps, the same in every language.
 5. **Verify.** SHA-256 the decompressed bytes against `CASSINI_PAYLOAD_SHA256`.
    Bound the decompression while inflating, not after.
 
-6. **Resolve the transcript.** v1 inlines it at `manifest.transcript`. v2 and v3
-   index them in `manifest.transcripts[]`, each entry's `payloadRef` naming its
-   own chunk set and its own SHA-256.
+6. **Resolve the transcript.** `manifest.transcripts[]` indexes them, each
+   entry's `payloadRef` naming its own chunk set and its own SHA-256.
 
    The manifest resolves the default, not the tag. For each slot — words,
    readable, display — take the first entry for that slot flagged
@@ -203,6 +202,6 @@ corrupted payload, a truncated download. Not someone who wants to lie to you.
   descriptors past that line on a long recording. If `CHUNK_COUNT` is missing on
   a file that plainly has chunk tags, this is why. Count the tags you can see,
   and say that you did.
-* **The summary tags are an incomplete copy.** A v3 file carries no
+* **The summary tags are an incomplete copy.** A file carries no
   `CASSINI_WORD_COUNT`, no `CASSINI_TRANSCRIPT_LANGUAGE`, no `CASSINI_STT_*`,
   whatever the spec says. Read the manifest.

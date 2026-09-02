@@ -47,8 +47,8 @@
 			{#each nav as item (item.href)}
 				<a
 					href="{base}{item.href}"
-					aria-current={current.startsWith(item.href.replace(/v3\/$/, '')) ? 'page' : undefined}
-					class:on={current.startsWith(item.href.replace(/v3\/$/, ''))}
+					aria-current={current.startsWith(item.href.replace(/v1\/$/, '')) ? 'page' : undefined}
+					class:on={current.startsWith(item.href.replace(/v1\/$/, ''))}
 					onclick={() => (open = false)}>{item.label}</a
 				>
 			{/each}

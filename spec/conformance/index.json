@@ -22,7 +22,7 @@
         "metadata",
         "full"
       ],
-      "summary": "The smallest well-formed v3 file: 60 ms of audio, three words, one transcript.",
+      "summary": "The smallest well-formed file: 60 ms of audio, three words, one transcript.",
       "rationale": "If a reader opens nothing else in this suite, it must open this.",
       "spec": [
         "SPEC.md#file-identification",

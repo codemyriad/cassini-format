@@ -85,7 +85,7 @@ A REAL FILE TO CHECK AGAINST
 	parts.push(rule('ERRATA — read this before the specification'));
 	parts.push(await readRepoFile('ERRATA.md'));
 
-	parts.push(rule('WHAT A REAL v3 FILE ACTUALLY CONTAINS'));
+	parts.push(rule('WHAT A REAL FILE ACTUALLY CONTAINS'));
 	parts.push(
 		`Every comment in the demo file, in the order ffprobe reports them.\n` +
 			`Payload chunk values are elided; one is shown in full-ish so the shape is clear.\n\n` +

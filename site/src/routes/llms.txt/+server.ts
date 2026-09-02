@@ -29,11 +29,11 @@ alone will produce a reader that rejects every file written today.
 - [The specification](${origin}/spec/v1/): what a producer writes and a consumer reads today
 - [Transcript body, cassini.words.v1](${origin}/spec/words-v1/): one item per word, with a speaker and millisecond offsets
 - [Audio digest, exact-opus-audio-v1](${origin}/spec/audio-integrity/): the byte rule that makes a recording's identity survive a tag rewrite
-- [The whole document](${origin}/spec/document/): v1, v2 and v3 with the rationale and the rejected alternatives
+- [The whole document](${origin}/spec/document/): the specification on one page, rationale included
 
 ## Guides
 
-- [Reading a file](${origin}/consume/): the seven steps, and every behaviour a reader has to decide
+- [Reading a file](${origin}/consume/): the eight steps, and every behaviour a reader has to decide
 - [Writing a file](${origin}/produce/): numbered requirements, then conventions
 - [Design notes](${origin}/design/): why it is shaped this way
 - [Status](${origin}/status/): what is stable, what is still moving

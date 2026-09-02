@@ -177,9 +177,9 @@ export async function renderMarkdownFile(
 }
 
 /**
- * Splitting SPEC.md into per-version pages breaks its internal cross-references:
- * the v1 section links to a heading that now lives on the v3 page. Rather than
- * editing the document, any in-page anchor that does not exist on the rendered
+ * Splitting SPEC.md into pages breaks its internal cross-references: a part can
+ * link to a heading that lives in another part. Rather than editing the
+ * document, any in-page anchor that does not exist on the rendered
  * page is pointed at the full-document page, where every heading does exist.
  */
 function reanchor(html: string, fallback: string): string {

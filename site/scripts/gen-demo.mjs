@@ -20,8 +20,7 @@ const SITE = path.resolve(HERE, '..');
 
 const candidates = [
 	process.argv[2],
-	path.join(SITE, 'static/demo/lantern-festival.opus'),
-	'/tmp/claude-1000/-home-silvio-dev-cassini-format/888205b7-904d-472a-a33c-06aa8b6f636a/scratchpad/research/demo-asset/lantern-v3-go-packed.opus'
+	path.join(SITE, 'static/demo/lantern-festival.opus')
 ].filter(Boolean);
 
 let file;

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A complete Cassini v3 producer in pure Python, standard library only.
+"""A complete Cassini producer in pure Python, standard library only.
 
     cassini-pack.py AUDIO.opus TRANSCRIPT.json OUT.opus \\
         --title "Weekly Sync" --created-at 2026-04-15T09:12:00Z
@@ -14,7 +14,7 @@ exact-opus-audio-v1 excludes OpusTags and all Ogg framing, so the digest is
 provably unchanged by tagging — unlike the reference Go producer there is no
 hash / retag / re-hash fix-point loop to converge. Written from SPEC.md and
 spec/cassini-opus-audio-integrity-v1.md alone; the output passes the reference
-inspector, the reference extractor and the v3 JSON Schema.
+inspector, the reference extractor and the JSON Schema.
 
 SPDX-License-Identifier: CC0-1.0
 """

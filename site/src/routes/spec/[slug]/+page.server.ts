@@ -30,9 +30,9 @@ async function specPart(name: string) {
 
 const PAGES: Record<string, Page> = {
 	v1: {
-		title: 'Cassini portable meeting, version 3',
+		title: 'Cassini portable meeting, version 1',
 		kicker: 'Specification · current',
-		lede: 'What a producer writes and a consumer reads today: the machinery every version shares, the current manifest, and what a reader owes the person in front of it.',
+		lede: 'What a producer writes and a consumer reads: the container, the tags, the manifest, and what a reader owes the person in front of it.',
 		source: 'SPEC.md',
 		meta: [
 			{ label: 'Wire id', value: 'org.cassini.portable-meeting/1' },
@@ -43,7 +43,7 @@ const PAGES: Record<string, Page> = {
 	},
 	document: {
 		title: 'The specification document, in full',
-		kicker: 'Specification · all versions, one page',
+		kicker: 'Specification · one page',
 		lede: 'SPEC.md as it stands, rationale and rejected alternatives included.',
 		source: 'SPEC.md',
 		meta: [{ label: 'Covers', value: 'the published format' }],
@@ -52,7 +52,7 @@ const PAGES: Record<string, Page> = {
 	'words-v1': {
 		title: 'The transcript body',
 		kicker: 'Specification · cassini.words.v1',
-		lede: 'Where the timestamps live: one item per word, pointing at a speaker. A v1 file inlines it, a v2 or v3 file gives it its own chunk set. One schema covers both.',
+		lede: 'Where the timestamps live: one item per word, pointing at a speaker. Each transcript in a file has its own chunk set carrying one of these.',
 		source: 'spec/cassini-words-v1.md',
 		meta: [
 			{ label: 'Format id', value: 'cassini.words.v1' },

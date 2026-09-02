@@ -20,7 +20,7 @@
 	<div class="grid vers">
 		<a class="v v--now" href="{base}/spec/v1/">
 			<p class="tag">current</p>
-			<h2>v3</h2>
+			<h2>v1</h2>
 			<p class="wire">org.cassini.portable-meeting/1</p>
 			<p>
 				Identity moved from decoded PCM to the compressed Opus packets. The old digest depended on
@@ -39,8 +39,8 @@
 		<a class="v" href="{base}/spec/words-v1/">
 			<h3>cassini.words.v1</h3>
 			<p>
-				One item per word, with a speaker and a start and end in milliseconds. A v1 file inlines it,
-				a v3 file gives it its own chunk set. One document type, one schema.
+				One item per word, with a speaker and a start and end in milliseconds. Each transcript
+				gets its own chunk set. One document type, one schema.
 			</p>
 		</a>
 		<a class="v" href="{base}/spec/audio-integrity/">

@@ -55,8 +55,8 @@ def replace_set(comments, prefix, obj, mime):
 MANIFEST_MIME = "application/vnd.cassini.portable-meeting+json"
 WORDS_MIME = "application/vnd.cassini.transcript-words+json"
 
-one = load(OUT + "001-minimal-v3.opus")[1]
-three = load(OUT + "003-multichunk-v3.opus")[1]
+one = load(OUT + "001-minimal-v1.opus")[1]
+three = load(OUT + "003-multichunk-v1.opus")[1]
 
 # --- 004  padded base64url in every chunk of both sets ----------------------
 def repad(comments):
@@ -80,29 +80,29 @@ def pad_last_chunk(comments, prefix):
 
 c = pad_last_chunk(one, "CASSINI_PAYLOAD_")
 c = pad_last_chunk(c, "CASSINI_TX_RAW_ASR_PAYLOAD_")
-write(OUT + "001-minimal-v3.opus", "004-padded-base64url-v3.opus", c)
+write(OUT + "001-minimal-v1.opus", "004-padded-base64url-v1.opus", c)
 
 # --- 005  a chunk tag that appears twice ------------------------------------
 c = list(three)
 i = next(k for k, (n, _) in enumerate(c) if n == "CASSINI_TX_RAW_ASR_PAYLOAD_001")
 c.insert(i + 1, c[i])                       # byte-identical repeat
-write(OUT + "003-multichunk-v3.opus", "005-duplicate-chunk-tag.opus", c)
+write(OUT + "003-multichunk-v1.opus", "005-duplicate-chunk-tag.opus", c)
 
 # --- 006  a chunk missing from the middle of a set --------------------------
 c = drop(three, "CASSINI_TX_RAW_ASR_PAYLOAD_001")
-write(OUT + "003-multichunk-v3.opus", "006-missing-chunk.opus", c)
+write(OUT + "003-multichunk-v1.opus", "006-missing-chunk.opus", c)
 
 # --- 007  CHUNK_COUNT higher than the chunks present ------------------------
 c = edit(three, "CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT", "4")
-write(OUT + "003-multichunk-v3.opus", "007-chunk-count-too-high.opus", c)
+write(OUT + "003-multichunk-v1.opus", "007-chunk-count-too-high.opus", c)
 
 # --- 008  CHUNK_COUNT lower than the chunks present -------------------------
 c = edit(three, "CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT", "2")
-write(OUT + "003-multichunk-v3.opus", "008-chunk-count-too-low.opus", c)
+write(OUT + "003-multichunk-v1.opus", "008-chunk-count-too-low.opus", c)
 
 # --- 009  a payload digest that does not match the payload ------------------
 c = edit(one, "CASSINI_PAYLOAD_SHA256", "0" * 64)
-write(OUT + "001-minimal-v3.opus", "009-bad-payload-sha256.opus", c)
+write(OUT + "001-minimal-v1.opus", "009-bad-payload-sha256.opus", c)
 
 # --- 010  correct, self-consistent metadata over the WRONG audio ------------
 #          (vector 003's whole comment list, pasted onto vector 001's audio)
@@ -110,12 +110,12 @@ write("base-tiny.opus", "010-stale-audio.opus", three)
 
 # --- 011  the tag and the manifest disagree about the audio digest ----------
 c = edit(one, "CASSINI_AUDIO_OPUS_SHA256", "f" * 64)
-write(OUT + "001-minimal-v3.opus", "011-tag-manifest-disagreement.opus", c)
+write(OUT + "001-minimal-v1.opus", "011-tag-manifest-disagreement.opus", c)
 
 # --- 012 / 013  tag-name case ------------------------------------------------
-write(OUT + "001-minimal-v3.opus", "012-lowercase-tag-names.opus",
+write(OUT + "001-minimal-v1.opus", "012-lowercase-tag-names.opus",
       [(n.lower(), v) for n, v in one])
-write(OUT + "001-minimal-v3.opus", "013-mixed-case-tag-names.opus",
+write(OUT + "001-minimal-v1.opus", "013-mixed-case-tag-names.opus",
       [("".join(ch.lower() if i % 2 else ch for i, ch in enumerate(n)), v)
        for n, v in one])
 
@@ -123,7 +123,7 @@ write(OUT + "001-minimal-v3.opus", "013-mixed-case-tag-names.opus",
 m = decode_set(one, "CASSINI_PAYLOAD_")
 m["cassiniFutureField"] = {"note": "a member from a later revision", "n": 7}
 m["speakers"][0]["pronouns"] = "she/her"
-write(OUT + "001-minimal-v3.opus", "014-unknown-manifest-member.opus",
+write(OUT + "001-minimal-v1.opus", "014-unknown-manifest-member.opus",
       replace_set(one, "CASSINI_PAYLOAD_", m, MANIFEST_MIME))
 
 # --- 015  an unknown MAJOR version ------------------------------------------
@@ -133,7 +133,7 @@ c = replace_set(one, "CASSINI_PAYLOAD_", m, MANIFEST_MIME)
 c = edit(c, "CASSINI_FORMAT", "org.cassini.portable-meeting/99")
 c = edit(c, "CASSINI_PAYLOAD_SCHEMA",
          "https://cassini.local/spec/cassini-portable-meeting-manifest-v99.schema.json")
-write(OUT + "001-minimal-v3.opus", "015-unknown-major-version.opus", c)
+write(OUT + "001-minimal-v1.opus", "015-unknown-major-version.opus", c)
 
 # --- 016  two transcripts, exactly one flagged default ----------------------
 body = decode_set(one, "CASSINI_TX_RAW_ASR_PAYLOAD_")
@@ -151,11 +151,11 @@ entry["payloadRef"].update(prefix=ALT, chunkCount=len(chunks), sha256=sha,
 m["transcripts"].append(entry)
 c = replace_set(c, "CASSINI_PAYLOAD_", m, MANIFEST_MIME)
 c = edit(c, "CASSINI_TRANSCRIPT_IDS", "raw-asr,second-pass")
-write(OUT + "001-minimal-v3.opus", "016-two-transcripts.opus", sorted(c))
+write(OUT + "001-minimal-v1.opus", "016-two-transcripts.opus", sorted(c))
 
 # --- 017  an id in CASSINI_TRANSCRIPT_IDS with no chunk set behind it -------
 c = edit(one, "CASSINI_TRANSCRIPT_IDS", "raw-asr,ghost")
-write(OUT + "001-minimal-v3.opus", "017-dangling-transcript-id.opus", c)
+write(OUT + "001-minimal-v1.opus", "017-dangling-transcript-id.opus", c)
 
 # --- 018 / 021  a comment header past the 61,440-octet window --------------
 # RFC 7845 5.2 lets a reader ignore comments not wholly inside the first 61,440
@@ -170,14 +170,14 @@ big = replace_set(one, "CASSINI_PAYLOAD_", m, MANIFEST_MIME)
 def chunky(name):
     return name.startswith("CASSINI_PAYLOAD_") and name[-3:].isdigit()
 
-write(OUT + "001-minimal-v3.opus", "018-oversize-opustags.opus",
+write(OUT + "001-minimal-v1.opus", "018-oversize-opustags.opus",
       sorted(big))                                   # ASCII order: chunks first
-write(OUT + "001-minimal-v3.opus", "021-descriptors-first.opus",
+write(OUT + "001-minimal-v1.opus", "021-descriptors-first.opus",
       sorted(big, key=lambda kv: (chunky(kv[0]), kv[0])))
 
 # --- 019  the manifest chunk count claims one more chunk than exists -------
 c = edit(one, "CASSINI_PAYLOAD_CHUNK_COUNT", "2")
-write(OUT + "001-minimal-v3.opus", "019-manifest-chunk-count-too-high.opus", c)
+write(OUT + "001-minimal-v1.opus", "019-manifest-chunk-count-too-high.opus", c)
 
 # --- 020 / 022  the same chunk tag twice, in both orders -------------------
 # A first-wins reader passes one of these and fails the other; a last-wins
@@ -187,7 +187,7 @@ DUP = "CASSINI_TX_RAW_ASR_PAYLOAD_001"
 JUNK = "Xn9" * 40
 real = dict(three)[DUP]
 head = [(n, v) for n, v in three if n != DUP]
-write(OUT + "003-multichunk-v3.opus", "020-duplicate-chunk-differing.opus",
+write(OUT + "003-multichunk-v1.opus", "020-duplicate-chunk-differing.opus",
       head + [(DUP, JUNK), (DUP, real)])
-write(OUT + "003-multichunk-v3.opus", "022-duplicate-chunk-junk-last.opus",
+write(OUT + "003-multichunk-v1.opus", "022-duplicate-chunk-junk-last.opus",
       head + [(DUP, real), (DUP, JUNK)])

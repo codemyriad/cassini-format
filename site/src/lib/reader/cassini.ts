@@ -336,8 +336,8 @@ export async function readCassini(buf: ArrayBuffer): Promise<ReadResult> {
 		});
 	}
 
-	// v1 inlines a single transcript. v2 and v3 index them and put each body in
-	// its own chunk set.
+	// The private drafts inlined a single transcript. The published format
+	// indexes them and puts each body in its own chunk set.
 	if (manifest.transcript?.items) {
 		return {
 			classification: main.verified === false ? 'damaged-metadata' : 'cassini',

@@ -17,7 +17,7 @@ tools/cassini-read-pure.py.
 Usage:
   cassini-extract.py FILE                 # print the manifest as JSON
   cassini-extract.py FILE --tags          # print the raw Cassini descriptor tags
-  cassini-extract.py FILE --list          # list transcript ids in a v2/v3 file
+  cassini-extract.py FILE --list          # list transcript ids in a file
   cassini-extract.py FILE --transcript    # print the DEFAULT transcript body
   cassini-extract.py FILE --transcript ID # print one transcript body as JSON
   cassini-extract.py FILE --check         # decode and verify every chunk set
