@@ -37,6 +37,7 @@ for w in re.findall(r"warning=([^\n]*)", text):
     code = ("audio-digest-mismatch" if "sha256 mismatch:" in w else
             "tag-manifest-disagreement" if "between manifest and tag" in w else
             "audio-shape-mismatch" if ("sample count mismatch" in w or "duration mismatch" in w) else
+            "duplicate-tag" if "repeated tag" in w else
             "payload-sha256-mismatch" if "payload sha256 mismatch" in w else
             "base64-invalid" if "illegal base64" in w else
             "unsupported-version" if "unsupported CASSINI_FORMAT" in w else "reader-warning")
@@ -73,9 +74,8 @@ if obs["classification"] == "cassini":
     t = subprocess.run([BIN, "inspect", "--transcript", sys.argv[1]],
                        capture_output=True, text=True)
     if "failed:" in (t.stdout + t.stderr):
+        # The body is unavailable; the file keeps the state inspect printed.
         msg = (t.stdout + t.stderr).strip()
-        obs["classification"] = "damaged-metadata"
-        obs["payloadTrust"] = "unverified"
         obs["errors"].append({
             "code": ("chunk-missing" if "missing transcript chunk" in msg else
                      "base64-invalid" if "illegal base64" in msg else "decode-failed"),

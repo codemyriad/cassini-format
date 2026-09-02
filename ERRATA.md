@@ -23,11 +23,12 @@ whoever called the reader. Three gaps:
   byte-range request before the audio has been downloaded. It says
   **unverified** where it presents the metadata, which is what makes that
   conforming.
-* `cassini inspect` calls the whole file `invalid-cassini-metadata` when a
-  transcript body is missing a chunk. [Resolving a
+* `cassini inspect` called the whole file `invalid-cassini-metadata` when a
+  transcript body was missing a chunk. [Resolving a
   transcript](SPEC.md#resolving-a-transcript) makes that transcript
-  unavailable and leaves the file's state alone. Conformance vector 006 is
-  that case; it is the one vector the Go reader fails.
+  unavailable and leaves the file's state alone. Fixed in
+  [gocassini#236](https://github.com/codemyriad/gocassini/pull/236), with the
+  `scripted` role and the id grammar; until it merges, vector 006 fails.
 
 ## Nothing bounds the decompression
 

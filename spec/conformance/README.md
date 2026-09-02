@@ -58,7 +58,7 @@ descriptors need not, and that is the whole argument for writing them first.
 tools/cassini-extract.py            14 pass,  6 warn, 0 fail, 2 skip
 tools/cassini-extract.py + digest   16 pass,  6 warn, 0 fail, 0 skip
 tools/cassini-read.js               17 pass,  3 warn, 0 fail, 2 skip
-cassini inspect (gocassini #234)    12 pass,  9 warn, 1 fail, 0 skip
+cassini inspect (gocassini #236)    16 pass,  6 warn, 0 fail, 0 skip
 ```
 
 A warning is a vector where the reader reported a different error code than the
