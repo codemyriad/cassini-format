@@ -157,6 +157,13 @@
 		timeMs = fraction * duration;
 	}
 
+	function seekBy(deltaMs: number) {
+		if (!audio || !duration) return;
+		const next = Math.min(duration, Math.max(0, timeMs + deltaMs));
+		audio.currentTime = next / 1000;
+		timeMs = next;
+	}
+
 	function onScrub(event: MouseEvent) {
 		const bar = event.currentTarget as HTMLElement;
 		const rect = bar.getBoundingClientRect();
@@ -199,12 +206,28 @@
 		}
 	}
 
+	const SEEK_STEP_MS = 5000;
+
 	function onKey(event: KeyboardEvent) {
 		const tag = (event.target as HTMLElement)?.tagName;
-		if (tag === 'INPUT' || tag === 'BUTTON') return;
+		if (tag === 'INPUT') return;
 		if (event.key === ' ') {
+			// A focused button already has its own Space activation (play, jump
+			// to a word, toggle fullscreen); running toggle() as well would
+			// double it. Arrow keys have no such native behaviour on a <button>,
+			// so they are not guarded the same way — that guard is what made
+			// scrubbing silently stop working after clicking anything.
+			if (tag === 'BUTTON') return;
 			event.preventDefault();
 			toggle();
+			return;
+		}
+		if (event.key === 'ArrowRight') {
+			event.preventDefault();
+			seekBy(SEEK_STEP_MS);
+		} else if (event.key === 'ArrowLeft') {
+			event.preventDefault();
+			seekBy(-SEEK_STEP_MS);
 		}
 	}
 
@@ -225,8 +248,8 @@
 <svelte:window on:keydown={onKey} />
 
 <div class="shell wrap">
-	<p class="eyebrow eyebrow--plain">Beyond meeting transcriptions</p>
-	<h1>The Element Song by Tom Lehrer, annotated with its text, all in a single .ogg file.</h1>
+	<p class="eyebrow eyebrow--plain">The Element Song by Tom Lehrer, annotated with its text, all in a single .ogg file.</p>
+	<h1>Beyond meeting transcriptions</h1>
 </div>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -292,7 +315,9 @@
 			{#if playing}❚❚{:else}▶{/if}
 		</button>
 		<span class="t">{clock(timeMs)}</span>
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- Arrow keys are handled by the page-level listener (svelte:window),
+		     which fires for a keydown here too since it bubbles. A second
+		     handler on this element would double-step when it has focus. -->
 		<div
 			class="bar"
 			role="slider"
@@ -302,10 +327,6 @@
 			aria-valuemax={100}
 			aria-valuenow={Math.round(progress * 100)}
 			onclick={onScrub}
-			onkeydown={(e) => {
-				if (e.key === 'ArrowRight') seekTo(Math.min(1, progress + 0.02));
-				if (e.key === 'ArrowLeft') seekTo(Math.max(0, progress - 0.02));
-			}}
 		>
 			<div class="bar__fill" style="width: {progress * 100}%"></div>
 		</div>
@@ -358,29 +379,12 @@
 </div>
 
 <div class="shell wrap wrap--after">
-	<div class="meta">
+	<div class="meta meta--single">
 		<div>
 			<p class="eyebrow eyebrow--plain">Playing</p>
 			<p class="m">
 				<strong>{result?.manifest?.meeting?.title ?? sourceName}</strong><br />
 				<span class="dim">{sourceName}</span>
-			</p>
-		</div>
-		<div>
-			<p class="eyebrow eyebrow--plain">Trust state</p>
-			<p class="m">
-				<code>{result?.state ?? '—'}</code><br />
-				<span class="dim">
-					This page never reads the audio bytes, so <code>unverified</code> is the best state it
-					may report.
-				</span>
-			</p>
-		</div>
-		<div>
-			<p class="eyebrow eyebrow--plain">Words</p>
-			<p class="m">
-				<strong>{timeline.length}</strong><br />
-				<span class="dim">each with a start and an end in milliseconds</span>
 			</p>
 		</div>
 	</div>
@@ -425,10 +429,18 @@
 	/* Fullscreen shows only this element's subtree at viewport size, so the
 	   words get to use the height a nav bar and footer would otherwise take. */
 	.stage.is-fullscreen {
+		/* The UA's own :fullscreen stylesheet is supposed to pin this element to
+		   the viewport, but it is a normal-priority rule, not an !important one,
+		   and how faithfully it is applied varies by browser. Setting the
+		   positioning explicitly, rather than trusting that, is what actually
+		   keeps the transport bar on screen instead of pushed past the fold. */
+		position: fixed;
+		inset: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		height: 100dvh;
+		width: 100vw;
 	}
 	.stage.is-fullscreen .stage__in {
 		flex: 1;
@@ -615,6 +627,12 @@
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.5rem;
 		margin-bottom: 2rem;
+	}
+	/* One block left (what's playing): a 3-column track would strand it in a
+	   narrow third of the row with dead space alongside. */
+	.meta--single {
+		grid-template-columns: minmax(0, 1fr);
+		max-width: 32ch;
 	}
 	@media (max-width: 700px) {
 		.meta {
