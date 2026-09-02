@@ -18,8 +18,8 @@ const siteContent = contentSource;
 /**
  * The whole specification as one document, for handing to a model in one paste.
  *
- * Order matters: the errata come before SPEC.md, because SPEC.md is stale in
- * places and a reader written from it alone rejects every file made today.
+ * Order matters: the errata come before SPEC.md, because they record where
+ * the reference implementations lag the rules.
  */
 export async function GET() {
 
@@ -40,39 +40,10 @@ you can download and check against.
 
 HOW TO USE IT
 
-Read the ERRATA section first. The specification document is stale in several
-places, and an implementation written from it alone will reject every file
-written today. Where the document and a real file disagree, the file wins.
-
-WHAT THIS FORMAT INHERITS RATHER THAN REDEFINES
-
-  Ogg page layout .......... RFC 3533 section 6
-  Ogg page CRC ............. RFC 3533 section 6.2.6: CRC-32, polynomial
-                             0x04C11DB7, init 0, no input or output reflection,
-                             no final XOR. Computed over the ENTIRE page, header
-                             and body, with the 4-byte CRC field itself (at
-                             offset 22, little-endian) set to zero for the
-                             computation
-  Opus packet TOC and frame
-    count, for deriving a
-    packet's duration ...... RFC 6716 section 3.1. The result is a count of
-                             samples at Opus's fixed 48 kHz clock, which is the
-                             unit everything else here uses: a 20 ms packet is
-                             960 samples. Frame sizes are 2.5/5/10/20/40/60 ms
-                             and a packet holds at most 120 ms
-  Ogg Opus, OpusHead,
-    OpusTags ............... RFC 7845 sections 5.1 and 5.2. Note 5.2: a reader
-                             MAY ignore comments not fully contained in the
-                             first 61,440 octets of the comment header
-  Vorbis comment vector .... the Vorbis I specification, section 5. Field names
-                             are case-insensitive and are NOT unique
-  base64url ................ RFC 4648 section 5, written without padding
-  gzip ..................... RFC 1952
-  SHA-256 .................. FIPS 180-4
-  JSON Schema .............. draft 2020-12
-
-Nothing here restates those. If a rule is not written down in this document, it
-comes from one of them.
+The specification is the rule. The errata record where the reference
+implementations still lag it and a few facts about real files. The standards
+this format inherits, and which sections, are listed at the top of the
+specification; nothing here restates them.
 
 A REAL FILE TO CHECK AGAINST
 

@@ -194,9 +194,10 @@ Three things the Vorbis comment format leaves open, pinned down here:
   comment under the canonical one.
 - **A name MAY repeat, and Cassini never repeats one.** Producers MUST NOT
   write a `CASSINI_*` name twice. A consumer that sees a repeat of a
-  load-bearing tag (a chunk, a digest, a count, `CASSINI_FORMAT`) MUST report
-  `invalid-cassini-metadata` rather than pick one. For a mirror tag it SHOULD
-  use the manifest's value and report the repeat.
+  load-bearing tag MUST report `invalid-cassini-metadata` rather than pick one.
+  Load-bearing means `CASSINI_FORMAT` and every `CASSINI_PAYLOAD_*` and
+  `CASSINI_TX_*` tag. For any other `CASSINI_*` tag it SHOULD use the
+  manifest's value and report the repeat.
 
 `ENCODER` and the vendor string belong to the muxer, not the producer. ffmpeg
 writes `encoder=Lavf<version>` whatever it was asked for.
@@ -521,8 +522,9 @@ Each entry in `transcripts[]` and `readableTranscripts[]`:
 `scripted` is the odd one. Some recordings are performances of words that
 already existed: a song's lyrics, a read script. That text is not a
 transcription; it is what the audio is a performance of, so it is authoritative
-rather than derived. A consumer SHOULD prefer a `scripted` entry over a
-`raw-asr` one when both exist. One is the words; the other is a guess at them.
+rather than derived. A producer that writes both SHOULD flag the `scripted`
+entry as the default. One is the words; the other is a guess at them. The
+consumer's resolution rule below does not change.
 
 The body of every entry is
 [`spec/cassini-words-v1.md`](spec/cassini-words-v1.md). The media type is
@@ -609,7 +611,9 @@ manifest wins.
 
 An entry whose chunk set is missing or fails its checks makes that transcript
 unavailable, not the file. The other transcripts, the speakers and the meeting
-are still good. The consumer SHOULD say which transcript it could not load.
+are still good, and the trust state below is unaffected: it describes the
+manifest and the audio, not a body. The consumer MUST say which transcript it
+could not load, and `ok` with no transcript on screen is a legal outcome.
 
 ### Trust and integrity
 
@@ -636,6 +640,8 @@ visible to whoever called it. The names are normative.
 | `stale-audio` | readable, checked, does not match | opens it; keeps and shows the transcript; labels it; names the failed check |
 | `ok` | readable, checked, matches | opens it |
 
+Test them in table order; the first that applies is the state.
+
 #### `plain-audio`
 
 `CASSINI_FORMAT` is absent. The ordinary case for an ordinary `.opus`.
@@ -653,9 +659,13 @@ match, the decode fails, the digest does not match, the JSON does not parse,
 
 #### `unverified`
 
-The consumer did not check the audio: it has not read the audio bytes (a
-byte-range fetch, a tag tool), the file carries no digest, or the digest in the
-manifest and the one in the tags disagree so there is no single claim to check.
+The consumer did not check the audio, or could not. It has not read the audio
+bytes (a byte-range fetch, a tag tool); the file carries no digest; the digest
+in the manifest and the one in the tags disagree, so there is no single claim
+to check; the digest parser rejected the stream (a page CRC failure, a sequence
+gap, a chained or multiplexed stream, a missing end-of-stream flag); or
+`integrity` carries a member this consumer does not recognise, so it cannot
+know what a match would mean. In each case the consumer SHOULD say why.
 
 A consumer that never verifies audio is conforming, and MUST report `unverified`
 rather than `ok`. Claiming a check you did not run is the one thing this section
