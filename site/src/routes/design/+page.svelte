@@ -5,16 +5,15 @@
 
 <svelte:head>
 	<title>Design notes — Cassini format</title>
-	<meta name="description" content="Why the format is shaped this way: the proposals, the research, and the arguments that produced it." />
+	<meta name="description" content="The measurements and arguments behind the parts of the spec that are not obvious." />
 </svelte:head>
 
 <div class="shell wrap">
 	<p class="eyebrow eyebrow--plain">Design notes</p>
-	<h1>The arguments that produced the format.</h1>
+	<h1>Why the format is shaped this way.</h1>
 	<p class="lede">
-		A spec tells you what to write; these tell you why. Working documents, kept as written, dates
-		and all, and not normative: where one disagrees with the spec, the spec wins, and the
-		disagreement is worth reporting.
+		The measurements and arguments behind the parts of the spec that are not obvious. Not
+		normative: where a note and the spec disagree, the spec wins.
 	</p>
 
 	<ol class="list">

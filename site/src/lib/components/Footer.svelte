@@ -26,6 +26,7 @@
 					<li><a href="{base}/consume/">Read a file</a></li>
 					<li><a href="{base}/produce/">Write a file</a></li>
 					<li><a href="{base}/design/">Design notes</a></li>
+					<li><a href="{base}/demo/">Karaoke demo</a></li>
 					<li><a href="{base}/llms-full.txt">The whole spec in one file</a></li>
 					<li><a href={site.implRepo} rel="noreferrer">gocassini — reference implementation</a></li>
 					<li><a href={site.repo} rel="noreferrer">This spec on GitHub</a></li>
@@ -34,12 +35,9 @@
 			<div class="status">
 				<p class="eyebrow eyebrow--plain">Status</p>
 				<p>
-					Version 1, published 2026-09-02. Every meeting gocassini records is written this way,
-					and the wire strings in <code>{site.formatId}</code> are stable.
-				</p>
-				<p>
-					One implementation is not an ecosystem.
-					<a href="{base}/status/">What is open</a>
+					Version 1, published 2026-09-02. The wire strings in <code>{site.formatId}</code> are
+					stable. gocassini is the only producer so far.
+					<a href="{base}/status/">Status</a>
 				</p>
 			</div>
 		</div>

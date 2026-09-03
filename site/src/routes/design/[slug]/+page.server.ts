@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import { renderMarkdownFile } from '$lib/markdown';
-import { listDesignDocs } from '$lib/docs';
+import { renderMarkdown } from '$lib/markdown';
+import { listDesignDocs, readRepoFile, stripDocHeader } from '$lib/docs';
 import { site } from '$lib/site';
 
 export async function entries() {
@@ -12,9 +12,11 @@ export async function load({ params }) {
 	const doc = docs.find((d) => d.slug === params.slug);
 	if (!doc) throw error(404, 'No such design note');
 
-	const rendered = await renderMarkdownFile(doc.file);
+	const { title, body } = stripDocHeader(await readRepoFile(doc.file));
+	const rendered = await renderMarkdown(body, doc.file);
 	return {
-		title: rendered.title || doc.title,
+		title: title || doc.title,
+		blurb: doc.blurb,
 		date: doc.date,
 		html: rendered.html,
 		headings: rendered.headings,

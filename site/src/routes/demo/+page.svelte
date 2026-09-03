@@ -228,6 +228,16 @@
 		} else if (event.key === 'ArrowLeft') {
 			event.preventDefault();
 			seekBy(-SEEK_STEP_MS);
+		} else if (
+			event.key.toLowerCase() === 'f' &&
+			!event.ctrlKey &&
+			!event.metaKey &&
+			!event.altKey
+		) {
+			// Plain f, not Ctrl/Cmd+F: that combination is the browser's own
+			// find-on-page shortcut and must reach it untouched.
+			event.preventDefault();
+			toggleFullscreen();
 		}
 	}
 

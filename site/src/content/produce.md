@@ -1,5 +1,4 @@
-The audio is ordinary Ogg Opus, so the only real work is building the tags. What
-follows is what a real file contains, measured rather than quoted.
+The audio is ordinary Ogg Opus, so the only real work is building the tags.
 
 If you would rather read code, there is [a complete producer in
 standard-library Python](#a-complete-producer).
@@ -8,7 +7,7 @@ standard-library Python](#a-complete-producer).
 
 An Ogg Opus file at 48 kHz, mono for speech, with two things in its OpusTags
 comment header: plain comments a human can read, and a JSON manifest gzipped,
-base64url-encoded and cut into numbered pieces. Nothing else.
+base64url-encoded and cut into numbered pieces.
 
 ## Requirements
 
@@ -52,8 +51,7 @@ base64url-encoded and cut into numbered pieces. Nothing else.
    [the specification](/spec/v1/#cassini-descriptor-tags).
 
 4. Build the payload in this order: compact UTF-8 JSON, gzip, base64url
-   **without padding**, split. Getting the order wrong is the commonest way to
-   produce a file nothing can read.
+   **without padding**, split.
 
 5. Chunks **MUST** be `CASSINI_PAYLOAD_NNN`, zero-padded to a *minimum* of
    three digits, from `000`, joined by index with no separator, exactly
@@ -105,7 +103,7 @@ base64url-encoded and cut into numbered pieces. Nothing else.
     outside the window. Nothing truncates in practice: `ffmpeg -c copy`, a remux
     to `.ogg` and a mutagen round-trip all preserve every comment on a 307 KB
     header. The descriptor block is about 1,388 bytes, so writing it first costs
-    nothing and a new producer may as well.
+    nothing.
 
 13. Verify your own output before shipping it: read it back, recompute both
     digests, refuse to publish a mismatch. The producer is the right place for
@@ -122,12 +120,10 @@ Not required. All of it is what the reference producer does.
   the payload. They cost nothing and they are what somebody sees on right-click.
 
 * **Do not bother with `ENCODER`.** The producer sets `Cassini`, ffmpeg's Ogg
-  muxer overwrites it with `encoder=Lavf…`. So nothing in a Cassini file records
-  which program wrote it, which is the omission I would most like back.
+  muxer overwrites it with `encoder=Lavf…`, so nothing in a Cassini file records
+  which program wrote it.
 
-* **Write a summary tag only when you have a value.** An empty
-  `CASSINI_ROOM_ID` reads as "this meeting has a room whose id is the empty
-  string". Absent, never empty.
+* **Write a summary tag only when you have a value.** Absent, never empty.
 
 * **Never put a room token, join link or internal service URL in a tag.** These
   files get mailed to people. The reference producer derives a one-way
@@ -144,9 +140,8 @@ standard library. No ffmpeg, no Go. It walks the Ogg pages, computes the digest,
 builds the manifest, and rewrites only the `OpusTags` packet, copying every audio
 page across untouched and patching the page sequence numbers and CRCs.
 
-That is easier than what the reference implementation does. Since the digest
-excludes `OpusTags` *and* all Ogg framing, tagging provably cannot change it, so
-there is no hash-tag-rehash loop. Compute it once.
+The digest excludes `OpusTags` and all Ogg framing, so tagging cannot change
+it: compute it once.
 
 `tools/cassini-opus-digest.py` computes `exact-opus-audio-v1` from
 [the digest spec](/spec/audio-integrity/) alone. Run it against the file the
@@ -170,9 +165,8 @@ ffprobe -v error -show_entries stream_tags=CASSINI_AUDIO_OPUS_SHA256 \
 8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc
 ```
 
-Two implementations that never saw each other's code, two languages, the same 64
-characters over 11,986 packets. That is the only evidence I have that the digest
-rule is written down properly, and it is worth more than my opinion.
+Two implementations that never saw each other's code, in two languages, agree
+on all 64 characters over 11,986 packets.
 
 ## Checking your work
 

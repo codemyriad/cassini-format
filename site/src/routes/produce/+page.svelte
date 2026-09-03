@@ -5,13 +5,13 @@
 
 <svelte:head>
 	<title>Writing a Cassini file — Cassini format</title>
-	<meta name="description" content="What a producer must write to make a valid Cassini portable meeting file, with a complete reference producer in stdlib Python." />
+	<meta name="description" content="How to embed a word-timed transcript in an Ogg Opus audio file: the requirements for a valid Cassini file, with a complete producer in stdlib Python." />
 </svelte:head>
 
 <Doc
 	title="Writing a Cassini file"
 	kicker="Guide · producers"
-	lede="What a producer has to get right, as requirements you can check off, then the conventions that are merely a good idea."
+	lede="The requirements, then the conventions."
 	html={data.html}
 	headings={data.headings}
 />

@@ -823,7 +823,9 @@ work well, and it decodes from a shell. A denser profile would be a new
 **Rejected alternatives.** A ZIP-like package: not playable in ordinary players.
 MP4/M4A: Ogg/OpusTags is easier to inspect from the command line. WebM: less
 obviously "just an audio file". Raw JSON in tags: bloat for no gain at this
-size.
+size. A sidecar transcript file, as Podcasting 2.0 and the CTM/RTTM formats do:
+more flexible, but a file that is mailed, moved to a phone or dropped in a chat
+arrives alone, and the transcript is gone.
 
 ### Why `.meeting` is not a contract
 

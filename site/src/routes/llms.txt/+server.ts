@@ -32,7 +32,7 @@ It is this whole specification flattened into one document.
 
 - [Reading a file](${origin}/consume/): the eight steps, and every behaviour a reader has to decide
 - [Writing a file](${origin}/produce/): numbered requirements, then conventions
-- [Design notes](${origin}/design/): why it is shaped this way
+- [Design notes](${origin}/design/): the measurements behind the non-obvious parts
 - [Status](${origin}/status/): version 1, published 2026-09-02; what is still open
 
 ## Schemas

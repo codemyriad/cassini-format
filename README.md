@@ -20,7 +20,7 @@ built from this repository.
   standard library only, meant to be copied.
 * [`site/`](site/): the website, and under `site/static/demo/` a real file to
   check against.
-* [`design/`](design/): the notes the decisions were made from. Historical.
+* [`design/`](design/): the measurements and arguments behind the non-obvious parts. Some files are historical and not published on the site.
 * [`LICENSE.md`](LICENSE.md): CC-BY-4.0 prose, CC0 everything an implementer
   copies.
 

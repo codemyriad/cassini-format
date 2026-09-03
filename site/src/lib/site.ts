@@ -1,6 +1,6 @@
 /**
  * One place for the strings that appear on every page. The wire name is
- * CASSINI and stays CASSINI (design/naming.md); keeping it here means the
+ * CASSINI and stays CASSINI; keeping it here means the
  * whole site moves together if that ever changes.
  */
 export const site = {
@@ -14,7 +14,7 @@ export const site = {
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:
-		'An ordinary .opus audio file that carries its own word-timestamped transcript, speakers and provenance in its OpusTags.'
+		'An open file format for audio with embedded text: an ordinary .opus file that carries its own word-timestamped transcript, speaker labels and provenance in its OpusTags. For meeting recordings, podcasts and lyrics alike.'
 };
 
 export const versions = [

@@ -62,8 +62,8 @@
 
 		{#if source}
 			<p class="src">
-				This page is rendered from <a href={sourceHref} rel="noreferrer"><code>{source}</code></a> in
-				the specification repository. If the two ever disagree, the file wins.
+				Rendered from <a href={sourceHref} rel="noreferrer"><code>{source}</code></a> in the
+				repository.
 			</p>
 		{/if}
 	</article>

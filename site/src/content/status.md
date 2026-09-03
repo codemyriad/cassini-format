@@ -1,6 +1,19 @@
-Version 1 of the format was published on 2026-09-02. Every meeting gocassini
-records is written this way and the files are in people's hands. Nothing here is
-a plan.
+We built [gocassini](https://github.com/codemyriad/gocassini) to record and
+transcribe Nextcloud Talk calls, and found that a single audio file carrying
+its own timed transcript was more useful than a recording plus a sidecar. This
+site publishes that format so anyone can use it. Version 1 was published on
+2026-09-02.
+
+## Who uses it
+
+gocassini, internally. Every meeting it records is written this way. That is
+the only producer and, apart from the readers in this repository, the only
+consumer. The format is published so that other things can be built on it: a
+transcript viewer for meetings, a podcast with its transcript embedded, or
+[a song with its synchronized lyrics in the audio file](/demo/).
+
+If you build something that reads or writes these files, or try to and hit a
+wall, please [open an issue](https://github.com/codemyriad/cassini-format/issues).
 
 ## Stable
 
@@ -19,24 +32,3 @@ by one reader, none of them yet bounds the decompression against the declared
 is where each of those shows up as a warning, and it is the thing to run against
 your own reader. The gocassini change that writes `version: 1` and the
 `scripted` role is an open pull request.
-
-## Open
-
-**A second implementation.** There isn't one. One implementation is not an
-ecosystem, and most of why this site exists is to find out whether that can
-change. The name question was settled: the format keeps the product's name, for
-the reason SQLite's file format keeps its.
-[The argument in full](/design/naming/).
-
-**What a second implementation would need.** I do not know, because there isn't
-one. The honest answer to "who else implements this" is nobody, and one
-implementation is not an ecosystem. Most of why this repository exists is to find
-out whether that can change.
-
-If you have built something that reads or writes these files, or tried to and hit
-a wall, I would like to hear about it. The walls are more useful.
-
-## The full arguments
-
-The [design notes](/design/) carry them, dates and all. The
-[freeze list](/design/format-freeze-2026-08-28/) is the complete inventory.

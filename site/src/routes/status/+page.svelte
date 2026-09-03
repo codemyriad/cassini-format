@@ -5,13 +5,12 @@
 
 <svelte:head>
 	<title>Status — Cassini format</title>
-	<meta name="description" content="What is stable in the format, what is still moving, and what is not written down yet." />
+	<meta name="description" content="Where the format comes from, who uses it, what is stable and what the software still owes the spec." />
 </svelte:head>
 
 <Doc
-	title="Where the format actually stands"
+	title="Status"
 	kicker="Status · 2026-09-02"
-	lede="Version 1, published. What is stable, what the reference implementations still owe it, and what is open."
 	html={data.html}
 	headings={data.headings}
 />

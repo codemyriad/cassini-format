@@ -12,8 +12,7 @@
 	<p class="eyebrow eyebrow--plain">Schemas</p>
 	<h1>Machine-readable, CC0, served from here.</h1>
 	<p class="lede">
-		Every schema in the repository, at a stable path, byte for byte the same file. Fetch one
-		directly; there is no API in front of it.
+		Every schema in the repository, at a stable path, byte for byte the same file.
 	</p>
 
 	<div class="schemas">
@@ -33,16 +32,10 @@
 	<div class="two">
 		<div>
 			<p>
-				Each schema declares its own identity as a URL under
-				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves the same bytes at
-				that path, so the <code>$id</code> resolves once the site is at that domain. A
-				<code>$ref</code> between schemas resolves against it, and every file written carries the
-				same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader holding only the file
-				can still find the schema it claims to follow.
-			</p>
-			<p>
-				That identity is a wire string. It is in the bytes of every file, so it is not something
-				to move casually.
+				Each schema's <code>$id</code> is its URL under
+				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves it there. Every
+				file carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader
+				holding only the file can find the schema it claims to follow.
 			</p>
 		</div>
 		<div class="code">

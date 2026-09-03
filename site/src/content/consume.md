@@ -1,5 +1,4 @@
-You have a `.opus` file and you want the transcript out of it. Everything you
-need is in the file.
+You have a `.opus` file and you want the transcript out of it.
 
 ## Is this one of those files?
 
@@ -12,7 +11,7 @@ ffprobe -v error -show_entries stream_tags=CASSINI_FORMAT \
 org.cassini.portable-meeting/1
 ```
 
-Nothing printed means ordinary audio. That is an answer, not an error.
+Nothing printed means ordinary audio.
 
 Two traps. Ogg carries comments on the *stream*, so `-show_entries format_tags`
 returns nothing. And `ffprobe` renames `DESCRIPTION` to `comment`.
@@ -61,19 +60,16 @@ ffprobe -v error -show_entries stream_tags -of json meeting.opus \
 
 ## Getting a model to write the reader
 
-Better than waiting for me to write one in your language.
 [`/llms-full.txt`](/llms-full.txt) is this whole specification in one 100 KB
 document: the spec, the body format, the digest contract, both guides, every
-schema, and the real tag dump of the file the front page links to. Hand it over,
-then check the result against [that file](/demo/lantern-festival.opus). If
-something written from the bundle gets it wrong, that is a bug in the bundle and
-I want to hear about it.
+schema, and the tag dump of the file the front page links to. Hand it over,
+then check the result against [that file](/demo/lantern-festival.opus).
 
 Then check it against the [conformance vectors](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance):
 22 files covering the edges, with a harness that takes a reader in any language.
 The three readers in this repository pass with no hard failures. The reference
 Go implementation fails one: a transcript body missing a chunk, which it treats
-as a broken file rather than a missing transcript. That is what a suite is for.
+as a broken file rather than a missing transcript.
 
 ## The algorithm
 
@@ -88,9 +84,7 @@ Eight steps, the same in every language.
    not required to be unique. Cassini never writes a name twice, so a repeat
    means something edited the file: if it is load-bearing — a chunk, a digest, a
    count, `CASSINI_FORMAT` — that is `invalid-cassini-metadata`, and if it is a
-   mirror tag, believe the manifest and say you saw it. Both current readers
-   assume names are unique and upper-case, and have got away with it because the
-   producer writes them that way.
+   mirror tag, believe the manifest and say you saw it.
 
 3. **Check `CASSINI_FORMAT`.** Absent means plain audio. Accept `/1`. A major
    version you do not implement means play the audio, never error on valid
@@ -121,7 +115,7 @@ Eight steps, the same in every language.
 8. **Ignore what you do not recognise.** A tag name or a manifest member you
    have never heard of is not an error, at any depth. The two exceptions are
    `integrity` and every `payloadRef`, where every member is an instruction and
-   an unknown one is a verification failure. The schemas now say exactly that.
+   an unknown one is a verification failure.
 
 ## In the browser, with no dependencies
 
@@ -129,9 +123,8 @@ Eight steps, the same in every language.
 the digests. The player on the front page is this module reading the file you can
 download.
 
-`tools/cassini-read.js` is that module, CC0, about 300 lines. It is generated
-from the site's own reader and the build fails if they drift, so the file you
-download is the one this page ran. `tools/cassini-read-pure.py` does the same in
+`tools/cassini-read.js` is that module, CC0, about 300 lines, generated from the
+site's own reader. `tools/cassini-read-pure.py` does the same in
 Python with no external tools, in about 110 lines, and only ever reads the front
 of the file — the same code works over an HTTP range request.
 
@@ -152,9 +145,7 @@ if (file.cassini) {
 claimed one, `false` disagreed. A manifest that disagrees is not shown at all;
 a transcript that disagrees comes back as `unavailable` with the reason.
 
-## Say which of the six states you ended in
-
-**Keep the transcript. Label it. Let the person decide.**
+## The six states
 
 Every read ends in exactly one of six states, and the names are part of the
 spec so that two readers describe one file the same way:
@@ -180,13 +171,9 @@ Three digests, three different consequences:
   life of one. Discarding the transcript here is the one thing a reader must
   not do.
 
-If you never verify the audio, you are still conforming — a reader that pulls
-only the front of the file over a range request cannot. Report `unverified` and
-mean it. The one thing the spec forbids outright is claiming a check you did not
-run.
-
-The digest catches accidents: a transcript reattached to the wrong audio, a
-corrupted payload, a truncated download. Not someone who wants to lie to you.
+If you never verify the audio, you are still conforming: a reader that pulls
+only the front of the file over a range request cannot. Report `unverified`.
+The one thing the spec forbids outright is claiming a check you did not run.
 
 ## Things that will trip you up
 
@@ -206,6 +193,5 @@ corrupted payload, a truncated download. Not someone who wants to lie to you.
   may not: on a long recording the tags that make the file decodable sit past
   that mark. Read the whole `OpusTags` packet, and over HTTP fetch more until
   you have it.
-* **The summary tags are an incomplete copy.** A file carries no
-  `CASSINI_WORD_COUNT`, no `CASSINI_TRANSCRIPT_LANGUAGE`, no `CASSINI_STT_*`,
-  whatever the spec says. Read the manifest.
+* **The summary tags are an incomplete copy.** Word count, language and the
+  speech-to-text engine are only in the manifest. Read the manifest.

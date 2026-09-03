@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { renderMarkdown, renderMarkdownFile } from '$lib/markdown';
+import { renderMarkdown } from '$lib/markdown';
 import { splitSpec, stripDocHeader, readRepoFile } from '$lib/docs';
 import { site } from '$lib/site';
 
@@ -25,7 +25,7 @@ const PAGES: Record<string, Page> = {
 	v1: {
 		title: 'Cassini portable meeting, version 1',
 		kicker: 'Specification · current',
-		lede: 'What a producer writes and a consumer reads: the container, the tags, the manifest, and what a reader owes the person in front of it. The whole document, rationale included.',
+		lede: 'The open specification for an Ogg Opus audio file with an embedded, word-timed transcript: the container, the tags, the manifest, and what a reader owes the person in front of it.',
 		source: 'SPEC.md',
 		meta: [
 			{ label: 'Wire id', value: 'org.cassini.portable-meeting/1' },
@@ -46,7 +46,7 @@ const PAGES: Record<string, Page> = {
 	'words-v1': {
 		title: 'The transcript body',
 		kicker: 'Specification · cassini.words.v1',
-		lede: 'Where the timestamps live: one item per word, pointing at a speaker. Each transcript in a file has its own chunk set carrying one of these.',
+		lede: 'The timed text: one item per word with word-level timestamps, pointing at a speaker. Each transcript in a file has its own chunk set carrying one of these.',
 		source: 'spec/cassini-words-v1.md',
 		meta: [
 			{ label: 'Format id', value: 'cassini.words.v1' },
@@ -84,7 +84,7 @@ export async function load({ params }) {
 				extraMeta.push(...meta);
 				return renderMarkdown(body, standalone);
 			})()
-		: await renderMarkdown(await page.markdown(), 'SPEC.md');
+		: await renderMarkdown(stripDocHeader(await page.markdown()).body, 'SPEC.md');
 
 	return {
 		slug: params.slug,

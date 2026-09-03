@@ -53,19 +53,17 @@ export function stripDocHeader(raw: string) {
 
 export type DesignDoc = { slug: string; file: string; title: string; date: string; blurb: string };
 
-/** Everything in design/, in the order the site wants to present it. */
-const DESIGN_ORDER = [
-	'public-page-draft-2026-08-28',
-	'research-brief-2026-03-17',
-	'proposal-multi-transcription-v2',
-	'operator-sealing',
-	'format-freeze-2026-08-28',
-	'naming'
-];
+/**
+ * The design notes the site publishes, in order. Other files in design/ are
+ * historical and stay in the repository only.
+ */
+const DESIGN_ORDER = ['packet-digest', 'multi-transcription', 'operator-sealing'];
 
 export async function listDesignDocs(): Promise<DesignDoc[]> {
 	const dir = path.join(REPO, 'design');
-	const files = (await readdir(dir)).filter((f) => f.endsWith('.md'));
+	const files = (await readdir(dir)).filter((f) =>
+		DESIGN_ORDER.includes(f.replace(/\.md$/, ''))
+	);
 	const docs = await Promise.all(
 		files.map(async (file) => {
 			const text = await readFile(path.join(dir, file), 'utf8');
@@ -81,11 +79,7 @@ export async function listDesignDocs(): Promise<DesignDoc[]> {
 			return { slug: file.slice(0, -3), file: `design/${file}`, title, date, blurb };
 		})
 	);
-	return docs.sort(
-		(a, b) =>
-			(DESIGN_ORDER.indexOf(a.slug) + 1 || 99) - (DESIGN_ORDER.indexOf(b.slug) + 1 || 99) ||
-			a.slug.localeCompare(b.slug)
-	);
+	return docs.sort((a, b) => DESIGN_ORDER.indexOf(a.slug) - DESIGN_ORDER.indexOf(b.slug));
 }
 
 export async function listSchemas() {

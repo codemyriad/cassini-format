@@ -13,8 +13,7 @@
 	<p class="eyebrow eyebrow--plain">Specification</p>
 	<h1>One published version.</h1>
 	<p class="lede">
-		Two shapes came before this one. Both were used only inside Cassini and neither was ever
-		published, so this is the first version anyone outside can implement.
+		Version 1 of the open specification for an audio file with an embedded, word-timed transcript.
 	</p>
 
 	<div class="grid vers">
@@ -22,10 +21,6 @@
 			<p class="tag">current</p>
 			<h2>v1</h2>
 			<p class="wire">org.cassini.portable-meeting/1</p>
-			<p>
-				Identity moved from decoded PCM to the compressed Opus packets. The old digest depended on
-				which decoder you linked, and so did a meeting's id.
-			</p>
 		</a>
 	</div>
 
@@ -48,26 +43,16 @@
 	</div>
 
 	<p class="eyebrow">Schemas</p>
-	<p class="lede">CC0, served from this site at the URL each one declares. Copy them into your project.</p>
-	<div class="schemas">
-		{#each data.schemas as s (s.file)}
-			<a href="{base}/schema/{s.file}">
-				<span class="f">{s.file}</span>
-				<span class="t">{s.title}</span>
-				<span class="b">{(s.bytes / 1024).toFixed(1)} KB</span>
-			</a>
-		{/each}
-	</div>
-	<p class="also">
-		Each schema's <code>$id</code> is its URL under <code>cassini-format.codemyriad.io</code>, and
-		<a href="{base}/schema/">this site serves it there</a>.
+	<p class="lede">
+		The manifest and transcript-body schemas are CC0 and
+		<a href="{base}/schema/">served from this site</a> at the URL each one declares.
 	</p>
 
 	<p class="eyebrow">Licence</p>
 	<p class="lede">
-		Prose CC BY 4.0; schemas, test vectors and example code CC0. The reference implementation stays
-		AGPL-3.0, deliberately a separate question: you can implement this without touching
-		<a href={site.implRepo} rel="noreferrer">gocassini</a> at all.
+		Prose CC BY 4.0; schemas, test vectors and example code CC0. The reference implementation,
+		<a href={site.implRepo} rel="noreferrer">gocassini</a>, is AGPL-3.0; you can implement the
+		format without touching it.
 	</p>
 </div>
 

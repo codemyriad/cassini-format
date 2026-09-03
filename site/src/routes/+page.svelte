@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>Cassini — an audio file that carries its own transcript</title>
+	<title>Cassini — an audio file format with the transcript embedded</title>
 	<meta name="description" content={site.description} />
 </svelte:head>
 
@@ -33,11 +33,10 @@
 
 	<p class="lede">
 		A Cassini file is a normal <code>.opus</code> recording: Ogg Opus at 48&nbsp;kHz, and any player
-		plays it. It also carries who spoke, what they said word by word with timestamps, and what
-		produced that text, in the same place <code>TITLE</code> and <code>ARTIST</code> live.
+		plays it. It also carries who spoke, what they said with word-level timestamps, and what
+		produced that text, embedded in the same place <code>TITLE</code> and <code>ARTIST</code> live.
+		One file format for audio and text, with no sidecar to lose.
 	</p>
-
-	<p class="lede">Nothing about it looks unusual until you go looking.</p>
 
 	<div class="hero__dump">
 		<TagDump
@@ -68,7 +67,7 @@
 			<h3>It degrades to audio</h3>
 			<p>
 				Understand nothing and you still play the recording. Understand the tags and you get
-				everything. The worst case is hearing a meeting without seeing the words.
+				everything.
 			</p>
 		</div>
 		<div class="cell">
@@ -85,7 +84,7 @@
 			<h3>The digest binds transcript to recording</h3>
 			<p>
 				A SHA-256 over the Opus packets, answering one question: is this transcript describing this
-				recording? It catches accidents, not adversaries. A join key, not a seal.
+				recording? It catches accidents, not adversaries.
 			</p>
 		</div>
 	</div>
@@ -96,7 +95,7 @@
 	<div class="two">
 		<div>
 			<p>
-				Two layers, on purpose. The first is plain tags any tool shows: title, date, speaker count,
+				Two layers. The first is plain tags any tool shows: title, date, speaker count,
 				the digests, and a decode hint explaining the second layer in one sentence. Someone with
 				<code>ffprobe</code> and no documentation should be able to work this out alone.
 			</p>
@@ -107,7 +106,7 @@
 			</p>
 			<p class="muted">
 				The <code>awk</code> line re-pads: the producer writes unpadded base64url and GNU
-				<code>basenc</code> demands padding. A real wart, written down rather than hidden.
+				<code>basenc</code> demands padding.
 			</p>
 		</div>
 		<div class="code">
@@ -137,7 +136,7 @@
 		download, walks its Ogg pages in JavaScript, reassembles the chunks, inflates them with
 		<code>DecompressionStream</code>, checks the manifest and transcript digests, and plays. The audio
 		digest is not checked in the browser, so the reader says <code>unverified</code>, as the spec
-		requires. If the format works, this works.
+		requires.
 	</p>
 	<p class="muted">
 		The words are the script the voices read, so the transcript's role is <code>scripted</code>.
@@ -151,38 +150,37 @@
 </section>
 
 <section class="shell band">
-	<p class="eyebrow">Who writes and reads these</p>
+	<p class="eyebrow">Where it comes from</p>
 	<div class="grid grid--2">
 		<div class="cell">
 			<h3>gocassini</h3>
 			<p>
-				The reference implementation: records Nextcloud Talk calls, transcribes, packs. Producer and
-				reader, AGPL-3.0.
+				We built gocassini to record and transcribe Nextcloud Talk calls, and it writes every meeting
+				this way. It is the reference producer and reader, AGPL-3.0, and so far the only one in use.
 			</p>
 			<p><a href={site.implRepo} rel="noreferrer">github.com/codemyriad/gocassini ↗</a></p>
 		</div>
 		<div class="cell">
-			<h3>Three readers and a producer, in this repo</h3>
+			<h3>Published so you can use it too</h3>
 			<p>
-				A Python extractor over <code>ffprobe</code>, one that needs no external tools at all, a
-				browser reader with no dependencies, and a complete producer in stdlib Python. All CC0. The
-				producer exists because a spec you cannot implement from is not a spec.
+				This repository has three readers and a complete producer, all CC0: a Python extractor over
+				<code>ffprobe</code>, one with no external tools, a browser reader with no dependencies, and a
+				producer in stdlib Python. The same format carries
+				<a href="{base}/demo/">a song with synchronized lyrics in one audio file</a> as easily as
+				a meeting.
 			</p>
 			<p>
 				<a href="{base}/consume/">Read one</a> · <a href="{base}/produce/">Write one</a> ·
-				<a href="{base}/llms-full.txt">the whole spec in one file</a>
+				<a href="{base}/llms-full.txt">the whole spec in one file</a> ·
+				<a href="{base}/status/">status</a>
 			</p>
 		</div>
 	</div>
-	<p class="muted honest">
-		The honest answer to "who else implements this" is nobody. If you build something that reads or
-		writes these files, I would like to hear about it.
-	</p>
 </section>
 
 <section class="shell band">
 	<p class="eyebrow">What it costs</p>
-	<div class="grid grid--3 stats">
+	<div class="grid grid--2 stats">
 		<div>
 			<p class="stat">{pct}%</p>
 			<p class="statlab">
@@ -196,20 +194,11 @@
 				{data.demo.commentCount} Vorbis comments.
 			</p>
 		</div>
-		<div>
-			<p class="stat">0</p>
-			<p class="statlab">
-				new extensions, outer media types or codecs. The file is <code>audio/ogg</code> and stays
-				that. The two JSON bodies inside carry their own <code>application/vnd.cassini.*+json</code>
-				names.
-			</p>
-		</div>
 	</div>
 </section>
 
 <section class="shell band">
 	<p class="eyebrow">What it doesn't do</p>
-	<p class="lede">Writing these down saves every implementer a wrong guess.</p>
 	<div class="grid grid--2">
 		<div class="cell">
 			<h3>It doesn't model transcript history</h3>
@@ -234,8 +223,8 @@
 		<div class="cell">
 			<h3>It doesn't claim a name of its own</h3>
 			<p>
-				No new extension, media type or magic bytes. It has to keep working in software that will
-				never be updated for it.
+				No new extension, media type or magic bytes: the file is <code>audio/ogg</code>. It has to
+				keep working in software that will never be updated for it.
 			</p>
 		</div>
 	</div>
@@ -341,12 +330,6 @@
 	.muted {
 		color: var(--fg-4);
 		font-size: 13px;
-	}
-	.honest {
-		margin-top: 1.5rem;
-		border-left: 2px solid var(--amber-rule);
-		padding-left: 1rem;
-		max-width: 68ch;
 	}
 
 	.cell .n {

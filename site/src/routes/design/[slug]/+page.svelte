@@ -6,6 +6,7 @@
 
 <svelte:head>
 	<title>{data.title} — Cassini format</title>
+	<meta name="description" content={data.blurb} />
 </svelte:head>
 
 <Doc
@@ -19,8 +20,7 @@
 >
 	{#snippet banner()}
 		<p class="hist">
-			A working document, kept as written. It is not the specification: where it and
-			<a href="{base}/spec/v1/">the spec</a> disagree, the spec wins.
+			Not normative: where this and <a href="{base}/spec/v1/">the spec</a> disagree, the spec wins.
 		</p>
 	{/snippet}
 </Doc>
