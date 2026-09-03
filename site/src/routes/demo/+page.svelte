@@ -248,18 +248,22 @@
 </script>
 
 <svelte:head>
-	<title>Beyond meeting transcriptions — Cassini format</title>
+	<title>Karaoke demo — synchronized lyrics in one audio file</title>
 	<meta
 		name="description"
-		content="The Element Song by Tom Lehrer, annotated with its text, all in a single .ogg file."
+		content="The Element Song by Tom Lehrer with word-timed lyrics embedded in a single Ogg Opus file, read and played in the browser."
 	/>
 </svelte:head>
 
 <svelte:window on:keydown={onKey} />
 
 <div class="shell wrap">
-	<p class="eyebrow eyebrow--plain">The Element Song by Tom Lehrer, annotated with its text, all in a single .ogg file.</p>
-	<h1>Beyond meeting transcriptions</h1>
+	<p class="eyebrow eyebrow--plain">Karaoke demo</p>
+	<h1>The Element Song by Tom Lehrer, with its words, in a single <code>.ogg</code> file.</h1>
+	<p class="lede">
+		The tags that carry a meeting transcript carry lyrics with word-level timestamps just as well.
+		Any player plays the song; a player that reads the tags shows the words in time with it.
+	</p>
 </div>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
