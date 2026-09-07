@@ -30,7 +30,8 @@ writer never fills. Multiple transcripts, display documents, summaries and
 processing provenance remain.
 
 The [Cassini follow-up](https://github.com/codemyriad/gocassini/pull/276)
-updates the Go packer and inspector, browser viewer and static exporter to
+was merged to main as [`4c7f8bd`](https://github.com/codemyriad/gocassini/commit/4c7f8bda30e9fc4f652f98ed31554734cb5c1b87).
+The Go packer and inspector, browser viewer and static exporter now
 accept both simplified entries and old origin labels. The readers and demos
 on this site use the simplified contract. Earlier Cassini builds that require
 `role` need the follow-up before opening newly produced files; merging the

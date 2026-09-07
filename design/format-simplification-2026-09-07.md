@@ -6,7 +6,8 @@ Compared against fetched gocassini `origin/main`, commit
 [`e4856e9fac32c447d6c5e023681433319d7ea3c8`](https://github.com/codemyriad/gocassini/tree/e4856e9fac32c447d6c5e023681433319d7ea3c8).
 The local Cassini checkout was behind at `7774ed1`; it was not used as the
 comparison target. The matching implementation is
-[Cassini PR 276](https://github.com/codemyriad/gocassini/pull/276).
+[Cassini PR 276](https://github.com/codemyriad/gocassini/pull/276), merged to main
+as [`4c7f8bd`](https://github.com/codemyriad/gocassini/commit/4c7f8bda30e9fc4f652f98ed31554734cb5c1b87).
 
 The main simplification is to stop classifying the origin of word-timed text.
 The words, their body format, the selected default and optional processing
@@ -120,3 +121,7 @@ Those paths are included in the implementation and regression checks above.
 The final review confirmed those fixes and explicitly agreed to merge after CI,
 with no blocking defects. The review record is attached to
 [Cassini PR 276](https://github.com/codemyriad/gocassini/pull/276).
+
+All required Cassini CI checks passed before merge, including the installed
+ExApp Talk recording check. That check needed one retry after a Go module proxy
+download failed before the stack started; the unchanged commit passed.
