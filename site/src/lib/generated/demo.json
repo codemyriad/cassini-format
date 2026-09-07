@@ -1,6 +1,6 @@
 {
 	"generatedFrom": "lantern-festival.opus",
-	"bytes": 1898861,
+	"bytes": 1898851,
 	"audio": {
 		"codec": "opus",
 		"sampleRate": 48000,
@@ -60,11 +60,11 @@
 		"CASSINI_MEETING_ID": "mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
 		"CASSINI_PAYLOAD_CHUNK_COUNT": "1",
 		"CASSINI_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
-		"CASSINI_PAYLOAD_GZIP_BYTES": "1134",
+		"CASSINI_PAYLOAD_GZIP_BYTES": "1126",
 		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
-		"CASSINI_PAYLOAD_RAW_BYTES": "2133",
+		"CASSINI_PAYLOAD_RAW_BYTES": "2115",
 		"CASSINI_PAYLOAD_SCHEMA": "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json",
-		"CASSINI_PAYLOAD_SHA256": "a4d048386f81bd4b28143d847a2f65497f84c5228c42dd0006f5be3195d6f657",
+		"CASSINI_PAYLOAD_SHA256": "613360a835619f94c40162b1e2407653f9c4236be93e460c561c66dafd7065ef",
 		"CASSINI_PROCESSED_AT": "2026-04-15T09:12:00Z",
 		"CASSINI_PROFILE": "ogg-opus",
 		"CASSINI_RECORDED_AT_LOCAL": "2026-04-15T11:12:00",
@@ -84,7 +84,7 @@
 	},
 	"sampleChunkTag": {
 		"key": "CASSINI_PAYLOAD_000",
-		"value": "H4sIAAAAAAAC_61W227jNhD9lYFe2mItR5Jt-bJPTnYLpI13A9vbKwpjRI0srmVSICkn7iL_3iHtNA6Kon1YJA8a8nBmeObM0F-inVRlNIsEWiuVjFttHBYNxXsiJ9U26kUHMlZqFc3SXtQaXcmG-IDebmPddpYBz9DZl0h6X3u33UworcbD6VTk5agqcDIRg6KcFvmURDkoKS2SMVIiqiofpaNMTIeZGNF0muRZmaSiEOzWSRci3aFyZBR8T9bJAzZwrbWrYdmp2NVGd9uawcIQOirn7pMTfCZLsjxOhnE6WifTWZrNkuQ3RhkS2pQedqcFNq-BaXoCRuGagqz9T39lZ9AxNwsbzbLBdJwOnnoRdqXUngyhlUOpyJzo8lnqkry7M3EW921DS048mg0nSZIwokalqLGB7dP-je6UYzsdMTvDyb9ElUzS1kh39JH36ER9rxsp2IzoEYULxYpDbvEh5eDenntzVWM2yhn3FWr2NW9kW8Iday-a_X4Wlm13m700yIEaLMjXb8Em3NSkoqfeBaohfQG6Iw1LzQJ_DSr41Avomlhi0oqa6_UKhuoy4FwhLLTBhuxrmNJYX-A-sAn3TETzGva58ydfcD94Gz7usNIc9w-WvUFlhZGtu7x5WPAK1qEnTjaVXoNUYdcwnc501IvYDVf_paP7D6x42w8l959n7vN8-n-bpsVjo7FcUuWl1Rqq5COjb-ar1e2H2836l83qZnl7v97cz3-9-zh_t_FCrzu1O4cacCmfJVaIinIcp_5vNBxRleVDFpao8hwLzKskHRYiGw2Hoywfi8EIsyRPx1ORZjgR-cTf1-DD9dExh7PhaDIY96Ltn7I9r0ySKatpL_eeI2xbboCgq6uDKvvPhLwQHAdu3ny22guBFLdnmGNRgZbyYWeaN975m85VkwB68gV6DL19npcnuvu-sfdHI7Hsn3qfOXKdIf9ZoNiRKi-qFj_v-qBbnhAXA_jkENidhqKTTcly5Cuxf68WpRVBDEoDdweJOnY6dvTo4AEtmE4FPRykCB7bLuhMbTvc-oUgd6s7E7ZXR-VqHtwCztn02K0DhNOQZCIAVRnW5qsl6M61nevDuiYItAEaAvYA_D4UzPIerCCFRnJu4Z7wbY1G8Ri9et7gr1o_8E0pbk5DPa7OQ50F2vcUg1Sw1WcyvnsbAoShBdKywcycnbN0SyiO8KPeaaPjSbaA9XrVA0_QQTMD0JKB8wzpwV4-UgmlflB9WLyfrz4t37-bAaGowdJ2T8p9Y8E6NG5hr7haC9sDx0cVVEbvQxqGl8mQYSC7AT8pSm5e4IqdMzsF432WmNj14d375e1PIQ5zdAy0_TOKH9ym1Y3vRDasLAmks89pAb9F_lFmFWPTHMFp_vd5NSwdV_fhZ_YKTD8X7O-acI9q_mob7Kzk15yV5EIl94SWS12-9W4PXBUlKEyI9dkBs8xKkwUZP7qOgIX1SXBUi0ewun_5g4DfmR1tXvrpKuMOeXr6C_bTo1hVCAAA"
+		"value": "H4sIAAAAAAAC_61V227jNhD9lYFe2mItR5Jt-bJPTnYLpI13A9vbKwpjRI0srmVSICkn7iL_3iHtNA6Kon1Y2A8a8nBmeObM8Eu0k6qMZpFAa6WScauNw6KheE_kpNpGvehAxkqtolnai1qjK9kQH9DbbazbzjLgGTr7Eknva--2mwml1Xg4nYq8HFUFTiZiUJTTIp-SKAclpUUyRkpEVeWjdJSJ6TATI5pOkzwrk1QUgt066UKkO1SOjILvyTp5wAautXY1LDsVu9roblszWBhCR-XcfXKCz2RJlsfJME5H62Q6S7NZkvzGKENCm9LD7rTA5jUwTU_AKFxTkLX_6a_sDDrmZmGjWTaYjtPBUy_CrpTakyG0cigVmRNdPktdknd3Js7ivm1oyYlHs-EkSRJG1KgUNTawfdq_0Z1ybKcjZmc4-ZeokknaGumOPvIenajvdSMFmxE9onChWHHILT6kHNzbc2-uasxGOeO-Qs2-5o1sS7hj7UWz38_Csu1us5cGOVCDBfn6LdiEm5pU9NS7QDWkL0B3pGGpWeCvQQWfegFdE0tMWlFzvV7BUF0GnCuEhTbYkH0NUxrrC9wHNuGeiWhewz53_uQL7gdvw8cdVprj_sGyN6isMLJ1lzcPC15xVGHXMHnOdNSL-BDX-qV_-w-sb9sPBfafZ6bzfPp_W6TFY6OxXFLlhdQaquQjo2_mq9Xth9vN-pfN6mZ5e7_e3M9_vfs4f7fxsq47tTuHGnDhngVViIpyHKf-NxqOqMryIctIVHmOBeZVkg4LkY2Gw1GWj8VghFmSp-OpSDOciHxS-o7Fh-ujY8Zmw9FkMO5F2z9le16ZJFPWzl7u_ZTAtmW5BxVdHVTZfybkhc44cPPms9W-7KS4GcPUigq0lA8707zxzt90rpoE0JMvx2Po5PN0PNHd9228PxqJZf_U6cyR6wz5zwLFjtRLzaiMn3d90C3Pg4txe3II7E5D0cmmZPHxldi_14bSiiAGpYF7gUQdOx07enTwgBZMp4IeDlIEj20XVKW2HW79QhC31Z0J26ujcjWPaQHnbHrs1gHCaSQyEYCqDGvz1RJ059rO9WFdEwTaAA0BewB-DQpmeQ9WkEIjObdwT_i2RqN4aF49b_BXrR_4phQ3pxEeV-cRzgLte4pBKtjqMxnfvQ0BwogCadlgZs7OWbolFEf4Ue-00fEkW8B6veqBJ-igmQFoycB5YvRgLx-phFI_qD4s3s9Xn5bv382AUNRgabsn5b6xYB0at7BXXK2F7YHjowoqo_chDcPLZMgwkN2Anwsltypwxc6ZnYLxPktM7Prw7v3y9qcQhzk6Btr-GcWPadPqxnciG1aWBNLZ57SAXx7_BLOKsWmO4DT_fV4NS8fVffiZvQLTzwX7uybco5q_2gY7K_ntZiW5UMk9oeVSl2-92wNXRQkKE2J9dsAss9JkQcYPqiNgYX0SHNXiEazuXz7__KrsaPPST1cZd8jT019Q4ZNkQwgAAA"
 	},
 	"manifest": {
 		"kind": "cassini-portable-meeting",
@@ -143,7 +143,6 @@
 		"transcripts": [
 			{
 				"id": "script",
-				"role": "scripted",
 				"default": true,
 				"format": "cassini.words.v1",
 				"wordCount": 669,
@@ -173,11 +172,10 @@
 			}
 		}
 	},
-	"manifestBytes": 2133,
-	"manifestSha256": "a4d048386f81bd4b28143d847a2f65497f84c5228c42dd0006f5be3195d6f657",
+	"manifestBytes": 2115,
+	"manifestSha256": "613360a835619f94c40162b1e2407653f9c4236be93e460c561c66dafd7065ef",
 	"transcript": {
 		"id": "script",
-		"role": "scripted",
 		"format": "cassini.words.v1",
 		"wordCount": 669,
 		"rawBytes": 45837,

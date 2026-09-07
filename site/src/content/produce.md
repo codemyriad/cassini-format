@@ -32,12 +32,12 @@ base64url-encoded and cut into numbered pieces.
    | `CASSINI_PAYLOAD_GZIP_BYTES` | decimal integer, the compressed length |
    | `CASSINI_TRANSCRIPT_IDS` | the ids in `transcripts[]`, comma-separated, no spaces, sorted |
    | `CASSINI_TRANSCRIPT_DEFAULT` | the id a viewer opens first |
-   | `CASSINI_TX_<UPPER_ID>_MIME` | per transcript: `application/vnd.cassini.transcript-words+json` |
-   | `CASSINI_TX_<UPPER_ID>_ENCODING` | per transcript: `base64url+gzip+utf8json` |
-   | `CASSINI_TX_<UPPER_ID>_CHUNK_COUNT` | per transcript: decimal integer |
-   | `CASSINI_TX_<UPPER_ID>_SHA256` | per transcript: lowercase hex, over the decompressed body |
-   | `CASSINI_TX_<UPPER_ID>_RAW_BYTES` | per transcript: decimal integer |
-   | `CASSINI_TX_<UPPER_ID>_GZIP_BYTES` | per transcript: decimal integer |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_MIME` | per transcript: `application/vnd.cassini.transcript-words+json` |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_ENCODING` | per transcript: `base64url+gzip+utf8json` |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_CHUNK_COUNT` | per transcript: decimal integer |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_SHA256` | per transcript: lowercase hex, over the decompressed body |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_RAW_BYTES` | per transcript: decimal integer |
+   | `CASSINI_TX_<UPPER_ID>_PAYLOAD_GZIP_BYTES` | per transcript: decimal integer |
    | `CASSINI_AUDIO_SAMPLE_RATE` | `48000` |
    | `CASSINI_AUDIO_CHANNELS` | `1` or `2` |
    | `CASSINI_AUDIO_SAMPLE_COUNT` | playable samples, as the digest spec defines them |
@@ -82,11 +82,12 @@ base64url-encoded and cut into numbered pieces.
    `meeting`, `integrity`, `transcript`, `provenance`, `summary`,
    `attachments`, `speakers`.
 
-10. **At most one** entry flagged `default: true` per slot — one across the
-    word-timed roles, one across `readable-cleanup`, one across `display`.
+10. **At most one** entry flagged `default: true` per slot — one across
+    `transcripts[]`, one across the `display` entries in `readableTranscripts[]`.
     Flagging none is legal and readers fall back to array order.
-    `CASSINI_TRANSCRIPT_DEFAULT` mirrors the words slot. A derived transcript
-    carries `sourceTranscriptId`.
+    `CASSINI_TRANSCRIPT_DEFAULT` mirrors the words slot. Word-timed entries
+    carry no `role`. A display entry carries `role: "display"` and
+    `sourceTranscriptId` naming its word-timed source.
 
 11. `CASSINI_AUDIO_OPUS_SHA256` is computed over the canonical compressed Opus
     stream, **without decoding the audio**. The rule is in
@@ -109,8 +110,8 @@ base64url-encoded and cut into numbered pieces.
     digests, refuse to publish a mismatch. The producer is the right place for
     the strict check, because it can fix the problem and a reader cannot.
 
-14. Keep the raw ASR transcript even when a cleaned version exists. A better
-    cleanup model is coming and it will want the original.
+14. Keep the original word transcript beside derived display text, so its
+    words and timings remain available for comparison and reprocessing.
 
 ## Conventions
 

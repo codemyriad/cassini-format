@@ -17,18 +17,29 @@ wall, please [open an issue](https://github.com/codemyriad/cassini-format/issues
 
 ## Stable
 
-The wire strings in `org.cassini.portable-meeting/1` are not going to move.
+The container and transport in `org.cassini.portable-meeting/1` remain stable.
 `CASSINI_FORMAT`, the payload chunk naming, `base64url+gzip+utf8json`, the
-`CASSINI_TX_<ID>_PAYLOAD_` prefix scheme, the manifest's top-level members and
-the `cassini.words.v1` body shape are load-bearing in shipped software. A change
-to any of them is a new major version.
+`CASSINI_TX_<ID>_PAYLOAD_` prefix scheme and the `cassini.words.v1` body shape
+are used by shipped software.
 
-## What the software still owes the specification
+## Simplification and implementation status
 
-The document is ahead of the code in a few places: padded base64url is refused
-by one reader, none of them yet bounds the decompression against the declared
-`RAW_BYTES`, and the six trust-state names are not the names they print. The
+The 2026-09-07 revision removes the required origin labels from word-timed
+transcripts, the withdrawn LLM cleanup slot, and metadata the production
+writer never fills. Multiple transcripts, display documents, summaries and
+processing provenance remain.
+
+The [Cassini follow-up](https://github.com/codemyriad/gocassini/pull/276)
+updates the Go packer and inspector, browser viewer and static exporter to
+accept both simplified entries and old origin labels. The readers and demos
+on this site use the simplified contract. Earlier Cassini builds that require
+`role` need the follow-up before opening newly produced files; merging the
+implementation does not itself update an installed app.
+
+See the [audit and implementation details](https://github.com/codemyriad/cassini-format/blob/main/design/format-simplification-2026-09-07.md)
+for the comparison against current main and what remains supported.
+
+The
 [conformance suite](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance)
-is where each of those shows up as a warning, and it is the thing to run against
-your own reader. The gocassini change that writes `version: 1` and the
-`scripted` role is an open pull request.
+checks both older files and transcripts without origin labels. Run it against
+your reader; its results distinguish required behavior from advisory warnings.

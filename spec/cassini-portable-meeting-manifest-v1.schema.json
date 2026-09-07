@@ -56,15 +56,9 @@
     },
     "provenance": {
       "type": "object",
-      "description": "Open. A new kind of provenance is the likeliest addition of all: meetingSummary, attribution and wordTimings were each exactly that, and each cost a version bump under a closed schema.",
+      "description": "Which systems produced the text, display formatting and summary, plus records of speaker attribution and word timing. Unknown members are ignored.",
       "properties": {
         "speechToText": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/$defs/processingStep"
-          }
-        },
-        "readableCleanup": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/$defs/processingStep"
@@ -85,12 +79,6 @@
         "wordTimings": {
           "$ref": "#/$defs/wordTimingProvenance"
         }
-      }
-    },
-    "chapters": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/chapter"
       }
     },
     "summary": {
@@ -160,17 +148,10 @@
           "type": "integer",
           "minimum": 0
         },
-        "language": {
-          "type": "string"
-        },
         "roomId": {
           "type": "string",
           "pattern": "^rm_[0-9a-f]{16}$",
           "description": "Id of the conversation this meeting was recorded in: a deterministic one-way derivation of the room's identity, never the identity itself. For a Nextcloud Talk recording it derives from the conversation token, which is also that room's join link and is therefore never published. Shaped rm_<16 lowercase hex>. Absent when the room is unknown."
-        },
-        "roomName": {
-          "type": "string",
-          "description": "LEGACY, read-only. The room's display name frozen at record time. Producers stopped writing this: a display name is editable and a published recording is not, so the current name lives in the catalog entry instead. The record-time name is still available as the meeting title. Absent in anything packed after that change."
         },
         "jobId": {
           "type": "string",
@@ -180,10 +161,6 @@
           "type": "integer",
           "minimum": 1,
           "description": "Which attempt of that job produced this artifact, 1-based. Absent when unknown. There is no separate attempt id: an attempt's identity is the pair (jobId, attemptNumber)."
-        },
-        "summary": {
-          "type": "string",
-          "description": "A short plain-text summary of the meeting, for display."
         }
       }
     },
@@ -285,25 +262,15 @@
     },
     "transcriptEntry": {
       "type": "object",
-      "description": "Open. Everything load-bearing is in required, so a missing or misspelled one is still an error, and anything else is a hint a consumer may ignore.",
+      "description": "A word-timed transcript. No origin classification is required. Consumers select by default and array order, and ignore legacy role and sourceTranscriptId members.",
       "required": [
         "id",
-        "role",
         "format",
         "payloadRef"
       ],
       "properties": {
         "id": {
           "$ref": "#/$defs/transcriptId"
-        },
-        "role": {
-          "enum": [
-            "raw-asr",
-            "human-corrected",
-            "translation",
-            "scripted"
-          ],
-          "description": "How this transcript came to exist. raw-asr is what a recogniser produced; human-corrected is that text after a person fixed it; translation is it in another language; scripted is authored text the recording was made from, which is not a transcription of anything and is authoritative rather than derived."
         },
         "default": {
           "type": "boolean"
@@ -322,10 +289,6 @@
         "createdAtUtc": {
           "type": "string",
           "format": "date-time"
-        },
-        "sourceTranscriptId": {
-          "$ref": "#/$defs/transcriptId",
-          "description": "The transcript this one was derived from. Expected on human-corrected and translation entries; a raw-asr entry MUST NOT carry it. The id must name a transcript this file declares."
         },
         "payloadRef": {
           "$ref": "#/$defs/payloadRef"
@@ -347,10 +310,9 @@
           "$ref": "#/$defs/transcriptId"
         },
         "role": {
-          "enum": [
-            "readable-cleanup",
-            "display"
-          ]
+          "type": "string",
+          "minLength": 1,
+          "description": "Display entries use display. Consumers skip any other readable role; older entries remain valid metadata."
         },
         "default": {
           "type": "boolean"
@@ -368,7 +330,7 @@
         },
         "sourceTranscriptId": {
           "$ref": "#/$defs/transcriptId",
-          "description": "The entry this readable rendering was made from. Required here. The id must name a transcript this file declares, in either array."
+          "description": "The word-timed entry this display document was made from. Required; the id must name an entry in transcripts[]."
         },
         "createdAtUtc": {
           "type": "string",
@@ -507,28 +469,6 @@
         "endsBoundedByAudio": {
           "description": "True when each word's end was measured against its own speaker's track rather than taken from its last token's timestamp.",
           "const": true
-        }
-      }
-    },
-    "chapter": {
-      "type": "object",
-      "description": "Open.",
-      "required": [
-        "startMs",
-        "title"
-      ],
-      "properties": {
-        "startMs": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "endMs": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "title": {
-          "type": "string",
-          "minLength": 1
         }
       }
     }

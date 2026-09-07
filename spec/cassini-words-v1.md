@@ -85,9 +85,7 @@ absence as zero.
 the key. The word is still canonical content: a consumer MAY de-emphasise it or
 flag it for review, but MUST NOT drop it.
 
-A file whose attribution stage never ran carries neither key on any item. A
-`scripted` transcript carries neither either: nothing was recognised, and its
-speaker ids are as certain as the person who wrote them.
+A file whose attribution stage never ran carries neither key on any item.
 
 ## Conventions
 
@@ -101,9 +99,9 @@ Not required; what the reference producer does.
 - Milliseconds throughout, on the same clock as the manifest's `durationMs`.
 - The media type written into the tags is
   `application/vnd.cassini.transcript-words+json`. It is a hint.
-- A derived transcript (`human-corrected`, `translation`, `readable-cleanup`,
-  `display`) uses this same body. What makes it derived is its `role` and
-  `sourceTranscriptId` in the manifest, not a different shape.
+- The same word-timed body can carry recognised or authored text. No origin
+  label is required. Display transcripts have their own body format, named by
+  their manifest entry; they are not `cassini.words.v1` documents.
 
 ## What is deliberately not here
 

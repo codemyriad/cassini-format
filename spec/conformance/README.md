@@ -1,6 +1,6 @@
 # Conformance vectors
 
-Twenty-two `.opus` files and one index, for answering "does my reader conform"
+Twenty-five `.opus` files and one index, for answering "does my reader conform"
 with something other than a person's judgement.
 
 ```bash
@@ -8,7 +8,7 @@ python3 run-conformance.py --adapter 'node adapters/adapter-js.mjs'
 ```
 
 ```console
-17 pass, 3 warn, 0 fail, 2 skip, of 22
+20 pass, 3 warn, 0 fail, 2 skip, of 25
 ```
 
 An adapter is any command that takes one file path and prints one observation
@@ -37,7 +37,10 @@ present, wrong payload and audio digests, lower- and mixed-case tag names,
 unknown manifest members, an unknown major version, two transcripts, a transcript
 id with no chunk set, and a comment header larger than the 61,440 octets
 [RFC 7845 §5.2](https://www.rfc-editor.org/rfc/rfc7845#section-5.2) lets a reader
-ignore.
+ignore. Vectors 023–025 cover word transcripts without origin labels,
+selection of a second default entry, and ignoring old or unfamiliar labels.
+Vector 026 combines those words with a native display and an unavailable
+withdrawn cleanup entry; supported bodies must remain usable.
 
 Vectors 018 and 021 are the pair worth reading first. They carry the same 49
 comments with the same values in the same 68,032-octet packet, and differ only in
@@ -55,24 +58,30 @@ descriptors need not, and that is the whole argument for writing them first.
 ## Where the readers stand today
 
 ```
-tools/cassini-extract.py            14 pass,  6 warn, 0 fail, 2 skip
-tools/cassini-extract.py + digest   16 pass,  6 warn, 0 fail, 0 skip
-tools/cassini-read.js               17 pass,  3 warn, 0 fail, 2 skip
-cassini inspect (gocassini #236)    16 pass,  6 warn, 0 fail, 0 skip
+tools/cassini-extract.py            18 pass,  6 warn, 0 fail, 2 skip
+tools/cassini-extract.py + digest   20 pass,  6 warn, 0 fail, 0 skip
+tools/cassini-read.js               21 pass,  3 warn, 0 fail, 2 skip
+cassini inspect (PR 276)            18 pass,  7 warn, 1 fail, 0 skip
 ```
 
 A warning is a vector where the reader reported a different error code than the
 suite names, or missed a SHOULD; the reader cannot be wrong there. A failure is
 a reader disagreeing with a rule that exists.
 
-The one failure is a rule no reader follows yet: a transcript body whose chunk
-set is damaged makes that transcript unavailable, and does not make the file
-invalid (006, and [Resolving a transcript](../../SPEC.md#resolving-a-transcript)).
-Every reader still calls the whole file invalid.
+Results were checked on 2026-09-07 against
+[Cassini PR 276](https://github.com/codemyriad/gocassini/pull/276), based on fetched
+main `e4856e9fac32c447d6c5e023681433319d7ea3c8`. Its only failure is the existing
+tag/manifest disagreement policy in 011, reproduced on that starting main.
+All four new vectors pass. See the
+[implementation audit](../../design/format-simplification-2026-09-07.md#compatibility-and-cassini-follow-up).
 
-The gocassini figure is the branch of
-[gocassini#234](https://github.com/codemyriad/gocassini/pull/234), which
-writes and reads `/1`; `origin/main` still says `/3` and fails nineteen.
+The original 22 vectors retain their old metadata as compatibility coverage.
+Regenerate only the new vectors with:
+
+```bash
+python3 build/simplified.py
+python3 build/make-index.py
+```
 
 ## The trust state
 

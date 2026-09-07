@@ -57,7 +57,7 @@ export type DesignDoc = { slug: string; file: string; title: string; date: strin
  * The design notes the site publishes, in order. Other files in design/ are
  * historical and stay in the repository only.
  */
-const DESIGN_ORDER = ['packet-digest', 'multi-transcription', 'operator-sealing'];
+const DESIGN_ORDER = ['packet-digest', 'multi-transcription', 'operator-sealing', 'format-simplification-2026-09-07'];
 
 export async function listDesignDocs(): Promise<DesignDoc[]> {
 	const dir = path.join(REPO, 'design');

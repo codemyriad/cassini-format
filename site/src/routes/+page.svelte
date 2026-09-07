@@ -74,9 +74,9 @@
 			<p class="n">02</p>
 			<h3>Keep what a better model could use</h3>
 			<p>
-				The raw ASR words survive the cleanup that rewrites them, next to provenance naming the
-				engine, model and device. The cleanup of 2026 will look bad in 2028. The original words
-				and their timings stay available for whatever replaces it.
+				The original words and their timings stay available beside display text, with provenance
+				naming the engine, model and device. Another model's transcript can live in the same file
+				for comparison.
 			</p>
 		</div>
 		<div class="cell">
@@ -139,7 +139,7 @@
 		requires.
 	</p>
 	<p class="muted">
-		The words are the script the voices read, so the transcript's role is <code>scripted</code>.
+		The words are the script the voices read, with timings derived from the speech renderer.
 		Segment timings are measured from the render; word timings inside a segment are interpolated,
 		and the file says so.
 	</p>
