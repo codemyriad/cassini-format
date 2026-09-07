@@ -6,7 +6,7 @@ static host will serve. There is no server side and nothing host-specific in the
 config.
 
 ```bash
-npm install
+npm ci
 npm run dev          # http://localhost:5173
 npm run build        # -> build/
 npm run preview      # serve build/ locally
@@ -54,8 +54,22 @@ See `static/demo/README.md` for how the file itself was made.
 ## Deploying
 
 `build/` is the whole site. Upload it. The pages are directory-shaped
-(`/spec/v3/index.html`), so the host needs to serve `index.html` for a directory
+(`/spec/index.html`), so the host needs to serve `index.html` for a directory
 URL, which every static host does by default. `404.html` is the not-found page.
+
+Production uses Cloudflare Pages Direct Upload, project `cassini-format`.
+Build from a clean checkout of merged `main` (including Git LFS demo assets),
+so unrelated local static files cannot enter the deployment:
+
+```bash
+npm ci
+SITE_URL=https://cassini-format.codemyriad.io npm run build
+wrangler pages deploy build --project-name cassini-format --branch main
+```
+
+`SITE_URL` makes the canonical and `llms-full.txt` links absolute. Wrangler needs
+the configured Cloudflare credentials and account. After deployment, verify
+`https://cassini-format.codemyriad.io/`, `/schema/`, and `/llms-full.txt`.
 
 For a deploy under a subpath rather than a domain root, set `BASE_PATH`:
 

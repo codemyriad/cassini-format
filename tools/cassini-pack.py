@@ -8,6 +8,10 @@ Takes an Ogg Opus file and a word-timed transcript JSON — either a flat
 {"speakers": [...], "items": [{speaker,startMs,endMs,text}]} or the segmented
 {"speakers": [...], "segments": [{speaker, words: [...]}]}.
 
+Writes word entries without an origin role. Cassini builds that still require
+that label need https://github.com/codemyriad/gocassini/pull/276 before reading
+this output. See design/format-simplification-2026-09-07.md for compatibility.
+
 No ffmpeg: it rewrites only the OpusTags packet and re-paginates, copying every
 compressed audio page verbatim and patching just the sequence number and CRC.
 exact-opus-audio-v1 excludes OpusTags and all Ogg framing, so the digest is
@@ -177,7 +181,7 @@ def chunk_tags(prefix, mime, raw, gz, chunks, sha):
     return tags + [(f"{prefix}{i:03d}", c) for i, c in enumerate(chunks)]
 
 
-def pack(src, transcript_path, out, title, created_at, tx_id="raw-asr",
+def pack(src, transcript_path, out, title, created_at, tx_id="words",
          recorded_at_local=None):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,31}", tx_id) or tx_id in RESERVED_IDS:
         raise ValueError(f"invalid transcript id {tx_id!r}")
@@ -210,7 +214,7 @@ def pack(src, transcript_path, out, title, created_at, tx_id="raw-asr",
                           opusAudioSha256=opus_sha, **shape),
         "speakers": speakers,
         "transcripts": [{
-            "id": tx_id, "role": "raw-asr", "default": True,
+            "id": tx_id, "default": True,
             "format": "cassini.words.v1", "wordCount": len(items),
             "payloadRef": {"prefix": prefix, "chunkCount": len(b_chunks),
                            "sha256": b_sha, "rawBytes": len(b_raw),
@@ -289,7 +293,7 @@ if __name__ == "__main__":
     ap.add_argument("--title", required=True)
     ap.add_argument("--created-at", required=True, metavar="RFC3339")
     ap.add_argument("--recorded-at-local", metavar="ISO8601")
-    ap.add_argument("--transcript-id", default="raw-asr")
+    ap.add_argument("--transcript-id", default="words")
     a = ap.parse_args()
     try:
         pack(a.audio, a.transcript, a.out, a.title, a.created_at,

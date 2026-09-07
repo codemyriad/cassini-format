@@ -59,7 +59,6 @@ function abridge() {
 			? [
 					{
 						id: tx.id,
-						role: tx.role,
 						default: tx.default,
 						format: tx.format,
 						payloadRef: {

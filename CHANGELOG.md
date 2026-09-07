@@ -10,6 +10,31 @@ says how a reader tells them apart.
 The wire format did not move. These change what the documents say about it, and
 what the schemas accept.
 
+### 2026-09-07 — simplification
+
+Compared with gocassini `main` at `e4856e9fac32c447d6c5e023681433319d7ea3c8`.
+The [audit](design/format-simplification-2026-09-07.md) records the evidence and
+the implemented [Cassini follow-up](https://github.com/codemyriad/gocassini/pull/276).
+
+* Word-timed entries no longer require or define an origin `role`
+  (`raw-asr`, `human-corrected`, `translation`, `scripted`) or derivation link.
+  Readers select from `transcripts[]` by `default` and array order, ignoring
+  old origin labels. The Python producer omits them.
+* Remove the withdrawn LLM cleanup slot and its provenance, unwritten
+  `chapters`, `meeting.summary`, `meeting.language`, the retired
+  `meeting.roomName` mirror, and the speculative `payloads` / `CASSINI_PL_`
+  reservation from the current contract. Unknown members in old files remain
+  ignorable and must survive edits.
+* Keep the used display slot and its source link. Correct the claim that its
+  body is word JSON: Cassini writes `transcript.display.v1` with `blocks`.
+* Update the browser reader, demo metadata, producer guidance and conformance
+  vectors. Existing vectors retain old labels to test compatibility.
+
+The container, chunk transport, audio digest and `/1` identifier are unchanged.
+Cassini’s packer, inspector, viewer and static exporter have a matching
+[consumer update](https://github.com/codemyriad/gocassini/pull/276). Earlier
+Cassini builds require that update to read files without the old `role`.
+
 ### 2026-09-01
 
 * `cassini.words.v1`, the transcript body, is written down for the first time:

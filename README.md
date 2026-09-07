@@ -59,7 +59,7 @@ Three commitments run through it:
 * **Progressive enhancement.** A player that understands nothing plays the
   audio. A reader that understands the tags gets everything.
 * **Keep what a better model could use later.** The words a recogniser
-  produced survive next to any cleanup, with provenance saying what made each.
+  produced survive next to derived display text, with provenance saying what made each.
 * **The digest is a join key, not a seal.** A SHA-256 over the Opus packets
   says whether this transcript describes this recording. It catches accidents,
   not adversaries.

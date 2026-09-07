@@ -6,7 +6,7 @@
   "notCovered": [
     "the two pre-publication draft formats, which were never public"
   ],
-  "updated": "2026-09-02",
+  "updated": "2026-09-07",
   "profiles": {
     "metadata": "Decodes the tags and the chunk sets and verifies every declared payload SHA-256 and byte count. Does not read the audio. Such a reader reports audioTrust 'not-checked' and never 'verified'.",
     "full": "Everything a metadata reader does, plus exact-opus-audio-v1 over the compressed audio packets."
@@ -705,6 +705,153 @@
           "emit-transcript"
         ],
         "state": "invalid-cassini-metadata"
+      }
+    },
+    {
+      "id": "023-no-transcript-role",
+      "file": "opus/023-no-transcript-role.opus",
+      "bytes": 2981,
+      "sha256": "bb5ae14ea100c2b1ff6c0d3d945459e6ddded157a6b013bdbab83be3b7b23934",
+      "derivedFrom": "001-minimal-v1",
+      "profiles": [
+        "metadata",
+        "full"
+      ],
+      "summary": "A newly packed transcript with no origin role, using the producer default id words.",
+      "rationale": "Requiring a word origin enum makes a valid transcript unavailable. Exercise the current producer, not a hand-written descriptor.",
+      "spec": [
+        "SPEC.md#transcripts",
+        "SPEC.md#resolving-a-transcript"
+      ],
+      "expect": {
+        "classification": "cassini",
+        "payloadTrust": "verified",
+        "audioTrust": "verified",
+        "formatId": "org.cassini.portable-meeting/1",
+        "manifestVersion": 1,
+        "manifestKind": "cassini-portable-meeting",
+        "transcriptIds": [
+          "words"
+        ],
+        "defaultTranscriptId": "words",
+        "wordCounts": {
+          "words": 3
+        },
+        "speakerIds": [
+          "spk_a",
+          "spk_b"
+        ],
+        "audioOpusSha256": "3504435d6e7c677c862313ffdb0ced1d0678b7bf3b8c33fd903b89a848c076a8",
+        "errors": [],
+        "warnings": [],
+        "state": "ok"
+      }
+    },
+    {
+      "id": "024-no-role-second-default",
+      "file": "opus/024-no-role-second-default.opus",
+      "bytes": 3751,
+      "sha256": "8a16ce6d6bfd522fc7fad16a3c17990d32ae1ae9344519200fdb70c2e15457ae",
+      "derivedFrom": "016-two-transcripts",
+      "profiles": [
+        "metadata",
+        "full"
+      ],
+      "summary": "Two word transcripts without roles; the second is the default.",
+      "rationale": "Every transcripts[] entry participates in default selection, including entries without a role. A first-entry-only reader must not pass.",
+      "spec": [
+        "SPEC.md#transcripts",
+        "SPEC.md#resolving-a-transcript"
+      ],
+      "expect": {
+        "classification": "cassini",
+        "payloadTrust": "verified",
+        "transcriptIds": [
+          "raw-asr",
+          "second-pass"
+        ],
+        "defaultTranscriptId": "second-pass",
+        "wordCounts": {
+          "raw-asr": 3,
+          "second-pass": 3
+        },
+        "errors": [],
+        "warnings": [],
+        "mustNot": [
+          "sum-word-counts-across-transcripts"
+        ],
+        "state": "unverified"
+      }
+    },
+    {
+      "id": "025-ignored-origin-label",
+      "file": "opus/025-ignored-origin-label.opus",
+      "bytes": 3853,
+      "sha256": "373c3798862002bcb798753c11bbf7c10f1eb50b2222816cb4c05d65ba9bf72d",
+      "derivedFrom": "016-two-transcripts",
+      "profiles": [
+        "metadata",
+        "full"
+      ],
+      "summary": "Unknown word origin labels and legacy source links; no flagged default. Includes retired meeting hints and chapters.",
+      "rationale": "Removed word role and sourceTranscriptId members are ignored. Array order remains the fallback; legacy metadata must not reject the file.",
+      "spec": [
+        "SPEC.md#transcripts",
+        "SPEC.md#resolving-a-transcript"
+      ],
+      "expect": {
+        "classification": "cassini",
+        "payloadTrust": "verified",
+        "transcriptIds": [
+          "raw-asr",
+          "second-pass"
+        ],
+        "defaultTranscriptId": "raw-asr",
+        "wordCounts": {
+          "raw-asr": 3,
+          "second-pass": 3
+        },
+        "errors": [],
+        "warnings": [],
+        "mustNot": [
+          "sum-word-counts-across-transcripts"
+        ],
+        "state": "unverified"
+      }
+    },
+    {
+      "id": "026-display-and-withdrawn-cleanup",
+      "file": "opus/026-display-and-withdrawn-cleanup.opus",
+      "bytes": 4522,
+      "sha256": "fe5ffa4d042fb0610982128d49ab1baf06d3f3c9c45e30431eb190a0e49e6f0f",
+      "derivedFrom": "016-two-transcripts",
+      "profiles": [
+        "metadata",
+        "full"
+      ],
+      "summary": "Words without roles alongside a native display and an unavailable withdrawn cleanup entry.",
+      "rationale": "Unknown readable roles must be skipped without resolving their source or body, leaving supported words and displays usable.",
+      "spec": [
+        "SPEC.md#resolving-a-transcript"
+      ],
+      "expect": {
+        "classification": "cassini",
+        "payloadTrust": "verified",
+        "transcriptIds": [
+          "raw-asr",
+          "second-pass"
+        ],
+        "defaultTranscriptId": "raw-asr",
+        "wordCounts": {
+          "raw-asr": 3,
+          "second-pass": 3
+        },
+        "errors": [],
+        "warnings": [],
+        "mustNot": [
+          "sum-word-counts-across-transcripts"
+        ],
+        "state": "unverified"
       }
     }
   ],

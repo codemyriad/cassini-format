@@ -123,7 +123,6 @@ const out = {
 	transcript: entry
 		? {
 				id: entry.id,
-				role: entry.role,
 				format: entry.format,
 				wordCount: words.length,
 				rawBytes: body.rawBytes,

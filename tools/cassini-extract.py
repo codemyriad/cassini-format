@@ -217,11 +217,11 @@ def load_manifest(tags):
 
 
 def transcript_entries(manifest):
-    """Every body the file carries: the word-timed transcripts, then the
-    readable ones. Listing and checking want all of them; resolution does not,
-    see default_transcript_id."""
+    """Supported bodies: words, then displays. Unknown readable roles are skipped.
+    Default selection uses only words; see default_transcript_id."""
     return list(manifest.get("transcripts") or []) + list(
-        manifest.get("readableTranscripts") or [])
+        e for e in manifest.get("readableTranscripts") or []
+        if e.get("role") == "display")
 
 
 def default_transcript_id(tags, manifest):
@@ -281,7 +281,7 @@ def run(args):
             flags = " (default)" if entry.get("id") == default_id else ""
             words = entry.get("wordCount")
             words = f"{words} words" if words is not None else "? words"
-            print(f"{entry.get('id')}\t{entry.get('role', '?')}\t{words}{flags}")
+            print(f"{entry.get('id')}\t{entry.get('format', '?')}\t{words}{flags}")
         return
 
     if args.check:

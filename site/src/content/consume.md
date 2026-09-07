@@ -101,10 +101,16 @@ Eight steps, the same in every language.
    entry's `payloadRef` naming its own chunk set and its own SHA-256.
 
    The manifest resolves the default, not the tag. For each slot — words,
-   readable, display — take the first entry for that slot flagged
+   display — take the first entry for that slot flagged
    `default: true`, and failing that the first entry for that slot in array
    order. `CASSINI_TRANSCRIPT_DEFAULT` is a copy; ignore it when it names
    nothing the manifest has, and say so when it disagrees with the flag.
+
+   Every entry in `transcripts[]` participates. Do not filter or rank words by
+   a `role` label; older files may carry one, and newer ones omit it. For
+   display, use a `role: "display"` entry from `readableTranscripts[]` whose
+   `sourceTranscriptId` matches the selected words. Skip withdrawn cleanup
+   entries and bodies whose format your reader does not implement.
 
 7. **Read the items in file order.** They are in speaker-turn order, not sorted
    by time: across a speaker change `startMs` goes backwards, because people

@@ -7,12 +7,12 @@ meeting, for anything that wants a smaller file.
 
 | file | bytes | duration | speakers | words | OpusTags comments |
 |---|---|---|---|---|---|
-| `lantern-festival.opus` | 1,898,861 | 239,713 ms | 6 | 669 | 37 |
-| `lantern-festival-excerpt.opus` | 356,885 | 44,813 ms | 6 | 136 | 35 |
+| `lantern-festival.opus` | 1,898,851 | 239,713 ms | 6 | 669 | 37 |
+| `lantern-festival-excerpt.opus` | 356,875 | 44,813 ms | 6 | 136 | 35 |
 
 ```
-sha256(lantern-festival.opus)          a42b090be33c483a1e29ff1c3a7b93f46094f8a8794430b216b7878ec718c6b3
-sha256(lantern-festival-excerpt.opus)  544339473ebae816bfe4c4e854e685995fd00bd7ddcdfe8bc42b0613c4df603f
+sha256(lantern-festival.opus)          a772fc3c94cb01a8d702869414cc431f6556625bd3f8b96216af4b4fffcec6c6
+sha256(lantern-festival-excerpt.opus)  7a9eb4a3f9b6595494b918572728a0f32c7824d7be010ef4216caafcb56719dd
 
 meeting id, full     mtg_8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc
 meeting id, excerpt  mtg_7ffa3ecfdaad5c6dc14e2b93c9a25073eb53b18ae512071afd650ef0f81fd3ad
@@ -111,10 +111,13 @@ be dishonest to demo it with numbers that were invented.
   inside their segment, proportionally to token length.
 
 No speech-to-text ran at any point. The words are the script, verbatim, so the
-one transcript in each file has id `script` and role `scripted`: authored text
-the recording was made from, not a guess at it. `CASSINI_TRANSCRIPT_DEFAULT`
+one transcript in each file has id `script`. `CASSINI_TRANSCRIPT_DEFAULT`
 and `CASSINI_TRANSCRIPT_IDS` say `script`, and the body sits under
 `CASSINI_TX_SCRIPT_PAYLOAD_*`.
+
+The 2026-09-07 metadata revision removed the origin `role` from these files
+and from `elements.opus`. The audio packets, word bodies and audio digests are
+unchanged. This follows the [simplification and consumer rollout](../../../design/format-simplification-2026-09-07.md).
 
 The manifest carries no `provenance.speechToText`, because none ran. How the
 fixture was built (renderer, voices, which timings are measured) is recorded

@@ -237,7 +237,6 @@ function repeatedLoadBearing(tags) {
     }
     return undefined;
 }
-const WORD_ROLES = new Set(['raw-asr', 'human-corrected', 'translation', 'scripted']);
 /* -------------------------------------------------------------------------- */
 /* The reader                                                                  */
 /* -------------------------------------------------------------------------- */
@@ -347,7 +346,7 @@ export async function readCassini(buf) {
     // The manifest is the record and the tag is a copy of it. The words slot is
     // the first entry flagged default, failing that the first entry; the tag is
     // only ever compared, never used to choose.
-    const list = (manifest.transcripts ?? []).filter((t) => WORD_ROLES.has(t.role));
+    const list = manifest.transcripts ?? [];
     const entry = list.find((t) => t.default) ?? list[0];
     const wanted = one(tags, 'CASSINI_TRANSCRIPT_DEFAULT');
     if (wanted && entry && entry.id !== wanted) {
@@ -365,6 +364,9 @@ export async function readCassini(buf) {
     const ref = entry.payloadRef;
     let body;
     try {
+        if (entry.format !== 'cassini.words.v1') {
+            throw new Error(`unsupported transcript format "${entry.format}"`);
+        }
         body = await decodeChunkSet(tags, ref.prefix.toUpperCase(), ref.chunkCount, ref.sha256, typeof ref.rawBytes === 'number' ? ref.rawBytes : undefined);
     }
     catch (e) {

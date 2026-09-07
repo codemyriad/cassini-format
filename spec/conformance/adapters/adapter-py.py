@@ -38,7 +38,10 @@ try:
     if fmt.lower() not in cx.KNOWN_FORMATS:
         obs["warnings"].append({"code": "unsupported-version"})
     entries = cx.transcript_entries(manifest)
-    obs["transcriptIds"] = [e.get("id") for e in entries]
+    # The observation contract counts word transcripts only. Still load every
+    # supported body below, so display payload errors remain visible.
+    word_ids = {e.get("id") for e in manifest.get("transcripts", [])}
+    obs["transcriptIds"] = [e.get("id") for e in entries if e.get("id") in word_ids]
     obs["defaultTranscriptId"] = cx.default_transcript_id(tags, manifest)
     counts, bodies = {}, {}
     for e in entries:
@@ -51,7 +54,8 @@ try:
             obs["errors"].append({"code": code_for(str(exc)),
                                   "message": f"transcript {e['id']!r} is unavailable: {exc}"})
             continue
-        counts[e["id"]] = len(body.get("items") or [])
+        if e["id"] in word_ids:
+            counts[e["id"]] = len(body.get("items") or [])
         bodies[e["id"]] = body
     obs["wordCounts"] = counts
     obs["_manifest"], obs["_transcripts"] = manifest, bodies

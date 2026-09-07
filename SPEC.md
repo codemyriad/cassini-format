@@ -4,6 +4,8 @@ Date: 2026-09-02
 
 Status: published, version 1
 
+Revised: 2026-09-07. [Compatibility and implementation notes](design/format-simplification-2026-09-07.md#compatibility-and-cassini-follow-up).
+
 A Cassini portable meeting is an ordinary Ogg Opus file that also carries its
 own transcript. Who spoke, what they said word by word with timestamps, and what
 produced that text all live in the file's OpusTags comment header, next to
@@ -164,10 +166,6 @@ reserved for private data and will never be defined here.
 - Consumers MUST ignore private data they do not own. A tool that edits `x`
   MUST recompute `CASSINI_PAYLOAD_SHA256` and `CASSINI_PAYLOAD_RAW_BYTES`.
 
-**Reserved.** The manifest member `payloads` and the tag prefix `CASSINI_PL_`
-are held for a later revision. Producers MUST NOT write them; consumers MUST
-ignore them.
-
 ## Tags
 
 ### Reading the comment vector
@@ -268,13 +266,12 @@ Producers SHOULD write them; consumers MUST NOT require them.
 | `CASSINI_CREATED_AT` | RFC 3339 UTC |
 | `CASSINI_SPEAKER_COUNT` | decimal |
 
-Four optional tags mirror the origin fields of `meeting`. Each is written only
+Five optional tags mirror the origin fields of `meeting`. Each is written only
 when its value is known: absent, never empty.
 
 | Tag | Mirrors |
 |---|---|
 | `CASSINI_ROOM_ID` | `meeting.roomId` |
-| `CASSINI_ROOM_NAME` | `meeting.roomName` (no longer written; still read) |
 | `CASSINI_JOB_ID` | `meeting.jobId` |
 | `CASSINI_ATTEMPT_NUMBER` | `meeting.attemptNumber` |
 | `CASSINI_PROCESSED_AT` | `meeting.processedAtUtc` |
@@ -405,7 +402,7 @@ Three members identify the document:
 | `profile` | `ogg-opus`. Any other value: not a portable meeting. |
 
 Required alongside them: `meeting`, `audio`, `integrity`, `speakers`,
-`transcripts`. Optional: `readableTranscripts`, `provenance`, `chapters`,
+`transcripts`. Optional: `readableTranscripts`, `provenance`,
 `summary`, `attachments`, `x`.
 
 The manifest is an index. It does not contain the transcript; it points at it.
@@ -431,14 +428,10 @@ Optional:
   `YYYY-MM-DDTHH:MM:SS`, no offset and no zone. It is a label, not an
   instant: consumers MUST NOT convert it to one.
 - `processedAtUtc`: RFC 3339 UTC.
-- `summary`: a short plain-text summary of the meeting, for display.
-- `language`: BCP-47. The reference producer never writes it.
 - `roomId`: a one-way derivation of the room's identity, `rm_<16 lowercase
   hex>`. Never the identity itself: a Nextcloud Talk conversation token is also
   the link that joins the conversation, and this file travels. Producers MUST
   NOT write a raw room token in any tag or manifest member.
-- `roomName`: no longer written, still read. A display name is editable and a
-  published recording is not.
 - `jobId`, `attemptNumber`: the producer job, and which attempt, 1-based. A
   consumer MUST treat a non-positive `attemptNumber` as absent.
 
@@ -476,16 +469,22 @@ The index of word-timed transcripts, at least one entry. Each entry names the
 chunk set that carries its body. These are the canonical transcript; anything
 derived from them is optional and regenerable.
 
-`readableTranscripts` is the optional index of derived transcripts. Each entry
+`readableTranscripts` is the optional index of display transcripts. Each entry
 MUST name its source in `sourceTranscriptId`, and that id MUST be one of the
-transcripts this file declares.
+entries in `transcripts[]`.
+
+Word-timed entries have no `role` or `sourceTranscriptId`. The array says what
+they contain; `format` says how to decode the body. A consumer MUST NOT require
+an origin label or use one to select, reject or rank a word-timed transcript.
+Older files may carry these members; consumers MUST ignore them, like other
+unrecognised members. `provenance` can describe how the text was produced.
 
 ### `provenance`
 
 Optional. Which systems produced each layer, so a user can see what made the
 file.
 
-- `speechToText`, `readableCleanup`, `displayTranscript`: maps keyed by
+- `speechToText`, `displayTranscript`: maps keyed by
   transcript id. A transcript with `id: "canary"` resolves to
   `provenance.speechToText.canary`.
 - `meetingSummary`: one processing step.
@@ -501,9 +500,9 @@ A processing step has only optional strings: `backend`, `engine`, `model`,
 `device`, `language`, `source`, `version`. Producers MUST NOT put a URL or a
 hostname in any of them. This file is cleartext to everyone who receives it.
 
-### `chapters`, `summary`, `attachments`
+### `summary`, `attachments`
 
-All optional. `chapters` entries carry `startMs`, `endMs`, `title`.
+Both optional.
 
 An attachment is `{ "name", "mime", "contentBase64" }`: a file name unique
 within the array, its media type, and its bytes in **standard base64, not
@@ -520,7 +519,6 @@ Each entry in `transcripts[]` and `readableTranscripts[]`:
 ```jsonc
 {
   "id":      "canary",            // ^[a-z0-9][a-z0-9-]{0,31}$, unique in file
-  "role":    "raw-asr",
   "default": true,                // at most one per slot
   "format":  "cassini.words.v1",
   "language": "en",
@@ -538,27 +536,17 @@ Each entry in `transcripts[]` and `readableTranscripts[]`:
 }
 ```
 
-`role` says how the text came to exist:
+An entry in `readableTranscripts[]` also carries `role: "display"` and a
+`sourceTranscriptId` naming its word-timed source. This identifies a display
+document, not how the words came to exist.
 
-| Role | What it is | `sourceTranscriptId` |
-|---|---|---|
-| `raw-asr` | what a recogniser produced from the audio | MUST NOT carry one |
-| `human-corrected` | that text after a person fixed it | required |
-| `translation` | it in another language | required |
-| `scripted` | authored text the recording was made *from* | MUST NOT carry one |
-| `readable-cleanup`, `display` | derived views, in `readableTranscripts[]` only | required |
-
-`scripted` is the odd one. Some recordings are performances of words that
-already existed: a song's lyrics, a read script. That text is not a
-transcription; it is what the audio is a performance of, so it is authoritative
-rather than derived. A producer that writes both SHOULD flag the `scripted`
-entry as the default. One is the words; the other is a guess at them. The
-consumer's resolution rule below does not change.
-
-The body of every entry is
-[`spec/cassini-words-v1.md`](spec/cassini-words-v1.md). The media type is
-`application/vnd.cassini.transcript-words+json` for a word-timed body and
-`application/vnd.cassini.transcript-readable+json` for a derived one.
+A word-timed body is
+[`spec/cassini-words-v1.md`](spec/cassini-words-v1.md), with media type
+`application/vnd.cassini.transcript-words+json`. A display body retains its
+native document format: Cassini writes `transcript.display.v1`, with `blocks`,
+and media type `application/vnd.cassini.transcript-readable+json`. It is not a
+`cassini.words.v1` body. A consumer that does not implement a body's `format`
+MUST treat that transcript as unavailable without rejecting the file.
 
 **The chunk set.** `payloadRef.prefix` is authoritative; a consumer MUST use it
 as written and MUST NOT re-derive it. A producer derives it as `CASSINI_TX_` +
@@ -622,16 +610,18 @@ one small chunk set away and a body may be many.
 
 ### Resolving a transcript
 
-There are three slots. A consumer fills each from the entries of one array
-with one set of roles:
+There are two slots:
 
 | Slot | Array | Roles | Body `format` |
 |---|---|---|---|
-| words | `transcripts[]` | `raw-asr`, `human-corrected`, `translation`, `scripted` | `cassini.words.v1` |
-| readable | `readableTranscripts[]` | `readable-cleanup` | as the entry says |
+| words | `transcripts[]` | none; every entry participates | `cassini.words.v1` |
 | display | `readableTranscripts[]` | `display` | as the entry says |
 
-For each slot, in this order:
+Resolve the words slot from all `transcripts[]` entries. Then resolve the
+display slot using only `readableTranscripts[]` entries whose role is `display`
+and whose `sourceTranscriptId` names the selected words transcript.
+
+Within each slot's candidates, select in this order:
 
 1. the first entry whose `default` is `true`;
 2. failing that, the first entry.
@@ -639,8 +629,11 @@ For each slot, in this order:
 Array order is therefore normative. Zero flagged defaults is a legal file.
 `CASSINI_TRANSCRIPT_DEFAULT` is the id this rule selects for the words slot.
 
-When showing a readable transcript beside the words, a consumer SHOULD prefer
-the entry whose `sourceTranscriptId` names the words it is showing.
+When showing a display transcript beside the words, a consumer MUST use only
+an entry whose `sourceTranscriptId` names the words it is showing. If none
+matches, show the words without a display transcript. Entries with an
+unrecognised readable role are skipped; this includes the withdrawn
+`readable-cleanup` entries in older files.
 
 `CASSINI_TRANSCRIPT_IDS` and `CASSINI_TRANSCRIPT_DEFAULT` are copies. A consumer
 MUST ignore an id in the tag that is not in the manifest, and MUST ignore a
@@ -805,8 +798,8 @@ Producers SHOULD write compact JSON, keep the raw transcript even when a cleaned
 one exists, and keep the manifest an index rather than a container.
 
 A file SHOULD carry the meeting's identifying fields, the speaker table, the
-canonical word transcript as its own chunk set, and optionally a readable
-transcript and chapters. It SHOULD NOT carry search indexes, build products or
+canonical word transcript as its own chunk set, and optionally a display
+transcript and summary. It SHOULD NOT carry search indexes, build products or
 captions, which are derivable.
 
 ## Rationale

@@ -29,8 +29,8 @@
 		<a class="v" href="{base}/spec/words-v1/">
 			<h3>cassini.words.v1</h3>
 			<p>
-				One item per word, with a speaker and a start and end in milliseconds. Each transcript
-				gets its own chunk set. One document type, one schema.
+				One item per word, with a speaker and a start and end in milliseconds. Each words transcript
+				gets its own chunk set. Display documents retain their own body format.
 			</p>
 		</a>
 		<a class="v" href="{base}/spec/audio-integrity/">
