@@ -1,0 +1,569 @@
+{
+  "title": "Saturday repair café: the rain plan",
+  "synthetic": true,
+  "sourceProduction": {
+    "title": "Saturday repair café: the rain plan",
+    "createdAtUtc": "2026-09-07T15:00:00Z",
+    "sampleRate": 24000,
+    "scenes": [
+      {
+        "id": "opening_time",
+        "startMs": 0,
+        "samples": 1019520,
+        "silenceCuts": [
+          {
+            "startSample": 342696,
+            "endSample": 356616
+          },
+          {
+            "startSample": 561336,
+            "endSample": 580536
+          },
+          {
+            "startSample": 798696,
+            "endSample": 815976
+          },
+          {
+            "startSample": 857496,
+            "endSample": 874296
+          }
+        ],
+        "wavSha256": "7cb43323d3cb6373d92429e6ff88779498039ab3eb85fe18d445a893027e8771"
+      },
+      {
+        "id": "bookings_and_space",
+        "startMs": 42480,
+        "samples": 949968,
+        "silenceCuts": [
+          {
+            "startSample": 211176,
+            "endSample": 223200
+          },
+          {
+            "startSample": 375600,
+            "endSample": 390936
+          },
+          {
+            "startSample": 579360,
+            "endSample": 593736
+          },
+          {
+            "startSample": 656376,
+            "endSample": 670776
+          },
+          {
+            "startSample": 867840,
+            "endSample": 883176
+          }
+        ],
+        "wavSha256": "aebad40f0baa2edde9c287a0ec21bf8001f6de68df2fb63f0382a1d439b356a7"
+      },
+      {
+        "id": "owners_and_cutoff",
+        "startMs": 82062,
+        "samples": 744936,
+        "silenceCuts": [
+          {
+            "startSample": 276936,
+            "endSample": 293736
+          },
+          {
+            "startSample": 403416,
+            "endSample": 419256
+          },
+          {
+            "startSample": 476136,
+            "endSample": 495336
+          },
+          {
+            "startSample": 633816,
+            "endSample": 650160
+          },
+          {
+            "startSample": 746856,
+            "endSample": 767976
+          },
+          {
+            "startSample": 834240,
+            "endSample": 835200
+          }
+        ],
+        "wavSha256": "0129d0bb16318872fc6338cec9c2733c63ee033d101f40f9aa1f4891d7650cd4"
+      }
+    ],
+    "masterGain": 0.8960432605155622,
+    "fixture": {
+      "synthetic": true,
+      "script": "repair-cafe.script.json",
+      "scriptSha256": "0ec810b566d5a7cbe2877b3ada377ce93eecf2c9314e354ea48d69fadd9d6cc1",
+      "synthesis": {
+        "provider": "ElevenLabs",
+        "model": "eleven_v3",
+        "voices": {
+          "maya": "Xb7hH8MSUJpSbSDYk0k2",
+          "jonah": "JBFqnCBsd6RMkjVDRZzb",
+          "tess": "pFZP5JQG7iQjIQuC4Bku"
+        }
+      },
+      "editTimingReference": "Scribe v2 word boundaries, verified against the script; used only to schedule source edits",
+      "mix": "Continuous dialogue scenes with separately generated acknowledgments mixed over speech",
+      "interjections": [
+        {
+          "id": "i01",
+          "speaker": "tess",
+          "hostTurn": "t01",
+          "text": "Right.",
+          "startMs": 11299,
+          "endMs": 11658,
+          "sourceStartSample": 245520,
+          "sourceEndSample": 261336,
+          "destinationSample": 267576,
+          "gain": 0.72
+        },
+        {
+          "id": "i02",
+          "speaker": "maya",
+          "hostTurn": "t05",
+          "text": "Yeah.",
+          "startMs": 37399,
+          "endMs": 37679,
+          "sourceStartSample": 93336,
+          "sourceEndSample": 107256,
+          "destinationSample": 893976,
+          "gain": 0.72
+        },
+        {
+          "id": "i03",
+          "speaker": "jonah",
+          "hostTurn": "t08",
+          "text": "Mm-hmm.",
+          "startMs": 60739,
+          "endMs": 61139,
+          "sourceStartSample": 87096,
+          "sourceEndSample": 103896,
+          "destinationSample": 1454136,
+          "gain": 0.72
+        },
+        {
+          "id": "i04",
+          "speaker": "tess",
+          "hostTurn": "t12",
+          "text": "Okay.",
+          "startMs": 91482,
+          "endMs": 91882,
+          "sourceStartSample": 226296,
+          "sourceEndSample": 243096,
+          "destinationSample": 2191968,
+          "gain": 0.72
+        }
+      ]
+    },
+    "requests": {
+      "opening_time": {
+        "inputs": [
+          {
+            "text": "So, Saturday. I think we have to give up on the courtyard. The forecast's got worse. We can have the small hall, but the craft group are in there until half past ten, and that's when they finish, not when the room's clear.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "Then eleven's the earliest. We need to get the tables in, run the cables... I'd rather not have people waiting around us while we do that.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "Hang on, let me check who's booked before eleven. Three. Two bikes and a toaster. Are we taking bikes inside?",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "Could they go under the awning?",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "With the repair stands there, we'd be blocking the doorway. And rain comes in sideways under that thing. I think we have to cancel the bikes this time.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60709,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "bookings_and_space": {
+        "inputs": [
+          {
+            "text": "Okay. I'll ring those two, then. I don't want them cycling over in the rain for nothing. Next month's session, or do we know somewhere sooner?",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "There's the bike workshop at the library next weekend. I'll check they've got spaces before we send anyone there.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "Thanks. And I've got eleven fifteen free for the toaster, if that suits them. Everything after eleven can stay as it is.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "How many tables can we actually fit?",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "Four comfortably. Two for electrical repairs, one for sewing, one for intake. No spare table for people to leave things on.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "That's fine. I'll keep the waiting list at the desk. People need to stay with their stuff anyway.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60710,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "owners_and_cutoff": {
+        "inputs": [
+          {
+            "text": "I'll update the website and the neighbourhood group tonight. And put a sign on the courtyard gate. Actually, I'll be there from ten until we open, because someone will have seen the old time.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "I'll tell the repair volunteers half ten for setup. Still finishing at one?",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "Yes, we can't keep everyone late.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "Last walk-ins at quarter past twelve, then? We can have a look, but I won't promise we'll fix it.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "Exactly. And we stop taking things earlier if the queue's full.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "Good. I'll make those three calls now.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60711,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "i01": {
+        "inputs": [
+          {
+            "text": "So, Saturday. I think we have to give up on the courtyard. The forecast's got worse. We can have the small hall, but the craft group are in there until half past ten.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "Right.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "and that's when they finish, not when the room's clear.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60810,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "i02": {
+        "inputs": [
+          {
+            "text": "With the repair stands there, we'd be blocking the doorway.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "Yeah.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "And rain comes in sideways under that thing. I think we have to cancel the bikes this time.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60811,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "i03": {
+        "inputs": [
+          {
+            "text": "Thanks. And I've got eleven fifteen free.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "Mm-hm.",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"
+          },
+          {
+            "text": "for the toaster, if that suits them. Everything after eleven can stay as it is.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60812,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      },
+      "i04": {
+        "inputs": [
+          {
+            "text": "I'll update the website and the neighbourhood group tonight. And put a sign on the courtyard gate. Actually, I'll be there from ten until we open.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          },
+          {
+            "text": "Okay.",
+            "voice_id": "pFZP5JQG7iQjIQuC4Bku"
+          },
+          {
+            "text": "because someone will have seen the old time.",
+            "voice_id": "Xb7hH8MSUJpSbSDYk0k2"
+          }
+        ],
+        "model_id": "eleven_v3",
+        "language_code": "en",
+        "seed": 60813,
+        "settings": {
+          "stability": 0.5
+        },
+        "apply_text_normalization": "off"
+      }
+    },
+    "transcriptNote": "Scribe timing is an editing/QA reference only. Cassini must recognize and align the multitrack audio independently.",
+    "tracks": [
+      {
+        "speaker": "maya",
+        "label": "Maya",
+        "file": "maya.wav",
+        "sampleRate": 24000,
+        "sampleCount": 2714424,
+        "sha256": "f26b4b75f2e627907f72fa8e7dc74afb7f89ba84fbaaa5b8b263d1c40b69f865"
+      },
+      {
+        "speaker": "jonah",
+        "label": "Jonah",
+        "file": "jonah.wav",
+        "sampleRate": 24000,
+        "sampleCount": 2714424,
+        "sha256": "d509646587e4f4b29371c5236cea089f6421fdfa9d0ae6fd1dca08c92d741dc5"
+      },
+      {
+        "speaker": "tess",
+        "label": "Tess",
+        "file": "tess.wav",
+        "sampleRate": 24000,
+        "sampleCount": 2714424,
+        "sha256": "83493bae1f9dbb189ebae912200cbae6d3f5dea708fbd7e9e0ee51a81a54e0ca"
+      }
+    ],
+    "multitrack": {
+      "file": "repair-cafe.multitrack.mka",
+      "bytes": 3241108,
+      "sha256": "274befc9995c1be30247c6d1fecfd84c6af33b11fac93c1ff681aadd5af0922c"
+    }
+  },
+  "cassiniProcessing": {
+    "producer": "Cassini CLI, actual per-track ASR and portable packing",
+    "baseCommit": "4c7f8bda30e9fc4f652f98ed31554734cb5c1b87",
+    "patch": {
+      "path": "site/scripts/cassini-vad-silence.patch",
+      "sha256": "c58707998557be5751434d695bb01e30d00a189cea5a2d77c1920e42d17040a9",
+      "license": "AGPL-3.0-only",
+      "summary": "Before fixed windows, split long VAD spans at sustained measured silence with 200 ms onset/tail context. Continuous speech retains existing windowing."
+    },
+    "binarySha256": "8356d600c72a2ee3c7e5a680a001fa66c34a82b446e8b978ff1ea2be3a9cef68",
+    "buildCommand": "go build -o /tmp/cassini-pipeline-final-bin ./cmd/cassini",
+    "configuration": {
+      "CASSINI_STT_QUALITY": "best",
+      "CASSINI_STT_NUM_THREADS": "6",
+      "CASSINI_STT_HINTS_DISABLED": "1",
+      "CASSINI_SUMMARY_DISABLED": "1",
+      "device": "cpu",
+      "backend": "sherpa-onnx",
+      "model": "parakeet-tdt-0.6b-v3"
+    },
+    "processScript": {
+      "path": "site/scripts/process-demo-cassini.sh",
+      "sha256": "f803116e5ef9dac4d0c955c5528ef053c2090b68f5bd95f6944f17686c8202ef"
+    },
+    "commands": [
+      [
+        "site/scripts/process-demo-cassini.sh",
+        "/tmp/cassini-pipeline-final-bin",
+        "/tmp/cassini-multitrack/repair-cafe.cassini-input.mkv",
+        "/tmp/cassini-multitrack/repair-cafe-final.cassini.opus"
+      ],
+      [
+        "site/scripts/process-demo-cassini.sh",
+        "/tmp/cassini-pipeline-final-bin",
+        "/tmp/cassini-multitrack/repair-cafe-excerpt.cassini-input.mkv",
+        "/tmp/cassini-multitrack/repair-cafe-excerpt-final.cassini.opus",
+        "Saturday repair café: the rain plan — excerpt"
+      ]
+    ],
+    "inputs": [
+      {
+        "file": "repair-cafe.cassini-input.mkv",
+        "sha256": "b4e55b75c3ee4feb7923759c5cc4310db96fdf99a79bb855600aa27dada2b95b",
+        "bytes": 3241014
+      },
+      {
+        "file": "repair-cafe-excerpt.cassini-input.mkv",
+        "sha256": "17a0ff065ff3e7826e77701a62276c26b1a828962926346c114b2a04500134bb",
+        "bytes": 1189355
+      }
+    ],
+    "outputs": [
+      {
+        "file": "repair-cafe-final.cassini.opus",
+        "fileSha256": "7dd82bdff9430c019d071ffac9679aeb563305cccc504c5f04ed6e640a46aac3",
+        "bytes": 899628,
+        "wordCount": 331,
+        "speakerCount": 3,
+        "durationMs": 113113,
+        "opusAudioSha256": "8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80"
+      },
+      {
+        "file": "repair-cafe-excerpt-final.cassini.opus",
+        "fileSha256": "a306039bbd96ae0bd494b9ad8f7d84043b0dd4e971c5d5632b97d90a734efb5f",
+        "bytes": 336383,
+        "wordCount": 126,
+        "speakerCount": 3,
+        "durationMs": 42493,
+        "opusAudioSha256": "f16c4752cda2d4f2ea5792d11bcf7f9c1ed73da0f0f91b81f40d18aa161d6f98"
+      }
+    ],
+    "validation": {
+      "tests": [
+        {
+          "command": "go test ./internal/transcribe",
+          "result": "passed (13.054s)"
+        },
+        {
+          "command": "go test ./internal/transcribe -run '^TestVADSilenceBounds' -count=1",
+          "result": "passed (0.013s)"
+        },
+        {
+          "command": "git diff --check",
+          "result": "passed"
+        },
+        {
+          "command": "git apply --reverse --check site/scripts/cassini-vad-silence.patch",
+          "result": "passed against patched worktree"
+        }
+      ],
+      "nativeAudioRegression": "Actual Jonah track now decodes complete table-allocation sentence using normal Cassini VAD; baseline omitted it.",
+      "independentReaders": "JavaScript browser reader and Python reader both loaded full and excerpt; Opus-packet digests independently verified.",
+      "fullTranscript": "All reference content and 4 overlapping acknowledgments recognized with correct speaker identities. Single remaining insertion: until repeated once. Orthographic and punctuation differences remain; no transcript edits.",
+      "excerptTranscript": "All reference content and 2 overlapping acknowledgments recognized; same until insertion.",
+      "codeReview": "Independent reviewer found a low-duty-cycle energy edge case; detector tightened and regression test added. No remaining concrete review findings."
+    },
+    "noScriptInput": true,
+    "notes": [
+      "The authored script and Scribe timings were used only to prepare and check synthetic source audio. Cassini received only the 3 labelled audio streams.",
+      "Cassini performed speech recognition, word timing, speaker attribution, mixing and packing. No recognized words were hand-corrected."
+    ]
+  },
+  "multitrack": {
+    "file": "repair-cafe.multitrack.mkv",
+    "bytes": 3241014,
+    "sha256": "b4e55b75c3ee4feb7923759c5cc4310db96fdf99a79bb855600aa27dada2b95b"
+  },
+  "outputs": [
+    {
+      "file": "repair-cafe.opus",
+      "bytes": 899628,
+      "durationMs": 113113,
+      "speakers": 3,
+      "words": 331,
+      "transcriptId": "raw-asr",
+      "sha256": "7dd82bdff9430c019d071ffac9679aeb563305cccc504c5f04ed6e640a46aac3",
+      "opusAudioSha256": "8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80",
+      "provenance": {
+        "speechToText": {
+          "raw-asr": {
+            "backend": "sherpa-onnx",
+            "model": "parakeet-tdt-0.6b-v3",
+            "device": "cpu",
+            "hints": {
+              "termCount": 3,
+              "decodingMethod": "greedy_search",
+              "applied": false,
+              "reason": "disabled by configuration (CASSINI_STT_HINTS_DISABLED)"
+            }
+          }
+        },
+        "attribution": {
+          "ran": true,
+          "mode": "annotate",
+          "wordsMeasured": 28,
+          "wordsFlagged": 0,
+          "wordsDropped": 0
+        },
+        "wordTimings": {
+          "endsBoundedByAudio": true
+        }
+      }
+    },
+    {
+      "file": "repair-cafe-excerpt.opus",
+      "bytes": 336383,
+      "durationMs": 42493,
+      "speakers": 3,
+      "words": 126,
+      "transcriptId": "raw-asr",
+      "sha256": "a306039bbd96ae0bd494b9ad8f7d84043b0dd4e971c5d5632b97d90a734efb5f",
+      "opusAudioSha256": "f16c4752cda2d4f2ea5792d11bcf7f9c1ed73da0f0f91b81f40d18aa161d6f98",
+      "provenance": {
+        "speechToText": {
+          "raw-asr": {
+            "backend": "sherpa-onnx",
+            "model": "parakeet-tdt-0.6b-v3",
+            "device": "cpu",
+            "hints": {
+              "termCount": 3,
+              "decodingMethod": "greedy_search",
+              "applied": false,
+              "reason": "disabled by configuration (CASSINI_STT_HINTS_DISABLED)"
+            }
+          }
+        },
+        "attribution": {
+          "ran": true,
+          "mode": "annotate",
+          "wordsMeasured": 11,
+          "wordsFlagged": 0,
+          "wordsDropped": 0
+        },
+        "wordTimings": {
+          "endsBoundedByAudio": true
+        }
+      }
+    }
+  ],
+  "transcriptSource": "Unedited Cassini recognition from separate participant audio tracks. No scripted words or external timestamps were supplied to Cassini."
+}

@@ -20,7 +20,7 @@ const SITE = path.resolve(HERE, '..');
 
 const candidates = [
 	process.argv[2],
-	path.join(SITE, 'static/demo/lantern-festival.opus')
+	path.join(SITE, 'static/demo/repair-cafe.opus')
 ].filter(Boolean);
 
 let file;
@@ -80,9 +80,9 @@ const bytes = (await readFile(file)).length;
 const words = body?.json?.items ?? [];
 const speakers = Object.fromEntries((manifest.json.speakers ?? []).map((s) => [s.id, s.label]));
 
-// A turn is a maximal run of consecutive items with the same speaker. No gap
-// heuristic: items are in speaker-turn order, not time order, and splitting on
-// a timestamp gap would break a turn wherever somebody paused.
+// These are raw speaker runs, useful for the reader quickstart. The Cassini UI
+// reconstructs full turns and inline interjections from chronological words;
+// a run here can end when a second speaker acknowledges the first mid-sentence.
 const turns = [];
 for (const w of words) {
 	const last = turns.at(-1);

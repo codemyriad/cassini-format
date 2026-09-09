@@ -14,6 +14,14 @@ npm run preview      # serve build/ locally
 
 ## Where the content comes from
 
+The homepage introduces the format with a playable example, an interactive
+file diagram and links to implementation guides. `/try/` opens the example or
+a local `.opus`/`.ogg` file in the shared transcript player; local files are
+read directly in the browser. The player uses Cassini’s transcript component,
+including inline interjections and word playback highlighting. Hover highlights
+individual words; click one to seek to it. `/demo/` keeps the separate song karaoke view. `/spec/` is the
+reference hub for the versioned contracts, schemas and conformance suite.
+
 Most of the site is not written here. The specification pages render
 `../SPEC.md` and `../spec/*.md` directly, and the design notes render
 `../design/*.md`, so those files stay the source of truth and stay readable on
@@ -35,9 +43,17 @@ the build instead of shipping.
 
 ## The demo file
 
-`static/demo/lantern-festival.opus` is a real
-`org.cassini.portable-meeting/1` file. Everything the site says about it comes
-out of the file itself:
+`static/demo/repair-cafe.opus` is a valid `org.cassini.portable-meeting/1` file:
+“Saturday repair café: the rain plan,” a fictional planning call between three
+volunteers. ElevenLabs v3 supplies the synthetic voices on three separate,
+synchronized speaker tracks, with four overlapping acknowledgments. Cassini's
+native pipeline processes those tracks, transcribes each speaker with Parakeet,
+and packs the recording and recognized word timings into the `.opus` file.
+The site copies Cassini's output without editing the transcript.
+
+`repair-cafe-excerpt.opus` is a shorter excerpt processed the same way.
+`repair-cafe.multitrack.mkv` contains the three lossless source tracks and is
+downloadable from `/try/`. The site's file facts come from the full `.opus` file:
 
 ```bash
 node scripts/gen-demo.mjs          # -> src/lib/generated/demo.json
@@ -49,7 +65,11 @@ Re-run it whenever the demo file changes; the numbers on the site update with it
 It is the only build step that needs `ffprobe`, and its output is committed, so a
 plain `npm run build` does not.
 
-See `static/demo/README.md` for how the file itself was made.
+See `static/demo/README.md` for the script and how the audio was made.
+
+The standalone readers and producer are CC0. The transcript interface is
+Cassini’s AGPL-3.0 component; its vendored source and license are included in
+`src/lib/vendor/cassini-viewer/`.
 
 ## Deploying
 
@@ -76,3 +96,41 @@ For a deploy under a subpath rather than a domain root, set `BASE_PATH`:
 ```bash
 BASE_PATH=/cassini-format npm run build
 ```
+
+## The Cassini transcript component
+
+The players mount Cassini's actual exported `MeetingView.svelte`, including its
+turn reconstruction, inline interjections, overlap labels, playback and follow
+behavior. This is a pinned source dependency, not a second transcript renderer.
+`src/lib/vendor/cassini-viewer/upstream.json` records the upstream commit and
+SHA-256 of every source file. The vendored component and model are **AGPL-3.0**;
+their upstream license is retained in that directory. This exception does not
+change the CC0 license of `src/lib/reader/cassini.ts` or the standalone readers.
+
+`src/lib/viewer/artifact.ts` adapts the format reader's verified manifest and
+words through Cassini's own portable projection. `CassiniView.svelte` mounts the
+component in a shadow root so its own stylesheet cannot affect the surrounding
+site; `embedding.css` only adapts the card layout and theme. Local files remain
+in browser memory and use a blob URL for playback.
+
+Word hover, seeking and playback highlighting come from Cassini's shared
+component, restored under [D-734](https://linear.app/code-myriad/issue/D-734/restore-word-level-transcript-highlighting-and-seeking-in-the-cassini).
+The site does not maintain a separate word renderer or playback index.
+The reproducible patch in `scripts/sync-viewer.mjs` adds only embedding fixes
+(scoped Space shortcuts, scrolling within the panel, playback errors) and
+TypeScript narrowing. Cassini owns word interactions, transcript wording,
+turn reconstruction and interjection placement. To update from a Cassini checkout:
+
+```bash
+node scripts/sync-viewer.mjs --from /path/to/gocassini --ref COMMIT
+npm run gen:viewer-css
+npm run test:viewer
+npm run check
+npm run build
+```
+
+`npm run build` checks the pinned source hashes and regenerates the component
+stylesheet. `npm run test:viewer` runs the upstream timing, overlap, playhead and
+transcript regression suites plus the format adapter and word playback tests. The
+upstream test files are excluded from the site's TypeScript diagnostics and run
+with their native Vitest runner.

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+	import { page } from '$app/state';
 	import type { Heading } from '$lib/markdown';
 
 	let {
@@ -24,6 +26,8 @@
 	} = $props();
 
 	let active = $state('');
+	let contentsOpen = $state(false);
+	const inReference = $derived(page.url.pathname.startsWith(`${base}/spec/`));
 
 	$effect(() => {
 		const targets = headings
@@ -45,27 +49,52 @@
 <div class="shell doc" class:doc--wide={headings.length <= 2}>
 	<article>
 		<header>
+			<nav class="doc-breadcrumb" aria-label="Breadcrumb">
+				<a href="{base}/">Home</a><span aria-hidden="true">/</span><a
+					href="{base}{inReference ? '/spec/' : '/#build'}"
+					>{inReference ? 'Specification' : 'Build with Cassini'}</a
+				>
+			</nav>
 			{#if kicker}<p class="eyebrow eyebrow--plain">{kicker}</p>{/if}
 			<h1>{title}</h1>
 			{#if lede}<p class="lede">{lede}</p>{/if}
 			{#if meta.length}
 				<dl class="meta">
 					{#each meta as m (m.label)}
-						<div><dt>{m.label}</dt><dd>{m.value}</dd></div>
+						<div>
+							<dt>{m.label}</dt>
+							<dd>{m.value}</dd>
+						</div>
 					{/each}
 				</dl>
 			{/if}
 			{#if banner}{@render banner()}{/if}
 		</header>
+		{#if headings.length > 2}
+			<details class="mobile-contents" bind:open={contentsOpen}>
+				<summary>On this page</summary>
+				<nav aria-label="On this page, mobile">
+					<ul>
+						{#each headings.filter((h) => h.depth <= 2) as h (h.id)}<li>
+								<a href="#{h.id}" onclick={() => (contentsOpen = false)}>{h.text}</a>
+							</li>{/each}
+					</ul>
+				</nav>
+			</details>
+		{/if}
 
 		<div class="prose">{@html html}</div>
 
 		{#if source}
 			<p class="src">
-				Rendered from <a href={sourceHref} rel="noreferrer"><code>{source}</code></a> in the
-				repository.
+				Rendered from <a href={sourceHref} rel="noreferrer"><code>{source}</code></a> in the repository.
 			</p>
 		{/if}
+		<nav class="doc-next" aria-label="Continue reading">
+			<a href="{base}/consume/">Read a file →</a><a href="{base}/produce/">Write a file →</a><a
+				href="{base}/spec/">Specification & schemas →</a
+			>
+		</nav>
 	</article>
 
 	{#if headings.length > 2}
@@ -85,6 +114,45 @@
 </div>
 
 <style>
+	.doc-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		font-size: 12px;
+		margin-bottom: 2rem;
+		color: var(--fg-4);
+	}
+	.doc-breadcrumb a {
+		color: var(--fg-4);
+	}
+	.mobile-contents {
+		display: none;
+		border: 1px solid var(--rule);
+		border-radius: 4px;
+		margin: 0 0 2rem;
+		padding: 0.7rem 1rem;
+		font-size: 14px;
+	}
+	.mobile-contents summary {
+		cursor: pointer;
+		color: var(--fg);
+	}
+	.mobile-contents ul {
+		padding-left: 1.2rem;
+		margin-bottom: 0.5rem;
+	}
+	.mobile-contents li {
+		margin-block: 0.5rem;
+	}
+	.doc-next {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 2rem;
+		margin-top: 3rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--rule);
+		font-size: 14px;
+	}
 	.doc {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) 15rem;
@@ -97,6 +165,9 @@
 		grid-template-columns: minmax(0, 1fr);
 	}
 	@media (max-width: 1050px) {
+		.mobile-contents {
+			display: block;
+		}
 		.doc {
 			grid-template-columns: minmax(0, 1fr);
 			gap: 0;
@@ -107,7 +178,7 @@
 	}
 	article {
 		min-width: 0;
-		max-width: 82ch;
+		max-width: 88ch;
 	}
 	header {
 		border-bottom: 1px solid var(--rule);
@@ -251,7 +322,7 @@
 		width: 100%;
 		border-collapse: collapse;
 		margin: 1.5rem 0;
-		font-size: 12.5px;
+		font-size: 14px;
 		display: block;
 		overflow-x: auto;
 	}

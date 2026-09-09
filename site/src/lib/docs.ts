@@ -22,7 +22,13 @@ export async function splitSpec() {
 	const parts = new Map<string, string>();
 	cuts.forEach((cut, i) => {
 		const end = cuts[i + 1]?.at ?? lines.length;
-		parts.set(cut.name, lines.slice(cut.at + 1, end).join('\n').trim());
+		parts.set(
+			cut.name,
+			lines
+				.slice(cut.at + 1, end)
+				.join('\n')
+				.trim()
+		);
 	});
 	return { raw, parts };
 }
@@ -57,13 +63,16 @@ export type DesignDoc = { slug: string; file: string; title: string; date: strin
  * The design notes the site publishes, in order. Other files in design/ are
  * historical and stay in the repository only.
  */
-const DESIGN_ORDER = ['packet-digest', 'multi-transcription', 'operator-sealing', 'format-simplification-2026-09-07'];
+const DESIGN_ORDER = [
+	'packet-digest',
+	'multi-transcription',
+	'operator-sealing',
+	'format-simplification-2026-09-07'
+];
 
 export async function listDesignDocs(): Promise<DesignDoc[]> {
 	const dir = path.join(REPO, 'design');
-	const files = (await readdir(dir)).filter((f) =>
-		DESIGN_ORDER.includes(f.replace(/\.md$/, ''))
-	);
+	const files = (await readdir(dir)).filter((f) => DESIGN_ORDER.includes(f.replace(/\.md$/, '')));
 	const docs = await Promise.all(
 		files.map(async (file) => {
 			const text = await readFile(path.join(dir, file), 'utf8');
@@ -75,7 +84,11 @@ export async function listDesignDocs(): Promise<DesignDoc[]> {
 				.filter((l) => !/^(#|Date|Status|Source|Author)/.test(l.trim()))
 				.join('\n')
 				.trim();
-			const blurb = (body.split(/\n\s*\n/)[0] ?? '').replace(/\s+/g, ' ').slice(0, 240);
+			const blurb = (body.split(/\n\s*\n/)[0] ?? '')
+				.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+				.replace(/[`*_]/g, '')
+				.replace(/\s+/g, ' ')
+				.slice(0, 240);
 			return { slug: file.slice(0, -3), file: `design/${file}`, title, date, blurb };
 		})
 	);

@@ -5,361 +5,823 @@
 	import Player from '$lib/components/Player.svelte';
 
 	let { data } = $props();
-
-	const kb = (n: number) => `${Math.round(n / 1024).toLocaleString()} KB`;
+	let layer = $state(1);
 	const mb = (n: number) => `${(n / 1024 / 1024).toFixed(2)} MB`;
-	const mins = (ms: number) => {
-		const total = Math.round(ms / 1000);
-		return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
-	};
-	const pct = $derived(((data.demo.gzipBytes / data.demo.bytes) * 100).toFixed(1));
+	const minutes = (ms: number) =>
+		`${Math.floor(ms / 60000)}:${String(Math.floor((ms % 60000) / 1000)).padStart(2, '0')}`;
+	const layers = [
+		{
+			name: 'Audio',
+			detail: 'The original recording',
+			label: 'Plays in an ordinary Opus player',
+			description:
+				'The recording is standard Ogg Opus audio. Players that do not understand Cassini can still play it. Adding a transcript leaves the compressed audio packets intact.',
+			code: 'meeting.opus\n├── OpusHead   codec information\n├── OpusTags   embedded metadata\n└── Opus audio recording'
+		},
+		{
+			name: 'Transcript',
+			detail: 'Every word, with its time',
+			label: 'Words you can read, search and seek',
+			description:
+				'Word timestamps and speaker labels live in the audio file’s comment header. A Cassini reader turns them into a transcript you can navigate. Multiple transcripts can share the same recording.',
+			code: ''
+		},
+		{
+			name: 'Context',
+			detail: 'Speakers, source and integrity',
+			label: 'Enough context to use it again',
+			description:
+				'A manifest connects the speakers and transcripts, with optional processing provenance. An audio digest lets a reader check whether the transcript still belongs to this recording.',
+			code: 'OpusTags\n├── Title and readable summary tags\n├── Manifest → speakers, transcripts\n├── Transcript bodies → timed words\n└── Audio digest → recording match'
+		}
+	];
 </script>
 
 <svelte:head>
-	<title>Cassini — an audio file format with the transcript embedded</title>
+	<title>Cassini — the recording, the words, one file</title>
 	<meta name="description" content={site.description} />
 </svelte:head>
 
-<section class="hero shell">
-	<p class="kicker">
-		<span class="tick">{site.formatId}</span>
-		<span class="sep">·</span>
-		<span>audio/ogg</span>
-		<span class="sep">·</span>
-		<span>no new extension</span>
-	</p>
-
-	<h1>An ordinary audio file that carries its own transcript.</h1>
-
-	<p class="lede">
-		A Cassini file is a normal <code>.opus</code> recording: Ogg Opus at 48&nbsp;kHz, and any player
-		plays it. It also carries who spoke, what they said with word-level timestamps, and what
-		produced that text, embedded in the same place <code>TITLE</code> and <code>ARTIST</code> live.
-		One file format for audio and text, with no sidecar to lose.
-	</p>
-
-	<div class="hero__dump">
-		<TagDump
-			rows={data.rows}
-			count={data.demo.commentCount}
-			title="lantern-festival.opus"
-			command="ffprobe -v error -show_entries stream_tags -of default=nw=1 meeting.opus"
-			max={14}
-			note="Real output, with the payload chunks hidden. Tags sort ASCII: that is the order the producer writes them."
-		/>
+<section class="hero shell" aria-labelledby="hero-title">
+	<div class="hero-copy">
+		<a class="release" href="{base}/status/"
+			><span class="release-dot"></span> Open format
+			<span class="release-divider">/</span>
+			Version 1 <span aria-hidden="true">↗</span></a
+		>
+		<h1 id="hero-title">
+			The recording.<br />The words.<br /><span>One file.</span>
+		</h1>
+		<p class="hero-lede">An ordinary audio file that carries its own transcript.</p>
+		<p class="hero-description">
+			Cassini keeps audio, word timestamps and speaker labels together in a single <code>.opus</code
+			> file. Send it, save it, build on it. The words travel with the recording.
+		</p>
+		<div class="actions">
+			<a class="button button--primary" href="{base}/try/"
+				>Try a file <span aria-hidden="true">→</span></a
+			>
+			<a class="button" href="#build">Build with Cassini</a>
+		</div>
+		<p class="hero-note">Standard Ogg Opus. Open specification. No sidecar to lose.</p>
 	</div>
 
-	<div class="cta">
-		<a class="btn btn--go" href="{base}/spec/v1/">Read the spec</a>
-		<a class="btn" href="{base}/consume/">Read a file</a>
-		<a class="btn" href="{base}/produce/">Write a file</a>
-		<a class="btn btn--dl" href="{base}/demo/lantern-festival.opus" download>
-			Download that file <span>{mb(data.demo.bytes)}</span>
-		</a>
-	</div>
-</section>
-
-<section class="shell band">
-	<p class="eyebrow">Three commitments</p>
-	<div class="grid grid--3">
-		<div class="cell">
-			<p class="n">01</p>
-			<h3>It degrades to audio</h3>
+	<div class="example" id="example">
+		<div class="example-top">
+			<span class="eyebrow eyebrow--plain">Listen & follow along</span><span class="file-type"
+				>.opus</span
+			>
+		</div>
+		<div class="example-heading">
+			<h2>{data.demo.title}</h2>
 			<p>
-				Understand nothing and you still play the recording. Understand the tags and you get
-				everything.
+				{data.demo.speakers} speakers <span>·</span>
+				{minutes(data.demo.durationMs)} <span>·</span> Click a word to seek
 			</p>
 		</div>
-		<div class="cell">
-			<p class="n">02</p>
-			<h3>Keep what a better model could use</h3>
-			<p>
-				The original words and their timings stay available beside display text, with provenance
-				naming the engine, model and device. Another model's transcript can live in the same file
-				for comparison.
-			</p>
+		<Player src="{base}/demo/{data.demo.filename}" fallbackTitle={data.demo.title} compact />
+		<div class="example-bottom">
+			<span>Audio + transcript, from the same file</span>
+			<a href="{base}/demo/{data.demo.filename}" download
+				>Download <span>{mb(data.demo.bytes)}</span>
+				<span aria-hidden="true">↓</span></a
+			>
 		</div>
-		<div class="cell">
-			<p class="n">03</p>
-			<h3>The digest binds transcript to recording</h3>
-			<p>
-				A SHA-256 over the Opus packets, answering one question: is this transcript describing this
-				recording? It catches accidents, not adversaries.
-			</p>
-		</div>
+		<p class="fixture-note">
+			Three fictional volunteers, voiced with ElevenLabs v3 on separate speaker tracks. Cassini
+			transcribed the recording and produced this file. <a href="{base}/demo/README.md"
+				>About this example</a
+			>
+		</p>
 	</div>
 </section>
 
-<section class="shell band">
-	<p class="eyebrow">See for yourself</p>
-	<div class="two">
+<div class="shell">
+	<div class="facts" aria-label="Format at a glance">
 		<div>
-			<p>
-				Two layers. The first is plain tags any tool shows: title, date, speaker count,
-				the digests, and a decode hint explaining the second layer in one sentence. Someone with
-				<code>ffprobe</code> and no documentation should be able to work this out alone.
-			</p>
-			<p>
-				The second is the payload: compact UTF-8 JSON, gzipped, base64url-encoded, split across
-				numbered tags small enough to keep the comment header readable. It decodes in one pipeline,
-				using nothing you don't already have.
-			</p>
-			<p class="muted">
-				The <code>awk</code> line re-pads: the producer writes unpadded base64url and GNU
-				<code>basenc</code> demands padding.
-			</p>
+			<strong>One .opus file</strong><span>Audio and text together</span>
 		</div>
-		<div class="code">
-			<div class="code__bar">
-				<span>bash</span><button class="copy" type="button" data-copy>copy</button>
+		<div>
+			<strong>Word-level timing</strong><span>Read, search and jump to speech</span>
+		</div>
+		<div>
+			<strong>Ordinary playback</strong><span>Works in players that support Opus</span>
+		</div>
+		<div>
+			<strong>Open to implement</strong><span>CC0 schemas and reader code</span>
+		</div>
+	</div>
+</div>
+
+<section class="shell section" aria-labelledby="why-title">
+	<div class="section-heading">
+		<p class="eyebrow eyebrow--plain">01 / Why keep them together?</p>
+		<h2 id="why-title">
+			A recording is more useful<br />with the words attached.
+		</h2>
+		<p>
+			A transcript should survive the trip from the tool that made it to the person who needs it.
+		</p>
+	</div>
+	<div class="benefits">
+		<article>
+			<span class="benefit-mark" aria-hidden="true">↗</span>
+			<h3>Share the whole conversation</h3>
+			<p>
+				A meeting recording, interview or podcast can carry who said what. Copy one file and its
+				transcript comes along.
+			</p>
+		</article>
+		<article>
+			<span class="benefit-mark" aria-hidden="true">↔</span>
+			<h3>Choose how to use it</h3>
+			<p>
+				Listen in an Opus player. Read and seek in a Cassini viewer. The format also works for <a
+					href="{base}/demo/">music with synchronized lyrics</a
+				>.
+			</p>
+		</article>
+		<article>
+			<span class="benefit-mark" aria-hidden="true">↻</span>
+			<h3>Keep it useful for later</h3>
+			<p>
+				Original words and timings can sit beside display text and additional transcripts, with
+				provenance recording what produced them.
+			</p>
+		</article>
+	</div>
+</section>
+
+<section class="shell section" aria-labelledby="inside-title">
+	<div class="section-heading">
+		<p class="eyebrow eyebrow--plain">02 / Inside the file</p>
+		<h2 id="inside-title">Audio underneath. Context built in.</h2>
+		<p>
+			Cassini adds metadata where an audio file already keeps its title and artist: the OpusTags
+			header.
+		</p>
+	</div>
+	<div class="anatomy">
+		<div class="file-stack" aria-label="Explore the file layers">
+			<div class="file-stack-title">
+				<svg
+					width="20"
+					height="24"
+					viewBox="0 0 20 24"
+					fill="none"
+					stroke="currentColor"
+					aria-hidden="true"><path d="M2 1h10l6 6v16H2zM12 1v6h6" /></svg
+				><span>meeting.opus</span><span class="stack-note">one file</span>
 			</div>
-			{@html data.decodeHtml}
+			{#each layers as item, i (item.name)}
+				<button
+					class="layer"
+					class:selected={layer === i}
+					aria-pressed={layer === i}
+					aria-controls="layer-detail"
+					onclick={() => (layer = i)}
+					><span class="layer-number">0{i + 1}</span><span
+						><strong>{item.name}</strong><small>{item.detail}</small></span
+					><span class="layer-arrow" aria-hidden="true">↗</span></button
+				>
+			{/each}
+			<p class="stack-caption">Same extension. Same audio. More to work with.</p>
+		</div>
+		<div class="layer-detail" id="layer-detail" aria-live="polite" aria-atomic="true">
+			<p class="eyebrow eyebrow--plain">{layers[layer].name}</p>
+			<h3>{layers[layer].label}</h3>
+			<p>{layers[layer].description}</p>
+			<div class="code">
+				<div class="code__bar">
+					<span>{layer === 1 ? 'A word from the example file' : 'File structure · schematic'}</span>
+				</div>
+				{#if layer === 1}{@html data.wordHtml}{:else}<pre><code>{layers[layer].code}</code
+						></pre>{/if}
+			</div>
 		</div>
 	</div>
-
-	<div class="two two--tight">
-		<div class="code">
-			<div class="code__bar"><span>the manifest that comes out</span></div>
-			{@html data.manifestHtml}
+	<details class="inspect">
+		<summary
+			><span>Look at the actual tags and decoded manifest</span><span class="inspect-hint"
+				>For a closer look</span
+			></summary
+		>
+		<div class="inspect-body">
+			<p>
+				The manifest and each transcript are UTF-8 JSON, gzipped, base64url-encoded and split across
+				numbered comments. These values come from the downloadable example.
+			</p>
+			<TagDump
+				rows={data.rows}
+				count={data.demo.commentCount}
+				title={data.demo.filename}
+				max={8}
+				note="Payload values are shortened for display."
+			/>
+			<div class="code">
+				<div class="code__bar"><span>Decoded manifest</span></div>
+				{@html data.manifestHtml}
+			</div>
+			<a class="text-link" href="{base}/consume/">Learn how to extract and verify the payload →</a>
 		</div>
-		<div class="code">
-			<div class="code__bar"><span>and a transcript body, one item per word</span></div>
-			{@html data.wordsHtml}
-		</div>
-	</div>
-</section>
-
-<section class="shell band">
-	<p class="eyebrow">Try it on the actual file</p>
-	<p class="lede">
-		Nothing is loaded from anywhere else. The player fetches the same <code>.opus</code> you can
-		download, walks its Ogg pages in JavaScript, reassembles the chunks, inflates them with
-		<code>DecompressionStream</code>, checks the manifest and transcript digests, and plays. The audio
-		digest is not checked in the browser, so the reader says <code>unverified</code>, as the spec
-		requires.
+	</details>
+	<p class="size-note">
+		In this example, the compressed manifest and transcript total <strong
+			>{(data.demo.gzipBytes / 1024).toFixed(1)} KB</strong
+		>
+		in a <strong>{mb(data.demo.bytes)}</strong> file. These sizes exclude base64 encoding and tag overhead.
 	</p>
-	<p class="muted">
-		The words are the script the voices read, with timings derived from the speech renderer.
-		Segment timings are measured from the render; word timings inside a segment are interpolated,
-		and the file says so.
-	</p>
-	<Player
-		src="{base}/demo/lantern-festival.opus"
-		fallbackTitle={data.demo.title}
-	/>
 </section>
 
-<section class="shell band">
-	<p class="eyebrow">Where it comes from</p>
-	<div class="grid grid--2">
-		<div class="cell">
-			<h3>gocassini</h3>
+<section class="shell section" id="build" aria-labelledby="build-title">
+	<div class="section-heading">
+		<p class="eyebrow eyebrow--plain">03 / Make something with it</p>
+		<h2 id="build-title">Start with a file. Build from there.</h2>
+		<p>Copy a reader, use the Python producer, or implement the specification in your own stack.</p>
+	</div>
+	<div class="paths">
+		<a class="path" href="{base}/consume/"
+			><span class="path-label">Extract & display</span>
+			<h3>Read a file <span aria-hidden="true">→</span></h3>
 			<p>
-				We built gocassini to record and transcribe Nextcloud Talk calls, and it writes every meeting
-				this way. It is the reference producer and reader, AGPL-3.0, and so far the only one in use.
+				Get the transcript out in Python or JavaScript. Learn how to decode, verify and handle
+				incomplete metadata.
 			</p>
-			<p><a href={site.implRepo} rel="noreferrer">github.com/codemyriad/gocassini ↗</a></p>
-		</div>
-		<div class="cell">
-			<h3>Published so you can use it too</h3>
+			<span class="path-meta">Guide + working readers</span></a
+		>
+		<a class="path" href="{base}/produce/"
+			><span class="path-label">Pack & preserve</span>
+			<h3>Write a file <span aria-hidden="true">→</span></h3>
 			<p>
-				This repository has three readers and a complete producer, all CC0: a Python extractor over
-				<code>ffprobe</code>, one with no external tools, a browser reader with no dependencies, and a
-				producer in stdlib Python. The same format carries
-				<a href="{base}/demo/">a song with synchronized lyrics in one audio file</a> as easily as
-				a meeting.
+				Combine an Opus recording with a word-timed transcript using a complete producer in
+				standard-library Python.
 			</p>
+			<span class="path-meta">Guide + working producer</span></a
+		>
+		<a class="path" href="{base}/spec/"
+			><span class="path-label">Implement & validate</span>
+			<h3>Use the specification <span aria-hidden="true">→</span></h3>
 			<p>
-				<a href="{base}/consume/">Read one</a> · <a href="{base}/produce/">Write one</a> ·
-				<a href="{base}/llms-full.txt">the whole spec in one file</a> ·
-				<a href="{base}/status/">status</a>
+				Find the v1 contract, transcript format, audio digest, JSON Schemas and conformance suite in
+				one place.
 			</p>
-		</div>
+			<span class="path-meta">Reference + test vectors</span></a
+		>
+	</div>
+	<div class="build-note">
+		<p>Working with a coding assistant?</p>
+		<a href="{base}/llms-full.txt"
+			>Give it the complete specification in one text file <span aria-hidden="true">↗</span></a
+		>
 	</div>
 </section>
 
-<section class="shell band">
-	<p class="eyebrow">What it costs</p>
-	<div class="grid grid--2 stats">
-		<div>
-			<p class="stat">{pct}%</p>
-			<p class="statlab">
-				of the demo file is transcript: {kb(data.demo.gzipBytes)} on {mb(data.demo.bytes)} of audio.
-			</p>
-		</div>
-		<div>
-			<p class="stat">{data.demo.words.toLocaleString()}</p>
-			<p class="statlab">
-				word-timed items, {data.demo.speakers} speakers, {mins(data.demo.durationMs)} of speech, in
-				{data.demo.commentCount} Vorbis comments.
-			</p>
-		</div>
+<section class="shell section questions" aria-labelledby="questions-title">
+	<div class="section-heading">
+		<p class="eyebrow eyebrow--plain">Before you build</p>
+		<h2 id="questions-title">A few useful boundaries.</h2>
+		<p>
+			Version 1 is published and used by <a href={site.implRepo}>gocassini</a>, the reference
+			implementation. The ecosystem is still small.
+			<a href="{base}/status/">Read the project status →</a>
+		</p>
 	</div>
-</section>
-
-<section class="shell band">
-	<p class="eyebrow">What it doesn't do</p>
-	<div class="grid grid--2">
-		<div class="cell">
-			<h3>It doesn't model transcript history</h3>
+	<div class="faq">
+		<details>
+			<summary>Does Cassini create the transcript?</summary>
 			<p>
-				A reprocessed file replaces its predecessor. Provenance records what made the current
-				transcript, not what came before.
+				The format stores a transcript you already have. Recording and speech recognition happen in
+				a producer such as <a href={site.implRepo}>gocassini</a>. The standalone Python producer
+				takes audio and timed words as input.
 			</p>
-		</div>
-		<div class="cell">
-			<h3>It doesn't survive audio edits</h3>
+		</details>
+		<details>
+			<summary>Do listeners need a Cassini app?</summary>
 			<p>
-				Cut the audio in an editor that has never heard of Cassini and the digest stops matching.
-				What is left is a plain recording with stale metadata.
+				They need a player that supports Ogg Opus to hear the audio. A Cassini reader is needed to
+				display the embedded words and speaker labels. <a href="{base}/try/">The browser reader</a> is
+				one example.
 			</p>
-		</div>
-		<div class="cell">
-			<h3>It doesn't prove authenticity</h3>
+		</details>
+		<details>
+			<summary>What happens if the audio is edited?</summary>
 			<p>
-				Anyone who rewrites the transcript can recompute every hash and the file still verifies.
+				Audio edits can leave the embedded transcript out of date. A reader that checks the audio
+				digest can detect a mismatch and label the transcript as stale. Software may also strip
+				metadata, so check files after editing or converting them.
 			</p>
-		</div>
-		<div class="cell">
-			<h3>It doesn't claim a name of its own</h3>
+		</details>
+		<details>
+			<summary>Do the digests prove authenticity?</summary>
 			<p>
-				No new extension, media type or magic bytes: the file is <code>audio/ogg</code>. It has to
-				keep working in software that will never be updated for it.
+				No. They check that data matches, including whether a transcript refers to the same audio.
+				Anyone rewriting a file can recompute its hashes. Cassini does not provide signatures or
+				proof of who said something.
 			</p>
-		</div>
+		</details>
+		<details>
+			<summary>Can I implement it in my own software?</summary>
+			<p>
+				Yes. The schemas, test vectors and standalone readers and producer are CC0. The
+				specification text is CC BY 4.0. The transcript interface shown here comes from Cassini and
+				is AGPL-3.0, as is the gocassini application. <a href="{base}/spec/"
+					>Start with the reference →</a
+				>
+			</p>
+		</details>
 	</div>
 </section>
 
 <style>
 	.hero {
-		/* Block only: .shell owns the inline gutter, and the `padding`
-		   shorthand would reset it to zero. */
-		padding-block: clamp(3rem, 8vh, 6rem) 1rem;
+		display: grid;
+		grid-template-columns: 0.95fr 1.05fr;
+		gap: clamp(2rem, 5vw, 4.5rem);
+		align-items: center;
+		padding-block: clamp(3rem, 6vw, 5.5rem) 4rem;
 	}
-	.kicker {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0 0.5rem;
-		margin: 0;
-		font-size: 11px;
-		line-height: 1.7;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--fg-4);
-		max-width: none;
+	.hero-copy {
+		min-width: 0;
 	}
-	.tick {
-		color: var(--blue);
-	}
-	.sep {
-		color: var(--fg-5);
-		margin: 0 0.15rem;
-	}
-	.hero h1 {
-		margin: 1.4rem 0 1.6rem;
-		max-width: 22ch;
-	}
-	.hero .lede + .lede {
-		color: var(--fg-3);
-	}
-	.hero__dump {
-		margin: 2.2rem 0 1.6rem;
-	}
-	.cta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.6rem;
-	}
-	.btn {
+	.release {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
-		border: 1px solid var(--rule);
-		background: var(--bg-raise);
-		color: var(--fg-2);
-		padding: 0.5rem 0.9rem;
-		font-size: 13px;
+		gap: 0.65rem;
+		font: 11px var(--mono);
+		color: var(--fg-3);
 	}
-	.btn:hover {
-		color: var(--fg);
-		border-color: var(--rule-hi);
-		background: var(--bg-raise-hi);
-		text-decoration: none;
+	.release-dot {
+		width: 6px;
+		height: 6px;
+		background: var(--green);
+		border-radius: 50%;
 	}
-	.btn--go {
-		border-color: var(--blue-rule);
-		background: var(--blue-wash);
-		color: var(--blue);
-	}
-	.btn--go:hover {
-		color: var(--blue);
-		border-color: var(--blue);
-	}
-	.btn--dl span {
+	.release-divider {
 		color: var(--fg-5);
+	}
+	h1 {
+		font-size: clamp(3rem, 5.3vw, 4.8rem);
+		line-height: 1.04;
+		letter-spacing: -0.06em;
+		margin: 1.6rem 0;
+	}
+	h1 > span {
+		color: var(--blue);
+	}
+	.hero-lede {
+		color: var(--fg);
+		font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+		line-height: 1.4;
+		max-width: 30ch;
+		margin-bottom: 0.85rem;
+	}
+	.hero-description {
+		max-width: 46ch;
+		font-size: 16px;
+	}
+	.hero .actions {
+		margin-top: 1.8rem;
+	}
+	.hero-note {
+		margin: 1.1rem 0 0;
+		color: var(--fg-4);
+		font-size: 12px;
+	}
+	.example {
+		min-width: 0;
+		border: 1px solid var(--rule-hi);
+		border-radius: 9px;
+		background: var(--bg-raise);
+		box-shadow: 0 18px 60px #00000012;
+	}
+	.example-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid var(--rule);
+		padding: 1rem 1.3rem;
+	}
+	.example-top .eyebrow {
+		color: var(--blue);
+	}
+	.file-type {
+		font: 11px var(--mono);
+		color: var(--fg-4);
+	}
+	.example-heading {
+		padding: 1.3rem 1.3rem 1rem;
+	}
+	.example-heading h2 {
+		font-size: 19px;
+		line-height: 1.4;
+		letter-spacing: -0.02em;
+	}
+	.example-heading p {
+		font-size: 12px;
+		margin: 0.45rem 0 0;
+		color: var(--fg-4);
+	}
+	.example-heading p span {
+		margin-inline: 0.25rem;
+	}
+	.example-bottom {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem;
+		padding: 0.9rem 1.3rem;
 		font-size: 11px;
+		border-top: 1px solid var(--rule);
+		color: var(--fg-4);
 	}
-
-	.band {
-		padding-top: 4.5rem;
+	.example-bottom a {
+		font-weight: 600;
 	}
-	.band > .eyebrow {
-		margin-bottom: 1.6rem;
+	.example-bottom a span {
+		margin-left: 0.2rem;
 	}
-	.band > .lede {
-		margin-bottom: 1.8rem;
+	.fixture-note {
+		padding: 0 1.3rem 1rem;
+		margin: 0;
+		font-size: 11px;
+		color: var(--fg-4);
 	}
-
-	.two {
+	.fixture-note a {
+		color: inherit;
+		text-decoration: underline;
+	}
+	.facts {
 		display: grid;
-		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-		gap: 2rem;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1.5rem;
+		border-block: 1px solid var(--rule);
+		padding-block: 1.75rem;
+	}
+	.facts div {
+		display: grid;
+		gap: 0.3rem;
+	}
+	.facts strong {
+		color: var(--fg);
+		font-size: 14px;
+		font-weight: 600;
+	}
+	.facts span {
+		font-size: 12px;
+		color: var(--fg-4);
+	}
+	.section {
+		padding-top: clamp(4rem, 8vw, 6.5rem);
+	}
+	.section-heading {
+		max-width: 700px;
+		margin-bottom: 2.5rem;
+	}
+	.section-heading .eyebrow {
+		color: var(--blue);
+		margin-bottom: 1rem;
+	}
+	.section-heading h2 {
+		margin-bottom: 1rem;
+	}
+	.section-heading > p:last-child {
+		max-width: 59ch;
+		margin-bottom: 0;
+		font-size: 16px;
+	}
+	.benefits {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 2.5rem;
+	}
+	.benefits article {
+		border-top: 1px solid var(--rule-hi);
+		padding-top: 1.4rem;
+	}
+	.benefit-mark {
+		color: var(--blue);
+		font: 26px var(--mono);
+	}
+	.benefits h3 {
+		margin: 1rem 0 0.7rem;
+	}
+	.benefits p {
+		font-size: 15px;
+		margin: 0;
+	}
+	.anatomy {
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: 4rem;
 		align-items: start;
 	}
-	.two--tight {
-		margin-top: 1.5rem;
+	.file-stack {
+		border: 1px solid var(--rule-hi);
+		border-radius: 7px;
+		overflow: hidden;
+	}
+	.file-stack-title {
+		display: flex;
+		gap: 0.75rem;
+		align-items: center;
+		padding: 1.25rem;
+		font: 14px var(--mono);
+		color: var(--fg);
+		border-bottom: 1px solid var(--rule);
+	}
+	.file-stack-title svg {
+		color: var(--blue);
+	}
+	.stack-note {
+		margin-left: auto;
+		color: var(--fg-4);
+		font-size: 11px;
+	}
+	.layer {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		padding: 1.15rem 1.25rem;
+		text-align: left;
+		border: 0;
+		border-bottom: 1px solid var(--rule);
+		background: transparent;
+		color: var(--fg-2);
+		cursor: pointer;
+	}
+	.layer:hover {
+		background: var(--bg-raise);
+	}
+	.layer.selected {
+		background: var(--blue-wash);
+		box-shadow: inset 3px 0 var(--blue);
+	}
+	.layer:focus-visible {
+		outline-offset: -3px;
+	}
+	.layer-number {
+		font: 11px var(--mono);
+		color: var(--fg-4);
+	}
+	.layer strong {
+		display: block;
+		font-size: 17px;
+		font-weight: 600;
+		color: var(--fg);
+	}
+	.layer small {
+		font-size: 13px;
+		color: var(--fg-4);
+	}
+	.layer-arrow {
+		margin-left: auto;
+		color: var(--fg-4);
+	}
+	.layer.selected .layer-arrow,
+	.layer.selected strong {
+		color: var(--blue);
+	}
+	.stack-caption {
+		margin: 0;
+		padding: 0.9rem 1.25rem;
+		font-size: 12px;
+		color: var(--fg-4);
+	}
+	.layer-detail {
+		min-width: 0;
+	}
+	.layer-detail .eyebrow {
+		margin: 0.3rem 0 1rem;
+	}
+	.layer-detail h3 {
+		margin-bottom: 0.8rem;
+	}
+	.layer-detail > p {
+		font-size: 15px;
+	}
+	.layer-detail .code {
+		border-radius: 5px;
+	}
+	.layer-detail .code pre {
+		min-height: 165px;
+	}
+	.inspect {
+		border-block: 1px solid var(--rule);
+		margin-top: 2.5rem;
+	}
+	.inspect summary {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		cursor: pointer;
+		padding-block: 1.1rem;
+		font-size: 14px;
+		color: var(--fg);
+		list-style: none;
+	}
+	.inspect summary::before {
+		content: '+';
+		color: var(--blue);
+		font: 18px var(--mono);
+	}
+	.inspect[open] summary::before {
+		content: '−';
+	}
+	.inspect summary::-webkit-details-marker {
+		display: none;
+	}
+	.inspect-hint {
+		margin-left: auto;
+		color: var(--fg-4);
+		font-size: 12px;
+	}
+	.inspect-body {
+		padding-bottom: 1.5rem;
+		display: grid;
+		gap: 1rem;
+		min-width: 0;
+	}
+	.inspect-body > p {
+		font-size: 14px;
+		margin: 0;
+	}
+	.inspect-body .code {
+		max-height: 420px;
+		overflow: auto;
+	}
+	.size-note {
+		font-size: 12px;
+		color: var(--fg-4);
+		margin-top: 1rem;
+		max-width: 100ch;
+	}
+	.size-note strong {
+		color: var(--fg-2);
+	}
+	.paths {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		border: 1px solid var(--rule-hi);
+		border-radius: 7px;
+		overflow: hidden;
+	}
+	.path {
+		padding: 1.6rem;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		border-right: 1px solid var(--rule);
+	}
+	.path:last-child {
+		border: 0;
+	}
+	.path:hover {
+		text-decoration: none;
+		background: var(--blue-wash);
+	}
+	.path-label {
+		font: 10px var(--mono);
+		text-transform: uppercase;
+		letter-spacing: 0.09em;
+		color: var(--fg-4);
+	}
+	.path h3 {
+		margin: 1.2rem 0 0.75rem;
+		font-size: 21px;
+		display: flex;
+		justify-content: space-between;
 		gap: 1rem;
 	}
-	@media (max-width: 950px) {
-		.two {
-			grid-template-columns: minmax(0, 1fr);
+	.path h3 span {
+		color: var(--blue);
+	}
+	.path p {
+		font-size: 14px;
+		margin: 0 0 1.5rem;
+	}
+	.path-meta {
+		font-size: 12px;
+		color: var(--blue);
+		margin-top: auto;
+	}
+	.build-note {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+		margin-top: 1.1rem;
+		font-size: 13px;
+	}
+	.build-note p {
+		margin: 0;
+		color: var(--fg-4);
+	}
+	.questions {
+		display: grid;
+		grid-template-columns: 0.85fr 1.15fr;
+		gap: 4rem;
+	}
+	.faq {
+		border-top: 1px solid var(--rule);
+	}
+	.faq details {
+		border-bottom: 1px solid var(--rule);
+	}
+	.faq summary {
+		cursor: pointer;
+		color: var(--fg);
+		padding: 1.05rem 1.8rem 1.05rem 0;
+		font-size: 16px;
+		font-weight: 500;
+		position: relative;
+		list-style: none;
+	}
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+	.faq summary::after {
+		content: '+';
+		position: absolute;
+		right: 0;
+		color: var(--blue);
+	}
+	.faq details[open] summary::after {
+		content: '−';
+	}
+	.faq p {
+		font-size: 14px;
+		padding-right: 1rem;
+	}
+	@media (max-width: 1050px) {
+		.hero {
+			gap: 2rem;
+		}
+		h1 {
+			font-size: 3.7rem;
+		}
+		.anatomy,
+		.questions {
+			gap: 2rem;
+		}
+		.path {
+			padding: 1.25rem;
 		}
 	}
-
-	.muted {
-		color: var(--fg-4);
-		font-size: 13px;
+	@media (max-width: 820px) {
+		.hero {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 2.5rem;
+		}
+		h1 {
+			font-size: clamp(3.4rem, 9vw, 5rem);
+		}
+		.hero-description {
+			max-width: 55ch;
+		}
+		.facts {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.benefits {
+			gap: 1.25rem;
+		}
+		.benefits h3 {
+			font-size: 17px;
+		}
+		.anatomy,
+		.questions {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.questions {
+			gap: 0;
+		}
+		.paths {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.path {
+			border-right: 0;
+			border-bottom: 1px solid var(--rule);
+		}
+		.path h3 {
+			margin-top: 0.8rem;
+		}
 	}
-
-	.cell .n {
-		color: var(--fg-5);
-		font-size: 11px;
-		letter-spacing: 0.14em;
-		margin: 0 0 0.6rem;
-	}
-	.cell h3 {
-		margin-bottom: 0.55rem;
-	}
-	.cell p:last-child {
-		margin-bottom: 0;
-	}
-	.cell p {
-		font-size: 13.5px;
-		color: var(--fg-3);
-	}
-
-	.stats .stat {
-		font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem);
-		color: var(--blue);
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		margin: 0 0 0.5rem;
-		line-height: 1;
-	}
-	.statlab {
-		font-size: 13px;
-		color: var(--fg-3);
-		margin: 0;
+	@media (max-width: 560px) {
+		.benefits {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 2rem;
+		}
+		.benefits h3 {
+			font-size: 20px;
+			margin-top: 0.6rem;
+		}
+		.inspect-hint {
+			display: none;
+		}
+		.example-bottom {
+			font-size: 12px;
+		}
+		.facts {
+			gap: 1.5rem 1rem;
+		}
 	}
 </style>

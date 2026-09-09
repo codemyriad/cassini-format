@@ -41,7 +41,9 @@
 	<div class="rows">
 		{#each shown as row (row.key)}
 			<div class="row" data-kind={row.kind}>
-				<span class="k">{row.key}</span><span class="eq">=</span><span class="v">{clamp(row.value)}</span>
+				<span class="k">{row.key}</span><span class="eq">=</span><span class="v"
+					>{clamp(row.value)}</span
+				>
 			</div>
 		{/each}
 		{#if hidden > 0}
@@ -57,6 +59,7 @@
 
 <style>
 	.dump {
+		font-family: var(--mono);
 		border: 1px solid var(--rule);
 		background: var(--bg-raise);
 		font-size: 12.5px;

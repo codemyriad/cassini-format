@@ -113,6 +113,11 @@ function rehypeFrameCode() {
 		visit(tree as never, 'element', (node: never, index: number | undefined, parent: never) => {
 			const el = node as { tagName: string; properties?: Record<string, unknown> };
 			const p = parent as { type?: string; children?: unknown[] } | undefined;
+			// Tables can scroll horizontally on small screens. Preserve their table
+			// semantics while allowing keyboard users to focus and scroll them.
+			if (el.tagName === 'table') {
+				el.properties = { ...el.properties, tabIndex: 0 };
+			}
 			if (el.tagName !== 'pre' || !p || index === undefined) return;
 			const holder = p as { children: unknown[] };
 			if ((holder as { tagName?: string }).tagName === 'div') return;
@@ -210,7 +215,7 @@ export async function renderMarkdown(
 		})
 		.use(rehypeRewriteLinks)
 		.use(rehypeShiki, {
-			themes: { light: 'github-light', dark: 'github-dark-default' },
+			themes: { light: 'github-light-high-contrast', dark: 'github-dark-default' },
 			defaultColor: false,
 			cssVariablePrefix: '--shiki-',
 			// Shiki replaces the <pre> outright, so this is the only way the
@@ -239,7 +244,7 @@ export async function highlight(code: string, lang: string): Promise<string> {
 	const { codeToHtml } = await import('shiki');
 	return codeToHtml(code.replace(/\n$/, ''), {
 		lang,
-		themes: { light: 'github-light', dark: 'github-dark-default' },
+		themes: { light: 'github-light-high-contrast', dark: 'github-dark-default' },
 		defaultColor: false,
 		cssVariablePrefix: '--shiki-'
 	});

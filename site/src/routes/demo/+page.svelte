@@ -92,9 +92,7 @@
 		result = null;
 		try {
 			const bytes =
-				src instanceof File
-					? await src.arrayBuffer()
-					: await (await fetch(src)).arrayBuffer();
+				src instanceof File ? await src.arrayBuffer() : await (await fetch(src)).arrayBuffer();
 			// Hand the same bytes to <audio>, rather than making the browser fetch
 			// the file a second time.
 			if (objectUrl) URL.revokeObjectURL(objectUrl);
@@ -259,11 +257,12 @@
 
 <div class="shell wrap">
 	<p class="eyebrow eyebrow--plain">Karaoke demo</p>
-	<h1>The Element Song by Tom Lehrer, with its words, in a single <code>.ogg</code> file.</h1>
+	<h1>The song and its lyrics.<br />One audio file.</h1>
 	<p class="lede">
-		The tags that carry a meeting transcript carry lyrics with word-level timestamps just as well.
-		Any player plays the song; a player that reads the tags shows the words in time with it.
+		Tom Lehrer’s Element Song, with word-timed lyrics embedded in the same <code>.opus</code>
+		file. Press play and follow the words, or click one to jump to it.
 	</p>
+	<a class="back" href="{base}/try/">← Open the transcript reader</a>
 </div>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -291,7 +290,11 @@
 			<div class="rows">
 				<p class="context context--before">
 					{#each stage.before as word, i (word.startMs + ':' + i)}
-						<button class="ctx" data-near={stage.before.length - i} onclick={() => jumpToWord(word)}>
+						<button
+							class="ctx"
+							data-near={stage.before.length - i}
+							onclick={() => jumpToWord(word)}
+						>
 							{word.text}
 						</button>
 					{/each}
@@ -329,9 +332,7 @@
 			{#if playing}❚❚{:else}▶{/if}
 		</button>
 		<span class="t">{clock(timeMs)}</span>
-		<!-- Arrow keys are handled by the page-level listener (svelte:window),
-		     which fires for a keydown here too since it bubbles. A second
-		     handler on this element would double-step when it has focus. -->
+		<!-- Handle focused slider keys here and stop them reaching the page shortcut. -->
 		<div
 			class="bar"
 			role="slider"
@@ -340,6 +341,10 @@
 			aria-valuemin={0}
 			aria-valuemax={100}
 			aria-valuenow={Math.round(progress * 100)}
+			onkeydown={(event) => {
+				event.stopPropagation();
+				onKey(event);
+			}}
 			onclick={onScrub}
 		>
 			<div class="bar__fill" style="width: {progress * 100}%"></div>
@@ -387,7 +392,10 @@
 		onloadedmetadata={() => {
 			const d = audio?.duration ?? 0;
 			// Ogg without a seek table can report Infinity until it has buffered.
-			duration = Number.isFinite(d) && d > 0 ? d * 1000 : (result?.manifest?.audio?.durationMs as number) || 0;
+			duration =
+				Number.isFinite(d) && d > 0
+					? d * 1000
+					: (result?.manifest?.audio?.durationMs as number) || 0;
 		}}
 	></audio>
 </div>
@@ -414,6 +422,9 @@
 </div>
 
 <style>
+	.back {
+		font-size: 14px;
+	}
 	.wrap {
 		padding-block: 3.5rem 1.5rem;
 	}
@@ -431,9 +442,7 @@
 	.stage {
 		position: relative;
 		border-block: 1px solid var(--rule);
-		background:
-			radial-gradient(120% 90% at 50% 0%, var(--bg-raise) 0%, transparent 70%),
-			var(--bg);
+		background: radial-gradient(120% 90% at 50% 0%, var(--bg-raise) 0%, transparent 70%), var(--bg);
 		padding: clamp(1.5rem, 4vw, 3rem) 0 0;
 	}
 	.stage.dragging {

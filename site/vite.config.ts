@@ -11,7 +11,9 @@ export default defineConfig({
 		sveltekit({
 			compilerOptions: {
 				runes: ({ filename }: { filename: string }) =>
-					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
+					filename.split(/[/\\]/).some((part) => part === 'node_modules' || part === 'vendor')
+						? undefined
+						: true
 			},
 			adapter: adapter({
 				pages: 'build',

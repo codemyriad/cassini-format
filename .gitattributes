@@ -1,1 +1,4 @@
 site/static/demo/*.opus filter=lfs diff=lfs merge=lfs -text
+site/static/demo/*.mkv filter=lfs diff=lfs merge=lfs -text
+# Preserve literal context lines in the reproducible upstream patch.
+site/scripts/cassini-vad-silence.patch whitespace=-blank-at-eol,-space-before-tab

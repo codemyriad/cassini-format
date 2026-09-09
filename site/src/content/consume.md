@@ -1,4 +1,26 @@
-You have a `.opus` file and you want the transcript out of it.
+Start with the standalone reader to see what a file contains, then use the
+algorithm below to build your own. To listen and explore without writing code,
+[open the browser reader](/try/).
+
+## Read your first file
+
+You need Python 3 and `curl`. Download the CC0 reader and the same example used
+on this site, then run it:
+
+```bash
+curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-read-pure.py
+curl -fLO https://cassini-format.codemyriad.io/demo/{{demo.filename}}
+python3 cassini-read-pure.py {{demo.filename}}
+```
+
+The output includes the title, transcript availability and the first few words
+with their timestamps. The state is `unverified`: this reader verifies the
+metadata digests but does not check the audio digest. It uses only the Python
+standard library.
+
+For JavaScript, jump to [the browser reader](#in-the-browser-with-no-dependencies).
+The shell examples below use `ffprobe`, `jq`, GNU `basenc`, `awk` and `gunzip`.
+Use your own file as `meeting.opus`, or substitute `{{demo.filename}}`.
 
 ## Is this one of those files?
 
@@ -34,13 +56,15 @@ ffprobe -v error -show_entries stream_tags -of json meeting.opus \
 The `awk` line re-pads: the producer writes unpadded base64url, GNU `basenc`
 demands padding.
 
-A transcript body decodes the same way with its own prefix. This reconstructs
-the meeting as speaker turns:
+A transcript body decodes the same way with its own prefix. This groups
+consecutive words by speaker. An overlapping acknowledgment splits the main
+speaker's run; Cassini's player reconstructs those fragments as a readable turn
+with an inline reply.
 
 ```bash
 ffprobe -v error -show_entries stream_tags -of json meeting.opus \
 | jq -r '.streams[0].tags
-         | [to_entries[] | select(.key | test("^CASSINI_TX_RAW_ASR_PAYLOAD_[0-9]{3}$"))]
+         | [to_entries[] | select(.key | test("^{{demo.transcriptPrefix}}[0-9]{3}$"))]
          | sort_by(.key) | map(.value) | join("")' \
 | awk '{ p=(4-length($0)%4)%4; printf "%s",$0; for(i=0;i<p;i++) printf "=" }' \
 | basenc --base64url -d | gunzip \
@@ -55,21 +79,21 @@ ffprobe -v error -show_entries stream_tags -of json meeting.opus \
 {{demo.turns}}
 ```
 
-`raw-asr` is a transcript id, not a constant. Read `CASSINI_TRANSCRIPT_IDS` and
-`CASSINI_TRANSCRIPT_DEFAULT`, or read the manifest, which is the record.
+This example uses the demo's `{{demo.transcriptId}}` transcript. A transcript id
+is not a format constant: resolve the selected entry's `payloadRef.prefix` from
+the manifest when reading other files.
 
 ## Getting a model to write the reader
 
-[`/llms-full.txt`](/llms-full.txt) is this whole specification in one 100 KB
+[`/llms-full.txt`](/llms-full.txt) is this whole specification in one text
 document: the spec, the body format, the digest contract, both guides, every
 schema, and the tag dump of the file the front page links to. Hand it over,
-then check the result against [that file](/demo/lantern-festival.opus).
+then check the result against [that file](/demo/{{demo.filename}}).
 
 Then check it against the [conformance vectors](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance):
-22 files covering the edges, with a harness that takes a reader in any language.
-The three readers in this repository pass with no hard failures. The reference
-Go implementation fails one: a transcript body missing a chunk, which it treats
-as a broken file rather than a missing transcript.
+A set of fixtures covering edge cases, with a harness that takes a reader in
+any language. See [project status](/status/) for implementation and compatibility
+notes, and run the suite against the version you plan to ship.
 
 ## The algorithm
 
@@ -126,12 +150,15 @@ Eight steps, the same in every language.
 ## In the browser, with no dependencies
 
 `fetch` gets the bytes, `DecompressionStream` inflates, `crypto.subtle` checks
-the digests. The player on the front page is this module reading the file you can
-download.
+the digests. The player on the front page uses this module to read the downloadable
+file, then displays it with Cassini’s transcript component.
 
-`tools/cassini-read.js` is that module, CC0, about 300 lines, generated from the
-site's own reader. `tools/cassini-read-pure.py` does the same in
-Python with no external tools, in about 110 lines, and only ever reads the front
+[`tools/cassini-read.js`](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-read.js)
+is that module, CC0, generated from the site's own reader. The transcript interface
+is a separate AGPL-3.0 component from Cassini; it displays short interjections
+inline and highlights the active turn or interjection during playback.
+`tools/cassini-read-pure.py` does the same in
+Python with no external tools, and only ever reads the front
 of the file — the same code works over an HTTP range request.
 
 ```js
@@ -140,10 +167,11 @@ import { readCassini, toTurns } from './cassini-read.js';
 const buf = await (await fetch('meeting.opus')).arrayBuffer();
 const file = await readCassini(buf);
 
-if (file.cassini) {
+if (file.manifest && file.transcript) {
   const turns = toTurns(file.transcript.words, file.manifest.speakers);
   console.log(file.manifest.meeting.title, turns.length, 'turns');
 }
+console.log(file.state); // Preserve this status in your viewer.
 ```
 
 `state` comes back alongside the data, one of the six below. `verified:

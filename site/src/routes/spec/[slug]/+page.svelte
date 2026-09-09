@@ -67,9 +67,9 @@
 	}
 	.rail a.on {
 		color: var(--blue);
-		background: var(--blue-wash);
+		background: var(--bg);
 	}
 	.rail a.on span {
-		color: var(--blue-dim);
+		color: var(--blue);
 	}
 </style>

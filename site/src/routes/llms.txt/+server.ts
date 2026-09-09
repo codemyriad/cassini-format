@@ -1,6 +1,7 @@
 import { site } from '$lib/site';
 import { origin } from '$lib/origin';
 import { listSchemas } from '$lib/docs';
+import demo from '$lib/generated/demo.json';
 
 export const prerender = true;
 export const trailingSlash = 'never';
@@ -30,6 +31,7 @@ It is this whole specification flattened into one document.
 
 ## Guides
 
+- [Try a file](${origin}/try/): play the example or read a local file in the browser
 - [Reading a file](${origin}/consume/): the eight steps, and every behaviour a reader has to decide
 - [Writing a file](${origin}/produce/): numbered requirements, then conventions
 - [Design notes](${origin}/design/): the measurements behind the non-obvious parts
@@ -39,12 +41,13 @@ It is this whole specification flattened into one document.
 
 ${schemas.map((s) => `- [${s.title}](${origin}/schema/${s.file})`).join('\n')}
 
-## A real file
+## A playable example
 
-- [lantern-festival.opus](${origin}/demo/lantern-festival.opus): a real ${site.formatId} file, 1.8 MB, six speakers, 669 word-timed items. Everything quoted on this site comes out of it.
+- [${demo.generatedFrom}](${origin}/demo/${demo.generatedFrom}): a valid ${site.formatId} file, ${(demo.bytes / 1024 / 1024).toFixed(2)} MB, ${Object.keys(demo.speakers).length} speakers, ${demo.transcript?.wordCount ?? 0} word-timed items. “${demo.readableTags.TITLE}” is a scripted conversation between fictional volunteers, voiced with Eleven v3 and four overlapping acknowledgments.
 - [How it was made](${origin}/demo/README.md)
+- The site uses Cassini’s AGPL-3.0 transcript component, with inline interjections, playback highlighting, and seeking from timestamps, passages or brief replies.
 
-## Reference code, all CC0
+## Standalone reference code, all CC0
 
 - [tools/cassini-read.js](${site.repo}/blob/main/tools/cassini-read.js): a browser reader, no dependencies
 - [tools/cassini-read-pure.py](${site.repo}/blob/main/tools/cassini-read-pure.py): a reader with no external tools at all

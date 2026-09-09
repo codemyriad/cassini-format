@@ -18,7 +18,14 @@ const substitutions: Record<string, () => string> = {
 			.slice(0, 3)
 			.map((t) => `[${t.startMs / 1000}s] ${t.speaker}: ${t.text}`)
 			.join('\n'),
+	'demo.filename': () => demo.generatedFrom,
+	'demo.sampleCount': () => String(demo.readableTags.CASSINI_AUDIO_SAMPLE_COUNT),
+	'demo.sampleRate': () => String(demo.audio.sampleRate),
+	'demo.durationMs': () => String(demo.readableTags.CASSINI_AUDIO_DURATION_MS),
 	'demo.title': () => String(demo.readableTags.TITLE ?? ''),
+	'demo.transcriptId': () => String(demo.transcript?.id ?? ''),
+	'demo.transcriptPrefix': () =>
+		String(demo.manifest.transcripts.find((entry) => entry.id === demo.transcript?.id)?.payloadRef.prefix ?? ''),
 	'demo.words': () => String(demo.transcript?.wordCount ?? 0),
 	'demo.speakers': () => String(Object.keys(demo.speakers).length),
 	'demo.comments': () => String(demo.commentCount),

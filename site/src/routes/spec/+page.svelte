@@ -5,151 +5,263 @@
 </script>
 
 <svelte:head>
-	<title>Specification — Cassini format</title>
-	<meta name="description" content="Every version of the Cassini portable meeting format, with a permanent URL each." />
+	<title>Specification & implementation resources — Cassini</title>
+	<meta
+		name="description"
+		content="The Cassini v1 specification, transcript format, audio digest, JSON Schemas and conformance suite. Everything you need to implement the open format."
+	/>
 </svelte:head>
 
-<div class="shell wrap">
-	<p class="eyebrow eyebrow--plain">Specification</p>
-	<h1>One published version.</h1>
+<div class="shell page-intro">
+	<p class="eyebrow eyebrow--plain">Reference</p>
+	<h1>The format, fully specified.</h1>
 	<p class="lede">
-		Version 1 of the open specification for an audio file with an embedded, word-timed transcript.
+		The contracts and tools for building compatible readers and producers. Start with v1, then
+		follow the body format and verification rules it references.
 	</p>
+</div>
 
-	<div class="grid vers">
-		<a class="v v--now" href="{base}/spec/v1/">
-			<p class="tag">current</p>
-			<h2>v1</h2>
-			<p class="wire">org.cassini.portable-meeting/1</p>
-		</a>
-	</div>
+<div class="shell reference">
+	<a class="current" href="{base}/spec/v1/">
+		<div>
+			<p class="eyebrow eyebrow--plain">Current version · Published 2 September 2026</p>
+			<h2>Cassini v1 <span aria-hidden="true">→</span></h2>
+			<p>The file structure, metadata, producer requirements and reader behavior.</p>
+		</div>
+		<code>{site.formatId}</code>
+	</a>
 
-	<p class="eyebrow">The pieces a version points at</p>
-	<div class="grid grid--2">
-		<a class="v" href="{base}/spec/words-v1/">
-			<h3>cassini.words.v1</h3>
+	<section aria-labelledby="contracts">
+		<h2 id="contracts">The supporting contracts</h2>
+		<div class="resources">
+			<a href="{base}/spec/words-v1/"
+				><span class="number">01</span>
+				<div>
+					<h3>Transcript body</h3>
+					<p>A word, its speaker, and start and end times in milliseconds.</p>
+					<code>cassini.words.v1</code>
+				</div>
+				<span aria-hidden="true">↗</span></a
+			>
+			<a href="{base}/spec/audio-integrity/"
+				><span class="number">02</span>
+				<div>
+					<h3>Audio digest</h3>
+					<p>The exact bytes used to match a transcript to a recording, independent of its tags.</p>
+					<code>exact-opus-audio-v1</code>
+				</div>
+				<span aria-hidden="true">↗</span></a
+			>
+		</div>
+	</section>
+
+	<section aria-labelledby="validation">
+		<h2 id="validation">Validate your implementation</h2>
+		<p>Schemas check the JSON shape. Conformance vectors exercise the behavior of a reader.</p>
+		<div class="schema-list">
+			{#each data.schemas as schema (schema.file)}<a href="{base}/schema/{schema.file}"
+					><span><strong>{schema.title}</strong><small>{schema.file}</small></span><span
+						class="schema-size">{(schema.bytes / 1024).toFixed(1)} KB ↗</span
+					></a
+				>{/each}
+		</div>
+		<div class="resource-links">
+			<a href="{base}/schema/">About the schemas →</a><a
+				href="{site.repo}/tree/main/spec/conformance">Conformance suite on GitHub ↗</a
+			><a href="{base}/demo/repair-cafe.opus" download>Download an example file ↓</a>
+		</div>
+	</section>
+
+	<section class="further" aria-labelledby="further">
+		<div>
+			<h2 id="further">A little more context</h2>
 			<p>
-				One item per word, with a speaker and a start and end in milliseconds. Each words transcript
-				gets its own chunk set. Display documents retain their own body format.
+				The guides walk through an implementation. Design notes explain the decisions behind the
+				contract.
 			</p>
-		</a>
-		<a class="v" href="{base}/spec/audio-integrity/">
-			<h3>exact-opus-audio-v1</h3>
-			<p>
-				The audio digest, byte by byte. It covers the Opus packets and excludes OpusTags, so writing
-				the digest into the file cannot change it.
-			</p>
-		</a>
-	</div>
+		</div>
+		<nav aria-label="Related resources">
+			<a href="{base}/consume/"
+				>Read a file <span>Python, JavaScript and the decoding algorithm →</span></a
+			><a href="{base}/produce/"
+				>Write a file <span>A complete producer and validation steps →</span></a
+			><a href="{base}/design/">Design notes <span>Tradeoffs, measurements and rationale →</span></a
+			><a href="{base}/status/"
+				>Project status <span>Adoption, compatibility and recent changes →</span></a
+			><a href="{base}/llms-full.txt"
+				>The complete specification as text <span>One file for tools and coding assistants ↗</span
+				></a
+			>
+		</nav>
+	</section>
 
-	<p class="eyebrow">Schemas</p>
-	<p class="lede">
-		The manifest and transcript-body schemas are CC0 and
-		<a href="{base}/schema/">served from this site</a> at the URL each one declares.
-	</p>
-
-	<p class="eyebrow">Licence</p>
-	<p class="lede">
-		Prose CC BY 4.0; schemas, test vectors and example code CC0. The reference implementation,
-		<a href={site.implRepo} rel="noreferrer">gocassini</a>, is AGPL-3.0; you can implement the
-		format without touching it.
+	<p class="licence">
+		Specification text: CC BY 4.0. Schemas, test vectors and standalone readers/producer: CC0. The <a
+			href={site.implRepo}>gocassini reference application</a
+		> and the site's Cassini transcript component are AGPL-3.0.
 	</p>
 </div>
 
 <style>
-	.wrap {
-		padding-top: 3.5rem;
+	.reference section {
+		margin-top: 3.5rem;
 	}
-	h1 {
-		margin: 1.1rem 0 1.2rem;
-		max-width: 24ch;
+	.reference section > h2 {
+		font-size: 25px;
+		margin-bottom: 1rem;
 	}
-	.eyebrow {
-		margin: 4rem 0 1.4rem;
+	.reference section > p {
+		font-size: 15px;
 	}
-	.vers {
-		margin: 2.2rem 0 1rem;
-	}
-	.v {
-		display: block;
+	.current {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 2rem;
+		border: 1px solid var(--blue-rule);
+		border-radius: 7px;
+		background: var(--blue-wash);
 		color: inherit;
 	}
-	.v:hover {
-		background: var(--bg-raise) !important;
+	.current:hover {
+		text-decoration: none;
+		border-color: var(--blue);
+	}
+	.current .eyebrow {
+		color: var(--blue);
+		line-height: 1.6;
+	}
+	.current h2 {
+		margin: 1rem 0 0.65rem;
+	}
+	.current h2 span {
+		color: var(--blue);
+		margin-left: 0.5rem;
+	}
+	.current p {
+		margin-bottom: 0;
+		font-size: 15px;
+	}
+	.current > code {
+		font-size: 11px;
+	}
+	.resources {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+	.resources > a {
+		display: flex;
+		gap: 1rem;
+		align-items: baseline;
+		padding: 1.5rem;
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		color: inherit;
+	}
+	.resources > a:hover {
+		background: var(--bg-raise);
 		text-decoration: none;
 	}
-	.v h2 {
-		margin: 0.5rem 0 0.35rem;
-		font-size: 1.5rem;
-	}
-	.v h3 {
-		margin: 0 0 0.5rem;
+	.resources > a > span:last-child {
+		margin-left: auto;
 		color: var(--blue);
 	}
-	.v p {
+	.number {
+		font: 11px var(--mono);
+		color: var(--fg-4);
+	}
+	.resources h3 {
+		margin-bottom: 0.6rem;
+	}
+	.resources p {
+		font-size: 15px;
+	}
+	.resources code {
+		font-size: 11px;
+	}
+	.schema-list {
+		border-top: 1px solid var(--rule);
+	}
+	.schema-list a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-block: 1.15rem;
+		border-bottom: 1px solid var(--rule);
+	}
+	.schema-list a strong {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	.schema-list a small {
+		display: block;
+		font: 11px var(--mono);
+		color: var(--fg-4);
+		margin-top: 0.5rem;
+		overflow-wrap: anywhere;
+	}
+	.schema-size {
+		font: 11px var(--mono);
+		white-space: nowrap;
+		color: var(--fg-4);
+	}
+	.resource-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 2rem;
+		font-size: 14px;
+		margin-top: 1rem;
+	}
+	.further {
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: 4rem;
+		border-top: 1px solid var(--rule);
+		padding-top: 3rem;
+	}
+	.further h2 {
+		font-size: 25px;
+		margin-bottom: 1rem;
+	}
+	.further p {
+		font-size: 15px;
+	}
+	.further nav {
+		display: grid;
+	}
+	.further nav a {
+		border-bottom: 1px solid var(--rule);
+		padding: 0.9rem 0;
+		font-size: 16px;
+	}
+	.further nav a:first-child {
+		padding-top: 0;
+	}
+	.further nav span {
+		display: block;
 		font-size: 13px;
-		color: var(--fg-3);
-		margin: 0;
-		max-width: none;
+		color: var(--fg-4);
+		margin-top: 0.25rem;
 	}
-	.v p + p {
-		margin-top: 0.6rem;
-	}
-	.tag {
-		font-size: 10.5px !important;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--fg-5) !important;
-	}
-	.v--now .tag {
-		color: var(--blue) !important;
-	}
-	.v--now h2 {
-		color: var(--blue);
-	}
-	.wire {
-		color: var(--fg-4) !important;
-		font-size: 11.5px !important;
-		word-break: break-all;
-	}
-	.also {
-		margin-top: 1.2rem;
+	.licence {
+		margin-top: 3rem;
 		font-size: 13px;
 		color: var(--fg-4);
 	}
-	.schemas {
-		display: grid;
-		border: 1px solid var(--rule);
-		background: var(--rule);
-		gap: 1px;
-		margin-top: 1.5rem;
-	}
-	.schemas a {
-		display: grid;
-		grid-template-columns: minmax(0, 22rem) minmax(0, 1fr) auto;
-		gap: 1rem;
-		background: var(--bg);
-		padding: 0.7rem 1rem;
-		color: var(--fg-3);
-		font-size: 12.5px;
-		align-items: baseline;
-	}
-	.schemas a:hover {
-		background: var(--bg-raise);
-		text-decoration: none;
-		color: var(--fg);
-	}
-	.schemas .f {
-		color: var(--blue);
-		word-break: break-all;
-	}
-	.schemas .b {
-		color: var(--fg-5);
-	}
-	@media (max-width: 760px) {
-		.schemas a {
+	@media (max-width: 720px) {
+		.resources,
+		.further {
 			grid-template-columns: minmax(0, 1fr);
-			gap: 0.2rem;
+		}
+		.further {
+			gap: 1.5rem;
+		}
+		.current {
+			padding: 1.25rem;
 		}
 	}
 </style>

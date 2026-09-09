@@ -9,12 +9,14 @@
 			<div>
 				<p class="eyebrow eyebrow--plain">Specification</p>
 				<ul>
-					<li><a href="{base}/spec/v1/">The specification</a></li>
+					<li><a href="{base}/spec/">Reference overview</a></li>
+					<li><a href="{base}/spec/v1/">Version 1 specification</a></li>
 					<li><a href="{base}/spec/words-v1/">Transcript body</a></li>
 					<li><a href="{base}/spec/audio-integrity/">Audio digest</a></li>
 					<li><a href="{base}/schema/">JSON Schemas</a></li>
 					<li>
-						<a href="https://github.com/codemyriad/cassini-format/tree/main/spec/conformance"
+						<a
+							href="https://github.com/codemyriad/cassini-format/tree/main/spec/conformance"
 							rel="noreferrer">Conformance vectors</a
 						>
 					</li>
@@ -23,6 +25,7 @@
 			<div>
 				<p class="eyebrow eyebrow--plain">Implement</p>
 				<ul>
+					<li><a href="{base}/try/">Try a file in your browser</a></li>
 					<li><a href="{base}/consume/">Read a file</a></li>
 					<li><a href="{base}/produce/">Write a file</a></li>
 					<li><a href="{base}/design/">Design notes</a></li>
@@ -35,9 +38,9 @@
 			<div class="status">
 				<p class="eyebrow eyebrow--plain">Status</p>
 				<p>
-					Version 1, published 2026-09-02. The wire strings in <code>{site.formatId}</code> are
-					stable. gocassini is the only producer so far.
-					<a href="{base}/status/">Status</a>
+					An open format from {site.company}. Version 1 was published on 2 September 2026, with
+					gocassini as its reference implementation.
+					<a href="{base}/status/">Project status →</a>
 				</p>
 			</div>
 		</div>
@@ -73,9 +76,11 @@
 			<p class="lic">
 				Spec text <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer"
 					>CC&nbsp;BY&nbsp;4.0</a
-				>. Schemas, test vectors and the example code
-				<a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noreferrer">CC0&nbsp;1.0</a
-				>. Implement it without asking anyone.
+				>. Schemas, test vectors and standalone readers/producer
+				<a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noreferrer"
+					>CC0&nbsp;1.0</a
+				>. Cassini’s transcript component
+				<a href="{site.repo}/blob/main/site/src/lib/vendor/cassini-viewer/README.md">AGPL-3.0</a>.
 			</p>
 		</div>
 	</div>

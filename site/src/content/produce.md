@@ -1,7 +1,35 @@
-The audio is ordinary Ogg Opus, so the only real work is building the tags.
+You need an Ogg Opus recording and a transcript with word timestamps. Cassini
+packages those inputs together; it does not run speech recognition for you.
 
-If you would rather read code, there is [a complete producer in
-standard-library Python](#a-complete-producer).
+## Write your first file
+
+The [CC0 Python producer](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-pack.py)
+uses only the standard library. Download it, then provide your audio and
+transcript:
+
+```bash
+curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-pack.py
+python3 cassini-pack.py recording.opus transcript.json meeting.opus \
+  --title "Weekly sync" --created-at 2026-09-07T09:00:00Z
+```
+
+Replace the title and date with your own. `recording.opus` is your source audio;
+`meeting.opus` is the output. `transcript.json` supplies speakers and word items
+in this shape:
+
+```json
+{
+  "speakers": [{ "id": "sam", "label": "Sam" }],
+  "items": [
+    { "speaker": "sam", "startMs": 900, "endMs": 1300, "text": "Hello." }
+  ]
+}
+```
+
+Use words and timings that describe your recording. After packing,
+[open the result in the browser reader](/try/) and follow
+[Checking your work](#checking-your-work) below. If you are implementing your
+own producer, the requirements that follow define what it must write.
 
 ## What you are making
 
@@ -149,25 +177,20 @@ it: compute it once.
 front page links to:
 
 ```bash
-python3 tools/cassini-opus-digest.py lantern-festival.opus
+python3 tools/cassini-opus-digest.py {{demo.filename}}
 ffprobe -v error -show_entries stream_tags=CASSINI_AUDIO_OPUS_SHA256 \
-        -of default=nw=1:nk=1 lantern-festival.opus
+        -of default=nw=1:nk=1 {{demo.filename}}
 ```
+
+The digest tool’s `sha256` and the tag agree:
 
 ```console
-{
-  "sha256": "8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc",
-  "sampleRate": 48000,
-  "channels": 1,
-  "sampleCount": 11506248,
-  "durationMs": 239713,
-  "packetCount": 11986
-}
-8e1f7499c6d5fba88c3bd9b69ecd3de1b07ae0cff65152c942c5e99062d01cbc
+{{demo.audioDigest}}
 ```
 
-Two implementations that never saw each other's code, in two languages, agree
-on all 64 characters over 11,986 packets.
+The file contains {{demo.sampleCount}} playable samples at {{demo.sampleRate}} Hz,
+for a duration of {{demo.durationMs}} ms. These values and the digest above are
+read from the downloadable file when the site is generated.
 
 ## Checking your work
 

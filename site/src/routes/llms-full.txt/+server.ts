@@ -10,8 +10,7 @@ import demo from '$lib/generated/demo.json';
 export const prerender = true;
 export const trailingSlash = 'never';
 
-const rule = (title: string) =>
-	`\n\n${'='.repeat(78)}\n${title}\n${'='.repeat(78)}\n\n`;
+const rule = (title: string) => `\n\n${'='.repeat(78)}\n${title}\n${'='.repeat(78)}\n\n`;
 
 const siteContent = contentSource;
 
@@ -19,14 +18,14 @@ const siteContent = contentSource;
  * The whole specification as one document, for handing to a model in one paste.
  */
 export async function GET() {
-
 	const parts: string[] = [];
 
 	parts.push(`${site.formatName} format — the complete specification, flattened
 
 This document: ${origin}/llms-full.txt
 Wire version: ${site.formatId}
-Spec text CC BY 4.0. Schemas, test vectors and example code CC0.
+Spec text CC BY 4.0. Schemas, test vectors and standalone readers/producer CC0.
+The site's embedded Cassini transcript component is AGPL-3.0.
 
 WHAT THIS IS
 
@@ -43,7 +42,7 @@ them.
 
 A REAL FILE TO CHECK AGAINST
 
-  ${origin}/demo/lantern-festival.opus
+  ${origin}/demo/${demo.generatedFrom}
   ${demo.bytes.toLocaleString()} bytes, ${demo.commentCount} OpusTags comments,
   ${Object.keys(demo.speakers).length} speakers, ${demo.transcript?.wordCount} word-timed items.
   How it was made: ${origin}/demo/README.md

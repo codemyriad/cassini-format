@@ -5,14 +5,18 @@
 
 <svelte:head>
 	<title>JSON Schemas — Cassini format</title>
-	<meta name="description" content="The manifest and transcript-body schemas, CC0, served from a stable URL." />
+	<meta
+		name="description"
+		content="The manifest and transcript-body schemas, CC0, served from a stable URL."
+	/>
 </svelte:head>
 
 <div class="shell wrap">
 	<p class="eyebrow eyebrow--plain">Schemas</p>
-	<h1>Machine-readable, CC0, served from here.</h1>
+	<h1>JSON Schemas</h1>
 	<p class="lede">
-		Every schema in the repository, at a stable path, byte for byte the same file.
+		Validate the manifest and transcript body. These CC0 schemas are served at stable URLs, byte for
+		byte as they appear in the repository.
 	</p>
 
 	<div class="schemas">
@@ -33,9 +37,9 @@
 		<div>
 			<p>
 				Each schema's <code>$id</code> is its URL under
-				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves it there. Every
-				file carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader
-				holding only the file can find the schema it claims to follow.
+				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves it there. Every file
+				carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader holding only
+				the file can find the schema it claims to follow.
 			</p>
 		</div>
 		<div class="code">

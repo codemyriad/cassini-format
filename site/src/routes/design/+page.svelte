@@ -70,6 +70,7 @@
 		display: grid;
 		gap: 0.35rem;
 		min-width: 0;
+		overflow-wrap: anywhere;
 	}
 	.t {
 		color: var(--fg);

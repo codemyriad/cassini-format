@@ -14,5 +14,9 @@
     "types": [
       "node"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "src/lib/vendor/**/*.test.ts"
+  ]
 }

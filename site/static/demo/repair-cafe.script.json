@@ -1,0 +1,183 @@
+{
+  "title": "Saturday repair café: the rain plan",
+  "premise": "A brief Thursday evening planning call between three fictional volunteers. Saturday's monthly repair café was advertised for 10 a.m.–1 p.m. in the community centre courtyard. Rain is now likely, and the only indoor room is occupied until 10:30. The team must settle a workable opening time and handle the few affected bookings.",
+  "speakers": [
+    {
+      "id": "maya",
+      "label": "Maya",
+      "role": "Session coordinator",
+      "voiceDirection": "Adult woman, conversational British English. Warm but practical. Thinking with the others rather than chairing a formal meeting. Ordinary pace; let the small self-correction land naturally.",
+      "voiceName": "Alice",
+      "voiceId": "Xb7hH8MSUJpSbSDYk0k2"
+    },
+    {
+      "id": "jonah",
+      "label": "Jonah",
+      "role": "Repair volunteer lead",
+      "voiceDirection": "Adult man, conversational British English. Calm, slightly lower voice; direct about physical constraints without sounding stern. Unhurried, with natural clause breaks.",
+      "voiceName": "George",
+      "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+    },
+    {
+      "id": "tess",
+      "label": "Tess",
+      "role": "Bookings and welcome desk volunteer",
+      "voiceDirection": "Adult woman, conversational British English, clearly distinct from Maya. A little quicker and brighter. Checks the booking list while talking; practical, attentive, never announcer-like.",
+      "voiceName": "Lily",
+      "voiceId": "pFZP5JQG7iQjIQuC4Bku"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "opening_time",
+      "turns": [
+        {
+          "id": "t01",
+          "speaker": "maya",
+          "text": "So, Saturday. I think we have to give up on the courtyard. The forecast's got worse. We can have the small hall, but the craft group are in there until half past ten, and that's when they finish, not when the room's clear.",
+          "interjections": [
+            {
+              "id": "i01",
+              "speaker": "tess",
+              "text": "Right.",
+              "afterWordOrPhrase": "half past ten",
+              "direction": "Quiet acknowledgement, overlapping Maya as she continues with 'and that's'."
+            }
+          ]
+        },
+        {
+          "id": "t02",
+          "speaker": "jonah",
+          "text": "Then eleven's the earliest. We need to get the tables in, run the cables... I'd rather not have people waiting around us while we do that."
+        },
+        {
+          "id": "t03",
+          "speaker": "tess",
+          "text": "Hang on, let me check who's booked before eleven. Three. Two bikes and a toaster. Are we taking bikes inside?"
+        },
+        {
+          "id": "t04",
+          "speaker": "maya",
+          "text": "Could they go under the awning?"
+        },
+        {
+          "id": "t05",
+          "speaker": "jonah",
+          "text": "With the repair stands there, we'd be blocking the doorway. And rain comes in sideways under that thing. I think we have to cancel the bikes this time.",
+          "interjections": [
+            {
+              "id": "i02",
+              "speaker": "maya",
+              "text": "Yeah.",
+              "afterWordOrPhrase": "blocking the doorway",
+              "direction": "Soft agreement; Jonah continues without yielding the floor."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bookings_and_space",
+      "turns": [
+        {
+          "id": "t06",
+          "speaker": "tess",
+          "text": "Okay. I'll ring those two, then. I don't want them cycling over in the rain for nothing. Next month's session, or do we know somewhere sooner?"
+        },
+        {
+          "id": "t07",
+          "speaker": "jonah",
+          "text": "There's the bike workshop at the library next weekend. I'll check they've got spaces before we send anyone there."
+        },
+        {
+          "id": "t08",
+          "speaker": "tess",
+          "text": "Thanks. And I've got eleven fifteen free for the toaster, if that suits them. Everything after eleven can stay as it is.",
+          "interjections": [
+            {
+              "id": "i03",
+              "speaker": "jonah",
+              "text": "Mm-hm.",
+              "afterWordOrPhrase": "eleven fifteen free",
+              "direction": "Brief listening sound, under Tess's continuing phrase 'for the toaster'."
+            }
+          ]
+        },
+        {
+          "id": "t09",
+          "speaker": "maya",
+          "text": "How many tables can we actually fit?"
+        },
+        {
+          "id": "t10",
+          "speaker": "jonah",
+          "text": "Four comfortably. Two for electrical repairs, one for sewing, one for intake. No spare table for people to leave things on."
+        },
+        {
+          "id": "t11",
+          "speaker": "tess",
+          "text": "That's fine. I'll keep the waiting list at the desk. People need to stay with their stuff anyway."
+        }
+      ]
+    },
+    {
+      "id": "owners_and_cutoff",
+      "turns": [
+        {
+          "id": "t12",
+          "speaker": "maya",
+          "text": "I'll update the website and the neighbourhood group tonight. And put a sign on the courtyard gate. Actually, I'll be there from ten until we open, because someone will have seen the old time.",
+          "interjections": [
+            {
+              "id": "i04",
+              "speaker": "tess",
+              "text": "Okay.",
+              "afterWordOrPhrase": "ten until we open",
+              "direction": "Understated acknowledgement as Maya continues 'because someone'."
+            }
+          ]
+        },
+        {
+          "id": "t13",
+          "speaker": "jonah",
+          "text": "I'll tell the repair volunteers half ten for setup. Still finishing at one?"
+        },
+        {
+          "id": "t14",
+          "speaker": "maya",
+          "text": "Yes, we can't keep everyone late."
+        },
+        {
+          "id": "t15",
+          "speaker": "tess",
+          "text": "Last walk-ins at quarter past twelve, then? We can have a look, but I won't promise we'll fix it."
+        },
+        {
+          "id": "t16",
+          "speaker": "jonah",
+          "text": "Exactly. And we stop taking things earlier if the queue's full."
+        },
+        {
+          "id": "t17",
+          "speaker": "tess",
+          "text": "Good. I'll make those three calls now."
+        }
+      ]
+    }
+  ],
+  "productionNotes": [
+    "This is explicitly a fictional, AI-voiced demonstration, not a real meeting recording.",
+    "Generate the main turns as continuous dialogue, preserving the exact words. Generate the four short interjections separately and place them at their stated phrase anchors so the principal speaker continues underneath. Do not add the interjection text to the principal speech stream.",
+    "Treat scene boundaries as ordinary conversational gaps, not chapter breaks. No music, room effects, introductions, or closing announcement.",
+    "The hesitation in 'run the cables...' and Maya's correction from leaving a sign to personally covering the gate are intentional. Avoid exaggerated hesitations or additional filler."
+  ],
+  "production": {
+    "provider": "ElevenLabs",
+    "model": "eleven_v3",
+    "outputFormat": "pcm_24000",
+    "sampleRate": 24000,
+    "seed": 60709,
+    "stability": 0.5,
+    "createdAtUtc": "2026-09-07T15:00:00Z"
+  }
+}

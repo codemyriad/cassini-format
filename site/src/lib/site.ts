@@ -14,7 +14,7 @@ export const site = {
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:
-		'An open file format for audio with embedded text: an ordinary .opus file that carries its own word-timestamped transcript, speaker labels and provenance in its OpusTags. For meeting recordings, podcasts and lyrics alike.'
+		'Audio, a word-timed transcript and speaker labels in one ordinary .opus file. Explore the open Cassini format, try a file in your browser, or build a reader of your own.'
 };
 
 export const versions = [
@@ -22,8 +22,8 @@ export const versions = [
 ] as const;
 
 export const nav = [
-	{ href: '/spec/v1/', label: 'Spec', key: 'S' },
-	{ href: '/produce/', label: 'Produce', key: 'P' },
-	{ href: '/consume/', label: 'Consume', key: 'C' },
-	{ href: '/design/', label: 'Design notes', key: 'D' }
+	{ href: '/try/', label: 'Try it' },
+	{ href: '/consume/', label: 'Read a file' },
+	{ href: '/produce/', label: 'Write a file' },
+	{ href: '/spec/', label: 'Specification' }
 ];

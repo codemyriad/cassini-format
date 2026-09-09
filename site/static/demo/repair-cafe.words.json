@@ -1,0 +1,2032 @@
+{
+  "speakers": [
+    {
+      "id": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "label": "Maya"
+    },
+    {
+      "id": "spk_tess_7134aac53eddcc48c4c90667",
+      "label": "Tess"
+    },
+    {
+      "id": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "label": "Jonah"
+    }
+  ],
+  "items": [
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 60,
+      "endMs": 459,
+      "text": "So,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 459,
+      "endMs": 1329,
+      "text": "Saturday,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 1420,
+      "endMs": 1660,
+      "text": "I"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 1659,
+      "endMs": 1819,
+      "text": "think"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 1819,
+      "endMs": 1979,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 1979,
+      "endMs": 2139,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2139,
+      "endMs": 2299,
+      "text": "to"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2300,
+      "endMs": 2539,
+      "text": "give"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2540,
+      "endMs": 2700,
+      "text": "up"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2699,
+      "endMs": 2779,
+      "text": "on"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2780,
+      "endMs": 2940,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 2939,
+      "endMs": 3679,
+      "text": "courtyard,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 3819,
+      "endMs": 3979,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 3979,
+      "endMs": 4859,
+      "text": "forecasts"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 4859,
+      "endMs": 5179,
+      "text": "got"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 5179,
+      "endMs": 5739,
+      "text": "worse."
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 5899,
+      "endMs": 6219,
+      "text": "We"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 6219,
+      "endMs": 6379,
+      "text": "can"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 6379,
+      "endMs": 6539,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 6540,
+      "endMs": 6780,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 6779,
+      "endMs": 7179,
+      "text": "small"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 7179,
+      "endMs": 7619,
+      "text": "hall,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 7739,
+      "endMs": 7899,
+      "text": "but"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 7899,
+      "endMs": 8059,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 8060,
+      "endMs": 8459,
+      "text": "craft"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 8459,
+      "endMs": 8779,
+      "text": "group"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 8780,
+      "endMs": 8940,
+      "text": "are"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 8940,
+      "endMs": 9020,
+      "text": "in"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 9020,
+      "endMs": 9180,
+      "text": "there"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 9179,
+      "endMs": 9499,
+      "text": "until"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 9507,
+      "endMs": 9827,
+      "text": "until"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 9827,
+      "endMs": 10067,
+      "text": "half"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 10067,
+      "endMs": 10307,
+      "text": "past"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 10387,
+      "endMs": 11027,
+      "text": "ten,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 11027,
+      "endMs": 11267,
+      "text": "and",
+      "attributionGapDb": 33.33575379921126
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 11267,
+      "endMs": 11667,
+      "text": "that's",
+      "attributionGapDb": 16.17046040459461
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 11355,
+      "endMs": 11915,
+      "text": "Right.",
+      "attributionGapDb": -10.552694818370234
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 11668,
+      "endMs": 11828,
+      "text": "when",
+      "attributionGapDb": -8.69437266576125
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 11827,
+      "endMs": 12147,
+      "text": "they",
+      "attributionGapDb": -45.473911661273185
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 12148,
+      "endMs": 12577,
+      "text": "finish,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 12707,
+      "endMs": 12947,
+      "text": "not"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 12947,
+      "endMs": 13107,
+      "text": "when"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 13107,
+      "endMs": 13267,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 13267,
+      "endMs": 13748,
+      "text": "room's"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 13747,
+      "endMs": 14188,
+      "text": "clear."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 14428,
+      "endMs": 14587,
+      "text": "Then"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 14827,
+      "endMs": 15227,
+      "text": "11's"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 15227,
+      "endMs": 15307,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 15307,
+      "endMs": 15820,
+      "text": "earliest."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 16348,
+      "endMs": 16507,
+      "text": "We"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 16507,
+      "endMs": 16667,
+      "text": "need"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 16667,
+      "endMs": 16747,
+      "text": "to"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 16747,
+      "endMs": 16907,
+      "text": "get"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 16908,
+      "endMs": 17067,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 17067,
+      "endMs": 17387,
+      "text": "tables"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 17387,
+      "endMs": 17647,
+      "text": "in,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 17787,
+      "endMs": 18027,
+      "text": "run"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 18027,
+      "endMs": 18267,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 18267,
+      "endMs": 18828,
+      "text": "cables."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 19580,
+      "endMs": 19899,
+      "text": "I'd"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 19899,
+      "endMs": 20219,
+      "text": "rather"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 20219,
+      "endMs": 20379,
+      "text": "not"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 20379,
+      "endMs": 20619,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 20619,
+      "endMs": 20779,
+      "text": "people"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 20779,
+      "endMs": 21179,
+      "text": "waiting"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 21179,
+      "endMs": 21579,
+      "text": "around"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 21580,
+      "endMs": 21739,
+      "text": "us"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 21739,
+      "endMs": 22059,
+      "text": "while"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 22060,
+      "endMs": 22300,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 22300,
+      "endMs": 22620,
+      "text": "do"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 22619,
+      "endMs": 22939,
+      "text": "that.",
+      "attributionGapDb": 31.072973396589624
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 22972,
+      "endMs": 23371,
+      "text": "Hang"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 23371,
+      "endMs": 23531,
+      "text": "on,"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 23691,
+      "endMs": 23931,
+      "text": "let"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 23931,
+      "endMs": 24091,
+      "text": "me"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 24092,
+      "endMs": 24411,
+      "text": "check"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 24411,
+      "endMs": 24731,
+      "text": "who's"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 24731,
+      "endMs": 25131,
+      "text": "booked"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 25131,
+      "endMs": 25451,
+      "text": "before"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 25692,
+      "endMs": 26060,
+      "text": "11."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 26843,
+      "endMs": 27163,
+      "text": "Three."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 27804,
+      "endMs": 28203,
+      "text": "Two"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 28203,
+      "endMs": 28603,
+      "text": "bikes"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 28603,
+      "endMs": 28763,
+      "text": "and"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 28763,
+      "endMs": 28923,
+      "text": "a"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 28924,
+      "endMs": 29516,
+      "text": "toaster."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 30172,
+      "endMs": 30411,
+      "text": "Are"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 30411,
+      "endMs": 30571,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 30571,
+      "endMs": 30812,
+      "text": "taking"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 30811,
+      "endMs": 31291,
+      "text": "bikes"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 31292,
+      "endMs": 31852,
+      "text": "inside?",
+      "attributionGapDb": -83.91163401313241
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32028,
+      "endMs": 32267,
+      "text": "Could"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32267,
+      "endMs": 32507,
+      "text": "they"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32507,
+      "endMs": 32667,
+      "text": "go"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32667,
+      "endMs": 32827,
+      "text": "under"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32827,
+      "endMs": 32987,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 32987,
+      "endMs": 33516,
+      "text": "awning?"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 33788,
+      "endMs": 33947,
+      "text": "With"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 33947,
+      "endMs": 34027,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 34027,
+      "endMs": 34507,
+      "text": "repair"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 34507,
+      "endMs": 34907,
+      "text": "stands"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 34908,
+      "endMs": 35147,
+      "text": "there,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 35227,
+      "endMs": 35627,
+      "text": "we'd"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 35627,
+      "endMs": 35707,
+      "text": "be"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 35707,
+      "endMs": 36188,
+      "text": "blocking"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 36187,
+      "endMs": 36347,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 36347,
+      "endMs": 36987,
+      "text": "doorway,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 37147,
+      "endMs": 37467,
+      "text": "and",
+      "attributionGapDb": 4.34809756069005
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 37340,
+      "endMs": 37772,
+      "text": "Yeah.",
+      "attributionGapDb": 10.336378992612978
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 37467,
+      "endMs": 37787,
+      "text": "rain",
+      "attributionGapDb": -12.603015278127181
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 37788,
+      "endMs": 38107,
+      "text": "comes",
+      "attributionGapDb": -75.06516055141671
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 38107,
+      "endMs": 38267,
+      "text": "in"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 38268,
+      "endMs": 38908,
+      "text": "sideways"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 38907,
+      "endMs": 39227,
+      "text": "under"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 39228,
+      "endMs": 39468,
+      "text": "that"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 39467,
+      "endMs": 39948,
+      "text": "thing."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 40187,
+      "endMs": 40427,
+      "text": "I"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 40427,
+      "endMs": 40667,
+      "text": "think"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 40667,
+      "endMs": 40827,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 40827,
+      "endMs": 40907,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 40907,
+      "endMs": 41067,
+      "text": "to"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 41067,
+      "endMs": 41547,
+      "text": "cancel"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 41547,
+      "endMs": 41627,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 41627,
+      "endMs": 42187,
+      "text": "bikes"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 42187,
+      "endMs": 42507,
+      "text": "this",
+      "attributionGapDb": 14.574523282187638
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 42508,
+      "endMs": 42668,
+      "text": "time.",
+      "attributionGapDb": 23.30178082326977
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 42556,
+      "endMs": 43175,
+      "text": "Okay,"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 43275,
+      "endMs": 43595,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 43595,
+      "endMs": 43915,
+      "text": "ring"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 43916,
+      "endMs": 44235,
+      "text": "those"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 44235,
+      "endMs": 44555,
+      "text": "two"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 44556,
+      "endMs": 44716,
+      "text": "then."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 45276,
+      "endMs": 45435,
+      "text": "I"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 45435,
+      "endMs": 45595,
+      "text": "don't"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 45595,
+      "endMs": 45755,
+      "text": "want"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 45755,
+      "endMs": 45915,
+      "text": "them"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 45915,
+      "endMs": 46395,
+      "text": "cycling"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 46396,
+      "endMs": 46556,
+      "text": "over"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 46555,
+      "endMs": 46715,
+      "text": "in"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 46715,
+      "endMs": 46795,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 46795,
+      "endMs": 47115,
+      "text": "rain"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 47115,
+      "endMs": 47355,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 47355,
+      "endMs": 47788,
+      "text": "nothing."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 48395,
+      "endMs": 48715,
+      "text": "Next"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 48715,
+      "endMs": 49115,
+      "text": "month's"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 49115,
+      "endMs": 49435,
+      "text": "session"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 49595,
+      "endMs": 49755,
+      "text": "or"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 49755,
+      "endMs": 49915,
+      "text": "do"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 49915,
+      "endMs": 50155,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 50155,
+      "endMs": 50315,
+      "text": "know"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 50316,
+      "endMs": 50715,
+      "text": "somewhere"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 50715,
+      "endMs": 51212,
+      "text": "sooner?"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 51188,
+      "endMs": 51587,
+      "text": "There's",
+      "attributionGapDb": -35.980619621505994
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 51587,
+      "endMs": 51667,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 51667,
+      "endMs": 52067,
+      "text": "bike"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 52067,
+      "endMs": 52547,
+      "text": "workshop"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 52548,
+      "endMs": 52628,
+      "text": "at"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 52627,
+      "endMs": 52707,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 52707,
+      "endMs": 53187,
+      "text": "library"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 53188,
+      "endMs": 53427,
+      "text": "next"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 53428,
+      "endMs": 54148,
+      "text": "weekend."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 54307,
+      "endMs": 54707,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 54707,
+      "endMs": 54947,
+      "text": "check"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 55027,
+      "endMs": 55347,
+      "text": "they've"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 55347,
+      "endMs": 55587,
+      "text": "got"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 55588,
+      "endMs": 56067,
+      "text": "spaces"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 56068,
+      "endMs": 56307,
+      "text": "before"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 56307,
+      "endMs": 56547,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 56547,
+      "endMs": 56788,
+      "text": "send"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 56787,
+      "endMs": 57428,
+      "text": "anyone"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 57427,
+      "endMs": 57747,
+      "text": "there.",
+      "attributionGapDb": -12.0007055551742
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 57788,
+      "endMs": 58427,
+      "text": "Thanks."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 58587,
+      "endMs": 58827,
+      "text": "And"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 58827,
+      "endMs": 59147,
+      "text": "I've"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 59148,
+      "endMs": 59308,
+      "text": "got"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 59307,
+      "endMs": 59547,
+      "text": "eleven"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 59788,
+      "endMs": 60188,
+      "text": "fifteen"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 60347,
+      "endMs": 60668,
+      "text": "free",
+      "attributionGapDb": -26.008367598942307
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 60667,
+      "endMs": 60747,
+      "text": "for",
+      "attributionGapDb": -8.054871408979086
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 60747,
+      "endMs": 61237,
+      "text": "Mm-hmm.",
+      "attributionGapDb": 10.692748495687717
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 60748,
+      "endMs": 60908,
+      "text": "the",
+      "attributionGapDb": -7.661077508525338
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 60907,
+      "endMs": 61387,
+      "text": "toaster",
+      "attributionGapDb": -9.27266997502219
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 61387,
+      "endMs": 61547,
+      "text": "if"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 61547,
+      "endMs": 61787,
+      "text": "that"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 61788,
+      "endMs": 62187,
+      "text": "suits"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 62188,
+      "endMs": 62398,
+      "text": "them."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 62972,
+      "endMs": 63371,
+      "text": "Everything"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 63371,
+      "endMs": 63691,
+      "text": "after"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 63931,
+      "endMs": 64091,
+      "text": "11"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 64251,
+      "endMs": 64491,
+      "text": "can"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 64491,
+      "endMs": 64811,
+      "text": "stay"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 64811,
+      "endMs": 64971,
+      "text": "as"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 64972,
+      "endMs": 65211,
+      "text": "it"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 65212,
+      "endMs": 65388,
+      "text": "is."
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 65596,
+      "endMs": 65835,
+      "text": "How"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 65835,
+      "endMs": 66155,
+      "text": "many"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 66156,
+      "endMs": 66635,
+      "text": "tables"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 66635,
+      "endMs": 66795,
+      "text": "can"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 66795,
+      "endMs": 67035,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 67035,
+      "endMs": 67595,
+      "text": "actually"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 67596,
+      "endMs": 68012,
+      "text": "fit?"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 68177,
+      "endMs": 68497,
+      "text": "four"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 68498,
+      "endMs": 69297,
+      "text": "comfortably,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 69457,
+      "endMs": 69537,
+      "text": "two"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 69697,
+      "endMs": 69937,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 69938,
+      "endMs": 70497,
+      "text": "electrical"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 70497,
+      "endMs": 71138,
+      "text": "repairs,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 71297,
+      "endMs": 71537,
+      "text": "one"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 71537,
+      "endMs": 71777,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 71777,
+      "endMs": 72267,
+      "text": "sewing,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 72338,
+      "endMs": 72578,
+      "text": "one"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 72577,
+      "endMs": 72737,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 72737,
+      "endMs": 73356,
+      "text": "intake."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 73884,
+      "endMs": 74203,
+      "text": "No"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 74203,
+      "endMs": 74523,
+      "text": "spare"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 74523,
+      "endMs": 74843,
+      "text": "table"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 74843,
+      "endMs": 75083,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 75083,
+      "endMs": 75243,
+      "text": "people"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 75244,
+      "endMs": 75404,
+      "text": "to"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 75403,
+      "endMs": 75643,
+      "text": "leave"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 75643,
+      "endMs": 76123,
+      "text": "things"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 76124,
+      "endMs": 76444,
+      "text": "on.",
+      "attributionGapDb": 15.416493952826169
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 76444,
+      "endMs": 76923,
+      "text": "That's"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 76923,
+      "endMs": 77263,
+      "text": "fine."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 77483,
+      "endMs": 77803,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 77804,
+      "endMs": 77963,
+      "text": "keep"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 77963,
+      "endMs": 78123,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 78123,
+      "endMs": 78603,
+      "text": "waiting"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 78603,
+      "endMs": 78843,
+      "text": "list"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 78843,
+      "endMs": 79003,
+      "text": "at"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 79003,
+      "endMs": 79163,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 79164,
+      "endMs": 79644,
+      "text": "desk."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 79883,
+      "endMs": 80283,
+      "text": "People"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 80283,
+      "endMs": 80443,
+      "text": "need"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 80444,
+      "endMs": 80603,
+      "text": "to"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 80603,
+      "endMs": 80843,
+      "text": "stay"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 80844,
+      "endMs": 81004,
+      "text": "with"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 81003,
+      "endMs": 81163,
+      "text": "their"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 81163,
+      "endMs": 81484,
+      "text": "stuff"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 81723,
+      "endMs": 82283,
+      "text": "anyway.",
+      "attributionGapDb": -15.635511389095708
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 82172,
+      "endMs": 82491,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 82491,
+      "endMs": 82891,
+      "text": "update"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 82891,
+      "endMs": 83051,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 83051,
+      "endMs": 83531,
+      "text": "website"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 83532,
+      "endMs": 83692,
+      "text": "and"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 83691,
+      "endMs": 83851,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 83851,
+      "endMs": 84492,
+      "text": "neighborhood"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 84491,
+      "endMs": 84972,
+      "text": "group"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 84971,
+      "endMs": 85451,
+      "text": "tonight."
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 85691,
+      "endMs": 86011,
+      "text": "And"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86011,
+      "endMs": 86171,
+      "text": "put"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86172,
+      "endMs": 86411,
+      "text": "a"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86411,
+      "endMs": 86571,
+      "text": "sign"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86572,
+      "endMs": 86732,
+      "text": "on"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86731,
+      "endMs": 86891,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 86891,
+      "endMs": 87691,
+      "text": "courtyard"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 87691,
+      "endMs": 88091,
+      "text": "gate."
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 88331,
+      "endMs": 88891,
+      "text": "Actually"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 88931,
+      "endMs": 89251,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 89251,
+      "endMs": 89411,
+      "text": "be"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 89411,
+      "endMs": 89571,
+      "text": "there"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 89572,
+      "endMs": 89811,
+      "text": "from"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 89812,
+      "endMs": 90052,
+      "text": "ten"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 90291,
+      "endMs": 90691,
+      "text": "until"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 90692,
+      "endMs": 90852,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 90851,
+      "endMs": 91411,
+      "text": "open,",
+      "attributionGapDb": 20.802925962290647
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 91412,
+      "endMs": 91652,
+      "text": "because",
+      "attributionGapDb": 20.660257178227727
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 91579,
+      "endMs": 91929,
+      "text": "Okay.",
+      "attributionGapDb": -12.6630117982081
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 91651,
+      "endMs": 91971,
+      "text": "someone",
+      "attributionGapDb": 13.21438998844529
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 91971,
+      "endMs": 92131,
+      "text": "will",
+      "attributionGapDb": -31.347980887393263
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 92131,
+      "endMs": 92291,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 92291,
+      "endMs": 92531,
+      "text": "seen"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 92531,
+      "endMs": 92771,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 92771,
+      "endMs": 93092,
+      "text": "old"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 93091,
+      "endMs": 93421,
+      "text": "time."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 93692,
+      "endMs": 93931,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 93931,
+      "endMs": 94091,
+      "text": "tell"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 94091,
+      "endMs": 94171,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 94171,
+      "endMs": 94571,
+      "text": "repair"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 94571,
+      "endMs": 95131,
+      "text": "volunteers"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 95131,
+      "endMs": 95451,
+      "text": "half"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 95611,
+      "endMs": 95771,
+      "text": "10"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 95771,
+      "endMs": 96011,
+      "text": "for"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 96011,
+      "endMs": 96332,
+      "text": "setup."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 97147,
+      "endMs": 97307,
+      "text": "Still"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 97307,
+      "endMs": 97628,
+      "text": "finishing"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 97627,
+      "endMs": 97787,
+      "text": "at"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 97787,
+      "endMs": 98027,
+      "text": "one?"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 98268,
+      "endMs": 98747,
+      "text": "Yes,"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 98747,
+      "endMs": 98907,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 98907,
+      "endMs": 99227,
+      "text": "can't"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 99227,
+      "endMs": 99467,
+      "text": "keep"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 99467,
+      "endMs": 100027,
+      "text": "everyone"
+    },
+    {
+      "speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+      "startMs": 100027,
+      "endMs": 100427,
+      "text": "late."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 100604,
+      "endMs": 100923,
+      "text": "Last"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 100923,
+      "endMs": 101323,
+      "text": "walk-ins"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 101483,
+      "endMs": 101643,
+      "text": "at"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 101643,
+      "endMs": 101963,
+      "text": "quarter"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 101964,
+      "endMs": 102204,
+      "text": "past"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 102203,
+      "endMs": 102523,
+      "text": "twelve"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 102604,
+      "endMs": 102843,
+      "text": "then?"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 103644,
+      "endMs": 103803,
+      "text": "We"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 103803,
+      "endMs": 103963,
+      "text": "can"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 103963,
+      "endMs": 104123,
+      "text": "have"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 104123,
+      "endMs": 104203,
+      "text": "a"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 104204,
+      "endMs": 104443,
+      "text": "look,"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 104443,
+      "endMs": 104603,
+      "text": "but"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 104603,
+      "endMs": 104683,
+      "text": "I"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 104683,
+      "endMs": 105003,
+      "text": "won't"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 105004,
+      "endMs": 105323,
+      "text": "promise"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 105323,
+      "endMs": 105643,
+      "text": "we'll"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 105644,
+      "endMs": 106123,
+      "text": "fix"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 106124,
+      "endMs": 106220,
+      "text": "it."
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 106428,
+      "endMs": 107127,
+      "text": "Exactly,"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 107227,
+      "endMs": 107467,
+      "text": "and"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 107467,
+      "endMs": 107707,
+      "text": "we"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 107707,
+      "endMs": 108027,
+      "text": "stop"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 108027,
+      "endMs": 108347,
+      "text": "taking"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 108347,
+      "endMs": 108667,
+      "text": "things"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 108668,
+      "endMs": 109068,
+      "text": "earlier"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 109067,
+      "endMs": 109227,
+      "text": "if"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 109227,
+      "endMs": 109387,
+      "text": "the"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 109388,
+      "endMs": 110027,
+      "text": "queue's"
+    },
+    {
+      "speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
+      "startMs": 110027,
+      "endMs": 110427,
+      "text": "full.",
+      "attributionGapDb": -1.4487467854323661
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 110460,
+      "endMs": 110859,
+      "text": "Good."
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 111020,
+      "endMs": 111499,
+      "text": "I'll"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 111499,
+      "endMs": 111659,
+      "text": "make"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 111659,
+      "endMs": 111899,
+      "text": "those"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 111899,
+      "endMs": 112299,
+      "text": "three"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 112299,
+      "endMs": 112859,
+      "text": "calls"
+    },
+    {
+      "speaker": "spk_tess_7134aac53eddcc48c4c90667",
+      "startMs": 112859,
+      "endMs": 113101,
+      "text": "now."
+    }
+  ]
+}

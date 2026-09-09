@@ -1,0 +1,441 @@
+@import "tailwindcss";
+
+/* Explicit content source (relative to THIS file → cassini-viewer/src) so the
+ * viewer surface's utility classes are detected both in cassini-viewer's own
+ * build AND when cassini-app bundles this stylesheet from a different cwd
+ * (D-420: the shell consumes the viewing layer). */
+@source "./";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Plugin registration
+ *
+ * autumn = light (default), forest = dark (auto-applied when prefers-color-scheme: dark).
+ * The `@plugin "daisyui/theme"` blocks below redefine these themes inline so
+ * every token is visible and tunable in this file.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+@plugin "daisyui" {
+  /* root: emit the theme custom-properties on BOTH :root (standalone export)
+   * AND :host (the AppAPI embedded build, where embedded.ts renders the SPA
+   * inside an open shadow root). Custom properties set on :host inherit across
+   * the shadow boundary into the SPA; :root inside a shadow-scoped stylesheet
+   * would match nothing. :where() keeps specificity 0 (daisyUI's default). In
+   * standalone :host matches nothing; in the shadow :root matches nothing — so
+   * one declaration serves both contexts. See src/embedded.ts. */
+  root: ":where(:root, :host)";
+  themes:
+    saturn-light --default,
+    saturn-dark --prefersdark;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Tailwind v4 design tokens (@theme)
+ *
+ * These power Tailwind utilities (font-sans, rounded-md, etc.).
+ * Reference: https://tailwindcss.com/docs/theme
+ * ────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Typography ------------------------------------------------------------- */
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* Spacing scale base (1 unit = --spacing) -------------------------------- */
+  --spacing: 0.25rem;
+
+  /* Radii (Tailwind utilities) --------------------------------------------- */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+
+  /* Breakpoints ------------------------------------------------------------ */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * DaisyUI light theme — autumn
+ *
+ * Reference: https://daisyui.com/docs/themes/#list-of-all-color-names
+ * Token format: oklch (perceptually uniform). hex / rgb / hsl also work.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+@plugin "daisyui/theme" {
+  name: "saturn-light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(99.2% 0.008 104.031);
+  --color-base-200: oklch(91.8% 0.016 103.394);
+  --color-base-300: oklch(85.8% 0.014 103.384);
+  --color-base-content: oklch(13.1% 0.029 65.152);
+  --color-primary: oklch(62% 0.085 215);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(63% 0.16 72);
+  --color-secondary-content: oklch(15% 0.05 72);
+  --color-accent: oklch(81% 0.111 293.571);
+  --color-accent-content: oklch(14.125% 0.023 185.713);
+  --color-neutral: oklch(14% 0 0);
+  --color-neutral-content: oklch(91.8% 0.016 103.394);
+  --color-info: oklch(99.2% 0.008 104.031);
+  --color-info-content: oklch(13.844% 0.019 207.284);
+  --color-success: oklch(70.5% 0.147 152.3);
+  --color-success-content: oklch(0% 0 0);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(0% 0 0);
+  --color-error: oklch(76.6% 0.221 32.8);
+  --color-error-content: oklch(0% 0 0);
+
+  /* Geometry / depth ------------------------------------------------------ */
+  --radius-selector: 0.32rem; /* checkbox, toggle, badge, small UI    */
+  --radius-field: 0.5rem; /* button, input, select, tab           */
+  --radius-box: 0.5rem; /* card, modal, alert, large container  */
+  --size-selector: 0.25rem; /* base size for small UI elements      */
+  --size-field: 0.25rem; /* base size for inputs, buttons        */
+  --border: 1px; /* default border width                 */
+  --depth: 1; /* 0 = flat, 1 = subtle 3D shadows      */
+  --noise: 0; /* 0 = clean, 1 = subtle background noise */
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * DaisyUI dark theme — forest
+ * ────────────────────────────────────────────────────────────────────────── */
+
+@plugin "daisyui/theme" {
+  name: "saturn-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: oklch(26% 0 0);
+  --color-base-200: oklch(14% 0 0);
+  --color-base-300: oklch(36% 0 0);
+  --color-base-content: oklch(91.8% 0.016 103.394);
+  --color-primary: oklch(80.5% 0.0775 215);
+  --color-primary-content: oklch(0% 0 0);
+  --color-secondary: oklch(82% 0.14 78);
+  --color-secondary-content: oklch(20% 0.05 78);
+  --color-accent: oklch(81% 0.111 293.571);
+  --color-accent-content: oklch(14.125% 0.023 185.713);
+  --color-neutral: oklch(91.8% 0.016 103.394);
+  --color-neutral-content: oklch(26% 0 0);
+  --color-info: oklch(36% 0 0);
+  --color-info-content: oklch(91.8% 0.016 103.394);
+  --color-success: oklch(70.5% 0.147 152.3);
+  --color-success-content: oklch(0% 0 0);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(0% 0 0);
+  --color-error: oklch(76.6% 0.221 32.8);
+  --color-error-content: oklch(0% 0 0);
+
+  /* Geometry / depth (kept in sync with the autumn block) ----------------- */
+  --radius-selector: 0.32rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Shadow-DOM @property fallbacks (D-517)
+ *
+ * Tailwind v4 resolves border-style and box-shadow through registered custom
+ * properties (`border-style: var(--tw-border-style)`, `box-shadow: var(--tw-
+ * inset-shadow), …`). @property only registers from a DOCUMENT stylesheet, and
+ * the embedded build links this sheet INSIDE the shadow root — so the registra-
+ * tions are dropped, every var() is unresolvable, and border-style falls back to
+ * `none` while box-shadow is thrown out as invalid. Result: every `border`,
+ * `shadow-*` and `ring-*` utility renders as nothing in Nextcloud.
+ *
+ * Declaring the initial values here restores them. They are set per-element
+ * rather than once on :host because an unregistered custom property INHERITS
+ * (a registered one is inherits:false) — so a ring-* child inside a shadow-*
+ * card would otherwise inherit and repaint its parent's shadow. :where() keeps
+ * the whole block at zero specificity so every Tailwind utility still wins.
+ * ────────────────────────────────────────────────────────────────────────── */
+:where(:host, :host *) {
+  --tw-border-style: solid;
+  --tw-shadow: 0 0 #0000;
+  --tw-inset-shadow: 0 0 #0000;
+  --tw-inset-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-width: 0px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Nextcloud native colour override (D-414)
+ *
+ * Active when embedded.ts detects OCA.Theming and sets data-nc-theme on the
+ * shadow host element. NC CSS custom properties (--color-main-background etc.)
+ * inherit through the shadow boundary from the host page :root — no JS reads
+ * needed for those. --nc-primary is set as an inline style on the shadow host
+ * by embedded.ts to sidestep the circular var() reference that would arise
+ * from both NC and DaisyUI using --color-primary.
+ *
+ * data-theme="saturn-light" stays on .cassini-root as a DaisyUI fallback for
+ * tokens NC doesn't provide (accent, secondary, neutral, etc.).
+ * :host([data-nc-theme]) .cassini-root has specificity (0,2,0) which beats
+ * DaisyUI's [data-theme="saturn-light"] at (0,1,0).
+ * ────────────────────────────────────────────────────────────────────────── */
+:host([data-nc-theme]) .cassini-root {
+  --color-primary:         var(--color-primary-element);
+  --color-primary-content: var(--color-primary-element-text);
+  --color-base-100:        var(--color-background-dark);
+  --color-base-200:        var(--color-main-background);
+  --color-base-300:        var(--color-border-dark);
+  --color-base-content:    var(--color-main-text);
+}
+
+:host([data-nc-theme="dark"]),
+:host([data-nc-theme="dark-highcontrast"]) {
+  color-scheme: dark;
+}
+
+/* All NC modes: word-level highlight uses solid primary bg — text needs primary-content */
+:host([data-nc-theme]) .cassini-root [class~="bg-primary"][class~="ring-primary"] {
+  color: var(--color-primary-content);
+}
+
+/* All NC modes: explicit borders using NC's border token (border-width resets to 0 in shadow DOM) */
+:host([data-nc-theme]) .cassini-root .card.border-base-300 {
+  border: 1px solid var(--color-border-dark);
+}
+
+/* All NC modes: solid primary fill on the open meeting and the selected room.
+ * D-654 replaced the list's cards with flat rows, so these are scoped to the
+ * two things that actually carry a selected state — NOT to every button in the
+ * list, which now also holds a search field, a rooms button and chip clears. */
+:host([data-nc-theme]) .cassini-root .meeting-row[aria-current="page"],
+:host([data-nc-theme]) .cassini-root .room-button[aria-pressed="true"] {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-content);
+  box-shadow: none;
+}
+:host([data-nc-theme]) .cassini-root .meeting-row[aria-current="page"] *,
+:host([data-nc-theme]) .cassini-root .room-button[aria-pressed="true"] * {
+  color: var(--color-primary-content);
+}
+
+/* HC: flatten all backgrounds to NC's main-background — clean white/black canvas */
+:host([data-nc-theme*="highcontrast"]) .cassini-root {
+  --color-base-100: var(--color-main-background);
+  --color-base-200: var(--color-main-background);
+}
+/* HC flattens base-100/base-200 to one colour, so the rail and the sheet need
+ * their own edges back — they are what separates the three panes. */
+:host([data-nc-theme*="highcontrast"]) .cassini-root .rooms-rail {
+  border-right: 1px solid var(--color-border-dark);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root .meeting-sheet {
+  border-left: 1px solid var(--color-border-dark);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root .meeting-row:not([aria-current="page"]):hover,
+:host([data-nc-theme*="highcontrast"]) .cassini-root .room-button:not([aria-pressed="true"]):hover {
+  background-color: var(--color-background-dark);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root details.collapse {
+  border: 1px solid var(--color-border-dark);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root [class*="text-base-content"] {
+  color: var(--color-base-content);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root .card.border-base-300 {
+  border: 2px solid var(--color-main-text);
+}
+/* The operator's run cards are .card + .border-base-300 too, so they inherit the
+ * rule above — but they sit inside panels rather than alone in a list, so 2px of
+ * --color-main-text reads louder than everything around them. Match the panels
+ * instead: 1px of the same --color-border-dark that base-300 resolves to. */
+:host([data-nc-theme*="highcontrast"]) .cassini-root .recordings-list .card.border-base-300 {
+  border: 1px solid var(--color-border-dark);
+}
+/* HC flattens base-100 and base-200 to one colour, so the selected card's
+ * bg-base-200 tint carries no signal there. Invert it instead — the same
+ * foreground/background swap .cassini-shell-tab[aria-current] uses, which tracks
+ * whichever theme is live with no hardcoded light/dark branch.
+ *
+ * The descendant rule is required, not defensive: the status word and the
+ * attempt badge set their own colour and border, and on an inverted fill both
+ * land on top of their own colour and vanish. This costs the red/green status
+ * tone while a card is selected — legibility on the flipped fill wins. */
+:host([data-nc-theme*="highcontrast"]) .cassini-root .recordings-list .card.border-base-300[aria-current="page"] {
+  background-color: var(--color-main-text);
+  border-color: var(--color-main-text);
+  color: var(--color-main-background);
+}
+:host([data-nc-theme*="highcontrast"]) .cassini-root .recordings-list .card.border-base-300[aria-current="page"] * {
+  color: var(--color-main-background);
+  border-color: var(--color-main-background);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Global resets
+ *
+ * D-383: in the AppAPI embedded build this CSS is injected INTO the SPA's open
+ * shadow root (src/embedded.ts), not registered as a global ui/style link, so
+ * every selector below is scoped to the shadow tree. The html/body rules match
+ * nothing there (no html/body inside a shadow tree) and Tailwind Preflight's
+ * `*` reset only touches shadow elements — so nothing bleeds onto Nextcloud
+ * chrome, and NC's chrome no longer bleeds into the SPA. The :host block
+ * re-establishes the base typography Preflight's (now-inert) html/body rules
+ * would have set, and resets inherited properties at the shadow boundary. In
+ * the standalone export the very same file runs in the document: :host matches
+ * nothing and the html/body rules apply as before. ────────────────────────── */
+
+/* Shadow-boundary reset — active only in the embedded (shadow) build, where
+ * :host is the shadow host; inert in standalone (no shadow host). Only
+ * structure + Tailwind @theme tokens here: --font-sans is emitted by Tailwind
+ * v4 on :root,:host so it resolves on :host, but the daisyUI COLOR tokens are
+ * not on :host in this app (the viewer's themes come from @plugin
+ * "daisyui/theme" blocks, which emit on :root + [data-theme=…]) — so the themed
+ * color/background live on .cassini-root below, which carries data-theme. */
+:host {
+  display: block;
+  height: 100%;
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* .cassini-root carries data-theme (App.svelte), so the daisyUI [data-theme=…]
+ * rule defines the full theme on it — every app node lives inside it. Set the
+ * inherited base color/background here so they resolve in BOTH the embedded
+ * (shadow) build (where :host has no daisyUI color tokens) and standalone. */
+.cassini-root {
+  height: 100%;
+  min-height: 100%;
+  color: var(--color-base-content);
+  background-color: var(--color-base-100);
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Suppress transitions during theme swap to avoid cascading animation
+ * across thousands of transcript tokens. Toggled by App.svelte's setTheme,
+ * which adds .theme-switching to the .cassini-root wrapper (data-theme also
+ * lives there now — not on document.documentElement, which is outside the
+ * shadow root in the embedded build). */
+.cassini-root.theme-switching,
+.cassini-root.theme-switching *,
+.cassini-root.theme-switching *::before,
+.cassini-root.theme-switching *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Scroll containers reserve their scrollbar gutter at all times, so content
+ * width never shifts as the scrollbar appears/disappears. Applied directly
+ * in CSS rather than via Tailwind arbitrary class to guarantee it lands. */
+.scroll-stable {
+  scrollbar-gutter: stable;
+}
+
+/* Shared by standalone, embedded and exported meeting views (D-734). Instant
+ * word changes track the audio without animating thousands of paint effects. */
+.cassini-word {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-radius: 0.15rem;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.cassini-word:hover {
+  background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  box-shadow: 0 1px 0 var(--color-primary);
+}
+.cassini-word[data-active="true"] {
+  color: var(--color-base-100);
+  background: color-mix(in srgb, var(--color-primary) 70%, var(--color-base-content));
+}
+.cassini-word-interpolated {
+  text-decoration: underline dashed var(--color-warning);
+  text-underline-offset: 0.2em;
+}
+
+/* GPU-composited loading spinner. DaisyUI's loading-spinner uses a mask
+ * animation that runs on the main thread, so it visibly stalls when the
+ * meeting view performs the heavy synchronous transcript mount right
+ * before disappearing. transform-rotate on its own layer keeps spinning
+ * even when the main thread is briefly blocked. */
+.cassini-spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 4px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: cassini-spinner-spin 0.9s linear infinite;
+  will-change: transform;
+}
+@keyframes cassini-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cassini-spinner {
+    animation-duration: 2s;
+  }
+}
+
+/* Consistent keyboard focus ring across all interactive elements.
+ * `:where()` keeps specificity at 0 so any per-element override still wins. */
+:where(
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  summary,
+  [role="button"],
+  [role="switch"],
+  [role="checkbox"],
+  [role="link"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: 2px solid var(--color-base-content);
+  outline-offset: 2px;
+}
+
+/* …except the control inside a daisyUI .input/.select wrapper, which shows focus
+ * on the wrapper via :focus-within — the inner ring lands inside that one, and
+ * squared off, since the inner control carries no radius. daisyUI already resets
+ * it, but that reset sits in @layer utilities while the rule above is unlayered,
+ * and unlayered wins over any layer regardless of specificity. Matching (0,1,1)
+ * against its (0,1,0), also unlayered, is what actually reaches it. */
+:where(.input, .select) :is(input, select, textarea):focus-visible {
+  outline: none;
+}

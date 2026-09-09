@@ -1,0 +1,131 @@
+/* Host presentation only. The Cassini component owns transcript rendering. */
+:host {
+	height: 100%;
+	font-family: var(--sans, system-ui, sans-serif);
+}
+.cassini-root {
+	--color-base-100: var(--bg);
+	--color-base-200: var(--bg);
+	--color-base-300: var(--rule);
+	--color-base-content: var(--fg-2);
+	--color-primary: var(--blue);
+	--color-primary-content: var(--bg);
+	--color-info: var(--bg);
+	--color-info-content: var(--fg);
+	--color-warning: var(--amber);
+	--font-sans: var(--sans, system-ui, sans-serif);
+	background: transparent;
+}
+/* The surrounding page provides a title and file diagnostics. */
+.meeting-viewer > div > header,
+.meeting-viewer > div > div > header,
+.meeting-viewer [data-transcript-content] > section.grid {
+	display: none;
+}
+.meeting-viewer > div {
+	padding-bottom: 0;
+}
+.meeting-viewer [data-transcript-content] {
+	margin: 1.25rem;
+	gap: 1rem;
+}
+.meeting-viewer [data-transcript-content] > div:first-child {
+	display: none;
+}
+.meeting-viewer [role='log'] {
+	gap: 1.2rem;
+}
+.meeting-viewer footer {
+	position: relative;
+	inset: auto;
+	flex: none;
+	order: -1;
+	padding: 0.7rem 1rem;
+	border-bottom: 1px solid var(--rule);
+}
+.meeting-viewer footer > .card {
+	padding: 0;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+.meeting-viewer footer .card > div {
+	gap: 0.65rem;
+}
+.meeting-viewer footer label {
+	background: transparent;
+	border: 0;
+	padding-right: 0;
+}
+.meeting-viewer [role='log'] p {
+	padding-inline: 0;
+}
+.meeting-viewer [role='log'] p button {
+	font-size: 0.96rem;
+	line-height: 1.75;
+}
+.meeting-viewer [role='log'] article > div {
+	margin-bottom: 0.25rem;
+}
+.meeting-viewer [role='log'] article .badge {
+	border-radius: 3px;
+	font-size: 0.75rem;
+}
+.meeting-viewer [role='log'] article[aria-current='true'] {
+	--tw-ring-offset-width: 4px;
+}
+.meeting-viewer .box-decoration-clone {
+	font-size: 0.85rem;
+}
+.meeting-viewer .box-decoration-clone button {
+	font-size: inherit;
+}
+/* Cassini's opacity-based muted text compounds the site's translucent palette. */
+.meeting-viewer [class*='text-base-content/'] {
+	color: var(--fg-4);
+}
+.meeting-viewer .box-decoration-clone {
+	color: var(--fg-2);
+}
+.compact .meeting-viewer [data-transcript-content] {
+	margin: 1rem;
+}
+/* The compact home card uses its actual width, independent of viewport size. */
+.compact .meeting-viewer footer .card > div {
+	grid-template-columns: auto minmax(0, 1fr);
+}
+.compact .meeting-viewer footer .card > div > button {
+	grid-row: 2;
+	grid-column: 1;
+}
+.compact .meeting-viewer footer .card > div > div:first-of-type {
+	grid-row: 2;
+	grid-column: 2;
+}
+.compact .meeting-viewer footer .card > div > div:last-of-type {
+	grid-row: 1;
+	grid-column: 1 / -1;
+}
+.compact .meeting-viewer footer .btn {
+	width: 2rem;
+	height: 2rem;
+	min-height: 2rem;
+}
+.compact .meeting-viewer footer label {
+	height: 2rem;
+}
+.compact .meeting-viewer footer label > span {
+	font-size: 0.7rem;
+}
+.compact .meeting-viewer footer .toggle {
+	--size: calc(var(--size-selector, 0.25rem) * 4);
+}
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		transition: none !important;
+	}
+}

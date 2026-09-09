@@ -21,7 +21,20 @@
 	});
 
 	const current = $derived(page.url.pathname);
+	const isCurrent = (href: string) =>
+		current.startsWith(`${base}${href}`) ||
+		(href === '/try/' && current.startsWith(`${base}/demo/`)) ||
+		(href === '/spec/' && current.startsWith(`${base}/schema/`));
 </script>
+
+<svelte:window
+	onkeydown={(event) => {
+		if (event.key === 'Escape' && open) {
+			open = false;
+			document.getElementById('menu-toggle')?.focus();
+		}
+	}}
+/>
 
 <header class="nav">
 	<div class="shell nav__in">
@@ -43,12 +56,12 @@
 			<span>{site.name}</span><span class="brand__dim">/format</span>
 		</a>
 
-		<nav class="nav__links" class:nav__links--open={open} aria-label="Main">
+		<nav id="main-navigation" class="nav__links" class:nav__links--open={open} aria-label="Main">
 			{#each nav as item (item.href)}
 				<a
 					href="{base}{item.href}"
-					aria-current={current.startsWith(item.href.replace(/v1\/$/, '')) ? 'page' : undefined}
-					class:on={current.startsWith(item.href.replace(/v1\/$/, ''))}
+					aria-current={isCurrent(item.href) ? 'page' : undefined}
+					class:on={isCurrent(item.href)}
 					onclick={() => (open = false)}>{item.label}</a
 				>
 			{/each}
@@ -56,14 +69,45 @@
 		</nav>
 
 		<div class="nav__end">
-			<button class="ghost" type="button" onclick={toggleTheme} aria-label="Switch colour theme">
-				{theme === 'dark' ? 'light' : 'dark'}
+			<button
+				class="ghost theme"
+				type="button"
+				onclick={toggleTheme}
+				aria-label="Switch to {theme === 'dark' ? 'light' : 'dark'} theme"
+				title="Switch colour theme"
+			>
+				{#if theme === 'dark'}
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						aria-hidden="true"
+						><circle cx="12" cy="12" r="4" /><path
+							d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+						/></svg
+					>
+				{:else}
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z" /></svg
+					>
+				{/if}
 			</button>
 			<button
 				class="ghost burger"
+				id="menu-toggle"
 				type="button"
 				aria-expanded={open}
-				onclick={() => (open = !open)}>menu</button
+				aria-controls="main-navigation"
+				onclick={() => (open = !open)}>{open ? 'Close' : 'Menu'}</button
 			>
 		</div>
 	</div>
@@ -82,9 +126,11 @@
 		display: flex;
 		align-items: center;
 		gap: 1.5rem;
-		height: 52px;
+		height: 72px;
 	}
 	.brand {
+		font-family: var(--mono);
+		font-size: 15px;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
@@ -109,7 +155,7 @@
 		align-items: center;
 		gap: 1.35rem;
 		margin-left: auto;
-		font-size: 13px;
+		font-size: 14px;
 	}
 	.nav__links a {
 		color: var(--fg-3);
@@ -133,6 +179,7 @@
 		display: flex;
 		gap: 0.35rem;
 		flex: none;
+		margin-left: auto;
 	}
 	.ghost {
 		font: inherit;
@@ -142,7 +189,10 @@
 		color: var(--fg-4);
 		background: var(--bg-raise);
 		border: 1px solid var(--rule);
-		padding: 0.28rem 0.55rem;
+		padding: 0.5rem 0.7rem;
+		min-height: 40px;
+		min-width: 40px;
+		border-radius: 4px;
 		cursor: pointer;
 	}
 	.ghost:hover {
@@ -152,6 +202,11 @@
 	.burger {
 		display: none;
 	}
+	.theme {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
 
 	@media (max-width: 820px) {
 		.burger {
@@ -160,7 +215,7 @@
 		.nav__links {
 			display: none;
 			position: absolute;
-			top: 52px;
+			top: 72px;
 			left: 0;
 			right: 0;
 			flex-direction: column;
@@ -174,9 +229,17 @@
 			display: flex;
 		}
 		.nav__links a {
-			padding: 0.5rem 0;
+			padding: 0.75rem 0;
 			width: 100%;
 			border-bottom: 1px solid var(--rule);
+		}
+	}
+	@media (max-width: 380px) {
+		.nav__in {
+			gap: 0.75rem;
+		}
+		.brand__dim {
+			display: none;
 		}
 	}
 </style>

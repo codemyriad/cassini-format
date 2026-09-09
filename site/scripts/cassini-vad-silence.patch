@@ -1,0 +1,197 @@
+diff --git a/cassini-go-recorder/internal/transcribe/stt.go b/cassini-go-recorder/internal/transcribe/stt.go
+index 2919d10..17e1015 100644
+--- a/cassini-go-recorder/internal/transcribe/stt.go
++++ b/cassini-go-recorder/internal/transcribe/stt.go
+@@ -555,6 +555,24 @@ func wordEndOverContinuingAudio(samples []float32, sampleRate int, word Word, au
+ // within the full recording. vadSegment means the source span came from VAD and
+ // therefore ends at a detected speech boundary with its closing silence removed.
+ func (r *Recognizer) transcribeSegment(samples []float32, sampleRate int, segOffsetMS int64, vadSegment bool) ([]Word, error) {
++	// Silero can keep a brief acknowledgement and a later turn in one span,
++	// even across several seconds of silence. Fixed windows then spend most
++	// of their context on that silence and can bisect the later turn. Separate
++	// those acoustic islands first, keeping their original clock and padding.
++	if vadSegment {
++		if bounds := vadSilenceBounds(samples, sampleRate); len(bounds) > 1 {
++			var words []Word
++			for _, win := range bounds {
++				offset := segOffsetMS + int64(win.start)*1000/int64(sampleRate)
++				part, err := r.transcribeSegment(samples[win.start:win.end], sampleRate, offset, true)
++				if err != nil {
++					return nil, err
++				}
++				words = append(words, part...)
++			}
++			return words, nil
++		}
++	}
+ 	// Silero can merge quiet pauses until MaxSpeechDuration forces a roughly
+ 	// 25s segment. Parakeet TDT v3 sometimes emits only a prefix (or nothing)
+ 	// for those long, abrupt spans even with trailing silence. Decode long VAD
+@@ -638,6 +656,60 @@ func (r *Recognizer) transcribeSegment(samples []float32, sampleRate int, segOff
+ 	return allWords, nil
+ }
+ 
++// vadSilenceBounds refines only spans that would otherwise need fixed windows.
++// A full second below the existing word-energy criteria is deliberately more
++// conservative than Silero's half-second pause setting. Each retained island
++// keeps 200 ms of the measured quiet run on both sides; only its silent middle
++// is omitted from ASR input, never from the recording or its timebase.
++func vadSilenceBounds(samples []float32, sampleRate int) []windowBound {
++	whole := []windowBound{{start: 0, end: len(samples)}}
++	if sampleRate <= 0 || len(samples) <= scaleSamples(vadDecodeWindowSamples+vadDecodeWindowGrace, sampleRate) {
++		return whole
++	}
++	window := max(1, sampleRate*int(wordEndScanWindowMS)/1000)
++	minimumActive := (sampleRate*minimumActiveDurationMS + 999) / 1000
++	handle := sampleRate * int(wordEnergyPostMarginMS) / 1000
++	minimumQuiet := sampleRate // one second
++	var bounds []windowBound
++	start, quietStart := 0, -1
++	for at := 0; at < len(samples); at += window {
++		end := min(at+window, len(samples))
++		var peak float32
++		var squareSum float64
++		active := 0
++		for _, value := range samples[at:end] {
++			squareSum += float64(value) * float64(value)
++			if value < 0 {
++				value = -value
++			}
++			peak = max(peak, value)
++			if value >= minimumActiveAmplitude {
++				active++
++			}
++		}
++		minimumMeanSquare := float64(minimumWordRMSAmplitude) * float64(minimumWordRMSAmplitude)
++		// All gates must agree that this frame is quiet. Requiring the full
++		// word gate in each tiny frame would discard low-duty-cycle speech
++		// that easily passes the activity-duration gate over a whole word.
++		sounding := peak >= minimumWordPeakAmplitude || squareSum/float64(end-at) >= minimumMeanSquare || active >= minimumActive
++		if !sounding {
++			if quietStart < 0 {
++				quietStart = at
++			}
++			continue
++		}
++		if quietStart > start && at-quietStart >= minimumQuiet {
++			bounds = append(bounds, windowBound{start: start, end: quietStart + handle})
++			start = at - handle
++		}
++		quietStart = -1
++	}
++	if len(bounds) == 0 {
++		return whole
++	}
++	return append(bounds, windowBound{start: start, end: len(samples)})
++}
++
+ func vadSegmentWindowBounds(total, sampleRate int) []windowBound {
+ 	windowSamples := scaleSamples(vadDecodeWindowSamples, sampleRate)
+ 	overlapSamples := scaleSamples(vadDecodeWindowOverlap, sampleRate)
+diff --git a/cassini-go-recorder/internal/transcribe/stt_silence_test.go b/cassini-go-recorder/internal/transcribe/stt_silence_test.go
+new file mode 100644
+index 0000000..efdd420
+--- /dev/null
++++ b/cassini-go-recorder/internal/transcribe/stt_silence_test.go
+@@ -0,0 +1,101 @@
++package transcribe
++
++import (
++	"reflect"
++	"testing"
++)
++
++func TestVADSilenceBoundsPreserveSeparatedSpeech(t *testing.T) {
++	const rate = 16000
++	samples := make([]float32, 13*rate)
++	// A short backchannel, a long quiet interval, then a full sentence. The
++	// old fixed-window plan cut the sentence to give its final child context.
++	for i := 0; i < rate/2; i++ {
++		samples[i] = .1
++	}
++	for i := 8 * rate; i < len(samples); i++ {
++		samples[i] = .1
++	}
++	want := []windowBound{{start: 0, end: 7 * rate / 10}, {start: 78 * rate / 10, end: len(samples)}}
++	got := vadSilenceBounds(samples, rate)
++	if !reflect.DeepEqual(got, want) {
++		t.Fatalf("bounds = %#v; want %#v", got, want)
++	}
++	// Every sounding sample keeps its original position in a retained slice;
++	// both boundaries sit in silence with 200 ms of onset/tail context.
++	for i, value := range samples {
++		if value == 0 {
++			continue
++		}
++		covered := false
++		for _, bound := range got {
++			covered = covered || i >= bound.start && i < bound.end
++		}
++		if !covered {
++			t.Fatalf("speech sample %d was excluded", i)
++		}
++	}
++}
++
++func TestVADSilenceBoundsLeaveOrdinaryPausesAndContinuousSpeechAlone(t *testing.T) {
++	const rate = 16000
++	for _, pauseMS := range []int{0, 300, 990} {
++		samples := make([]float32, 13*rate)
++		for i := range samples {
++			samples[i] = .1
++		}
++		clear(samples[6*rate : 6*rate+pauseMS*rate/1000])
++		got := vadSilenceBounds(samples, rate)
++		want := []windowBound{{start: 0, end: len(samples)}}
++		if !reflect.DeepEqual(got, want) {
++			t.Errorf("%d ms pause changed existing window behavior: %#v", pauseMS, got)
++		}
++	}
++}
++
++func TestVADSilenceBoundsPreserveSustainedSparseEnergy(t *testing.T) {
++	const rate = 16000
++	samples := make([]float32, 13*rate)
++	for i := range samples {
++		samples[i] = .1
++	}
++	// This quieter 100 Hz pulse train has 2 ms of active samples in every
++	// 10 ms frame. Its peak (.002) and RMS (~.000894) comfortably pass the
++	// word gate, but requiring 5 ms of activity in each frame would classify
++	// the entire three seconds as silence and discard the middle 2.6 seconds.
++	for i := 5 * rate; i < 8*rate; i++ {
++		switch {
++		case i%160 < 16:
++			samples[i] = .002
++		case i%160 < 32:
++			samples[i] = -.002
++		default:
++			samples[i] = 0
++		}
++	}
++	words := []Word{{Text: "quiet", StartMS: 6000, EndMS: 6400}}
++	if got := filterWordsByEnergy(samples, rate, words); len(got) != 1 {
++		t.Fatal("fixture should pass the existing word-energy gate")
++	}
++	want := []windowBound{{start: 0, end: len(samples)}}
++	if got := vadSilenceBounds(samples, rate); !reflect.DeepEqual(got, want) {
++		t.Fatalf("sustained audio passing the word gate was split: %#v", got)
++	}
++}
++
++func TestVADSilenceBoundsDoNotResegmentShortOrSilentSpans(t *testing.T) {
++	const rate = 16000
++	for _, length := range []int{0, 5 * rate, 105 * rate / 10, 13 * rate} {
++		samples := make([]float32, length)
++		got := vadSilenceBounds(samples, rate)
++		want := []windowBound{{start: 0, end: length}}
++		if !reflect.DeepEqual(got, want) {
++			t.Errorf("silent span of %d samples split: %#v", length, got)
++		}
++	}
++	samples := make([]float32, 10*rate)
++	samples[0], samples[len(samples)-1] = .1, .1
++	if got := vadSilenceBounds(samples, rate); len(got) != 1 {
++		t.Fatalf("short span was resegmented: %#v", got)
++	}
++}
