@@ -3,7 +3,7 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	// One delegated listener for every copy button the markdown pipeline emits.
 	$effect(() => {
@@ -24,6 +24,13 @@
 		return () => document.removeEventListener('click', onClick);
 	});
 </script>
+
+<svelte:head>
+	{#if data.canonical}
+		<link rel="canonical" href={data.canonical} />
+		<meta property="og:url" content={data.canonical} />
+	{/if}
+</svelte:head>
 
 <a class="skip" href="#main">Skip to content</a>
 <Nav />

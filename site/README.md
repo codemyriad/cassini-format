@@ -83,13 +83,13 @@ so unrelated local static files cannot enter the deployment:
 
 ```bash
 npm ci
-SITE_URL=https://cassini-format.codemyriad.io npm run build
+SITE_URL=https://format.gocassini.com npm run build
 wrangler pages deploy build --project-name cassini-format --branch main
 ```
 
 `SITE_URL` makes the canonical and `llms-full.txt` links absolute. Wrangler needs
 the configured Cloudflare credentials and account. After deployment, verify
-`https://cassini-format.codemyriad.io/`, `/schema/`, and `/llms-full.txt`.
+`https://format.gocassini.com/`, `/schema/`, and `/llms-full.txt`.
 
 For a deploy under a subpath rather than a domain root, set `BASE_PATH`:
 

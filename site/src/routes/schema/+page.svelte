@@ -37,7 +37,7 @@
 		<div>
 			<p>
 				Each schema's <code>$id</code> is its URL under
-				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves it there. Every file
+				<code>format.gocassini.com/schema/</code>, and this site serves it there. Every file
 				carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader holding only
 				the file can find the schema it claims to follow.
 			</p>

@@ -53,7 +53,7 @@ base64url-encoded and cut into numbered pieces.
    | `CASSINI_PROFILE` | `ogg-opus` |
    | `CASSINI_PAYLOAD_MIME` | `application/vnd.cassini.portable-meeting+json` |
    | `CASSINI_PAYLOAD_ENCODING` | `base64url+gzip+utf8json` |
-   | `CASSINI_PAYLOAD_SCHEMA` | `https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json` |
+   | `CASSINI_PAYLOAD_SCHEMA` | `https://format.gocassini.com/schema/cassini-portable-meeting-manifest-v1.schema.json` |
    | `CASSINI_PAYLOAD_CHUNK_COUNT` | decimal integer, 1 or more |
    | `CASSINI_PAYLOAD_SHA256` | lowercase hex, over the **decompressed** JSON |
    | `CASSINI_PAYLOAD_RAW_BYTES` | decimal integer, the decompressed length |

@@ -1,6 +1,6 @@
 {
 	"generatedFrom": "repair-cafe.opus",
-	"bytes": 899628,
+	"bytes": 899620,
 	"audio": {
 		"codec": "opus",
 		"sampleRate": 48000,
@@ -74,7 +74,7 @@
 		"CASSINI_PAYLOAD_GZIP_BYTES": "914",
 		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
 		"CASSINI_PAYLOAD_RAW_BYTES": "1620",
-		"CASSINI_PAYLOAD_SCHEMA": "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json",
+		"CASSINI_PAYLOAD_SCHEMA": "https://format.gocassini.com/schema/cassini-portable-meeting-manifest-v1.schema.json",
 		"CASSINI_PAYLOAD_SHA256": "75533ccb8171e3f967ccf313d2790945a94a70d50520f991186726e70436ca58",
 		"CASSINI_PROCESSED_AT": "2026-09-07T16:48:00Z",
 		"CASSINI_PROFILE": "ogg-opus",

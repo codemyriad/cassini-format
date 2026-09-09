@@ -6,7 +6,7 @@
   "notCovered": [
     "the two pre-publication draft formats, which were never public"
   ],
-  "updated": "2026-09-07",
+  "updated": "2026-09-09",
   "profiles": {
     "metadata": "Decodes the tags and the chunk sets and verifies every declared payload SHA-256 and byte count. Does not read the audio. Such a reader reports audioTrust 'not-checked' and never 'verified'.",
     "full": "Everything a metadata reader does, plus exact-opus-audio-v1 over the compressed audio packets."
@@ -15,8 +15,8 @@
     {
       "id": "001-minimal-v1",
       "file": "opus/001-minimal-v1.opus",
-      "bytes": 2992,
-      "sha256": "77f191d135cfb1a51fa34787f83291f8aab68f019ded0896238a9c1c0d4c41fa",
+      "bytes": 2984,
+      "sha256": "d0ad2b147822c9edc39203b1e7ee51ca38c9b41835b857a42cc639ed30743662",
       "derivedFrom": null,
       "profiles": [
         "metadata",
@@ -81,8 +81,8 @@
     {
       "id": "003-multichunk-v1",
       "file": "opus/003-multichunk-v1.opus",
-      "bytes": 50958,
-      "sha256": "b771a29314b258e2955171101d5ed8ef2b794e584cc2879b62057b893e3c5368",
+      "bytes": 50950,
+      "sha256": "cb0f5d3e10edd89a448f2744aa4f06846a7d75b4e4619823e8229e12e0915e71",
       "derivedFrom": null,
       "profiles": [
         "metadata",
@@ -115,8 +115,8 @@
     {
       "id": "004-padded-base64url-v1",
       "file": "opus/004-padded-base64url-v1.opus",
-      "bytes": 2994,
-      "sha256": "9f5026a86961cfe8f7a3ddd578f7137be9a27646fde4f3d4e927d763fa3ad2a5",
+      "bytes": 2986,
+      "sha256": "4c1fc8630d0e1dc7193459308c96f93be6f51b2d72b2f592d9c04e079c06d617",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -146,8 +146,8 @@
     {
       "id": "005-duplicate-chunk-tag",
       "file": "opus/005-duplicate-chunk-tag.opus",
-      "bytes": 55106,
-      "sha256": "3a03785795437f7d54398905236acd0fe811e0b2d59e51281f89fbe1d44fdeee",
+      "bytes": 55098,
+      "sha256": "1d275da79fc6bab4b357b0fa64b051fff6932a1c11b1c74659eacaf0f4564f7e",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -177,8 +177,8 @@
     {
       "id": "006-missing-chunk",
       "file": "opus/006-missing-chunk.opus",
-      "bytes": 46811,
-      "sha256": "164166c5c94525a0ff7af23e45486fe7ace0f442ffd4dde9b27cbef00e1ff5f6",
+      "bytes": 46803,
+      "sha256": "2067267d8f40d5f0ebd5ca733a921e442e6e99be9830df4e97665cc7f11a8863",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -212,8 +212,8 @@
     {
       "id": "007-chunk-count-too-high",
       "file": "opus/007-chunk-count-too-high.opus",
-      "bytes": 50958,
-      "sha256": "e058abd6a0ade702ad8ff736a943f81af5a3fb396aca55f3acb0f56a514e55ac",
+      "bytes": 50950,
+      "sha256": "1bc091b0b6979877e62c2465f86b88ed00d871a04fbe9c51b8dcc5eccd493ac6",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -244,8 +244,8 @@
     {
       "id": "008-chunk-count-too-low",
       "file": "opus/008-chunk-count-too-low.opus",
-      "bytes": 50958,
-      "sha256": "153818418a7ea0a95d1e4ee8c5861864c42eb94fdfbc7f5b625b5dd31e042cac",
+      "bytes": 50950,
+      "sha256": "2b6f9df51cff4a1a1a2eea38cd5f6852d4bad18c0b2cbd8acc41eaa1b2ba2c61",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -276,8 +276,8 @@
     {
       "id": "009-bad-payload-sha256",
       "file": "opus/009-bad-payload-sha256.opus",
-      "bytes": 2992,
-      "sha256": "d6397e67bab522c96d645b05ebe404474bc9c3545a04d045154b822c15e6212e",
+      "bytes": 2984,
+      "sha256": "84308e357c97df9fa8bb7371038e490d7f519b6dd3b778d21f4fe74df014dfde",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -306,8 +306,8 @@
     {
       "id": "010-stale-audio",
       "file": "opus/010-stale-audio.opus",
-      "bytes": 13664,
-      "sha256": "8ac426544eae8ed08994937e68a64b7da135846e2632df3e16cda8eaf947351c",
+      "bytes": 13656,
+      "sha256": "5b771e32b554214ece95566f26483da5f780613573a16f5de8677d70ac183587",
       "derivedFrom": null,
       "profiles": [
         "full"
@@ -343,8 +343,8 @@
     {
       "id": "011-tag-manifest-disagreement",
       "file": "opus/011-tag-manifest-disagreement.opus",
-      "bytes": 2992,
-      "sha256": "9cbb2b383301303016cd6ea1c31b0185a88e51e35c40d8c96f987188ebba1b84",
+      "bytes": 2984,
+      "sha256": "89acf118f5be9a342b39eb93a4a0b70a3f4c7d68bfa9c36cab964ab6fa1ee88c",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "full"
@@ -374,8 +374,8 @@
     {
       "id": "012-lowercase-tag-names",
       "file": "opus/012-lowercase-tag-names.opus",
-      "bytes": 2992,
-      "sha256": "a9cfa0b69502b0b9b5fde4de08ec101e4ef78f2fbee96d41be02b96941d7c8ce",
+      "bytes": 2984,
+      "sha256": "79d41e7fc097df88999a6456100eb06c89565b548f004dfbfa03753132b63104",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -399,8 +399,8 @@
     {
       "id": "013-mixed-case-tag-names",
       "file": "opus/013-mixed-case-tag-names.opus",
-      "bytes": 2992,
-      "sha256": "7111edb8c588ec85a7d2a70d2bf6a30714dcc0f82e8a3cb3a1a6ed666f8b3227",
+      "bytes": 2984,
+      "sha256": "9075c1c4dd0ba2a2ba949c487d48bdcc003c61d749f3e160b76c6c603cf6a876",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -424,8 +424,8 @@
     {
       "id": "014-unknown-manifest-member",
       "file": "opus/014-unknown-manifest-member.opus",
-      "bytes": 3064,
-      "sha256": "75d9be700f7ecc483d486d54adbec868b1a6bea92f189063409e6e2237428fbb",
+      "bytes": 3056,
+      "sha256": "e03f394847321176c13f9a180fef7e9c7b3ccb494635bff3935180f31d60eb70",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -458,8 +458,8 @@
     {
       "id": "015-unknown-major-version",
       "file": "opus/015-unknown-major-version.opus",
-      "bytes": 2993,
-      "sha256": "9c635dc05246c87aa164f795f81e12e83f6b7fefb108e7e492d37b351f00dd9d",
+      "bytes": 2985,
+      "sha256": "c251ec856dec2683126cc5365151967a014e87f2385023d2945305557413a113",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -486,8 +486,8 @@
     {
       "id": "016-two-transcripts",
       "file": "opus/016-two-transcripts.opus",
-      "bytes": 3755,
-      "sha256": "9056a91e70d48f427c5a1223ebca0f815272a652baf281b319104f89f30953c5",
+      "bytes": 3747,
+      "sha256": "70378c87ce08edff20c96ba6e2806e205703a29cc77778ad51bcda66a5b8326a",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -521,8 +521,8 @@
     {
       "id": "017-dangling-transcript-id",
       "file": "opus/017-dangling-transcript-id.opus",
-      "bytes": 2998,
-      "sha256": "38a76575eb398b5429dfc523d33e4267e7fc02c5db4dffb4af6c71fb42908b09",
+      "bytes": 2990,
+      "sha256": "ab9ccf61b9404d2b0863dbaf17b37a1435aa4ef2cdff2c66e2fb2de1e7250bf9",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -557,8 +557,8 @@
     {
       "id": "018-oversize-opustags",
       "file": "opus/018-oversize-opustags.opus",
-      "bytes": 68458,
-      "sha256": "cbcee81cd0f284ebd01872b7f1ff8e39226d648613c35192c5d9e0199d878844",
+      "bytes": 68450,
+      "sha256": "199e9b964f3aa660e98ffe18301bc63fa3dba9d58511f718c598388670558036",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -593,8 +593,8 @@
     {
       "id": "019-manifest-chunk-count-too-high",
       "file": "opus/019-manifest-chunk-count-too-high.opus",
-      "bytes": 2992,
-      "sha256": "697b5c838e7149cf5cbc1d2bd8024ebbd7f6efff3bd6a82792d899ad206d54f9",
+      "bytes": 2984,
+      "sha256": "f50da6bcd413fd4554e5321301fc07c08c107fc19fe3fe92d93a209e2295185c",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -623,8 +623,8 @@
     {
       "id": "020-duplicate-chunk-differing",
       "file": "opus/020-duplicate-chunk-differing.opus",
-      "bytes": 51114,
-      "sha256": "7d856d528e1e389fcc8206c5ae54de06f96ba811ba840d01566d6cdf608900e6",
+      "bytes": 51106,
+      "sha256": "4d29f28ded61817a72cf6a7d58a87386a67585521bfa15c59a30ce3809f1c1b6",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -654,8 +654,8 @@
     {
       "id": "021-descriptors-first",
       "file": "opus/021-descriptors-first.opus",
-      "bytes": 68458,
-      "sha256": "33b7239e8a579dde4de34a2b1518af59ea303c8b85f19113e6866e31abf9baf0",
+      "bytes": 68450,
+      "sha256": "2492e971775756ebe363e743ef7f1e4926ef2585520c4a45693cde097adf15ee",
       "derivedFrom": "018-oversize-opustags",
       "profiles": [
         "metadata",
@@ -679,8 +679,8 @@
     {
       "id": "022-duplicate-chunk-junk-last",
       "file": "opus/022-duplicate-chunk-junk-last.opus",
-      "bytes": 51114,
-      "sha256": "7bd9947befa07b109a9b46961390dde8295f6d338067b87f7285b4af94504c54",
+      "bytes": 51106,
+      "sha256": "c44a0098e4c9168c5a257b281245dee74611c4681ef71d7dab0ec1fc8ea6755f",
       "derivedFrom": "003-multichunk-v1",
       "profiles": [
         "metadata",
@@ -710,8 +710,8 @@
     {
       "id": "023-no-transcript-role",
       "file": "opus/023-no-transcript-role.opus",
-      "bytes": 2981,
-      "sha256": "bb5ae14ea100c2b1ff6c0d3d945459e6ddded157a6b013bdbab83be3b7b23934",
+      "bytes": 2973,
+      "sha256": "480bd56d3eed1d598cef25fe60bfec050b46c65e46de020fdc4fa51d6d6ef7c5",
       "derivedFrom": "001-minimal-v1",
       "profiles": [
         "metadata",
@@ -750,8 +750,8 @@
     {
       "id": "024-no-role-second-default",
       "file": "opus/024-no-role-second-default.opus",
-      "bytes": 3751,
-      "sha256": "8a16ce6d6bfd522fc7fad16a3c17990d32ae1ae9344519200fdb70c2e15457ae",
+      "bytes": 3743,
+      "sha256": "b2dd23c791ceb3b018018269531bdb392aebef66d86459e6b21e2b7626991913",
       "derivedFrom": "016-two-transcripts",
       "profiles": [
         "metadata",
@@ -786,8 +786,8 @@
     {
       "id": "025-ignored-origin-label",
       "file": "opus/025-ignored-origin-label.opus",
-      "bytes": 3853,
-      "sha256": "373c3798862002bcb798753c11bbf7c10f1eb50b2222816cb4c05d65ba9bf72d",
+      "bytes": 3845,
+      "sha256": "96d7b07e4ef0d04169776677543d6addf049c9d82972b90215a5077ec20b41c3",
       "derivedFrom": "016-two-transcripts",
       "profiles": [
         "metadata",
@@ -822,8 +822,8 @@
     {
       "id": "026-display-and-withdrawn-cleanup",
       "file": "opus/026-display-and-withdrawn-cleanup.opus",
-      "bytes": 4522,
-      "sha256": "fe5ffa4d042fb0610982128d49ab1baf06d3f3c9c45e30431eb190a0e49e6f0f",
+      "bytes": 4514,
+      "sha256": "c91c93a127cd42ea46b43e566ae238aafbb79d1a2ba7e4087ae39950eb67d924",
       "derivedFrom": "016-two-transcripts",
       "profiles": [
         "metadata",

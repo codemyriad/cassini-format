@@ -9,7 +9,7 @@ on this site, then run it:
 
 ```bash
 curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-read-pure.py
-curl -fLO https://cassini-format.codemyriad.io/demo/{{demo.filename}}
+curl -fLO https://format.gocassini.com/demo/{{demo.filename}}
 python3 cassini-read-pure.py {{demo.filename}}
 ```
 

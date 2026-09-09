@@ -5,7 +5,7 @@ because that is all it is: Ogg Opus, 48 kHz. It also carries its own
 word-timestamped transcript, the speakers, and a record of what produced the
 text, in the OpusTags header, where a player that does not care ignores them.
 
-The website is <https://cassini-format.codemyriad.io/>. Everything on it is
+The website is <https://format.gocassini.com/>. Everything on it is
 built from this repository.
 
 ## What is here
