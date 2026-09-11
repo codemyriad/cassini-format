@@ -1,6 +1,6 @@
 {
 	"generatedFrom": "cassini-final-moments.opus",
-	"bytes": 767493,
+	"bytes": 767485,
 	"audio": {
 		"codec": "opus",
 		"sampleRate": 48000,
@@ -65,7 +65,7 @@
 		"CASSINI_PAYLOAD_GZIP_BYTES": "1960",
 		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
 		"CASSINI_PAYLOAD_RAW_BYTES": "3830",
-		"CASSINI_PAYLOAD_SCHEMA": "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json",
+		"CASSINI_PAYLOAD_SCHEMA": "https://format.gocassini.com/schema/cassini-portable-meeting-manifest-v1.schema.json",
 		"CASSINI_PAYLOAD_SHA256": "d60f00cd281bf643ddbd95fc36e6b5039cb110a4fa463f06936d59e699bdbec4",
 		"CASSINI_PROFILE": "ogg-opus",
 		"CASSINI_SPEAKER_COUNT": "4",

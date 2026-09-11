@@ -26,7 +26,10 @@
 </script>
 
 <svelte:head>
-	{#if data.canonical}<link rel="canonical" href={data.canonical} />{/if}
+	{#if data.canonical}
+		<link rel="canonical" href={data.canonical} />
+		<meta property="og:url" content={data.canonical} />
+	{/if}
 </svelte:head>
 
 <a class="skip" href="#main">Skip to content</a>

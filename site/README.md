@@ -103,9 +103,8 @@ set it to an empty string for relative links in a portable preview. Wrangler
 needs the configured Cloudflare credentials and account. After deployment,
 verify `https://format.gocassini.com/`, `/schema/`, and `/llms-full.txt`.
 
-Published schema `$id` values and embedded `CASSINI_PAYLOAD_SCHEMA` tags keep
-their original identifiers. Schema downloads are served at the new website;
-keep the old schema URLs reachable when configuring the domain migration.
+Schema `$id` values and new recordings’ `CASSINI_PAYLOAD_SCHEMA` tags use
+`https://format.gocassini.com/schema/`.
 
 For a deploy under a subpath rather than a domain root, set `BASE_PATH`:
 

@@ -51,6 +51,7 @@ function embedPatch(source) {
 // Narrow optional values for the site's TypeScript 6 checker. These are
 // type-only changes; they preserve the upstream portable projection exactly.
 function portableTypePatch(source) {
+	source = source.replaceAll('https://cassini-format.codemyriad.io', 'https://format.gocassini.com');
 	const replacements = [
 		['    ref.rawBytes < 0 ||', '    ref.rawBytes! < 0 ||'],
 		['    ref.gzipBytes < 0 ||', '    ref.gzipBytes! < 0 ||'],

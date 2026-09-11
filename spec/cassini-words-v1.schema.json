@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://cassini-format.codemyriad.io/schema/cassini-words-v1.schema.json",
+  "$id": "https://format.gocassini.com/schema/cassini-words-v1.schema.json",
   "title": "Cassini transcript body (cassini.words.v1)",
   "description": "The decompressed body of a CASSINI_TX_<ID>_PAYLOAD_* chunk set, and of a v1 file's inline manifest.transcript. Deliberately open: a consumer that meets an unknown member ignores it.",
   "type": "object",

@@ -40,11 +40,10 @@
 	<div class="two">
 		<div>
 			<p>
-				Download the schemas above from <code>format.gocassini.com/schema/</code>.
-				Their published <code>$id</code> values retain the original
-				<code>cassini-format.codemyriad.io/schema/</code> address. The manifest schema's identifier
-				also appears in the <code>CASSINI_PAYLOAD_SCHEMA</code> tag inside recordings.
-				Moving the website leaves these identifiers and the format unchanged.
+				Each schema’s <code>$id</code> is its URL under
+				<code>format.gocassini.com/schema/</code>. New recordings use the same location
+				in their <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader can find the schema
+				the file claims to follow.
 			</p>
 		</div>
 		<div class="code">
