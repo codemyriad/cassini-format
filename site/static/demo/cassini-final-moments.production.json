@@ -1,0 +1,38 @@
+{
+  "createdAtUtc": "2026-09-11T18:41:23Z",
+  "source": {
+    "title": "Final Moments in Cassini Mission Control",
+    "page": "https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/",
+    "download": "https://d2pn8kiwq2w21t.cloudfront.net/media/videoscassini20170915JPL-20170915-CASSINf-0001-720cc.m4v",
+    "publishedDate": "2017-09-15",
+    "sha256": "fc28a4e3b600355fa0a71c782e387d50d63bf7a65d909371fbfecf82599f25f7",
+    "credit": "Courtesy NASA/JPL-Caltech",
+    "usePolicy": "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+  },
+  "transcription": {
+    "method": "Editorial reconciliation of independent audio transcriptions, JPL webpage transcript and embedded EIA-608 captions",
+    "models": [
+      "google/gemini-3.5-flash",
+      "google/gemini-3.8-flash",
+      "openai/gpt-audio",
+      "ElevenLabs scribe_v2"
+    ],
+    "modelAccess": "Gemini and GPT Audio through OpenRouter; Scribe and forced alignment through ElevenLabs",
+    "evidence": "cassini-final-moments.evidence.json",
+    "timing": "Scribe v2 acoustic word timestamps; general audio models\u2019 segment timestamps rejected as inaccurate. ElevenLabs forced alignment was attempted but denied due to missing forced_alignment permission; no independent alignment result was available.",
+    "speakerAttribution": "Julie Webster and Earl Maize named by JPL captions and webpage. Their short exchange is assigned by diarization and conversational continuity. ACS 1 and the signal operator have no verified personal names.",
+    "decisions": [
+      "Opening: ACS one, we just had transition to high rate mode (captions and Scribe; webpage has condition).",
+      "11.179\u201312.500 seconds: [unintelligible]; candidates include X-band/X-ray band and S-band/Sierra band/C-band. No consensus; JPL also marks this unintelligible.",
+      "Retain Okay, the individually spoken digits one one five five four six, and audible uh fillers from Scribe.",
+      "Retain Project manager on FSO coord, Maybe a trickle, within the next, and gonna from acoustic recognition instead of the edited webpage wording.",
+      "After but, Scribe and GPT Audio hear just heard; Gemini and the webpage disagree on additional pronouns. Retain just heard and document the uncertainty.",
+      "Preserve full audio including final applause; do not assign group applause to Earl Maize or turn unspoken closing-credit captions into speech."
+    ],
+    "limitations": "AI-reconciled transcript, not a human-certified or official NASA transcript. Word boundaries and short-turn speaker assignments remain estimates."
+  },
+  "audio": {
+    "processing": "Full original stereo audio, no cuts or denoising in listening copy; AAC decoded and encoded as 48 kHz stereo Opus at 96 kb/s. Filtered radio crop used only for transcription comparison."
+  },
+  "producer": "site/scripts/produce-cassini-final.py using tools/cassini-pack.py"
+}

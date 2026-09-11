@@ -30,8 +30,8 @@ The site's embedded Cassini transcript component is AGPL-3.0.
 WHAT THIS IS
 
 Everything needed to write a reader or a producer, in one file: the
-specification, the transcript body format, the audio digest contract, both
-implementation guides, every JSON Schema, and the actual tag dump of a real file
+specification, the transcript body format, the audio digest contract,
+implementation and verification guides, every JSON Schema, and the actual tag dump of a real file
 you can download and check against.
 
 HOW TO USE IT
@@ -88,6 +88,12 @@ A REAL FILE TO CHECK AGAINST
 
 	parts.push(rule('GUIDE — reading a file'));
 	parts.push(await siteContent('consume'));
+
+	parts.push(rule('GUIDE — checking a file'));
+	parts.push(await siteContent('verify'));
+
+	parts.push(rule('IMPLEMENTATION PATHS AND CONFORMANCE SETUP'));
+	parts.push(await siteContent('build'));
 
 	for (const s of await listSchemas()) {
 		parts.push(rule(`SCHEMA — ${s.file}`));

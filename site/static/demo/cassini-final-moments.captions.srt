@@ -1,0 +1,102 @@
+1
+00:00:00,000 --> 00:00:02,402
+<font face="Monospace">{\an7}Mission Control:
+\hSystems ACS 1.</font>
+
+2
+00:00:00,000 --> 00:00:04,204
+<font face="Monospace">{\an7}We just had transition
+\h\hto high rate mode.</font>
+
+3
+00:00:04,204 --> 00:00:07,207
+<font face="Monospace">{\an7}And we are in the atmosphere.</font>
+
+4
+00:00:09,243 --> 00:00:12,847
+<font face="Monospace">{\an7}We have loss of signal at
+\h\h\h\h[unintelligible].</font>
+
+5
+00:00:12,846 --> 00:00:15,649
+<font face="Monospace">{\an7}Project manager.
+Flight director.</font>
+
+6
+00:00:15,649 --> 00:00:16,984
+<font face="Monospace">{\an7}Go ahead.</font>
+
+7
+00:00:16,984 --> 00:00:20,754
+<font face="Monospace">{\an7}Julie Webster: We call loss of
+\h\h\h\h\hsignal at 11:55:46.</font>
+
+8
+00:00:20,754 --> 00:00:24,725
+<font face="Monospace">{\an7}Earl Maize: This is project
+\h\h\hmanager on FSO co-ord.</font>
+
+9
+00:00:24,725 --> 00:00:26,527
+<font face="Monospace">{\an7}There may be a trickle of
+\h\h\h\h\htelemetry left,</font>
+
+10
+00:00:26,527 --> 00:00:31,232
+<font face="Monospace">{\an7}but you just heard the signal
+\hfrom the spacecraft is gone</font>
+
+11
+00:00:31,231 --> 00:00:35,969
+<font face="Monospace">{\an7}and, in the next 45 seconds, so
+will be the spacecraft.</font>
+
+12
+00:00:35,969 --> 00:00:40,474
+<font face="Monospace">{\an7}I hope you’re all
+\has deeply proud</font>
+
+13
+00:00:40,474 --> 00:00:43,277
+<font face="Monospace">{\an7}of this amazing accomplishment.</font>
+
+14
+00:00:43,277 --> 00:00:44,945
+<font face="Monospace">{\an7}Congratulations to you all!</font>
+
+15
+00:00:44,945 --> 00:00:46,780
+<font face="Monospace">{\an7}\h\hThis has been an
+incredible mission,</font>
+
+16
+00:00:46,780 --> 00:00:48,548
+<font face="Monospace">{\an7}an incredible spacecraft,</font>
+
+17
+00:00:48,549 --> 00:00:51,952
+<font face="Monospace">{\an7}and you’re all an
+\hincredible team!</font>
+
+18
+00:00:51,952 --> 00:00:54,855
+<font face="Monospace">{\an7}I’m going to call this
+\hthe end of mission.</font>
+
+19
+00:00:54,855 --> 00:00:57,291
+<font face="Monospace">{\an7}Project manager off the net.</font>
+
+20
+00:00:58,292 --> 00:01:01,295
+<font face="Monospace">{\an7}[applause]</font>
+
+21
+00:01:04,865 --> 00:01:06,133
+<font face="Monospace">{\an7}NASA Jet Propulsion Laboratory</font>
+
+22
+00:01:06,133 --> 00:01:07,635
+<font face="Monospace">{\an7}California Institute of
+\h\h\h\h\h\h\hTechnology</font>
+

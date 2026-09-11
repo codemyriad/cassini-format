@@ -31,9 +31,12 @@ It is this whole specification flattened into one document.
 
 ## Guides
 
-- [Try a file](${origin}/try/): play the example or read a local file in the browser
-- [Reading a file](${origin}/consume/): the eight steps, and every behaviour a reader has to decide
-- [Writing a file](${origin}/produce/): numbered requirements, then conventions
+- [Using Cassini](${origin}/using/): why we made it for our Nextcloud app, how a file moves between tools, and what is supported
+- [Open a file](${origin}/try/): play the example or read a local file in the browser
+- [Build with Cassini](${origin}/build/): implementation paths, reusable code and conformance setup
+- [Reading a file](${origin}/consume/): extract usable data, preserve its state, and implement a reader
+- [Writing a file](${origin}/produce/): package the example, adapt your inputs, check and share
+- [Checking a file](${origin}/verify/): payload checks, audio matching, schema validation and what each result establishes
 - [Design notes](${origin}/design/): the measurements behind the non-obvious parts
 - [Status](${origin}/status/): version 1, published 2026-09-02; what is still open
 
@@ -43,7 +46,7 @@ ${schemas.map((s) => `- [${s.title}](${origin}/schema/${s.file})`).join('\n')}
 
 ## A playable example
 
-- [${demo.generatedFrom}](${origin}/demo/${demo.generatedFrom}): a valid ${site.formatId} file, ${(demo.bytes / 1024 / 1024).toFixed(2)} MB, ${Object.keys(demo.speakers).length} speakers, ${demo.transcript?.wordCount ?? 0} word-timed items. “${demo.readableTags.TITLE}” is a scripted conversation between fictional volunteers, voiced with Eleven v3 and four overlapping acknowledgments.
+- [${demo.generatedFrom}](${origin}/demo/${demo.generatedFrom}): a valid ${site.formatId} file, ${(demo.bytes / 1024 / 1024).toFixed(2)} MB, ${Object.keys(demo.speakers).length} speakers, ${demo.transcript?.wordCount ?? 0} word-timed items. “${demo.readableTags.TITLE}” is a NASA/JPL mission-control recording. Courtesy NASA/JPL-Caltech. Its transcript combines independent audio recognition with JPL captions; uncertain speech and speaker identities are documented in the demo production notes.
 - [How it was made](${origin}/demo/README.md)
 - The site uses Cassini’s AGPL-3.0 transcript component, with inline interjections, playback highlighting, and seeking from timestamps, passages or brief replies.
 

@@ -12,9 +12,14 @@
 </svelte:head>
 
 <Doc
-	title="Read a Cassini file"
+	title="Read a file in code"
 	kicker="Implementation guide · reading"
-	lede="Extract the words, preserve the speakers, and handle every reader state. Start with a working example in Python or JavaScript."
+	lede="Bring words, timestamps and speakers into your application. Start with a working reader, then understand and check the result."
 	html={data.html}
 	headings={data.headings}
+	next={[
+		{ href: '/verify/', label: 'Check the file and audio match' },
+		{ href: '/build/#check-a-file-then-test-your-implementation', label: 'Test your reader' },
+		{ href: '/produce/', label: 'Create a file' }
+	]}
 />

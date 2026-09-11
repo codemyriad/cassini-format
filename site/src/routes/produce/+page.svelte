@@ -12,9 +12,14 @@
 </svelte:head>
 
 <Doc
-	title="Write a Cassini file"
+	title="Create a Cassini file"
 	kicker="Implementation guide · writing"
-	lede="Pack an Opus recording and a word-timed transcript into one file. Start with the Python producer, then explore the format requirements."
+	lede="Take existing audio and timed words through packaging, checking and sharing. Try the complete example, then use your own inputs."
 	html={data.html}
 	headings={data.headings}
+	next={[
+		{ href: '/verify/', label: 'Check your output' },
+		{ href: '/try/', label: 'Open and listen' },
+		{ href: '/spec/', label: 'Implement your own producer' }
+	]}
 />

@@ -18,6 +18,10 @@
 		Validate the manifest and transcript body. These CC0 schemas are served at stable URLs, byte for
 		byte as they appear in the repository.
 	</p>
+	<p>These schemas describe producer output. A reader also follows the
+		<a href="{base}/spec/v1/#trust-and-integrity">recovery rules in the specification</a>;
+		every schema error does not imply that the whole recording must be rejected.
+		<a href="{base}/verify/#validate-producer-output">Follow the validation walkthrough →</a></p>
 
 	<div class="schemas">
 		{#each data.schemas as s (s.file)}
@@ -36,10 +40,11 @@
 	<div class="two">
 		<div>
 			<p>
-				Each schema's <code>$id</code> is its URL under
-				<code>cassini-format.codemyriad.io/schema/</code>, and this site serves it there. Every file
-				carries the same URL in its <code>CASSINI_PAYLOAD_SCHEMA</code> tag, so a reader holding only
-				the file can find the schema it claims to follow.
+				Download the schemas above from <code>format.gocassini.com/schema/</code>.
+				Their published <code>$id</code> values retain the original
+				<code>cassini-format.codemyriad.io/schema/</code> address. The manifest schema's identifier
+				also appears in the <code>CASSINI_PAYLOAD_SCHEMA</code> tag inside recordings.
+				Moving the website leaves these identifiers and the format unchanged.
 			</p>
 		</div>
 		<div class="code">

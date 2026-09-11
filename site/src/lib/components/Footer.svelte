@@ -6,42 +6,39 @@
 <footer class="foot">
 	<div class="shell">
 		<div class="cols">
-			<div>
-				<p class="eyebrow eyebrow--plain">Specification</p>
+			<div class="status">
+				<p class="eyebrow eyebrow--plain">Use the format</p>
 				<ul>
-					<li><a href="{base}/spec/">Reference overview</a></li>
+					<li><a href="{base}/using/">Why we made it & how to use it</a></li>
+					<li><a href="{base}/try/">Open a recording</a></li>
+					<li><a href="{base}/demo/">Try synchronized lyrics</a></li>
+					<li><a href="{base}/status/">Project status & compatibility</a></li>
+				</ul>
+				<p class="origin">Made for our Nextcloud Talk app, <a href={site.implRepo}>gocassini</a>.
+					We use it for our meetings and have published it for others to try.</p>
+			</div>
+			<div>
+				<p class="eyebrow eyebrow--plain">Build with it</p>
+				<ul>
+					<li><a href="{base}/build/">Choose an implementation path</a></li>
+					<li><a href="{base}/consume/">Read a file in code</a></li>
+					<li><a href="{base}/produce/">Create a Cassini file</a></li>
+					<li><a href="{base}/verify/">Check a file</a></li>
+					<li><a href="{base}/build/#check-a-file-then-test-your-implementation">Test your reader</a></li>
+					<li><a href={site.repo} rel="noreferrer">Source code on GitHub ↗</a></li>
+				</ul>
+			</div>
+			<div>
+				<p class="eyebrow eyebrow--plain">Reference</p>
+				<ul>
+					<li><a href="{base}/spec/">Specification overview</a></li>
 					<li><a href="{base}/spec/v1/">Version 1 specification</a></li>
 					<li><a href="{base}/spec/words-v1/">Transcript body</a></li>
 					<li><a href="{base}/spec/audio-integrity/">Audio digest</a></li>
 					<li><a href="{base}/schema/">JSON Schemas</a></li>
-					<li>
-						<a
-							href="https://github.com/codemyriad/cassini-format/tree/main/spec/conformance"
-							rel="noreferrer">Conformance vectors</a
-						>
-					</li>
-				</ul>
-			</div>
-			<div>
-				<p class="eyebrow eyebrow--plain">Implement</p>
-				<ul>
-					<li><a href="{base}/try/">Try a file in your browser</a></li>
-					<li><a href="{base}/consume/">Read a file</a></li>
-					<li><a href="{base}/produce/">Write a file</a></li>
 					<li><a href="{base}/design/">Design notes</a></li>
-					<li><a href="{base}/demo/">Karaoke demo</a></li>
-					<li><a href="{base}/llms-full.txt">The whole spec in one file</a></li>
-					<li><a href={site.implRepo} rel="noreferrer">gocassini — reference implementation</a></li>
-					<li><a href={site.repo} rel="noreferrer">This spec on GitHub</a></li>
+					<li><a href="{base}/llms-full.txt">Complete specification as text</a></li>
 				</ul>
-			</div>
-			<div class="status">
-				<p class="eyebrow eyebrow--plain">Status</p>
-				<p>
-					An open format from {site.company}. Version 1 was published on 2 September 2026, with
-					gocassini as its reference implementation.
-					<a href="{base}/status/">Project status →</a>
-				</p>
 			</div>
 		</div>
 
@@ -95,7 +92,7 @@
 	}
 	.cols {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1.6fr;
+		grid-template-columns: 1.3fr 1fr 1fr;
 		gap: 2.5rem;
 	}
 	@media (max-width: 820px) {
@@ -120,7 +117,8 @@
 	ul a:hover {
 		color: var(--fg);
 	}
-	.status p {
+	.status .origin {
+		margin-top: 1.2rem;
 		color: var(--fg-3);
 		max-width: 52ch;
 		margin-bottom: 0.7rem;

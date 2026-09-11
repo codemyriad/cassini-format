@@ -1,21 +1,39 @@
-You need an Ogg Opus recording and a transcript with word timestamps. Cassini
-packages those inputs together; it does not run speech recognition for you.
+Use this guide to turn existing audio and timed words into a file someone else
+can open. First package the example, then substitute your own inputs and check
+the result before sharing it.
+
+You need **Python 3 and curl** for the first example. The producer uses only
+the Python standard library. Recording, speech recognition and any audio
+conversion happen before this step; [Using Cassini](/using/#what-do-you-have-today)
+explains the path from different starting materials.
 
 ## Write your first file
 
-The [CC0 Python producer](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-pack.py)
-uses only the standard library. Download it, then provide your audio and
-transcript:
+In a fresh directory, download the [CC0 producer](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-pack.py),
+the example audio and its matching word data:
 
 ```bash
 curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-pack.py
-python3 cassini-pack.py recording.opus transcript.json meeting.opus \
-  --title "Weekly sync" --created-at 2026-09-07T09:00:00Z
+curl -fLO https://format.gocassini.com/demo/{{demo.filename}}
+curl -fLO https://format.gocassini.com/demo/{{demo.wordInput}}
+python3 cassini-pack.py {{demo.filename}} {{demo.wordInput}} meeting.opus \
+  --title "My portable recording" --created-at 2026-09-09T09:00:00Z
 ```
 
-Replace the title and date with your own. `recording.opus` is your source audio;
-`meeting.opus` is the output. `transcript.json` supplies speakers and word items
-in this shape:
+The result is `meeting.opus`, containing **{{demo.words}} words** and
+**{{demo.speakers}} speakers**. The command prints `audio digest unchanged`
+after reading back the output and comparing the compressed audio with the input.
+[Open the result](/try/) to read and listen to your newly packaged file.
+
+The sample source already has Cassini metadata. This exercise uses its audio
+and supplies the words again. The packer writes a new manifest from the supplied
+inputs; it does not merge existing transcripts or other metadata from the source.
+
+## Use your own inputs
+
+Replace the audio and JSON paths, title and date in the command. Your source
+must be Ogg Opus. Your JSON supplies the speaker table and the words that
+actually describe that recording:
 
 ```json
 {
@@ -26,10 +44,42 @@ in this shape:
 }
 ```
 
-Use words and timings that describe your recording. After packing,
-[open the result in the browser reader](/try/) and follow
-[Checking your work](#checking-your-work) below. If you are implementing your
-own producer, the requirements that follow define what it must write.
+Times are integer milliseconds from the start of the audio. Each word's
+`speaker` identifies an entry in `speakers`. Keep words in speaker-turn order,
+including overlaps; sorting the whole list by time changes how conversations
+are reconstructed. See the [word format](/spec/words-v1/) for exact rules.
+
+The packer also accepts `segments` instead of `items`:
+
+```json
+{
+  "speakers": [{ "id": "sam", "label": "Sam" }],
+  "segments": [
+    { "speaker": "sam", "words": [
+      { "startMs": 900, "endMs": 1300, "text": "Hello." }
+    ] }
+  ]
+}
+```
+
+Use these exact field names and millisecond units when adapting speech-recognition
+output. This is a supported JSON input shape, not a general importer for every
+transcription service. Speaker attribution and transcription accuracy remain
+the responsibility of the pipeline that supplied them.
+
+## Check and share the result
+
+The producer's self-check establishes that packaging preserved the audio digest.
+Before sharing, [check the embedded data, audio claim and JSON structure](/verify/)
+and open the result in the recipient's software. That guide supplies all of its
+tool downloads and names its additional prerequisites.
+
+An ordinary Ogg Opus player can play your output. A Cassini reader can also show
+the embedded transcript. [What the recipient needs](/using/#what-the-recipient-needs)
+explains that distinction and the current applications.
+
+The sections below describe the encoding and requirements for implementing a
+producer yourself. The [specification](/spec/) is the normative reference.
 
 ## What you are making
 
@@ -173,16 +223,10 @@ The digest excludes `OpusTags` and all Ogg framing, so tagging cannot change
 it: compute it once.
 
 `tools/cassini-opus-digest.py` computes `exact-opus-audio-v1` from
-[the digest spec](/spec/audio-integrity/) alone. Run it against the file the
-front page links to:
-
-```bash
-python3 tools/cassini-opus-digest.py {{demo.filename}}
-ffprobe -v error -show_entries stream_tags=CASSINI_AUDIO_OPUS_SHA256 \
-        -of default=nw=1:nk=1 {{demo.filename}}
-```
-
-The digest tool’s `sha256` and the tag agree:
+[the digest spec](/spec/audio-integrity/) alone. The
+[verification guide](/verify/#check-the-audio-match) shows how to download it
+and compare the result with the claims in a file. For the downloadable example,
+the computed digest and the stored claim agree:
 
 ```console
 {{demo.audioDigest}}
@@ -194,29 +238,13 @@ read from the downloadable file when the site is generated.
 
 ## Checking your work
 
-```bash
-# still a playable Opus file. If this fails, nothing else matters.
-ffmpeg -v error -i meeting.opus -f null -
+Use the [complete file-checking walkthrough](/verify/) for the downloads,
+commands and interpretation of each result. It keeps the checks separate:
+payload bytes, audio identity and shape, JSON validity, and the behavior of the
+receiving application.
 
-# the manifest and the transcript body decode and validate
-python3 tools/cassini-extract.py meeting.opus > manifest.json
-python3 tools/cassini-extract.py meeting.opus --transcript > body.json
-python3 -c "import json,jsonschema
-v = lambda d, s: jsonschema.validate(json.load(open(d)), json.load(open(s)),
-                                     format_checker=jsonschema.FormatChecker())
-v('manifest.json', 'spec/cassini-portable-meeting-manifest-v1.schema.json')
-v('body.json', 'spec/cassini-words-v1.schema.json')"
-
-# the tags mirror the manifest, and the audio digest is the one in the file
-python3 tools/cassini-extract.py meeting.opus --check
-python3 tools/cassini-opus-digest.py meeting.opus
-
-# an independent reader agrees with you
-python3 tools/cassini-read-pure.py meeting.opus
-```
-
-The schemas check shape. The cross-field rules, one default per slot, a
-`sourceTranscriptId` that names a declared transcript, `integrity` equal to
-`audio`, are prose, and `--check` is where they are tested. With gocassini
-built, `cassini inspect meeting.opus` is the last check, and the one that
-catches a disagreement between your digest and the reference one.
+When implementing a producer, also review the cross-field rules: one default
+per slot, valid `sourceTranscriptId` references, and agreement between the
+manifest and summary tags. Passing a schema or the extractor's `--check` alone
+does not establish those rules. The [normative producer requirements](/spec/v1/#writing-a-file)
+remain the contract.

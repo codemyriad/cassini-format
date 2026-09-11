@@ -5,6 +5,7 @@
  */
 export const site = {
 	name: 'Cassini',
+	url: 'https://format.gocassini.com',
 	formatName: 'Cassini portable meeting',
 	tagPrefix: 'CASSINI_',
 	formatId: 'org.cassini.portable-meeting/1',
@@ -14,7 +15,7 @@ export const site = {
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:
-		'Audio, a word-timed transcript and speaker labels in one ordinary .opus file. Explore the open Cassini format, try a file in your browser, or build a reader of your own.'
+		'Audio and a timed transcript in one .opus file. Find a passage in the text, then listen to hear what was actually said. Made for our Nextcloud Talk app.'
 };
 
 export const versions = [
@@ -22,8 +23,8 @@ export const versions = [
 ] as const;
 
 export const nav = [
-	{ href: '/try/', label: 'Try it' },
-	{ href: '/consume/', label: 'Read a file' },
-	{ href: '/produce/', label: 'Write a file' },
+	{ href: '/using/', label: 'Using Cassini' },
+	{ href: '/try/', label: 'Open a file' },
+	{ href: '/build/', label: 'Build with it' },
 	{ href: '/spec/', label: 'Specification' }
 ];

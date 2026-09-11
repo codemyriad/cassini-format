@@ -27,20 +27,22 @@
 </script>
 
 <svelte:head>
-	<title>Try a Cassini file — audio and transcript in your browser</title>
+	<title>Open a Cassini file — audio and transcript in your browser</title>
 	<meta
 		name="description"
-		content="Play a sample meeting or open your own Cassini .opus file. Follow the highlighted words and click any word to seek. Local files stay in your browser."
+		content="Find a passage in a transcript and listen to check what was actually said. Try a sample meeting or open your own Cassini file. Local files stay in your browser."
 	/>
 </svelte:head>
 
 <div class="shell page-intro">
-	<p class="eyebrow eyebrow--plain">Try the format</p>
-	<h1>Open the file.<br />Find the words.</h1>
+	<p class="eyebrow eyebrow--plain">Open a recording</p>
+	<h1>Find the words.<br />Hear what was said.</h1>
 	<p class="lede">
-		Listen to the example below, or open a recording of your own. Words highlight as they play.
-		Click any word to jump to that moment, including words in an overlapping reply.
+		Use the transcript to find a passage, then listen to check what was actually said.
+		Select a word to move to that moment and press Play. Try the example below or open your own file.
 	</p>
+	<p class="reader-context">This player opens text already stored in the audio file.
+		It does not transcribe recordings. <a href="{base}/using/">How the format works →</a></p>
 </div>
 
 <div class="shell reader-page">
@@ -86,7 +88,7 @@
 	<div class="reader-heading">
 		<div>
 			<p class="eyebrow eyebrow--plain">
-				{typeof source === 'string' ? 'Example meeting' : 'Your file'}
+				{typeof source === 'string' ? 'Example recording' : 'Your file'}
 			</p>
 			<h2>{name}</h2>
 		</div>
@@ -101,39 +103,47 @@
 	</div>
 	<Player src={source} fallbackTitle={name} />
 	{#if typeof source === 'string'}<p class="sample-note">
-			A fictional planning call voiced with ElevenLabs v3, with a separate audio track for each
-			speaker. Cassini processed those tracks into the recording and word-timed transcript above.
-			Four brief replies overlap the main speaker.
+			Courtesy NASA/JPL-Caltech · September 15, 2017. The final Cassini mission-control calls,
+			with a transcript reconciled from multiple models and JPL captions. Uncertain speech is marked;
+			two speakers’ names remain unconfirmed.
 			<span class="sample-links">
-				<a href="{base}/demo/repair-cafe.multitrack.mkv" download>Download source tracks (.mkv) ↓</a
-				>
-				<a href="{base}/demo/README.md">How it was made →</a>
+				<a href="https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/">Original video →</a>
+				<a href="{base}/demo/README.md">Sources & transcription notes →</a>
 			</span>
 		</p>{/if}
 
 	<div class="next">
 		<div>
-			<p class="eyebrow eyebrow--plain">The same format, set to music</p>
-			<h2>A song can carry its lyrics, too.</h2>
-			<p>Try the karaoke view of Tom Lehrer’s Element Song, with words highlighted as it plays.</p>
-			<a class="button" href="{base}/demo/">Open the karaoke demo →</a>
+			<p class="eyebrow eyebrow--plain">Take it with you</p>
+			<h2>The download is the whole recording.</h2>
+			<p>Save the example and open that copy here. The recording travels with the words, so the
+				person you send it to can listen and check too. An ordinary Opus player can play the audio;
+				a Cassini reader also shows the transcript.</p>
+			<a class="button" href="{base}/using/#what-the-recipient-needs">Using and sharing a file →</a>
 		</div>
 		<div>
-			<p class="eyebrow eyebrow--plain">Make it your own</p>
-			<h2>Build a reader like this one.</h2>
+			<p class="eyebrow eyebrow--plain">Try it with your own tools</p>
+			<h2>Read the data, or create a file.</h2>
 			<p>
-				The standalone browser reader is CC0 and uses standard web APIs with no runtime
-				dependencies. The transcript interface shown here is Cassini’s own component, licensed under
-				AGPL-3.0.
+				Our guides use standalone readers and a producer to work with existing audio and timed
+				words. They also explain how to check your result. The data reader is CC0; this
+				transcript interface is a separate AGPL-3.0 component.
 			</p>
-			<a class="button" href="{base}/consume/">Read a file in code →</a>
+			<a class="button" href="{base}/build/">Choose an implementation path →</a>
 		</div>
 	</div>
+	<p class="sample-note">Another experiment with the same format:
+		<a href="{base}/demo/">a song with synchronized lyrics →</a></p>
 </div>
 
 <style>
 	.reader-page {
 		max-width: 1120px;
+	}
+	.reader-context {
+		font-size: 14px;
+		max-width: 75ch;
+		margin-bottom: 0;
 	}
 	.file-picker {
 		display: flex;

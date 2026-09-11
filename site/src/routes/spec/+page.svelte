@@ -16,9 +16,11 @@
 	<p class="eyebrow eyebrow--plain">Reference</p>
 	<h1>The format, fully specified.</h1>
 	<p class="lede">
-		The contracts and tools for building compatible readers and producers. Start with v1, then
+		The contracts our tools use to read and write Cassini files. Start with v1, then
 		follow the body format and verification rules it references.
 	</p>
+	<p class="orientation">Looking for a working example? <a href="{base}/build/">Start with the implementation guides</a>.
+		To understand where it fits, see <a href="{base}/using/">Using Cassini</a>.</p>
 </div>
 
 <div class="shell reference">
@@ -57,7 +59,8 @@
 
 	<section aria-labelledby="validation">
 		<h2 id="validation">Validate your implementation</h2>
-		<p>Schemas check the JSON shape. Conformance vectors exercise the behavior of a reader.</p>
+		<p>Schemas describe the JSON a producer should write. Reader behavior also follows the
+			prose rules for recovery and unknown data. Conformance vectors exercise that behavior.</p>
 		<div class="schema-list">
 			{#each data.schemas as schema (schema.file)}<a href="{base}/schema/{schema.file}"
 					><span><strong>{schema.title}</strong><small>{schema.file}</small></span><span
@@ -66,9 +69,11 @@
 				>{/each}
 		</div>
 		<div class="resource-links">
+			<a href="{base}/verify/">Check a produced file →</a>
+			<a href="{base}/build/#check-a-file-then-test-your-implementation">Run reader conformance checks →</a>
 			<a href="{base}/schema/">About the schemas →</a><a
 				href="{site.repo}/tree/main/spec/conformance">Conformance suite on GitHub ↗</a
-			><a href="{base}/demo/repair-cafe.opus" download>Download an example file ↓</a>
+			><a href="{base}/demo/cassini-final-moments.opus" download>Download an example file ↓</a>
 		</div>
 	</section>
 
@@ -81,6 +86,7 @@
 			</p>
 		</div>
 		<nav aria-label="Related resources">
+			<a href="{base}/build/">Implementation paths <span>Choose a guide and follow it through to a result →</span></a>
 			<a href="{base}/consume/"
 				>Read a file <span>Python, JavaScript and the decoding algorithm →</span></a
 			><a href="{base}/produce/"
@@ -103,6 +109,11 @@
 </div>
 
 <style>
+	.orientation {
+		font-size: 14px;
+		max-width: 75ch;
+		margin-bottom: 0;
+	}
 	.reference section {
 		margin-top: 3.5rem;
 	}

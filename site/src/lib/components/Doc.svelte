@@ -12,6 +12,8 @@
 		source = '',
 		sourceHref = '',
 		meta = [],
+		wrapTables = false,
+		next,
 		banner
 	}: {
 		title: string;
@@ -22,12 +24,39 @@
 		source?: string;
 		sourceHref?: string;
 		meta?: { label: string; value: string }[];
+		wrapTables?: boolean;
+		next?: { href: string; label: string }[];
 		banner?: import('svelte').Snippet;
 	} = $props();
 
 	let active = $state('');
 	let contentsOpen = $state(false);
-	const inReference = $derived(page.url.pathname.startsWith(`${base}/spec/`));
+	const inReference = $derived(
+		['/spec/', '/design/'].some((path) => page.url.pathname.startsWith(`${base}${path}`))
+	);
+	const inOverview = $derived(
+		['/using/', '/status/'].some((path) => page.url.pathname.startsWith(`${base}${path}`))
+	);
+	const section = $derived(
+		inReference
+			? { href: '/spec/', label: 'Specification' }
+			: inOverview
+				? { href: '/using/', label: 'Using Cassini' }
+				: { href: '/build/', label: 'Build with Cassini' }
+	);
+	const onward = $derived(
+		next ??
+			(inOverview
+				? [
+						{ href: '/try/', label: 'Open a recording' },
+						{ href: '/build/', label: 'Build support for Cassini' }
+					]
+				: [
+						{ href: '/build/', label: 'Choose an implementation path' },
+						{ href: '/verify/', label: 'Check a file' },
+						{ href: '/spec/', label: 'Specification & schemas' }
+					])
+	);
 
 	$effect(() => {
 		const targets = headings
@@ -50,10 +79,12 @@
 	<article>
 		<header>
 			<nav class="doc-breadcrumb" aria-label="Breadcrumb">
-				<a href="{base}/">Home</a><span aria-hidden="true">/</span><a
-					href="{base}{inReference ? '/spec/' : '/#build'}"
-					>{inReference ? 'Specification' : 'Build with Cassini'}</a
-				>
+				<a href="{base}/">Home</a><span aria-hidden="true">/</span>
+				{#if page.url.pathname === `${base}${section.href}`}
+					<span aria-current="page">{section.label}</span>
+				{:else}
+					<a href="{base}{section.href}">{section.label}</a>
+				{/if}
 			</nav>
 			{#if kicker}<p class="eyebrow eyebrow--plain">{kicker}</p>{/if}
 			<h1>{title}</h1>
@@ -83,7 +114,7 @@
 			</details>
 		{/if}
 
-		<div class="prose">{@html html}</div>
+		<div class="prose" class:wrap-tables={wrapTables}>{@html html}</div>
 
 		{#if source}
 			<p class="src">
@@ -91,9 +122,9 @@
 			</p>
 		{/if}
 		<nav class="doc-next" aria-label="Continue reading">
-			<a href="{base}/consume/">Read a file →</a><a href="{base}/produce/">Write a file →</a><a
-				href="{base}/spec/">Specification & schemas →</a
-			>
+			{#each onward.filter((link) => `${base}${link.href}` !== page.url.pathname) as link (link.href)}
+				<a href="{base}{link.href}">{link.label} →</a>
+			{/each}
 		</nav>
 	</article>
 
@@ -345,6 +376,15 @@
 	}
 	.prose :global(td:first-child) {
 		white-space: nowrap;
+	}
+	.prose.wrap-tables :global(table) {
+		display: table;
+		table-layout: fixed;
+	}
+	.prose.wrap-tables :global(th),
+	.prose.wrap-tables :global(td) {
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 	.prose :global(hr) {
 		margin: 3rem 0;

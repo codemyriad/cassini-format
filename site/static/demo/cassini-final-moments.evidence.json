@@ -1,0 +1,2055 @@
+{
+  "description": "Independent model responses, not the published transcript. Provider reasoning and request metadata omitted. Radio crop starts at 9 seconds, lasts 4 seconds, and is band-pass filtered (150\u20133500 Hz), gain 2.",
+  "responses": [
+    {
+      "attempt": "gemini-3.5-flash",
+      "model": "google/gemini-3.5-flash",
+      "finishReason": "stop",
+      "content": "```json\n{\n  \"segments\": [\n    {\n      \"start_seconds\": 0.0,\n      \"end_seconds\": 8.0,\n      \"speaker\": \"Speaker 1 (ACE)\",\n      \"text\": \"Systems, this is ACE, we've just had transition to high-rate mode, and uh we are in the atmosphere.\"\n    },\n    {\n      \"start_seconds\": 8.0,\n      \"end_seconds\": 14.0,\n      \"speaker\": \"Speaker 2\",\n      \"text\": \"We have loss of signal at X-band and S-band.\"\n    },\n    {\n      \"start_seconds\": 14.0,\n      \"end_seconds\": 17.0,\n      \"speaker\": \"Speaker 3 (Flight Director)\",\n      \"text\": \"Project Manager, Flight Director.\"\n    },\n    {\n      \"start_seconds\": 17.0,\n      \"end_seconds\": 18.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Go ahead.\"\n    },\n    {\n      \"start_seconds\": 18.0,\n      \"end_seconds\": 22.0,\n      \"speaker\": \"Speaker 3 (Flight Director)\",\n      \"text\": \"Okay, we call loss of signal at 11 55 46.\"\n    },\n    {\n      \"start_seconds\": 22.0,\n      \"end_seconds\": 26.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Project Manager on FSO coord.\"\n    },\n    {\n      \"start_seconds\": 26.0,\n      \"end_seconds\": 29.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Maybe a trickle of telemetry left, but\"\n    },\n    {\n      \"start_seconds\": 29.0,\n      \"end_seconds\": 38.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"we just heard the signal from the spacecraft is gone, and within the next 45 seconds, so will be the spacecraft.\"\n    },\n    {\n      \"start_seconds\": 38.0,\n      \"end_seconds\": 44.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Uh, I hope you're all as deeply proud of this amazing accomplishment.\"\n    },\n    {\n      \"start_seconds\": 44.0,\n      \"end_seconds\": 53.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Congratulations to you all. This has been an incredible mission, an incredible spacecraft, and you're all an incredible team.\"\n    },\n    {\n      \"start_seconds\": 53.0,\n      \"end_seconds\": 56.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"I'm going to call this the end of mission.\"\n    },\n    {\n      \"start_seconds\": 56.0,\n      \"end_seconds\": 58.0,\n      \"speaker\": \"Speaker 4 (Project Manager)\",\n      \"text\": \"Project Manager, off the net.\"\n    }\n  ],\n  \"speaker_notes\": \"Speaker 1 identifies himself as 'ACE' (the Real-Time Operations Controller). Speaker 2 is a female voice, likely a Ground Controller or Deep Space Network (DSN) operator, reporting signal status. Speaker 3 is the Flight Director, addressing the Project Manager. Speaker 4 is Earl Maize, the Cassini Project Manager, who identifies himself as 'Project Manager' on the FSO coord (Flight Support Officer coordination) loop.\",\n  \"uncertain_passages\": \"The acronym 'FSO coord' refers to the Flight Support Officer / Flight Operations Coordinator voice loop. The time '11 55 46' represents the UTC time of the loss of signal (11:55:46 UTC).\"\n}\n```"
+    },
+    {
+      "attempt": "gemini-3.8-flash",
+      "model": "google/gemini-3.8-flash",
+      "finishReason": "length",
+      "content": " had transition to high rate mode and uh we are in the atmosphere.\"\nWait, \"just had\" - does he say \"we just had transition to high rate mode\"? Yes.\nIs \"ACS 1\" pronounced \"ACS one\"? Yes, \"A-C-S one\".\nAt 00:07.8:\nFemale voice:\n\"We have loss of signal at X-ray band and Sierra band.\"\nWait, let's re-verify:\n\"We have loss of signal at X-ray band and Sierra band.\"\nCould it be \"X-band and Sierra band\"?\nListen: \"X-ray band and Sierra band\". Yes, \"X-ray band\".\nAt 00:13.2 - 00:15.2:\n\"Project Manager, Flight Director.\"\nAt 00:15.8 - 00:16.8:\n\"Go ahead.\"\nAt 00:17.5 - 00:22.0:\n\"Okay, we call loss of signal at 11 55 "
+    },
+    {
+      "attempt": "gemini-3.8-flash-retry",
+      "model": "google/gemini-3.8-flash",
+      "finishReason": "stop",
+      "content": "```json\n{\n  \"segments\": [\n    {\n      \"start_seconds\": 0.0,\n      \"end_seconds\": 6.84,\n      \"speaker\": \"Speaker 1 (Spacecraft Team Member)\",\n      \"text\": \"Systems ACS-1, we've just had transition to high rate mode, and uh we are in the atmosphere.\"\n    },\n    {\n      \"start_seconds\": 8.08,\n      \"end_seconds\": 12.44,\n      \"speaker\": \"Speaker 2 (Female Operator)\",\n      \"text\": \"We have loss of signal of at X-band and S-band.\"\n    },\n    {\n      \"start_seconds\": 13.0,\n      \"end_seconds\": 15.68,\n      \"speaker\": \"Speaker 3 (Flight Director)\",\n      \"text\": \"Project Manager, Flight Director.\"\n    },\n    {\n      \"start_seconds\": 16.08,\n      \"end_seconds\": 16.92,\n      \"speaker\": \"Speaker 4 (Earl Maize - Project Manager)\",\n      \"text\": \"Go ahead.\"\n    },\n    {\n      \"start_seconds\": 17.0,\n      \"end_seconds\": 22.04,\n      \"speaker\": \"Speaker 3 (Flight Director)\",\n      \"text\": \"Okay, we call loss of signal at 115546.\"\n    },\n    {\n      \"start_seconds\": 23.08,\n      \"end_seconds\": 38.36,\n      \"speaker\": \"Speaker 4 (Earl Maize - Project Manager)\",\n      \"text\": \"Project Manager on FSO coord. Maybe a trickle of telemetry left, but you know you just heard the signal from the spacecraft is gone, and within the next 45 seconds, so will be the spacecraft.\"\n    },\n    {\n      \"start_seconds\": 39.4,\n      \"end_seconds\": 49.32,\n      \"speaker\": \"Speaker 4 (Earl Maize - Project Manager)\",\n      \"text\": \"Uh I hope you're all as deeply proud of this amazing accomplishment. Congratulations to you all.\"\n    },\n    {\n      \"start_seconds\": 49.6,\n      \"end_seconds\": 55.44,\n      \"speaker\": \"Speaker 4 (Earl Maize - Project Manager)\",\n      \"text\": \"This has been an incredible mission, an incredible spacecraft, and you're all an incredible team.\"\n    },\n    {\n      \"start_seconds\": 57.08,\n      \"end_seconds\": 61.28,\n      \"speaker\": \"Speaker 4 (Earl Maize - Project Manager)\",\n      \"text\": \"I'm going to call this the end of mission. Project Manager off the net.\"\n    }\n  ],\n  \"speaker_notes\": \"Speaker 1 is a spacecraft team controller (likely ACS/Attitude Control Systems engineer). Speaker 2 is a female telemetry/communications controller announcing loss of signal (LOS). Speaker 3 is the Flight Director addressing the Project Manager. Speaker 4 self-identifies as 'Project Manager' and is Earl Maize, Cassini Project Manager at NASA JPL.\",\n  \"uncertain_passages\": [\n    {\n      \"timestamp\": \"0:09 - 0:11\",\n      \"note\": \"Speaker 2 stumbles slightly on phrasing ('of at X-band and S-band' or 'at X-band and S-band').\"\n    },\n    {\n      \"timestamp\": \"0:27 - 0:28\",\n      \"note\": \"Speaker 4 cuts himself off / has a quiet stutter ('you know' / 'you just heard') under breath before continuing.\"\n    }\n  ]\n}\n```"
+    },
+    {
+      "attempt": "gpt-audio",
+      "model": "openai/gpt-audio",
+      "finishReason": "stop",
+      "content": "Understood. I will carefully transcribe the recording, including all brief replies, false starts, and quiet radio calls. I\u2019ll identify distinct voices with stable speaker IDs and only suggest names if justified. I\u2019ll explain any uncertainty separately. I\u2019ll pay special attention to the first 22 seconds and technical acronyms. I\u2019ll return the result in JSON format with segments, speaker notes, and uncertain passages. Let me process the transcription now."
+    },
+    {
+      "attempt": "gpt-audio-retry",
+      "model": "openai/gpt-audio",
+      "finishReason": "stop",
+      "content": "{\n  \"segments\": [\n    {\n      \"start_seconds\": 0.0,\n      \"end_seconds\": 5.5,\n      \"speaker\": \"Voice1\",\n      \"text\": \"Systems BCS1, we just had transition to high-rate mode, and we are in the atmosphere.\"\n    },\n    {\n      \"start_seconds\": 5.5,\n      \"end_seconds\": 9.0,\n      \"speaker\": \"Voice2\",\n      \"text\": \"We have loss of signal at X-band and Z-band.\"\n    },\n    {\n      \"start_seconds\": 9.0,\n      \"end_seconds\": 11.0,\n      \"speaker\": \"Voice3\",\n      \"text\": \"Project manager, flight director?\"\n    },\n    {\n      \"start_seconds\": 11.0,\n      \"end_seconds\": 12.0,\n      \"speaker\": \"Voice4\",\n      \"text\": \"Go ahead.\"\n    },\n    {\n      \"start_seconds\": 12.0,\n      \"end_seconds\": 16.0,\n      \"speaker\": \"Voice3\",\n      \"text\": \"Okay, we call loss of signal at 115546.\"\n    },\n    {\n      \"start_seconds\": 16.0,\n      \"end_seconds\": 22.0,\n      \"speaker\": \"Voice5\",\n      \"text\": \"Project manager on FSO coord, maybe a trickle of telemetry left, but just heard the signal from the spacecraft is gone, and within the next 45 seconds so will be the spacecraft.\"\n    },\n    {\n      \"start_seconds\": 22.0,\n      \"end_seconds\": 40.0,\n      \"speaker\": \"Voice5\",\n      \"text\": \"I hope you're all as deeply proud of this amazing accomplishment. Congratulations to you all. This has been an incredible mission, an incredible spacecraft, and you're all an incredible team. I'm going to call this the end of mission. Project manager off the net.\"\n    },\n    {\n      \"start_seconds\": 40.0,\n      \"end_seconds\": 45.0,\n      \"speaker\": \"Crowd\",\n      \"text\": \"[Applause]\"\n    }\n  ],\n  \"speaker_notes\": {\n    \"Voice1\": \"Likely a systems engineer or controller reporting real-time status.\",\n    \"Voice2\": \"Possibly a communications or signal monitoring role, noting the loss of signal bands.\",\n    \"Voice3\": \"Appears to be the flight director or someone coordinating with the project manager.\",\n    \"Voice4\": \"A brief acknowledgment, likely the flight director responding.\",\n    \"Voice5\": \"Identified as the project manager, providing final commentary and mission conclusion.\",\n    \"Crowd\": \"Group applause at the end, no individual speakers identified.\"\n  },\n  \"uncertain_passages\": [\n    {\n      \"text\": \"X-band and Z-band\",\n      \"explanation\": \"There is some uncertainty about the exact bands mentioned. 'Z-band' may be a mishearing or less common term. It could be 'Z-band' or another band designation.\"\n    },\n    {\n      \"text\": \"FSO coord\",\n      \"explanation\": \"The term 'FSO coord' is likely an internal acronym or shorthand. It may stand for 'Flight Systems Operations coordinator' or a similar role, but this is not fully certain.\"\n    }\n  ]\n}"
+    },
+    {
+      "attempt": "gemini-3.5-flash-radio",
+      "model": "google/gemini-3.5-flash",
+      "finishReason": "stop",
+      "content": "We have loss of signal at X-band [or X-ray band] and S-band [or C-band]."
+    },
+    {
+      "attempt": "gemini-3.8-flash-radio",
+      "model": "google/gemini-3.8-flash",
+      "finishReason": "stop",
+      "content": "we have loss of signal at X-band and C-band"
+    },
+    {
+      "attempt": "gpt-audio-radio",
+      "model": "openai/gpt-audio",
+      "finishReason": "stop",
+      "content": "We have lots of signal at X-ray band and zero band."
+    }
+  ],
+  "scribe": {
+    "model": "scribe_v2",
+    "text": "Systems ACS one, we just had transition to high rate mode, and, uh, we are in the atmosphere. We have loss of signal at entry burn and zero burn. Project manager, flight director. Go ahead. Okay, we call loss of signal at one one five five four six. Project manager on FSO coord. Maybe a trickle of telemetry left, but just heard the signal from the spacecraft is gone, and within the next forty-five seconds, so will be the spacecraft. Uh, I hope you're all as deeply proud of this amazing accomplishment. Congratulations to you all. This has been an incredible mission, an incredible spacecraft, and you're all an incredible team. I'm gonna call this the end of mission. Project manager off the net. [audience clapping]",
+    "words": [
+      {
+        "text": "Systems",
+        "start": 0.219,
+        "end": 0.479,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.17434607446193695
+      },
+      {
+        "text": " ",
+        "start": 0.479,
+        "end": 0.56,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.3540717363357544
+      },
+      {
+        "text": "ACS",
+        "start": 0.56,
+        "end": 1.0,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.3540717363357544
+      },
+      {
+        "text": " ",
+        "start": 1.0,
+        "end": 1.1,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.02054937370121479
+      },
+      {
+        "text": "one,",
+        "start": 1.1,
+        "end": 1.259,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.01611934055108577
+      },
+      {
+        "text": " ",
+        "start": 1.259,
+        "end": 1.339,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "we",
+        "start": 1.339,
+        "end": 1.399,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 1.399,
+        "end": 1.859,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -4.768370445162873e-07
+      },
+      {
+        "text": "just",
+        "start": 1.86,
+        "end": 2.099,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -4.768370445162873e-07
+      },
+      {
+        "text": " ",
+        "start": 2.099,
+        "end": 2.179,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.00010918975021922961
+      },
+      {
+        "text": "had",
+        "start": 2.18,
+        "end": 2.319,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.00010918975021922961
+      },
+      {
+        "text": " ",
+        "start": 2.319,
+        "end": 2.399,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.001722401357255876
+      },
+      {
+        "text": "transition",
+        "start": 2.399,
+        "end": 2.819,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.001722401357255876
+      },
+      {
+        "text": " ",
+        "start": 2.819,
+        "end": 2.859,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": "to",
+        "start": 2.859,
+        "end": 2.919,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": " ",
+        "start": 2.919,
+        "end": 2.979,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -1.2993727978027891e-05
+      },
+      {
+        "text": "high",
+        "start": 2.98,
+        "end": 3.079,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -1.2993727978027891e-05
+      },
+      {
+        "text": " ",
+        "start": 3.079,
+        "end": 3.159,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.0046218945644795895
+      },
+      {
+        "text": "rate",
+        "start": 3.159,
+        "end": 3.299,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.0046218945644795895
+      },
+      {
+        "text": " ",
+        "start": 3.299,
+        "end": 3.359,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -2.3841830625315197e-06
+      },
+      {
+        "text": "mode,",
+        "start": 3.359,
+        "end": 3.559,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -0.07746128439684981
+      },
+      {
+        "text": " ",
+        "start": 3.559,
+        "end": 4.359,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": "and,",
+        "start": 4.36,
+        "end": 4.599,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -1.1026835409211344e-06
+      },
+      {
+        "text": " ",
+        "start": 4.599,
+        "end": 4.659,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": "uh,",
+        "start": 4.659,
+        "end": 4.739,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 4.739,
+        "end": 4.859,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": "we",
+        "start": 4.859,
+        "end": 4.94,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 4.94,
+        "end": 5.0,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": "are",
+        "start": 5.0,
+        "end": 5.199,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 5.199,
+        "end": 5.299,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "in",
+        "start": 5.299,
+        "end": 5.44,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 5.44,
+        "end": 5.639,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 5.639,
+        "end": 5.699,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 5.699,
+        "end": 5.759,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "atmosphere.",
+        "start": 5.759,
+        "end": 6.219,
+        "type": "word",
+        "speaker_id": "speaker_0",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": " ",
+        "start": 6.219,
+        "end": 6.219,
+        "type": "spacing",
+        "speaker_id": "speaker_0",
+        "logprob": -0.0003665013937279582
+      },
+      {
+        "text": "We",
+        "start": 9.719,
+        "end": 9.779,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.000380324519937858
+      },
+      {
+        "text": " ",
+        "start": 9.779,
+        "end": 9.859,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "have",
+        "start": 9.859,
+        "end": 9.96,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 9.96,
+        "end": 10.0,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.018389681354165077
+      },
+      {
+        "text": "loss",
+        "start": 10.0,
+        "end": 10.159,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.018389681354165077
+      },
+      {
+        "text": " ",
+        "start": 10.159,
+        "end": 10.199,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -2.9802276912960224e-06
+      },
+      {
+        "text": "of",
+        "start": 10.199,
+        "end": 10.28,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -2.9802276912960224e-06
+      },
+      {
+        "text": " ",
+        "start": 10.28,
+        "end": 10.34,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -1.9788545614574105e-05
+      },
+      {
+        "text": "signal",
+        "start": 10.34,
+        "end": 10.659,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -1.9788545614574105e-05
+      },
+      {
+        "text": " ",
+        "start": 10.659,
+        "end": 10.719,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.0016627785516902804
+      },
+      {
+        "text": "at",
+        "start": 10.719,
+        "end": 10.979,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.0016627785516902804
+      },
+      {
+        "text": " ",
+        "start": 10.979,
+        "end": 11.179,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.5702885389328003
+      },
+      {
+        "text": "entry",
+        "start": 11.179,
+        "end": 11.439,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.5702885389328003
+      },
+      {
+        "text": " ",
+        "start": 11.439,
+        "end": 11.519,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.9527533054351807
+      },
+      {
+        "text": "burn",
+        "start": 11.519,
+        "end": 11.679,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.9527533054351807
+      },
+      {
+        "text": " ",
+        "start": 11.679,
+        "end": 11.739,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.19853952527046204
+      },
+      {
+        "text": "and",
+        "start": 11.739,
+        "end": 11.86,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.19853952527046204
+      },
+      {
+        "text": " ",
+        "start": 11.86,
+        "end": 11.899,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.04985947906970978
+      },
+      {
+        "text": "zero",
+        "start": 11.899,
+        "end": 12.159,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.04985947906970978
+      },
+      {
+        "text": " ",
+        "start": 12.159,
+        "end": 12.219,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -0.002388602588325739
+      },
+      {
+        "text": "burn.",
+        "start": 12.219,
+        "end": 12.5,
+        "type": "word",
+        "speaker_id": "speaker_1",
+        "logprob": -0.0019109774380694944
+      },
+      {
+        "text": " ",
+        "start": 12.5,
+        "end": 12.5,
+        "type": "spacing",
+        "speaker_id": "speaker_1",
+        "logprob": -5.960446742392378e-06
+      },
+      {
+        "text": "Project",
+        "start": 14.039,
+        "end": 14.299,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -4.95898348162882e-05
+      },
+      {
+        "text": " ",
+        "start": 14.299,
+        "end": 14.379,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -0.04301966726779938
+      },
+      {
+        "text": "manager,",
+        "start": 14.38,
+        "end": 14.759,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -0.037642208859324455
+      },
+      {
+        "text": " ",
+        "start": 14.759,
+        "end": 14.88,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -3.266281055402942e-05
+      },
+      {
+        "text": "flight",
+        "start": 14.88,
+        "end": 15.039,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -3.266281055402942e-05
+      },
+      {
+        "text": " ",
+        "start": 15.039,
+        "end": 15.119,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -7.795983401592821e-05
+      },
+      {
+        "text": "director.",
+        "start": 15.119,
+        "end": 15.479,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -6.984069346395295e-05
+      },
+      {
+        "text": " ",
+        "start": 15.479,
+        "end": 16.1,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -5.149708886165172e-05
+      },
+      {
+        "text": "Go",
+        "start": 16.1,
+        "end": 16.159,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": " ",
+        "start": 16.159,
+        "end": 16.199,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": "ahead.",
+        "start": 16.199,
+        "end": 16.459,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.0331466029356307e-06
+      },
+      {
+        "text": " ",
+        "start": 16.459,
+        "end": 17.239,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "Okay,",
+        "start": 17.239,
+        "end": 17.379,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -4.734461444968474e-05
+      },
+      {
+        "text": " ",
+        "start": 17.379,
+        "end": 17.459,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": "we",
+        "start": 17.459,
+        "end": 17.579,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": " ",
+        "start": 17.579,
+        "end": 17.639,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": 0.0
+      },
+      {
+        "text": "call",
+        "start": 17.639,
+        "end": 17.76,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 17.76,
+        "end": 17.859,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -5.006777428206988e-06
+      },
+      {
+        "text": "loss",
+        "start": 17.859,
+        "end": 18.02,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -5.006777428206988e-06
+      },
+      {
+        "text": " ",
+        "start": 18.02,
+        "end": 18.059,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "of",
+        "start": 18.059,
+        "end": 18.159,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 18.159,
+        "end": 18.239,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1086402082582936e-05
+      },
+      {
+        "text": "signal",
+        "start": 18.239,
+        "end": 18.539,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1086402082582936e-05
+      },
+      {
+        "text": " ",
+        "start": 18.539,
+        "end": 18.619,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": 0.0
+      },
+      {
+        "text": "at",
+        "start": 18.619,
+        "end": 19.0,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 19.0,
+        "end": 19.079,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -5.960462772236497e-07
+      },
+      {
+        "text": "one",
+        "start": 19.079,
+        "end": 19.26,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -5.960462772236497e-07
+      },
+      {
+        "text": " ",
+        "start": 19.26,
+        "end": 19.319,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -0.702725887298584
+      },
+      {
+        "text": "one",
+        "start": 19.319,
+        "end": 19.619,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -0.702725887298584
+      },
+      {
+        "text": " ",
+        "start": 19.619,
+        "end": 19.679,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -5.960446742392378e-06
+      },
+      {
+        "text": "five",
+        "start": 19.68,
+        "end": 19.899,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -5.960446742392378e-06
+      },
+      {
+        "text": " ",
+        "start": 19.899,
+        "end": 19.939,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -6.9141146923357155e-06
+      },
+      {
+        "text": "five",
+        "start": 19.939,
+        "end": 20.219,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -6.9141146923357155e-06
+      },
+      {
+        "text": " ",
+        "start": 20.219,
+        "end": 20.279,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "four",
+        "start": 20.279,
+        "end": 20.52,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": " ",
+        "start": 20.52,
+        "end": 20.579,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "six.",
+        "start": 20.579,
+        "end": 20.92,
+        "type": "word",
+        "speaker_id": "speaker_2",
+        "logprob": -1.9967495319406225e-06
+      },
+      {
+        "text": " ",
+        "start": 20.92,
+        "end": 20.92,
+        "type": "spacing",
+        "speaker_id": "speaker_2",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "Project",
+        "start": 22.1,
+        "end": 22.379,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.0005453529884107411
+      },
+      {
+        "text": " ",
+        "start": 22.379,
+        "end": 22.459,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -5.924526340095326e-05
+      },
+      {
+        "text": "manager",
+        "start": 22.459,
+        "end": 22.819,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -5.924526340095326e-05
+      },
+      {
+        "text": " ",
+        "start": 22.819,
+        "end": 22.879,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "on",
+        "start": 22.879,
+        "end": 22.959,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 22.959,
+        "end": 23.079,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.5497195136049413e-06
+      },
+      {
+        "text": "FSO",
+        "start": 23.079,
+        "end": 23.379,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.3655931057789225e-05
+      },
+      {
+        "text": " ",
+        "start": 23.379,
+        "end": 23.479,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.44779208302497864
+      },
+      {
+        "text": "coord.",
+        "start": 23.479,
+        "end": 23.939,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.3742139970418066
+      },
+      {
+        "text": " ",
+        "start": 23.939,
+        "end": 23.939,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -4.529942543740617e-06
+      },
+      {
+        "text": "Maybe",
+        "start": 25.059,
+        "end": 25.239,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -4.529942543740617e-06
+      },
+      {
+        "text": " ",
+        "start": 25.239,
+        "end": 25.319,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "a",
+        "start": 25.319,
+        "end": 25.359,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 25.359,
+        "end": 25.419,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.004705190192908049
+      },
+      {
+        "text": "trickle",
+        "start": 25.42,
+        "end": 25.68,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.004705190192908049
+      },
+      {
+        "text": " ",
+        "start": 25.68,
+        "end": 25.699,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "of",
+        "start": 25.699,
+        "end": 25.799,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 25.799,
+        "end": 25.84,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -5.8412379075889476e-06
+      },
+      {
+        "text": "telemetry",
+        "start": 25.84,
+        "end": 26.299,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -5.8412379075889476e-06
+      },
+      {
+        "text": " ",
+        "start": 26.299,
+        "end": 26.359,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.5497195136049413e-06
+      },
+      {
+        "text": "left,",
+        "start": 26.359,
+        "end": 26.639,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.0002376112611273129
+      },
+      {
+        "text": " ",
+        "start": 26.639,
+        "end": 26.779,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "but",
+        "start": 26.779,
+        "end": 27.0,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 27.0,
+        "end": 27.0,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.014650621451437473
+      },
+      {
+        "text": "just",
+        "start": 28.059,
+        "end": 28.199,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.014650621451437473
+      },
+      {
+        "text": " ",
+        "start": 28.199,
+        "end": 28.279,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.4305104514278355e-06
+      },
+      {
+        "text": "heard",
+        "start": 28.279,
+        "end": 28.68,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.4305104514278355e-06
+      },
+      {
+        "text": " ",
+        "start": 28.68,
+        "end": 28.779,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 28.779,
+        "end": 29.059,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 29.059,
+        "end": 29.559,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "signal",
+        "start": 29.559,
+        "end": 29.819,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": " ",
+        "start": 29.819,
+        "end": 29.879,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "from",
+        "start": 29.879,
+        "end": 29.979,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 29.979,
+        "end": 30.019,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 30.019,
+        "end": 30.079,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 30.079,
+        "end": 30.139,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.00010084597306558862
+      },
+      {
+        "text": "spacecraft",
+        "start": 30.139,
+        "end": 30.76,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.00010084597306558862
+      },
+      {
+        "text": " ",
+        "start": 30.76,
+        "end": 30.939,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.0008044582791626453
+      },
+      {
+        "text": "is",
+        "start": 30.939,
+        "end": 31.059,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.0008044582791626453
+      },
+      {
+        "text": " ",
+        "start": 31.059,
+        "end": 31.139,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -6.079655122448457e-06
+      },
+      {
+        "text": "gone,",
+        "start": 31.139,
+        "end": 31.439,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -5.412086056821863e-06
+      },
+      {
+        "text": " ",
+        "start": 31.439,
+        "end": 31.659,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "and",
+        "start": 31.659,
+        "end": 32.34,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 32.34,
+        "end": 32.419,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "within",
+        "start": 32.419,
+        "end": 32.639,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": " ",
+        "start": 32.639,
+        "end": 32.68,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 32.68,
+        "end": 32.74,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 32.74,
+        "end": 32.799,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "next",
+        "start": 32.799,
+        "end": 33.0,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 33.0,
+        "end": 33.099,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -9.405170567333698e-05
+      },
+      {
+        "text": "forty-five",
+        "start": 33.099,
+        "end": 33.52,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -5.565651226788759e-05
+      },
+      {
+        "text": " ",
+        "start": 33.52,
+        "end": 33.68,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.145764938177308e-06
+      },
+      {
+        "text": "seconds,",
+        "start": 33.68,
+        "end": 34.0,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.963689380270807e-06
+      },
+      {
+        "text": " ",
+        "start": 34.0,
+        "end": 34.119,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "so",
+        "start": 34.119,
+        "end": 34.219,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": " ",
+        "start": 34.219,
+        "end": 34.279,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "will",
+        "start": 34.279,
+        "end": 34.419,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 34.419,
+        "end": 34.459,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "be",
+        "start": 34.459,
+        "end": 34.559,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 34.559,
+        "end": 34.619,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 34.619,
+        "end": 34.68,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 34.68,
+        "end": 34.739,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "spacecraft.",
+        "start": 34.739,
+        "end": 35.5,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.251161925535681e-07
+      },
+      {
+        "text": " ",
+        "start": 35.5,
+        "end": 36.319,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841830625315197e-06
+      },
+      {
+        "text": "Uh,",
+        "start": 36.319,
+        "end": 36.479,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.6291918025027978e-06
+      },
+      {
+        "text": " ",
+        "start": 36.479,
+        "end": 37.139,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "I",
+        "start": 37.139,
+        "end": 37.239,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 37.239,
+        "end": 37.279,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.5497195136049413e-06
+      },
+      {
+        "text": "hope",
+        "start": 37.279,
+        "end": 37.5,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.5497195136049413e-06
+      },
+      {
+        "text": " ",
+        "start": 37.5,
+        "end": 37.579,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "you're",
+        "start": 37.579,
+        "end": 37.819,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 37.819,
+        "end": 37.959,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "all",
+        "start": 37.959,
+        "end": 38.739,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 38.739,
+        "end": 38.859,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "as",
+        "start": 38.86,
+        "end": 39.579,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 39.579,
+        "end": 39.659,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": "deeply",
+        "start": 39.659,
+        "end": 40.079,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": " ",
+        "start": 40.079,
+        "end": 40.159,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": "proud",
+        "start": 40.159,
+        "end": 41.039,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920922133867862e-06
+      },
+      {
+        "text": " ",
+        "start": 41.039,
+        "end": 41.119,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "of",
+        "start": 41.119,
+        "end": 41.2,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 41.2,
+        "end": 41.239,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "this",
+        "start": 41.239,
+        "end": 41.52,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 41.52,
+        "end": 41.599,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": "amazing",
+        "start": 41.599,
+        "end": 42.059,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": " ",
+        "start": 42.059,
+        "end": 42.159,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.597391747054644e-05
+      },
+      {
+        "text": "accomplishment.",
+        "start": 42.159,
+        "end": 42.939,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.4908989639176677e-05
+      },
+      {
+        "text": " ",
+        "start": 42.939,
+        "end": 43.279,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -4.6491513785440475e-06
+      },
+      {
+        "text": "Congratulations",
+        "start": 43.279,
+        "end": 44.119,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -4.6491513785440475e-06
+      },
+      {
+        "text": " ",
+        "start": 44.119,
+        "end": 44.18,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "to",
+        "start": 44.18,
+        "end": 44.259,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 44.259,
+        "end": 44.299,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "you",
+        "start": 44.299,
+        "end": 44.399,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 44.399,
+        "end": 44.459,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "all.",
+        "start": 44.459,
+        "end": 44.739,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 44.739,
+        "end": 45.159,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "This",
+        "start": 45.159,
+        "end": 45.319,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 45.319,
+        "end": 45.379,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "has",
+        "start": 45.379,
+        "end": 45.52,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 45.52,
+        "end": 45.579,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "been",
+        "start": 45.579,
+        "end": 45.7,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 45.7,
+        "end": 45.739,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "an",
+        "start": 45.739,
+        "end": 45.799,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 45.799,
+        "end": 45.84,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.0265558760002023e-06
+      },
+      {
+        "text": "incredible",
+        "start": 45.84,
+        "end": 46.299,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.0265558760002023e-06
+      },
+      {
+        "text": " ",
+        "start": 46.299,
+        "end": 46.459,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.0728830375228426e-06
+      },
+      {
+        "text": "mission,",
+        "start": 46.459,
+        "end": 46.84,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -9.536738181381565e-07
+      },
+      {
+        "text": " ",
+        "start": 46.84,
+        "end": 46.959,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "an",
+        "start": 46.959,
+        "end": 47.059,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 47.059,
+        "end": 47.099,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -9.298280929215252e-06
+      },
+      {
+        "text": "incredible",
+        "start": 47.099,
+        "end": 47.559,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -9.298280929215252e-06
+      },
+      {
+        "text": " ",
+        "start": 47.559,
+        "end": 47.699,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -8.106198947643861e-06
+      },
+      {
+        "text": "spacecraft,",
+        "start": 47.7,
+        "end": 48.439,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -7.369271770585328e-06
+      },
+      {
+        "text": " ",
+        "start": 48.439,
+        "end": 48.919,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "and",
+        "start": 48.919,
+        "end": 49.0,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 49.0,
+        "end": 49.059,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "you're",
+        "start": 49.059,
+        "end": 49.239,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.390774476324926e-07
+      },
+      {
+        "text": " ",
+        "start": 49.239,
+        "end": 49.319,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "all",
+        "start": 49.319,
+        "end": 49.659,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 49.659,
+        "end": 49.739,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "an",
+        "start": 49.739,
+        "end": 49.84,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 49.84,
+        "end": 49.899,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.9073468138230965e-06
+      },
+      {
+        "text": "incredible",
+        "start": 49.899,
+        "end": 50.519,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.9073468138230965e-06
+      },
+      {
+        "text": " ",
+        "start": 50.519,
+        "end": 50.579,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -3.576278118089249e-07
+      },
+      {
+        "text": "team.",
+        "start": 50.579,
+        "end": 51.0,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.861022494471399e-07
+      },
+      {
+        "text": " ",
+        "start": 51.0,
+        "end": 51.0,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "I'm",
+        "start": 52.18,
+        "end": 52.299,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.973642748178463e-08
+      },
+      {
+        "text": " ",
+        "start": 52.299,
+        "end": 52.319,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -0.006715822499245405
+      },
+      {
+        "text": "gonna",
+        "start": 52.319,
+        "end": 52.52,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -0.006715822499245405
+      },
+      {
+        "text": " ",
+        "start": 52.52,
+        "end": 52.579,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "call",
+        "start": 52.579,
+        "end": 52.779,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 52.779,
+        "end": 52.84,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": "this",
+        "start": 52.84,
+        "end": 53.02,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1920928244535389e-07
+      },
+      {
+        "text": " ",
+        "start": 53.02,
+        "end": 53.099,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -5.960462772236497e-07
+      },
+      {
+        "text": "the",
+        "start": 53.099,
+        "end": 53.159,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -5.960462772236497e-07
+      },
+      {
+        "text": " ",
+        "start": 53.159,
+        "end": 53.199,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "end",
+        "start": 53.199,
+        "end": 53.319,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 53.319,
+        "end": 53.34,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": "of",
+        "start": 53.34,
+        "end": 53.419,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.3841855067985307e-07
+      },
+      {
+        "text": " ",
+        "start": 53.419,
+        "end": 53.479,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -4.291525328881107e-06
+      },
+      {
+        "text": "mission.",
+        "start": 53.479,
+        "end": 53.919,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -3.755084662770969e-06
+      },
+      {
+        "text": " ",
+        "start": 53.919,
+        "end": 53.919,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.6093124941107817e-05
+      },
+      {
+        "text": "Project",
+        "start": 55.059,
+        "end": 55.36,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.6093124941107817e-05
+      },
+      {
+        "text": " ",
+        "start": 55.36,
+        "end": 55.439,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -1.3232143828645349e-05
+      },
+      {
+        "text": "manager",
+        "start": 55.439,
+        "end": 56.079,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.3232143828645349e-05
+      },
+      {
+        "text": " ",
+        "start": 56.079,
+        "end": 56.179,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -2.50339189733495e-06
+      },
+      {
+        "text": "off",
+        "start": 56.18,
+        "end": 56.34,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -2.50339189733495e-06
+      },
+      {
+        "text": " ",
+        "start": 56.34,
+        "end": 56.36,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": "the",
+        "start": 56.36,
+        "end": 56.459,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": 0.0
+      },
+      {
+        "text": " ",
+        "start": 56.459,
+        "end": 56.52,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -7.152555099310121e-07
+      },
+      {
+        "text": "net.",
+        "start": 56.52,
+        "end": 56.919,
+        "type": "word",
+        "speaker_id": "speaker_3",
+        "logprob": -1.1622896067819966e-06
+      },
+      {
+        "text": " ",
+        "start": 56.919,
+        "end": 56.919,
+        "type": "spacing",
+        "speaker_id": "speaker_3",
+        "logprob": -4.768370445162873e-07
+      },
+      {
+        "text": "[audience clapping]",
+        "start": 59.059,
+        "end": 59.379,
+        "type": "audio_event",
+        "speaker_id": "speaker_3",
+        "logprob": -0.22613123537155388
+      }
+    ]
+  },
+  "forcedAlignment": {
+    "status": "not_authorized",
+    "reason": "API key lacks forced_alignment permission; no result used."
+  }
+}

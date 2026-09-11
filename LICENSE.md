@@ -19,7 +19,15 @@ The two layout documents are prose, but they are CC0 with the schemas rather
 than CC-BY with the prose, because an implementer should be able to transcribe
 an algorithm or a field table without an attribution obligation.
 
-The meeting demos are scripted, fictional conversations with synthetic voices.
+The NASA/JPL homepage example (`site/static/demo/cassini-final-moments.*`) is
+third-party source material, excluded from the CC0 dedication above. **Courtesy
+NASA/JPL-Caltech.** Its audio and source captions are used under the
+[JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/).
+The adapted transcript does not change the source material’s terms.
+See the [source and transcription notes](site/static/demo/README.md).
+No NASA, JPL or Caltech endorsement is implied.
+
+The earlier meeting demos are scripted, fictional conversations with synthetic voices.
 The earlier Lantern Festival fixture was made with Kokoro-82M and came from
 [gocassini](https://github.com/codemyriad/gocassini)'s test harness; the same
 author released that fixture here under CC0. The repair café conversation was

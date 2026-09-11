@@ -1,6 +1,7 @@
 # The format website
 
-The public site for the Cassini portable meeting format. SvelteKit with
+The public site for the Cassini portable meeting format at
+<https://format.gocassini.com/>. SvelteKit with
 `adapter-static`, so `npm run build` produces a plain directory of files that any
 static host will serve. There is no server side and nothing host-specific in the
 config.
@@ -14,13 +15,22 @@ npm run preview      # serve build/ locally
 
 ## Where the content comes from
 
-The homepage introduces the format with a playable example, an interactive
-file diagram and links to implementation guides. `/try/` opens the example or
+The homepage introduces the format through our Nextcloud Talk use case: use the
+transcript to find a passage, then listen to check what was actually said. The
+playable example and creation/sharing/reading workflow keep that purpose visible.
+`/using/` explains fit,
+compatibility and limitations; `/build/` connects the implementation guides to
+file checks and conformance tests. `/try/` opens the example or
 a local `.opus`/`.ogg` file in the shared transcript player; local files are
 read directly in the browser. The player uses Cassini’s transcript component,
 including inline interjections and word playback highlighting. Hover highlights
 individual words; click one to seek to it. `/demo/` keeps the separate song karaoke view. `/spec/` is the
 reference hub for the versioned contracts, schemas and conformance suite.
+`/consume/` and `/produce/` carry a visitor from sample inputs to a useful result;
+`/verify/` provides the shared checking workflow and explains the scope of each
+result. Keep prerequisites and working directories explicit when editing guides.
+The producer example downloads a matching `.words.json` alongside the demo audio;
+update both fixtures together when changing the example.
 
 Most of the site is not written here. The specification pages render
 `../SPEC.md` and `../spec/*.md` directly, and the design notes render
@@ -43,17 +53,17 @@ the build instead of shipping.
 
 ## The demo file
 
-`static/demo/repair-cafe.opus` is a valid `org.cassini.portable-meeting/1` file:
-“Saturday repair café: the rain plan,” a fictional planning call between three
-volunteers. ElevenLabs v3 supplies the synthetic voices on three separate,
-synchronized speaker tracks, with four overlapping acknowledgments. Cassini's
-native pipeline processes those tracks, transcribes each speaker with Parakeet,
-and packs the recording and recognized word timings into the `.opus` file.
-The site copies Cassini's output without editing the transcript.
+`static/demo/cassini-final-moments.opus` is a valid `org.cassini.portable-meeting/1`
+file containing NASA/JPL’s “Final Moments in Cassini Mission Control.” Courtesy
+NASA/JPL-Caltech. The full stereo audio includes a reconciled transcript from
+Gemini 3.5 Flash, Gemini 3.8 Flash, OpenAI GPT Audio, Scribe v2 and JPL captions.
+Scribe supplies acoustic word timings. Named speakers are sourced to JPL;
+unresolved voices and speech remain explicitly uncertain. Source credit and
+production provenance are embedded in the file.
 
-`repair-cafe-excerpt.opus` is a shorter excerpt processed the same way.
-`repair-cafe.multitrack.mkv` contains the three lossless source tracks and is
-downloadable from `/try/`. The site's file facts come from the full `.opus` file:
+The earlier repair café recordings and source tracks remain available; their
+production notes are in `static/demo/repair-cafe.README.md`. The site’s current
+file facts come from the NASA/JPL example:
 
 ```bash
 node scripts/gen-demo.mjs          # -> src/lib/generated/demo.json
@@ -83,13 +93,19 @@ so unrelated local static files cannot enter the deployment:
 
 ```bash
 npm ci
-SITE_URL=https://cassini-format.codemyriad.io npm run build
+SITE_URL=https://format.gocassini.com npm run build
 wrangler pages deploy build --project-name cassini-format --branch main
 ```
 
-`SITE_URL` makes the canonical and `llms-full.txt` links absolute. Wrangler needs
-the configured Cloudflare credentials and account. After deployment, verify
-`https://cassini-format.codemyriad.io/`, `/schema/`, and `/llms-full.txt`.
+Canonical links and the URLs in `llms.txt` and `llms-full.txt` default to
+`https://format.gocassini.com`. `SITE_URL` overrides the complete site root;
+set it to an empty string for relative links in a portable preview. Wrangler
+needs the configured Cloudflare credentials and account. After deployment,
+verify `https://format.gocassini.com/`, `/schema/`, and `/llms-full.txt`.
+
+Published schema `$id` values and embedded `CASSINI_PAYLOAD_SCHEMA` tags keep
+their original identifiers. Schema downloads are served at the new website;
+keep the old schema URLs reachable when configuring the domain migration.
 
 For a deploy under a subpath rather than a domain root, set `BASE_PATH`:
 

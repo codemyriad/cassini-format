@@ -20,7 +20,7 @@ const SITE = path.resolve(HERE, '..');
 
 const candidates = [
 	process.argv[2],
-	path.join(SITE, 'static/demo/repair-cafe.opus')
+	path.join(SITE, 'static/demo/cassini-final-moments.opus')
 ].filter(Boolean);
 
 let file;

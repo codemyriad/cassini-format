@@ -1,17 +1,13 @@
 {
-	"generatedFrom": "repair-cafe.opus",
-	"bytes": 899628,
+	"generatedFrom": "cassini-final-moments.opus",
+	"bytes": 767493,
 	"audio": {
 		"codec": "opus",
 		"sampleRate": 48000,
-		"channels": 1
+		"channels": 2
 	},
 	"tagNames": [
-		"CASSINI_ATTRIBUTION_MODE",
-		"CASSINI_ATTRIBUTION_RAN",
-		"CASSINI_ATTRIBUTION_WORDS_DROPPED",
-		"CASSINI_ATTRIBUTION_WORDS_FLAGGED",
-		"CASSINI_ATTRIBUTION_WORDS_MEASURED",
+		"ARTIST",
 		"CASSINI_AUDIO_CHANNELS",
 		"CASSINI_AUDIO_DURATION_MS",
 		"CASSINI_AUDIO_MATCH_POLICY",
@@ -30,2488 +26,1037 @@
 		"CASSINI_PAYLOAD_RAW_BYTES",
 		"CASSINI_PAYLOAD_SCHEMA",
 		"CASSINI_PAYLOAD_SHA256",
-		"CASSINI_PROCESSED_AT",
 		"CASSINI_PROFILE",
 		"CASSINI_SPEAKER_COUNT",
-		"CASSINI_STT_BACKEND",
-		"CASSINI_STT_DEVICE",
-		"CASSINI_STT_MODEL",
 		"CASSINI_TRANSCRIPT_DEFAULT",
 		"CASSINI_TRANSCRIPT_IDS",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_000",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_001",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_ENCODING",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_GZIP_BYTES",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_MIME",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_RAW_BYTES",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_SHA256",
+		"CASSINI_TX_WORDS_PAYLOAD_000",
+		"CASSINI_TX_WORDS_PAYLOAD_CHUNK_COUNT",
+		"CASSINI_TX_WORDS_PAYLOAD_ENCODING",
+		"CASSINI_TX_WORDS_PAYLOAD_GZIP_BYTES",
+		"CASSINI_TX_WORDS_PAYLOAD_MIME",
+		"CASSINI_TX_WORDS_PAYLOAD_RAW_BYTES",
+		"CASSINI_TX_WORDS_PAYLOAD_SHA256",
+		"COMMENT",
+		"COPYRIGHT",
 		"DATE",
+		"ENCODER",
+		"LICENSE",
+		"SOURCE",
 		"TITLE",
-		"comment",
-		"encoder"
+		"comment"
 	],
-	"commentCount": 43,
-	"chunkTagCount": 3,
+	"commentCount": 38,
+	"chunkTagCount": 2,
 	"readableTags": {
-		"CASSINI_ATTRIBUTION_MODE": "annotate",
-		"CASSINI_ATTRIBUTION_RAN": "true",
-		"CASSINI_ATTRIBUTION_WORDS_DROPPED": "0",
-		"CASSINI_ATTRIBUTION_WORDS_FLAGGED": "0",
-		"CASSINI_ATTRIBUTION_WORDS_MEASURED": "28",
-		"CASSINI_AUDIO_CHANNELS": "1",
-		"CASSINI_AUDIO_DURATION_MS": "113113",
+		"ARTIST": "NASA/JPL-Caltech",
+		"CASSINI_AUDIO_CHANNELS": "2",
+		"CASSINI_AUDIO_DURATION_MS": "64783",
 		"CASSINI_AUDIO_MATCH_POLICY": "exact-opus-audio-v1",
-		"CASSINI_AUDIO_OPUS_SHA256": "8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80",
-		"CASSINI_AUDIO_SAMPLE_COUNT": "5429448",
+		"CASSINI_AUDIO_OPUS_SHA256": "8ce6c6690402af088220183ded389bf6f34662b490869a28c3fcadf5a01f58d8",
+		"CASSINI_AUDIO_SAMPLE_COUNT": "3109617",
 		"CASSINI_AUDIO_SAMPLE_RATE": "48000",
-		"CASSINI_CREATED_AT": "2026-09-07T16:48:00.244576383Z",
+		"CASSINI_CREATED_AT": "2026-09-11T18:41:23Z",
 		"CASSINI_DECODE_HINT": "Concatenate CASSINI_PAYLOAD_000..N for the manifest; for a transcript body concatenate CASSINI_TX_<ID>_PAYLOAD_000..N. Each chunk set: base64url decode, gzip decompress, parse UTF-8 JSON.",
 		"CASSINI_FORMAT": "org.cassini.portable-meeting/1",
-		"CASSINI_MEETING_ID": "mtg_8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80",
+		"CASSINI_MEETING_ID": "mtg_8ce6c6690402af088220183ded389bf6f34662b490869a28c3fcadf5a01f58d8",
 		"CASSINI_PAYLOAD_CHUNK_COUNT": "1",
 		"CASSINI_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
-		"CASSINI_PAYLOAD_GZIP_BYTES": "914",
+		"CASSINI_PAYLOAD_GZIP_BYTES": "1960",
 		"CASSINI_PAYLOAD_MIME": "application/vnd.cassini.portable-meeting+json",
-		"CASSINI_PAYLOAD_RAW_BYTES": "1620",
+		"CASSINI_PAYLOAD_RAW_BYTES": "3830",
 		"CASSINI_PAYLOAD_SCHEMA": "https://cassini-format.codemyriad.io/schema/cassini-portable-meeting-manifest-v1.schema.json",
-		"CASSINI_PAYLOAD_SHA256": "75533ccb8171e3f967ccf313d2790945a94a70d50520f991186726e70436ca58",
-		"CASSINI_PROCESSED_AT": "2026-09-07T16:48:00Z",
+		"CASSINI_PAYLOAD_SHA256": "d60f00cd281bf643ddbd95fc36e6b5039cb110a4fa463f06936d59e699bdbec4",
 		"CASSINI_PROFILE": "ogg-opus",
-		"CASSINI_SPEAKER_COUNT": "3",
-		"CASSINI_STT_BACKEND": "sherpa-onnx",
-		"CASSINI_STT_DEVICE": "cpu",
-		"CASSINI_STT_MODEL": "parakeet-tdt-0.6b-v3",
-		"CASSINI_TRANSCRIPT_DEFAULT": "raw-asr",
-		"CASSINI_TRANSCRIPT_IDS": "raw-asr",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_CHUNK_COUNT": "2",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_GZIP_BYTES": "4427",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_MIME": "application/vnd.cassini.transcript-words+json",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_RAW_BYTES": "31850",
-		"CASSINI_TX_RAW_ASR_PAYLOAD_SHA256": "5a51f4c677c5637050a9019ac1c5824eb93891329423e967f941a51e53829505",
+		"CASSINI_SPEAKER_COUNT": "4",
+		"CASSINI_TRANSCRIPT_DEFAULT": "words",
+		"CASSINI_TRANSCRIPT_IDS": "words",
+		"CASSINI_TX_WORDS_PAYLOAD_CHUNK_COUNT": "1",
+		"CASSINI_TX_WORDS_PAYLOAD_ENCODING": "base64url+gzip+utf8json",
+		"CASSINI_TX_WORDS_PAYLOAD_GZIP_BYTES": "1446",
+		"CASSINI_TX_WORDS_PAYLOAD_MIME": "application/vnd.cassini.transcript-words+json",
+		"CASSINI_TX_WORDS_PAYLOAD_RAW_BYTES": "7806",
+		"CASSINI_TX_WORDS_PAYLOAD_SHA256": "8ff466b7afd6b0c055b7e11163c4c5b39ebbf155654d7416855f2faf4a3b3b9c",
 		"comment": "Cassini portable meeting file. Decode CASSINI_PAYLOAD_*: base64url -> gzip -> UTF-8 JSON.",
-		"DATE": "2026-09-07T16:48:00.244576383Z",
-		"encoder": "Lavf62.3.100",
-		"TITLE": "Saturday repair café: the rain plan"
+		"COMMENT": "Reconciled transcript by codemyriad; not an official NASA transcript. See embedded provenance. No NASA/JPL-Caltech endorsement implied.",
+		"COPYRIGHT": "Courtesy NASA/JPL-Caltech. Source material subject to JPL image use policy.",
+		"DATE": "2026-09-11T18:41:23Z",
+		"ENCODER": "cassini-pack.py",
+		"LICENSE": "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+		"SOURCE": "https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/",
+		"TITLE": "Final Moments in Cassini Mission Control"
 	},
 	"sampleChunkTag": {
 		"key": "CASSINI_PAYLOAD_000",
-		"value": "H4sIAAAAAAAA_6xUzW7jNhB-FWNOLSKl1A_1d3M2LZpis13ELvqHQhiRI5trmRRIyhs38AP1OfpiBWUbmx5a7GFv1niGM9_PzAvslJbQgEDnlFbxaKzHbqB4T-SV3kAEB7JOGQ1NEsFoTa8GggbMZhObcXIQwTW1eQEV3tr7TVvJtOrKAtOiZnUqZJmmQiARZzXPpKBaUsZYmgjGkrzosywpmeAVdpwJJioGEXjl504r9JOVeFxYGlHZhcD-77-ahd_SwqLSi3FADREIS-hJLv1PXkADKUuLmNUxK9dJ0eRVw9htmue8LLIq-w1mKIKc-9-KkCcni14Z_eigSZIsSbJTBDhJZQJgYbRHpcmeKQlzGEnhuQs5DvfjQE_oCZq8YoxFILaoNQ1uZvT8_xszaQ8Nz9M6z6v_aKq0p41V_hga79GL7XszKHGEBugZhZ_1iOfR4kMC0TzCMnyutpjyAhr4ArJ8QUBuJNyRddD8frGOG3ftHo_YYs1lxzuGIuE15VmV9z3n1EMEA3Y0QAOPeEQ4Ra8qPTnXlkmWIwqekZRC5JXIRc2KonxVuSbn_l35wWjctl0qCybrVGCeIfIEmaiTDutXpT-ERDj9EYG3qJ2wavSv5rf4MUZng22ox2nw0Hg7UQS9sXv0nxbt9qOx0t3OMoWfF76yLPkcJ8_-xeNgUD5RH-wwWurVMzTwZrlaPbx7aNe_tE_Ln9vl6ql9v_z17Y_L-zaYczvp3aVXGoG7-oIjT_pcFGUpeJGVjDOsWVKjSASv0py6OqvqJEvrPM2oLsq-zhPkCfGsSmvOOEQB-t3Rk4MmSyrOItj8qcZLJM_TMoK92od9xnEclJjd8M1By9srI58IjWdybj44ExabtDByvi_QoaMin-xwEx6_mXxfzUmnIMhozYE0akGBEDcSie3arOnZh--rMs0LdCh2NF89tyU7Ymy0fg53zMhZ4xEt7oh87KWP2W3RxYdsVvSgwtsgxgki2CodlH8BT3Z_lS9knad9JL81ocfGEslj6wit2EJ0hk8Smh4HRxFYwgChAalcuLxy0R0XwuhebS47s_jqKupqvW6_f3i3XrX3D6vl3dtv77-G0yncI--t6iY_3-kAVl-NF0AF0rU2Puzs2W7ukdBNNoyRVpfQdwNuNiHCLoF7a8ZxDpzOkbXaK72ZQZOW7s5MWpK8Oy7P1zA0PJ1O_wQAAP__nF9UHFQGAAA"
+		"value": "H4sIAAAAAAAC_61XXY_buhH9K4SeWsSSJdmWZe-Tu0luc5FkF9kUSZteLCiKkpmVSFWkvHGC_PeeoWSvtx9AUdyHXVjicGY458wZ6kfwoHQZbAPBrVVahZ3pHS8aGbZSOqXrYBYcZG-V0cE2mQVdbyrVSGwwdR2abrAwOJlufwSKfLWuvs-FzESWbeJlnPIqzvM0jZN8UcpykW-KKqsWyyxLi-UmzrMNT3OxqAQvqxWPk2qVlzncOuV8pNdK84a9M63UzjKl2fWYK3unLCXGro12vWmwRfSSO1nu3F-cwM40TrMw3oRJ8jHJt8tkmy7-Bqty6LnDxnc22GbLdb74OQv4UCpDJxBwxpWW_XhGcmpKSd6m01redo38gDjBdpnHcQyLPddaNnCXntavzaBdsF0k8SZL1v85ptJO1r1yR4rbcif2t6ZRAo-B_MaF8_UNfWbhIUFoet7R492ep6sMdr9DmX-_89hO8geQJdh-mZjABVWs4YVs8LS7vmNJ8HM2LVpVA9iL9ROeYsLzbPkoC-uAyJPpr0OjJPs0vT8btlx9lxdmr3gP5viXP38Do3qurehV5y5yfDR9SVmWsuJDgzO6fpCzoDI9IHnqjMjbRR4H-jkVJElRr44fG8PLD7IiJLteVuobdl7v7u7evH9z__Hz_aebDy_v7m93f317s3t5T6TaD_rh5AOlOwNaVUCsWPOqzIpYxKtVsZZJkmQLsRSrYrGRRVElq1W2WpbrZZLlq1WVVrxa8kWxKDYCrnv--KejkzjiOo-zWVB_V930Ilku8aJVLfUV7zqwzaM4P-gyOh30qUqhP_OLrxbdPwukRif4Pg8KbmW2HPrmBTl_Mbgq90Y_qcrQiIPUXAtJ1Shla257Uw7CeRH58T82qTVDP3r4P3Sg4zXt2DvX2e18_vj4GH3tmkhzy6PaHOYHVUpj5xV5DNvRY6h0eFLBdvQYTkycEz3MoyaQL9yWaafzB_X4j_QxTVwkGjOUVY8tkZZu3spS8SnS5Be9uY43yerX27fh6Xc4sqQK0XlJuE5jIaJ2eaBDDEWj7F6WL31vBrTDF2oVXBCmEmnOl3JRZHG8ABl4zNeJWOepXOTrchWX2aKo1jxblZt4s1gnVVFJUeXparOp0lW1HlWzVER18LEHT47s_e5uN6csr3njpNjDaLDyrE7_ta54CFWL4ocwxywh-zna86LzJhK00u0NFfMVQpteAdleotxCNcpTkpkKGJeyk_inHfMyyJ75sTOGHBnUgfC-WGNcl0y2hSwhhOzVm12YxTkTfNxFEwuSTvL2JaiNqRs5r2VLuC-iVVg13NKB_3UlP68Y5MTVvEaDjGNjFrxqJDj_lheWUQqFvD-kwW9ToJ0Q0iJa8Iv35bP75fYj241H2vdmqPfsBl4_mAF6dsXuvA9vCB0SOARvoJbE07P9U0jqTeKZ77jzJH9G7uhkEE3N7FQ7tvIU6pAyLsxgnRKMup7BQFoH7bdXrJaYh0BoxGAs3t8H8HHDrKzHrM7mwPGrFI5ypi7lQtCokNFFwv9-qEfYcudk29HGYnAM2Sr8LAcAi5jUkLqeNt4_bexkPzXrFdPmOWPORr20UPYxyIGrhi44UXAeWDvnUINhpObz0eIheJoiTPOW8jt64p0I5Y0mFkbs416qntk9LlJMfqNRCm4qGFkaeONuKEOvvo88p80gPt2y_AvUmWRH6QE3g4j5oemN3F6ycWYyMBA1NT3b84Okc2O3qqheWLDeB2VqIz_XhLKe96A7kQx13Hq3RssZ8mZfATs8lWMHKZ8Var5XYBlB5xFnf3h23JE2V-fm26O2SLv0u_9IcZMkStYbT5NFkkarOAZZyMRu2ZdB0-WnAUIKWPx2hVpib4lgxBnRDAj4OSzwcv457PmR0c8x8Pj2Tsm-5_71_Nq_ith7QylYqe0A0hJCvLHgDu8fLKoHDJ6HpSw_SLrtsZsHfpz5CoNBCr0y8KY5MtuZB6kBV60wclAv_1epw-kfBBOYfJv51Kg94JYNe6w2DZBgGAftVKuLaJiH1CLITKN2PZyy13c3SB6NNwPTjtT7QEOJh4YgUkhe--y0_ObGYLXRmo_-z41LClrrEUClwV9gChmljaTw8sxS3-LgAeW0q4jnoP_sUnae9GkveT9RBL_KK3ahYuT55LJUlte9pBIxXo5EAA9xG9C45tiITYd_cuVdlEYMk66hclConqzAfKR2i8aVPdV5aE7qM7LDa4G_D9AthmPaXMETOsFNfcZqqGR3XiU-X7QxOscNvUa8CWHMbtKXcByFT52NTAxYIDEDI9LzBrLp-DhGcKF9E56Gliwv5s9sTITtByAc0pHG5kRYU1VK0LSjEXuxJWKfSHULlKqENsixy7yKhD7VSaum4413oF62VFEIL4auo3a__JJB5WnujDL_miqIOVv7opG0STNWlJJlYiB-96S6RnmlhV_cPpyXCzCzO16x3e4aBvQ5NELnL4Sjzi9z9vDn7ye_N_hOgZyzTcYeijmgf60aWikhJ4Sh6E3HgAoqotFlFcFxOdgRr-1QBSiZP1Ln74_-kwzyJOfTHX4-vQ-fjbyoO8I3Ze2Maez8_GXLxQPWcEf9-U8491-P9g4AAA"
 	},
 	"manifest": {
 		"kind": "cassini-portable-meeting",
 		"version": 1,
 		"profile": "ogg-opus",
 		"meeting": {
-			"id": "mtg_8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80",
-			"title": "Saturday repair café: the rain plan",
-			"createdAtUtc": "2026-09-07T16:48:00.244576383Z",
-			"processedAtUtc": "2026-09-07T16:48:00Z",
-			"durationMs": 113113
+			"id": "mtg_8ce6c6690402af088220183ded389bf6f34662b490869a28c3fcadf5a01f58d8",
+			"title": "Final Moments in Cassini Mission Control",
+			"createdAtUtc": "2026-09-11T18:41:23Z",
+			"durationMs": 64783
 		},
 		"audio": {
 			"container": "ogg",
 			"codec": "opus",
 			"sampleRate": 48000,
-			"channels": 1,
-			"sampleCount": 5429448,
-			"durationMs": 113113
+			"channels": 2,
+			"sampleCount": 3109617,
+			"durationMs": 64783
 		},
 		"integrity": {
 			"matchPolicy": "exact-opus-audio-v1",
-			"opusAudioSha256": "8d28b76a269092cd722ccaee50953dce9de30021c00146f33170c58ab50c0c80",
+			"opusAudioSha256": "8ce6c6690402af088220183ded389bf6f34662b490869a28c3fcadf5a01f58d8",
 			"sampleRate": 48000,
-			"channels": 1,
-			"sampleCount": 5429448,
-			"durationMs": 113113
+			"channels": 2,
+			"sampleCount": 3109617,
+			"durationMs": 64783
 		},
 		"speakers": [
 			{
-				"id": "spk_maya_a95db5b0ac159e4384ff55ef",
-				"label": "Maya"
+				"id": "acs",
+				"label": "ACS 1"
 			},
 			{
-				"id": "spk_tess_7134aac53eddcc48c4c90667",
-				"label": "Tess"
+				"id": "signal",
+				"label": "Mission control"
 			},
 			{
-				"id": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-				"label": "Jonah"
+				"id": "webster",
+				"label": "Julie Webster"
+			},
+			{
+				"id": "maize",
+				"label": "Earl Maize"
 			}
 		],
 		"transcripts": [
 			{
-				"id": "raw-asr",
+				"id": "words",
 				"default": true,
 				"format": "cassini.words.v1",
-				"wordCount": 331,
-				"createdAtUtc": "2026-09-07T16:48:00Z",
+				"wordCount": 120,
 				"payloadRef": {
-					"prefix": "CASSINI_TX_RAW_ASR_PAYLOAD_",
-					"chunkCount": 2,
-					"sha256": "5a51f4c677c5637050a9019ac1c5824eb93891329423e967f941a51e53829505",
-					"rawBytes": 31850,
-					"gzipBytes": 4427,
+					"prefix": "CASSINI_TX_WORDS_PAYLOAD_",
+					"chunkCount": 1,
+					"sha256": "8ff466b7afd6b0c055b7e11163c4c5b39ebbf155654d7416855f2faf4a3b3b9c",
+					"rawBytes": 7806,
+					"gzipBytes": 1446,
 					"mime": "application/vnd.cassini.transcript-words+json",
 					"encoding": "base64url+gzip+utf8json"
 				}
 			}
 		],
 		"provenance": {
-			"speechToText": {
-				"raw-asr": {
-					"backend": "sherpa-onnx",
-					"model": "parakeet-tdt-0.6b-v3",
-					"device": "cpu",
-					"hints": {
-						"termCount": 3,
-						"decodingMethod": "greedy_search",
-						"applied": false,
-						"reason": "disabled by configuration (CASSINI_STT_HINTS_DISABLED)"
-					}
-				}
-			},
-			"attribution": {
-				"ran": true,
-				"mode": "annotate",
-				"wordsMeasured": 28,
-				"wordsFlagged": 0,
-				"wordsDropped": 0
-			},
-			"wordTimings": {
-				"endsBoundedByAudio": true
+			"demoProduction": {
+				"createdAtUtc": "2026-09-11T18:41:23Z",
+				"source": {
+					"title": "Final Moments in Cassini Mission Control",
+					"page": "https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/",
+					"download": "https://d2pn8kiwq2w21t.cloudfront.net/media/videoscassini20170915JPL-20170915-CASSINf-0001-720cc.m4v",
+					"publishedDate": "2017-09-15",
+					"sha256": "fc28a4e3b600355fa0a71c782e387d50d63bf7a65d909371fbfecf82599f25f7",
+					"credit": "Courtesy NASA/JPL-Caltech",
+					"usePolicy": "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+				},
+				"transcription": {
+					"method": "Editorial reconciliation of independent audio transcriptions, JPL webpage transcript and embedded EIA-608 captions",
+					"models": [
+						"google/gemini-3.5-flash",
+						"google/gemini-3.8-flash",
+						"openai/gpt-audio",
+						"ElevenLabs scribe_v2"
+					],
+					"modelAccess": "Gemini and GPT Audio through OpenRouter; Scribe and forced alignment through ElevenLabs",
+					"evidence": "cassini-final-moments.evidence.json",
+					"timing": "Scribe v2 acoustic word timestamps; general audio models’ segment timestamps rejected as inaccurate. ElevenLabs forced alignment was attempted but denied due to missing forced_alignment permission; no independent alignment result was available.",
+					"speakerAttribution": "Julie Webster and Earl Maize named by JPL captions and webpage. Their short exchange is assigned by diarization and conversational continuity. ACS 1 and the signal operator have no verified personal names.",
+					"decisions": [
+						"Opening: ACS one, we just had transition to high rate mode (captions and Scribe; webpage has condition).",
+						"11.179–12.500 seconds: [unintelligible]; candidates include X-band/X-ray band and S-band/Sierra band/C-band. No consensus; JPL also marks this unintelligible.",
+						"Retain Okay, the individually spoken digits one one five five four six, and audible uh fillers from Scribe.",
+						"Retain Project manager on FSO coord, Maybe a trickle, within the next, and gonna from acoustic recognition instead of the edited webpage wording.",
+						"After but, Scribe and GPT Audio hear just heard; Gemini and the webpage disagree on additional pronouns. Retain just heard and document the uncertainty.",
+						"Preserve full audio including final applause; do not assign group applause to Earl Maize or turn unspoken closing-credit captions into speech."
+					],
+					"limitations": "AI-reconciled transcript, not a human-certified or official NASA transcript. Word boundaries and short-turn speaker assignments remain estimates."
+				},
+				"audio": {
+					"processing": "Full original stereo audio, no cuts or denoising in listening copy; AAC decoded and encoded as 48 kHz stereo Opus at 96 kb/s. Filtered radio crop used only for transcription comparison."
+				},
+				"producer": "site/scripts/produce-cassini-final.py using tools/cassini-pack.py"
 			}
 		}
 	},
-	"manifestBytes": 1620,
-	"manifestSha256": "75533ccb8171e3f967ccf313d2790945a94a70d50520f991186726e70436ca58",
+	"manifestBytes": 3830,
+	"manifestSha256": "d60f00cd281bf643ddbd95fc36e6b5039cb110a4fa463f06936d59e699bdbec4",
 	"transcript": {
-		"id": "raw-asr",
+		"id": "words",
 		"format": "cassini.words.v1",
-		"wordCount": 331,
-		"rawBytes": 31850,
-		"gzipBytes": 4427,
-		"chunkCount": 2
+		"wordCount": 120,
+		"rawBytes": 7806,
+		"gzipBytes": 1446,
+		"chunkCount": 1
 	},
 	"speakers": {
-		"spk_maya_a95db5b0ac159e4384ff55ef": "Maya",
-		"spk_tess_7134aac53eddcc48c4c90667": "Tess",
-		"spk_jonah_b2d60d92ca43aa51a0c91ba9": "Jonah"
+		"acs": "ACS 1",
+		"signal": "Mission control",
+		"webster": "Julie Webster",
+		"maize": "Earl Maize"
 	},
 	"turns": [
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 60,
-			"endMs": 11667,
+			"speaker": "acs",
+			"label": "ACS 1",
+			"startMs": 219,
+			"endMs": 6219,
 			"words": [
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 60,
-					"endMs": 459,
-					"text": "So,"
+					"speaker": "acs",
+					"startMs": 219,
+					"endMs": 479,
+					"text": "Systems,"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 459,
-					"endMs": 1329,
-					"text": "Saturday,"
+					"speaker": "acs",
+					"startMs": 560,
+					"endMs": 1000,
+					"text": "ACS"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 1420,
-					"endMs": 1660,
-					"text": "I"
+					"speaker": "acs",
+					"startMs": 1100,
+					"endMs": 1259,
+					"text": "one,"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 1659,
-					"endMs": 1819,
-					"text": "think"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 1819,
-					"endMs": 1979,
+					"speaker": "acs",
+					"startMs": 1339,
+					"endMs": 1399,
 					"text": "we"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 1979,
-					"endMs": 2139,
-					"text": "have"
+					"speaker": "acs",
+					"startMs": 1860,
+					"endMs": 2099,
+					"text": "just"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2139,
-					"endMs": 2299,
+					"speaker": "acs",
+					"startMs": 2180,
+					"endMs": 2319,
+					"text": "had"
+				},
+				{
+					"speaker": "acs",
+					"startMs": 2399,
+					"endMs": 2819,
+					"text": "transition"
+				},
+				{
+					"speaker": "acs",
+					"startMs": 2859,
+					"endMs": 2919,
 					"text": "to"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2300,
-					"endMs": 2539,
-					"text": "give"
+					"speaker": "acs",
+					"startMs": 2980,
+					"endMs": 3079,
+					"text": "high"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2540,
-					"endMs": 2700,
-					"text": "up"
+					"speaker": "acs",
+					"startMs": 3159,
+					"endMs": 3299,
+					"text": "rate"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2699,
-					"endMs": 2779,
-					"text": "on"
+					"speaker": "acs",
+					"startMs": 3359,
+					"endMs": 3559,
+					"text": "mode,"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2780,
-					"endMs": 2940,
-					"text": "the"
+					"speaker": "acs",
+					"startMs": 4360,
+					"endMs": 4599,
+					"text": "and,"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 2939,
-					"endMs": 3679,
-					"text": "courtyard,"
+					"speaker": "acs",
+					"startMs": 4659,
+					"endMs": 4739,
+					"text": "uh,"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 3819,
-					"endMs": 3979,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 3979,
-					"endMs": 4859,
-					"text": "forecasts"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
+					"speaker": "acs",
 					"startMs": 4859,
-					"endMs": 5179,
-					"text": "got"
+					"endMs": 4940,
+					"text": "we"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 5179,
-					"endMs": 5739,
-					"text": "worse."
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 5899,
-					"endMs": 6219,
-					"text": "We"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 6219,
-					"endMs": 6379,
-					"text": "can"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 6379,
-					"endMs": 6539,
-					"text": "have"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 6540,
-					"endMs": 6780,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 6779,
-					"endMs": 7179,
-					"text": "small"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 7179,
-					"endMs": 7619,
-					"text": "hall,"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 7739,
-					"endMs": 7899,
-					"text": "but"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 7899,
-					"endMs": 8059,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 8060,
-					"endMs": 8459,
-					"text": "craft"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 8459,
-					"endMs": 8779,
-					"text": "group"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 8780,
-					"endMs": 8940,
+					"speaker": "acs",
+					"startMs": 5000,
+					"endMs": 5199,
 					"text": "are"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 8940,
-					"endMs": 9020,
+					"speaker": "acs",
+					"startMs": 5299,
+					"endMs": 5440,
 					"text": "in"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 9020,
-					"endMs": 9180,
-					"text": "there"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 9179,
-					"endMs": 9499,
-					"text": "until"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 9507,
-					"endMs": 9827,
-					"text": "until"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 9827,
-					"endMs": 10067,
-					"text": "half"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 10067,
-					"endMs": 10307,
-					"text": "past"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 10387,
-					"endMs": 11027,
-					"text": "ten,"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 11027,
-					"endMs": 11267,
-					"text": "and",
-					"attributionGapDb": 33.33575379921126
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 11267,
-					"endMs": 11667,
-					"text": "that's",
-					"attributionGapDb": 16.17046040459461
-				}
-			],
-			"text": "So, Saturday, I think we have to give up on the courtyard, the forecasts got worse. We can have the small hall, but the craft group are in there until until half past ten, and that's"
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 11355,
-			"endMs": 11915,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 11355,
-					"endMs": 11915,
-					"text": "Right.",
-					"attributionGapDb": -10.552694818370234
-				}
-			],
-			"text": "Right."
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 11668,
-			"endMs": 14188,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 11668,
-					"endMs": 11828,
-					"text": "when",
-					"attributionGapDb": -8.69437266576125
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 11827,
-					"endMs": 12147,
-					"text": "they",
-					"attributionGapDb": -45.473911661273185
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 12148,
-					"endMs": 12577,
-					"text": "finish,"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 12707,
-					"endMs": 12947,
-					"text": "not"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 12947,
-					"endMs": 13107,
-					"text": "when"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 13107,
-					"endMs": 13267,
+					"speaker": "acs",
+					"startMs": 5639,
+					"endMs": 5699,
 					"text": "the"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 13267,
-					"endMs": 13748,
-					"text": "room's"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 13747,
-					"endMs": 14188,
-					"text": "clear."
+					"speaker": "acs",
+					"startMs": 5759,
+					"endMs": 6219,
+					"text": "atmosphere."
 				}
 			],
-			"text": "when they finish, not when the room's clear."
+			"text": "Systems, ACS one, we just had transition to high rate mode, and, uh, we are in the atmosphere."
 		},
 		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 14428,
-			"endMs": 22939,
+			"speaker": "signal",
+			"label": "Mission control",
+			"startMs": 9719,
+			"endMs": 12500,
 			"words": [
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 14428,
-					"endMs": 14587,
-					"text": "Then"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 14827,
-					"endMs": 15227,
-					"text": "11's"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 15227,
-					"endMs": 15307,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 15307,
-					"endMs": 15820,
-					"text": "earliest."
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 16348,
-					"endMs": 16507,
+					"speaker": "signal",
+					"startMs": 9719,
+					"endMs": 9779,
 					"text": "We"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 16507,
-					"endMs": 16667,
-					"text": "need"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 16667,
-					"endMs": 16747,
-					"text": "to"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 16747,
-					"endMs": 16907,
-					"text": "get"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 16908,
-					"endMs": 17067,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 17067,
-					"endMs": 17387,
-					"text": "tables"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 17387,
-					"endMs": 17647,
-					"text": "in,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 17787,
-					"endMs": 18027,
-					"text": "run"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 18027,
-					"endMs": 18267,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 18267,
-					"endMs": 18828,
-					"text": "cables."
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 19580,
-					"endMs": 19899,
-					"text": "I'd"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 19899,
-					"endMs": 20219,
-					"text": "rather"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 20219,
-					"endMs": 20379,
-					"text": "not"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 20379,
-					"endMs": 20619,
+					"speaker": "signal",
+					"startMs": 9859,
+					"endMs": 9960,
 					"text": "have"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 20619,
-					"endMs": 20779,
-					"text": "people"
+					"speaker": "signal",
+					"startMs": 10000,
+					"endMs": 10159,
+					"text": "loss"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 20779,
-					"endMs": 21179,
-					"text": "waiting"
+					"speaker": "signal",
+					"startMs": 10199,
+					"endMs": 10280,
+					"text": "of"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 21179,
-					"endMs": 21579,
-					"text": "around"
+					"speaker": "signal",
+					"startMs": 10340,
+					"endMs": 10659,
+					"text": "signal"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 21580,
-					"endMs": 21739,
-					"text": "us"
+					"speaker": "signal",
+					"startMs": 10719,
+					"endMs": 10979,
+					"text": "at"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 21739,
-					"endMs": 22059,
-					"text": "while"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 22060,
-					"endMs": 22300,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 22300,
-					"endMs": 22620,
-					"text": "do"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 22619,
-					"endMs": 22939,
-					"text": "that.",
-					"attributionGapDb": 31.072973396589624
+					"speaker": "signal",
+					"startMs": 11179,
+					"endMs": 12500,
+					"text": "[unintelligible]",
+					"confidence": 0
 				}
 			],
-			"text": "Then 11's the earliest. We need to get the tables in, run the cables. I'd rather not have people waiting around us while we do that."
+			"text": "We have loss of signal at [unintelligible]"
 		},
 		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 22972,
-			"endMs": 31852,
+			"speaker": "webster",
+			"label": "Julie Webster",
+			"startMs": 14039,
+			"endMs": 15479,
 			"words": [
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 22972,
-					"endMs": 23371,
-					"text": "Hang"
+					"speaker": "webster",
+					"startMs": 14039,
+					"endMs": 14299,
+					"text": "Project"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 23371,
-					"endMs": 23531,
-					"text": "on,"
+					"speaker": "webster",
+					"startMs": 14380,
+					"endMs": 14759,
+					"text": "manager,"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 23691,
-					"endMs": 23931,
-					"text": "let"
+					"speaker": "webster",
+					"startMs": 14880,
+					"endMs": 15039,
+					"text": "flight"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 23931,
-					"endMs": 24091,
-					"text": "me"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 24092,
-					"endMs": 24411,
-					"text": "check"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 24411,
-					"endMs": 24731,
-					"text": "who's"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 24731,
-					"endMs": 25131,
-					"text": "booked"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 25131,
-					"endMs": 25451,
-					"text": "before"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 25692,
-					"endMs": 26060,
-					"text": "11."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 26843,
-					"endMs": 27163,
-					"text": "Three."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 27804,
-					"endMs": 28203,
-					"text": "Two"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 28203,
-					"endMs": 28603,
-					"text": "bikes"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 28603,
-					"endMs": 28763,
-					"text": "and"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 28763,
-					"endMs": 28923,
-					"text": "a"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 28924,
-					"endMs": 29516,
-					"text": "toaster."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 30172,
-					"endMs": 30411,
-					"text": "Are"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 30411,
-					"endMs": 30571,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 30571,
-					"endMs": 30812,
-					"text": "taking"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 30811,
-					"endMs": 31291,
-					"text": "bikes"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 31292,
-					"endMs": 31852,
-					"text": "inside?",
-					"attributionGapDb": -83.91163401313241
+					"speaker": "webster",
+					"startMs": 15119,
+					"endMs": 15479,
+					"text": "director."
 				}
 			],
-			"text": "Hang on, let me check who's booked before 11. Three. Two bikes and a toaster. Are we taking bikes inside?"
+			"text": "Project manager, flight director."
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 32028,
-			"endMs": 33516,
+			"speaker": "maize",
+			"label": "Earl Maize",
+			"startMs": 16100,
+			"endMs": 16459,
 			"words": [
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32028,
-					"endMs": 32267,
-					"text": "Could"
+					"speaker": "maize",
+					"startMs": 16100,
+					"endMs": 16159,
+					"text": "Go"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32267,
-					"endMs": 32507,
-					"text": "they"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32507,
-					"endMs": 32667,
-					"text": "go"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32667,
-					"endMs": 32827,
-					"text": "under"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32827,
-					"endMs": 32987,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 32987,
-					"endMs": 33516,
-					"text": "awning?"
+					"speaker": "maize",
+					"startMs": 16199,
+					"endMs": 16459,
+					"text": "ahead."
 				}
 			],
-			"text": "Could they go under the awning?"
+			"text": "Go ahead."
 		},
 		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 33788,
-			"endMs": 37467,
+			"speaker": "webster",
+			"label": "Julie Webster",
+			"startMs": 17239,
+			"endMs": 20920,
 			"words": [
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 33788,
-					"endMs": 33947,
-					"text": "With"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 33947,
-					"endMs": 34027,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 34027,
-					"endMs": 34507,
-					"text": "repair"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 34507,
-					"endMs": 34907,
-					"text": "stands"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 34908,
-					"endMs": 35147,
-					"text": "there,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 35227,
-					"endMs": 35627,
-					"text": "we'd"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 35627,
-					"endMs": 35707,
-					"text": "be"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 35707,
-					"endMs": 36188,
-					"text": "blocking"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 36187,
-					"endMs": 36347,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 36347,
-					"endMs": 36987,
-					"text": "doorway,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 37147,
-					"endMs": 37467,
-					"text": "and",
-					"attributionGapDb": 4.34809756069005
-				}
-			],
-			"text": "With the repair stands there, we'd be blocking the doorway, and"
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 37340,
-			"endMs": 37772,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 37340,
-					"endMs": 37772,
-					"text": "Yeah.",
-					"attributionGapDb": 10.336378992612978
-				}
-			],
-			"text": "Yeah."
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 37467,
-			"endMs": 42668,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 37467,
-					"endMs": 37787,
-					"text": "rain",
-					"attributionGapDb": -12.603015278127181
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 37788,
-					"endMs": 38107,
-					"text": "comes",
-					"attributionGapDb": -75.06516055141671
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 38107,
-					"endMs": 38267,
-					"text": "in"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 38268,
-					"endMs": 38908,
-					"text": "sideways"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 38907,
-					"endMs": 39227,
-					"text": "under"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 39228,
-					"endMs": 39468,
-					"text": "that"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 39467,
-					"endMs": 39948,
-					"text": "thing."
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 40187,
-					"endMs": 40427,
-					"text": "I"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 40427,
-					"endMs": 40667,
-					"text": "think"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 40667,
-					"endMs": 40827,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 40827,
-					"endMs": 40907,
-					"text": "have"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 40907,
-					"endMs": 41067,
-					"text": "to"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 41067,
-					"endMs": 41547,
-					"text": "cancel"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 41547,
-					"endMs": 41627,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 41627,
-					"endMs": 42187,
-					"text": "bikes"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 42187,
-					"endMs": 42507,
-					"text": "this",
-					"attributionGapDb": 14.574523282187638
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 42508,
-					"endMs": 42668,
-					"text": "time.",
-					"attributionGapDb": 23.30178082326977
-				}
-			],
-			"text": "rain comes in sideways under that thing. I think we have to cancel the bikes this time."
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 42556,
-			"endMs": 51212,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 42556,
-					"endMs": 43175,
+					"speaker": "webster",
+					"startMs": 17239,
+					"endMs": 17379,
 					"text": "Okay,"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 43275,
-					"endMs": 43595,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 43595,
-					"endMs": 43915,
-					"text": "ring"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 43916,
-					"endMs": 44235,
-					"text": "those"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 44235,
-					"endMs": 44555,
-					"text": "two"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 44556,
-					"endMs": 44716,
-					"text": "then."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 45276,
-					"endMs": 45435,
-					"text": "I"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 45435,
-					"endMs": 45595,
-					"text": "don't"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 45595,
-					"endMs": 45755,
-					"text": "want"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 45755,
-					"endMs": 45915,
-					"text": "them"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 45915,
-					"endMs": 46395,
-					"text": "cycling"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 46396,
-					"endMs": 46556,
-					"text": "over"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 46555,
-					"endMs": 46715,
-					"text": "in"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 46715,
-					"endMs": 46795,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 46795,
-					"endMs": 47115,
-					"text": "rain"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 47115,
-					"endMs": 47355,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 47355,
-					"endMs": 47788,
-					"text": "nothing."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 48395,
-					"endMs": 48715,
-					"text": "Next"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 48715,
-					"endMs": 49115,
-					"text": "month's"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 49115,
-					"endMs": 49435,
-					"text": "session"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 49595,
-					"endMs": 49755,
-					"text": "or"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 49755,
-					"endMs": 49915,
-					"text": "do"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 49915,
-					"endMs": 50155,
+					"speaker": "webster",
+					"startMs": 17459,
+					"endMs": 17579,
 					"text": "we"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 50155,
-					"endMs": 50315,
-					"text": "know"
+					"speaker": "webster",
+					"startMs": 17639,
+					"endMs": 17760,
+					"text": "call"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 50316,
-					"endMs": 50715,
-					"text": "somewhere"
+					"speaker": "webster",
+					"startMs": 17859,
+					"endMs": 18020,
+					"text": "loss"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 50715,
-					"endMs": 51212,
-					"text": "sooner?"
-				}
-			],
-			"text": "Okay, I'll ring those two then. I don't want them cycling over in the rain for nothing. Next month's session or do we know somewhere sooner?"
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 51188,
-			"endMs": 57747,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 51188,
-					"endMs": 51587,
-					"text": "There's",
-					"attributionGapDb": -35.980619621505994
+					"speaker": "webster",
+					"startMs": 18059,
+					"endMs": 18159,
+					"text": "of"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 51587,
-					"endMs": 51667,
-					"text": "the"
+					"speaker": "webster",
+					"startMs": 18239,
+					"endMs": 18539,
+					"text": "signal"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 51667,
-					"endMs": 52067,
-					"text": "bike"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 52067,
-					"endMs": 52547,
-					"text": "workshop"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 52548,
-					"endMs": 52628,
+					"speaker": "webster",
+					"startMs": 18619,
+					"endMs": 19000,
 					"text": "at"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 52627,
-					"endMs": 52707,
-					"text": "the"
+					"speaker": "webster",
+					"startMs": 19079,
+					"endMs": 19260,
+					"text": "one"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 52707,
-					"endMs": 53187,
-					"text": "library"
+					"speaker": "webster",
+					"startMs": 19319,
+					"endMs": 19619,
+					"text": "one"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 53188,
-					"endMs": 53427,
-					"text": "next"
+					"speaker": "webster",
+					"startMs": 19680,
+					"endMs": 19899,
+					"text": "five"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 53428,
-					"endMs": 54148,
-					"text": "weekend."
+					"speaker": "webster",
+					"startMs": 19939,
+					"endMs": 20219,
+					"text": "five"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 54307,
-					"endMs": 54707,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 54707,
-					"endMs": 54947,
-					"text": "check"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 55027,
-					"endMs": 55347,
-					"text": "they've"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 55347,
-					"endMs": 55587,
-					"text": "got"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 55588,
-					"endMs": 56067,
-					"text": "spaces"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 56068,
-					"endMs": 56307,
-					"text": "before"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 56307,
-					"endMs": 56547,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 56547,
-					"endMs": 56788,
-					"text": "send"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 56787,
-					"endMs": 57428,
-					"text": "anyone"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 57427,
-					"endMs": 57747,
-					"text": "there.",
-					"attributionGapDb": -12.0007055551742
-				}
-			],
-			"text": "There's the bike workshop at the library next weekend. I'll check they've got spaces before we send anyone there."
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 57788,
-			"endMs": 60747,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 57788,
-					"endMs": 58427,
-					"text": "Thanks."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 58587,
-					"endMs": 58827,
-					"text": "And"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 58827,
-					"endMs": 59147,
-					"text": "I've"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 59148,
-					"endMs": 59308,
-					"text": "got"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 59307,
-					"endMs": 59547,
-					"text": "eleven"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 59788,
-					"endMs": 60188,
-					"text": "fifteen"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 60347,
-					"endMs": 60668,
-					"text": "free",
-					"attributionGapDb": -26.008367598942307
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 60667,
-					"endMs": 60747,
-					"text": "for",
-					"attributionGapDb": -8.054871408979086
-				}
-			],
-			"text": "Thanks. And I've got eleven fifteen free for"
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 60747,
-			"endMs": 61237,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 60747,
-					"endMs": 61237,
-					"text": "Mm-hmm.",
-					"attributionGapDb": 10.692748495687717
-				}
-			],
-			"text": "Mm-hmm."
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 60748,
-			"endMs": 65388,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 60748,
-					"endMs": 60908,
-					"text": "the",
-					"attributionGapDb": -7.661077508525338
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 60907,
-					"endMs": 61387,
-					"text": "toaster",
-					"attributionGapDb": -9.27266997502219
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 61387,
-					"endMs": 61547,
-					"text": "if"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 61547,
-					"endMs": 61787,
-					"text": "that"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 61788,
-					"endMs": 62187,
-					"text": "suits"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 62188,
-					"endMs": 62398,
-					"text": "them."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 62972,
-					"endMs": 63371,
-					"text": "Everything"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 63371,
-					"endMs": 63691,
-					"text": "after"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 63931,
-					"endMs": 64091,
-					"text": "11"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 64251,
-					"endMs": 64491,
-					"text": "can"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 64491,
-					"endMs": 64811,
-					"text": "stay"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 64811,
-					"endMs": 64971,
-					"text": "as"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 64972,
-					"endMs": 65211,
-					"text": "it"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 65212,
-					"endMs": 65388,
-					"text": "is."
-				}
-			],
-			"text": "the toaster if that suits them. Everything after 11 can stay as it is."
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 65596,
-			"endMs": 68012,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 65596,
-					"endMs": 65835,
-					"text": "How"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 65835,
-					"endMs": 66155,
-					"text": "many"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 66156,
-					"endMs": 66635,
-					"text": "tables"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 66635,
-					"endMs": 66795,
-					"text": "can"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 66795,
-					"endMs": 67035,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 67035,
-					"endMs": 67595,
-					"text": "actually"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 67596,
-					"endMs": 68012,
-					"text": "fit?"
-				}
-			],
-			"text": "How many tables can we actually fit?"
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 68177,
-			"endMs": 76444,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 68177,
-					"endMs": 68497,
+					"speaker": "webster",
+					"startMs": 20279,
+					"endMs": 20520,
 					"text": "four"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 68498,
-					"endMs": 69297,
-					"text": "comfortably,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 69457,
-					"endMs": 69537,
-					"text": "two"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 69697,
-					"endMs": 69937,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 69938,
-					"endMs": 70497,
-					"text": "electrical"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 70497,
-					"endMs": 71138,
-					"text": "repairs,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 71297,
-					"endMs": 71537,
-					"text": "one"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 71537,
-					"endMs": 71777,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 71777,
-					"endMs": 72267,
-					"text": "sewing,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 72338,
-					"endMs": 72578,
-					"text": "one"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 72577,
-					"endMs": 72737,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 72737,
-					"endMs": 73356,
-					"text": "intake."
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 73884,
-					"endMs": 74203,
-					"text": "No"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 74203,
-					"endMs": 74523,
-					"text": "spare"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 74523,
-					"endMs": 74843,
-					"text": "table"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 74843,
-					"endMs": 75083,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 75083,
-					"endMs": 75243,
-					"text": "people"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 75244,
-					"endMs": 75404,
-					"text": "to"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 75403,
-					"endMs": 75643,
-					"text": "leave"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 75643,
-					"endMs": 76123,
-					"text": "things"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 76124,
-					"endMs": 76444,
-					"text": "on.",
-					"attributionGapDb": 15.416493952826169
+					"speaker": "webster",
+					"startMs": 20579,
+					"endMs": 20920,
+					"text": "six."
 				}
 			],
-			"text": "four comfortably, two for electrical repairs, one for sewing, one for intake. No spare table for people to leave things on."
+			"text": "Okay, we call loss of signal at one one five five four six."
 		},
 		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 76444,
-			"endMs": 82283,
+			"speaker": "maize",
+			"label": "Earl Maize",
+			"startMs": 22100,
+			"endMs": 56919,
 			"words": [
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 76444,
-					"endMs": 76923,
-					"text": "That's"
+					"speaker": "maize",
+					"startMs": 22100,
+					"endMs": 22379,
+					"text": "Project"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 76923,
-					"endMs": 77263,
-					"text": "fine."
+					"speaker": "maize",
+					"startMs": 22459,
+					"endMs": 22819,
+					"text": "manager"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 77483,
-					"endMs": 77803,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 77804,
-					"endMs": 77963,
-					"text": "keep"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 77963,
-					"endMs": 78123,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 78123,
-					"endMs": 78603,
-					"text": "waiting"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 78603,
-					"endMs": 78843,
-					"text": "list"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 78843,
-					"endMs": 79003,
-					"text": "at"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 79003,
-					"endMs": 79163,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 79164,
-					"endMs": 79644,
-					"text": "desk."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 79883,
-					"endMs": 80283,
-					"text": "People"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 80283,
-					"endMs": 80443,
-					"text": "need"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 80444,
-					"endMs": 80603,
-					"text": "to"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 80603,
-					"endMs": 80843,
-					"text": "stay"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 80844,
-					"endMs": 81004,
-					"text": "with"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 81003,
-					"endMs": 81163,
-					"text": "their"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 81163,
-					"endMs": 81484,
-					"text": "stuff"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 81723,
-					"endMs": 82283,
-					"text": "anyway.",
-					"attributionGapDb": -15.635511389095708
-				}
-			],
-			"text": "That's fine. I'll keep the waiting list at the desk. People need to stay with their stuff anyway."
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 82172,
-			"endMs": 91652,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 82172,
-					"endMs": 82491,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 82491,
-					"endMs": 82891,
-					"text": "update"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 82891,
-					"endMs": 83051,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 83051,
-					"endMs": 83531,
-					"text": "website"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 83532,
-					"endMs": 83692,
-					"text": "and"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 83691,
-					"endMs": 83851,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 83851,
-					"endMs": 84492,
-					"text": "neighborhood"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 84491,
-					"endMs": 84972,
-					"text": "group"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 84971,
-					"endMs": 85451,
-					"text": "tonight."
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 85691,
-					"endMs": 86011,
-					"text": "And"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86011,
-					"endMs": 86171,
-					"text": "put"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86172,
-					"endMs": 86411,
-					"text": "a"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86411,
-					"endMs": 86571,
-					"text": "sign"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86572,
-					"endMs": 86732,
+					"speaker": "maize",
+					"startMs": 22879,
+					"endMs": 22959,
 					"text": "on"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86731,
-					"endMs": 86891,
-					"text": "the"
+					"speaker": "maize",
+					"startMs": 23079,
+					"endMs": 23379,
+					"text": "FSO"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 86891,
-					"endMs": 87691,
-					"text": "courtyard"
+					"speaker": "maize",
+					"startMs": 23479,
+					"endMs": 23939,
+					"text": "coord."
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 87691,
-					"endMs": 88091,
-					"text": "gate."
+					"speaker": "maize",
+					"startMs": 25059,
+					"endMs": 25239,
+					"text": "Maybe"
 				},
 				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 88331,
-					"endMs": 88891,
-					"text": "Actually"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 88931,
-					"endMs": 89251,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 89251,
-					"endMs": 89411,
-					"text": "be"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 89411,
-					"endMs": 89571,
-					"text": "there"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 89572,
-					"endMs": 89811,
-					"text": "from"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 89812,
-					"endMs": 90052,
-					"text": "ten"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 90291,
-					"endMs": 90691,
-					"text": "until"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 90692,
-					"endMs": 90852,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 90851,
-					"endMs": 91411,
-					"text": "open,",
-					"attributionGapDb": 20.802925962290647
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 91412,
-					"endMs": 91652,
-					"text": "because",
-					"attributionGapDb": 20.660257178227727
-				}
-			],
-			"text": "I'll update the website and the neighborhood group tonight. And put a sign on the courtyard gate. Actually I'll be there from ten until we open, because"
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 91579,
-			"endMs": 91929,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 91579,
-					"endMs": 91929,
-					"text": "Okay.",
-					"attributionGapDb": -12.6630117982081
-				}
-			],
-			"text": "Okay."
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 91651,
-			"endMs": 93421,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 91651,
-					"endMs": 91971,
-					"text": "someone",
-					"attributionGapDb": 13.21438998844529
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 91971,
-					"endMs": 92131,
-					"text": "will",
-					"attributionGapDb": -31.347980887393263
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 92131,
-					"endMs": 92291,
-					"text": "have"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 92291,
-					"endMs": 92531,
-					"text": "seen"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 92531,
-					"endMs": 92771,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 92771,
-					"endMs": 93092,
-					"text": "old"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 93091,
-					"endMs": 93421,
-					"text": "time."
-				}
-			],
-			"text": "someone will have seen the old time."
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 93692,
-			"endMs": 98027,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 93692,
-					"endMs": 93931,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 93931,
-					"endMs": 94091,
-					"text": "tell"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 94091,
-					"endMs": 94171,
-					"text": "the"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 94171,
-					"endMs": 94571,
-					"text": "repair"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 94571,
-					"endMs": 95131,
-					"text": "volunteers"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 95131,
-					"endMs": 95451,
-					"text": "half"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 95611,
-					"endMs": 95771,
-					"text": "10"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 95771,
-					"endMs": 96011,
-					"text": "for"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 96011,
-					"endMs": 96332,
-					"text": "setup."
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 97147,
-					"endMs": 97307,
-					"text": "Still"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 97307,
-					"endMs": 97628,
-					"text": "finishing"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 97627,
-					"endMs": 97787,
-					"text": "at"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 97787,
-					"endMs": 98027,
-					"text": "one?"
-				}
-			],
-			"text": "I'll tell the repair volunteers half 10 for setup. Still finishing at one?"
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"label": "Maya",
-			"startMs": 98268,
-			"endMs": 100427,
-			"words": [
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 98268,
-					"endMs": 98747,
-					"text": "Yes,"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 98747,
-					"endMs": 98907,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 98907,
-					"endMs": 99227,
-					"text": "can't"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 99227,
-					"endMs": 99467,
-					"text": "keep"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 99467,
-					"endMs": 100027,
-					"text": "everyone"
-				},
-				{
-					"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-					"startMs": 100027,
-					"endMs": 100427,
-					"text": "late."
-				}
-			],
-			"text": "Yes, we can't keep everyone late."
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 100604,
-			"endMs": 106220,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 100604,
-					"endMs": 100923,
-					"text": "Last"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 100923,
-					"endMs": 101323,
-					"text": "walk-ins"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 101483,
-					"endMs": 101643,
-					"text": "at"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 101643,
-					"endMs": 101963,
-					"text": "quarter"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 101964,
-					"endMs": 102204,
-					"text": "past"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 102203,
-					"endMs": 102523,
-					"text": "twelve"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 102604,
-					"endMs": 102843,
-					"text": "then?"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 103644,
-					"endMs": 103803,
-					"text": "We"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 103803,
-					"endMs": 103963,
-					"text": "can"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 103963,
-					"endMs": 104123,
-					"text": "have"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 104123,
-					"endMs": 104203,
+					"speaker": "maize",
+					"startMs": 25319,
+					"endMs": 25359,
 					"text": "a"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 104204,
-					"endMs": 104443,
-					"text": "look,"
+					"speaker": "maize",
+					"startMs": 25420,
+					"endMs": 25680,
+					"text": "trickle"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 104443,
-					"endMs": 104603,
+					"speaker": "maize",
+					"startMs": 25699,
+					"endMs": 25799,
+					"text": "of"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 25840,
+					"endMs": 26299,
+					"text": "telemetry"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 26359,
+					"endMs": 26639,
+					"text": "left,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 26779,
+					"endMs": 27000,
 					"text": "but"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 104603,
-					"endMs": 104683,
-					"text": "I"
+					"speaker": "maize",
+					"startMs": 28059,
+					"endMs": 28199,
+					"text": "just"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 104683,
-					"endMs": 105003,
-					"text": "won't"
+					"speaker": "maize",
+					"startMs": 28279,
+					"endMs": 28680,
+					"text": "heard"
 				},
 				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 105004,
-					"endMs": 105323,
-					"text": "promise"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 105323,
-					"endMs": 105643,
-					"text": "we'll"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 105644,
-					"endMs": 106123,
-					"text": "fix"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 106124,
-					"endMs": 106220,
-					"text": "it."
-				}
-			],
-			"text": "Last walk-ins at quarter past twelve then? We can have a look, but I won't promise we'll fix it."
-		},
-		{
-			"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-			"label": "Jonah",
-			"startMs": 106428,
-			"endMs": 110427,
-			"words": [
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 106428,
-					"endMs": 107127,
-					"text": "Exactly,"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 107227,
-					"endMs": 107467,
-					"text": "and"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 107467,
-					"endMs": 107707,
-					"text": "we"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 107707,
-					"endMs": 108027,
-					"text": "stop"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 108027,
-					"endMs": 108347,
-					"text": "taking"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 108347,
-					"endMs": 108667,
-					"text": "things"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 108668,
-					"endMs": 109068,
-					"text": "earlier"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 109067,
-					"endMs": 109227,
-					"text": "if"
-				},
-				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 109227,
-					"endMs": 109387,
+					"speaker": "maize",
+					"startMs": 28779,
+					"endMs": 29059,
 					"text": "the"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 109388,
-					"endMs": 110027,
-					"text": "queue's"
+					"speaker": "maize",
+					"startMs": 29559,
+					"endMs": 29819,
+					"text": "signal"
 				},
 				{
-					"speaker": "spk_jonah_b2d60d92ca43aa51a0c91ba9",
-					"startMs": 110027,
-					"endMs": 110427,
-					"text": "full.",
-					"attributionGapDb": -1.4487467854323661
+					"speaker": "maize",
+					"startMs": 29879,
+					"endMs": 29979,
+					"text": "from"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 30019,
+					"endMs": 30079,
+					"text": "the"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 30139,
+					"endMs": 30760,
+					"text": "spacecraft"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 30939,
+					"endMs": 31059,
+					"text": "is"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 31139,
+					"endMs": 31439,
+					"text": "gone,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 31659,
+					"endMs": 32340,
+					"text": "and"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 32419,
+					"endMs": 32639,
+					"text": "within"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 32680,
+					"endMs": 32740,
+					"text": "the"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 32799,
+					"endMs": 33000,
+					"text": "next"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 33099,
+					"endMs": 33520,
+					"text": "forty-five"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 33680,
+					"endMs": 34000,
+					"text": "seconds,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 34119,
+					"endMs": 34219,
+					"text": "so"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 34279,
+					"endMs": 34419,
+					"text": "will"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 34459,
+					"endMs": 34559,
+					"text": "be"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 34619,
+					"endMs": 34680,
+					"text": "the"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 34739,
+					"endMs": 35500,
+					"text": "spacecraft."
+				},
+				{
+					"speaker": "maize",
+					"startMs": 36319,
+					"endMs": 36479,
+					"text": "Uh,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 37139,
+					"endMs": 37239,
+					"text": "I"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 37279,
+					"endMs": 37500,
+					"text": "hope"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 37579,
+					"endMs": 37819,
+					"text": "you're"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 37959,
+					"endMs": 38739,
+					"text": "all"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 38860,
+					"endMs": 39579,
+					"text": "as"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 39659,
+					"endMs": 40079,
+					"text": "deeply"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 40159,
+					"endMs": 41039,
+					"text": "proud"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 41119,
+					"endMs": 41200,
+					"text": "of"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 41239,
+					"endMs": 41520,
+					"text": "this"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 41599,
+					"endMs": 42059,
+					"text": "amazing"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 42159,
+					"endMs": 42939,
+					"text": "accomplishment."
+				},
+				{
+					"speaker": "maize",
+					"startMs": 43279,
+					"endMs": 44119,
+					"text": "Congratulations"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 44180,
+					"endMs": 44259,
+					"text": "to"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 44299,
+					"endMs": 44399,
+					"text": "you"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 44459,
+					"endMs": 44739,
+					"text": "all."
+				},
+				{
+					"speaker": "maize",
+					"startMs": 45159,
+					"endMs": 45319,
+					"text": "This"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 45379,
+					"endMs": 45520,
+					"text": "has"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 45579,
+					"endMs": 45700,
+					"text": "been"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 45739,
+					"endMs": 45799,
+					"text": "an"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 45840,
+					"endMs": 46299,
+					"text": "incredible"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 46459,
+					"endMs": 46840,
+					"text": "mission,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 46959,
+					"endMs": 47059,
+					"text": "an"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 47099,
+					"endMs": 47559,
+					"text": "incredible"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 47700,
+					"endMs": 48439,
+					"text": "spacecraft,"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 48919,
+					"endMs": 49000,
+					"text": "and"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 49059,
+					"endMs": 49239,
+					"text": "you're"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 49319,
+					"endMs": 49659,
+					"text": "all"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 49739,
+					"endMs": 49840,
+					"text": "an"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 49899,
+					"endMs": 50519,
+					"text": "incredible"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 50579,
+					"endMs": 51000,
+					"text": "team."
+				},
+				{
+					"speaker": "maize",
+					"startMs": 52180,
+					"endMs": 52299,
+					"text": "I'm"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 52319,
+					"endMs": 52520,
+					"text": "gonna"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 52579,
+					"endMs": 52779,
+					"text": "call"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 52840,
+					"endMs": 53020,
+					"text": "this"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 53099,
+					"endMs": 53159,
+					"text": "the"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 53199,
+					"endMs": 53319,
+					"text": "end"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 53340,
+					"endMs": 53419,
+					"text": "of"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 53479,
+					"endMs": 53919,
+					"text": "mission."
+				},
+				{
+					"speaker": "maize",
+					"startMs": 55059,
+					"endMs": 55360,
+					"text": "Project"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 55439,
+					"endMs": 56079,
+					"text": "manager"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 56180,
+					"endMs": 56340,
+					"text": "off"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 56360,
+					"endMs": 56459,
+					"text": "the"
+				},
+				{
+					"speaker": "maize",
+					"startMs": 56520,
+					"endMs": 56919,
+					"text": "net."
 				}
 			],
-			"text": "Exactly, and we stop taking things earlier if the queue's full."
-		},
-		{
-			"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-			"label": "Tess",
-			"startMs": 110460,
-			"endMs": 113101,
-			"words": [
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 110460,
-					"endMs": 110859,
-					"text": "Good."
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 111020,
-					"endMs": 111499,
-					"text": "I'll"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 111499,
-					"endMs": 111659,
-					"text": "make"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 111659,
-					"endMs": 111899,
-					"text": "those"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 111899,
-					"endMs": 112299,
-					"text": "three"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 112299,
-					"endMs": 112859,
-					"text": "calls"
-				},
-				{
-					"speaker": "spk_tess_7134aac53eddcc48c4c90667",
-					"startMs": 112859,
-					"endMs": 113101,
-					"text": "now."
-				}
-			],
-			"text": "Good. I'll make those three calls now."
+			"text": "Project manager on FSO coord. Maybe a trickle of telemetry left, but just heard the signal from the spacecraft is gone, and within the next forty-five seconds, so will be the spacecraft. Uh, I hope you're all as deeply proud of this amazing accomplishment. Congratulations to you all. This has been an incredible mission, an incredible spacecraft, and you're all an incredible team. I'm gonna call this the end of mission. Project manager off the net."
 		}
 	],
 	"firstWords": [
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 60,
-			"endMs": 459,
-			"text": "So,"
+			"speaker": "acs",
+			"startMs": 219,
+			"endMs": 479,
+			"text": "Systems,"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 459,
-			"endMs": 1329,
-			"text": "Saturday,"
+			"speaker": "acs",
+			"startMs": 560,
+			"endMs": 1000,
+			"text": "ACS"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 1420,
-			"endMs": 1660,
-			"text": "I"
+			"speaker": "acs",
+			"startMs": 1100,
+			"endMs": 1259,
+			"text": "one,"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 1659,
-			"endMs": 1819,
-			"text": "think"
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 1819,
-			"endMs": 1979,
+			"speaker": "acs",
+			"startMs": 1339,
+			"endMs": 1399,
 			"text": "we"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 1979,
-			"endMs": 2139,
-			"text": "have"
+			"speaker": "acs",
+			"startMs": 1860,
+			"endMs": 2099,
+			"text": "just"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2139,
-			"endMs": 2299,
+			"speaker": "acs",
+			"startMs": 2180,
+			"endMs": 2319,
+			"text": "had"
+		},
+		{
+			"speaker": "acs",
+			"startMs": 2399,
+			"endMs": 2819,
+			"text": "transition"
+		},
+		{
+			"speaker": "acs",
+			"startMs": 2859,
+			"endMs": 2919,
 			"text": "to"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2300,
-			"endMs": 2539,
-			"text": "give"
+			"speaker": "acs",
+			"startMs": 2980,
+			"endMs": 3079,
+			"text": "high"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2540,
-			"endMs": 2700,
-			"text": "up"
+			"speaker": "acs",
+			"startMs": 3159,
+			"endMs": 3299,
+			"text": "rate"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2699,
-			"endMs": 2779,
-			"text": "on"
+			"speaker": "acs",
+			"startMs": 3359,
+			"endMs": 3559,
+			"text": "mode,"
 		},
 		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2780,
-			"endMs": 2940,
-			"text": "the"
-		},
-		{
-			"speaker": "spk_maya_a95db5b0ac159e4384ff55ef",
-			"startMs": 2939,
-			"endMs": 3679,
-			"text": "courtyard,"
+			"speaker": "acs",
+			"startMs": 4360,
+			"endMs": 4599,
+			"text": "and,"
 		}
 	]
 }

@@ -23,7 +23,7 @@
 			detail: 'Every word, with its time',
 			label: 'Words you can read, search and seek',
 			description:
-				'Word timestamps and speaker labels live in the audio file’s comment header. A Cassini reader turns them into a transcript you can navigate. Multiple transcripts can share the same recording.',
+				'Word timestamps and speaker labels live in the audio file’s comment header. A Cassini reader lets you find a passage and listen to check the words. Multiple transcripts can share the same recording.',
 			code: ''
 		},
 		{
@@ -52,16 +52,17 @@
 		<h1 id="hero-title">
 			The recording.<br />The words.<br /><span>One file.</span>
 		</h1>
-		<p class="hero-lede">An ordinary audio file that carries its own transcript.</p>
+		<p class="hero-lede">Find a passage in the transcript. Hear what was actually said.</p>
 		<p class="hero-description">
-			Cassini keeps audio, word timestamps and speaker labels together in a single <code>.opus</code
-			> file. Send it, save it, build on it. The words travel with the recording.
+			Transcriptions can get words wrong. Cassini keeps the audio and timed transcript in one
+			<code>.opus</code> file so you can listen and check. We (<a href={site.companyUrl}>codemyriad</a>) made it for
+			<a href={site.implRepo}>our Nextcloud Talk app</a> and use it for our own meetings.
 		</p>
 		<div class="actions">
 			<a class="button button--primary" href="{base}/try/"
 				>Try a file <span aria-hidden="true">→</span></a
 			>
-			<a class="button" href="#build">Build with Cassini</a>
+			<a class="button" href="{base}/using/">How it fits your workflow</a>
 		</div>
 		<p class="hero-note">Standard Ogg Opus. Open specification. No sidecar to lose.</p>
 	</div>
@@ -88,10 +89,10 @@
 			>
 		</div>
 		<p class="fixture-note">
-			Three fictional volunteers, voiced with ElevenLabs v3 on separate speaker tracks. Cassini
-			transcribed the recording and produced this file. <a href="{base}/demo/README.md"
-				>About this example</a
-			>
+			Courtesy NASA/JPL-Caltech · September 15, 2017.
+			<a href="https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/">Original video</a>.
+			Transcript reconciled from multiple models and JPL captions; uncertain speech is marked.
+			<a href="{base}/demo/README.md">Sources & transcription notes</a>
 		</p>
 	</div>
 </section>
@@ -102,7 +103,7 @@
 			<strong>One .opus file</strong><span>Audio and text together</span>
 		</div>
 		<div>
-			<strong>Word-level timing</strong><span>Read, search and jump to speech</span>
+			<strong>Word-level timing</strong><span>Find a passage and listen back</span>
 		</div>
 		<div>
 			<strong>Ordinary playback</strong><span>Works in players that support Opus</span>
@@ -113,40 +114,80 @@
 	</div>
 </div>
 
+<section class="shell section" id="build" aria-labelledby="build-title">
+	<div class="section-heading">
+		<p class="eyebrow eyebrow--plain">01 / Your next step</p>
+		<h2 id="build-title">What brings you here?</h2>
+		<p>Explore where the format fits, use a recording, or bring Cassini into your own software.</p>
+	</div>
+	<div class="paths">
+		<a class="path" href="{base}/using/"
+			><span class="path-label">Understand & decide</span>
+			<h3>See how it fits <span aria-hidden="true">→</span></h3>
+			<p>
+				What you start with, what travels with the file, and what someone else needs to use it.
+			</p>
+			<span class="path-meta">Workflows, compatibility & limits</span></a
+		>
+		<a class="path" href="{base}/try/"
+			><span class="path-label">Listen & read</span>
+			<h3>Open a recording <span aria-hidden="true">→</span></h3>
+			<p>
+				Follow the sample or open a file someone sent you. Find a passage and listen to check the words.
+			</p>
+			<span class="path-meta">In your browser · local files stay local</span></a
+		>
+		<a class="path" href="{base}/build/"
+			><span class="path-label">Integrate & create</span>
+			<h3>Build with Cassini <span aria-hidden="true">→</span></h3>
+			<p>
+				Extract transcript data, create portable recordings, or implement the format in your own stack.
+			</p>
+			<span class="path-meta">Working guides, reference & checks</span></a
+		>
+	</div>
+	<div class="build-note">
+		<p>Already implementing?</p>
+		<a href="{base}/spec/"
+			>Go straight to the specification & schemas <span aria-hidden="true">→</span></a
+		>
+	</div>
+</section>
+
 <section class="shell section" aria-labelledby="why-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">01 / Why keep them together?</p>
+		<p class="eyebrow eyebrow--plain">02 / From one tool to the next</p>
 		<h2 id="why-title">
-			A recording is more useful<br />with the words attached.
+			Keep a way back<br />to what was said.
 		</h2>
 		<p>
-			A transcript should survive the trip from the tool that made it to the person who needs it.
+			A transcript makes a recording easier to navigate. Keeping the audio with it lets you listen
+			for yourself, even after someone saves or shares the file.
 		</p>
 	</div>
 	<div class="benefits">
 		<article>
-			<span class="benefit-mark" aria-hidden="true">↗</span>
-			<h3>Share the whole conversation</h3>
+			<span class="benefit-mark" aria-hidden="true">01</span>
+			<h3>Bring audio and words together</h3>
 			<p>
-				A meeting recording, interview or podcast can carry who said what. Copy one file and its
-				transcript comes along.
+				Start with a recording and a timed transcript. A <a href="{base}/produce/">producer</a>
+				packages them into one file. You choose what records and transcribes the audio.
 			</p>
 		</article>
 		<article>
-			<span class="benefit-mark" aria-hidden="true">↔</span>
-			<h3>Choose how to use it</h3>
+			<span class="benefit-mark" aria-hidden="true">02</span>
+			<h3>Send the whole conversation</h3>
 			<p>
-				Listen in an Opus player. Read and seek in a Cassini viewer. The format also works for <a
-					href="{base}/demo/">music with synchronized lyrics</a
-				>.
+				Copy or share the <code>.opus</code> file. Its words and speaker labels travel with it,
+				without another attachment or access to the service that made it.
 			</p>
 		</article>
 		<article>
-			<span class="benefit-mark" aria-hidden="true">↻</span>
-			<h3>Keep it useful for later</h3>
+			<span class="benefit-mark" aria-hidden="true">03</span>
+			<h3>Listen and check the words</h3>
 			<p>
-				Original words and timings can sit beside display text and additional transcripts, with
-				provenance recording what produced them.
+				Find a passage in a <a href="{base}/try/">Cassini reader</a> and listen back. The recording
+				stays available when you need to check a name, a number or the meaning of a reply.
 			</p>
 		</article>
 	</div>
@@ -154,7 +195,7 @@
 
 <section class="shell section" aria-labelledby="inside-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">02 / Inside the file</p>
+		<p class="eyebrow eyebrow--plain">03 / How it stays portable</p>
 		<h2 id="inside-title">Audio underneath. Context built in.</h2>
 		<p>
 			Cassini adds metadata where an audio file already keeps its title and artist: the OpusTags
@@ -233,56 +274,13 @@
 	</p>
 </section>
 
-<section class="shell section" id="build" aria-labelledby="build-title">
-	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">03 / Make something with it</p>
-		<h2 id="build-title">Start with a file. Build from there.</h2>
-		<p>Copy a reader, use the Python producer, or implement the specification in your own stack.</p>
-	</div>
-	<div class="paths">
-		<a class="path" href="{base}/consume/"
-			><span class="path-label">Extract & display</span>
-			<h3>Read a file <span aria-hidden="true">→</span></h3>
-			<p>
-				Get the transcript out in Python or JavaScript. Learn how to decode, verify and handle
-				incomplete metadata.
-			</p>
-			<span class="path-meta">Guide + working readers</span></a
-		>
-		<a class="path" href="{base}/produce/"
-			><span class="path-label">Pack & preserve</span>
-			<h3>Write a file <span aria-hidden="true">→</span></h3>
-			<p>
-				Combine an Opus recording with a word-timed transcript using a complete producer in
-				standard-library Python.
-			</p>
-			<span class="path-meta">Guide + working producer</span></a
-		>
-		<a class="path" href="{base}/spec/"
-			><span class="path-label">Implement & validate</span>
-			<h3>Use the specification <span aria-hidden="true">→</span></h3>
-			<p>
-				Find the v1 contract, transcript format, audio digest, JSON Schemas and conformance suite in
-				one place.
-			</p>
-			<span class="path-meta">Reference + test vectors</span></a
-		>
-	</div>
-	<div class="build-note">
-		<p>Working with a coding assistant?</p>
-		<a href="{base}/llms-full.txt"
-			>Give it the complete specification in one text file <span aria-hidden="true">↗</span></a
-		>
-	</div>
-</section>
-
 <section class="shell section questions" aria-labelledby="questions-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">Before you build</p>
-		<h2 id="questions-title">A few useful boundaries.</h2>
+		<p class="eyebrow eyebrow--plain">Before you choose</p>
+		<h2 id="questions-title">A small format, with some limits.</h2>
 		<p>
-			Version 1 is published and used by <a href={site.implRepo}>gocassini</a>, the reference
-			implementation. The ecosystem is still small.
+			We vibe coded this and use it in <a href={site.implRepo}>gocassini</a> for our own meetings.
+			Version 1 is published, but independent adoption is still something we hope to see.
 			<a href="{base}/status/">Read the project status →</a>
 		</p>
 	</div>

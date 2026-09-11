@@ -1,128 +1,80 @@
-# The demo recordings
+# Final Moments in Cassini Mission Control
 
-**Saturday repair café: the rain plan** is a scripted, AI-voiced planning call
-between three fictional volunteers. Rain forces their Saturday repair café
-indoors, but the hall isn't free until 10:30. They work through opening time,
-bike bookings, table space and who needs to call whom.
+**Courtesy NASA/JPL-Caltech.** Recorded September 15, 2017.
+[Original video and JPL transcript](https://www.jpl.nasa.gov/videos/final-moments-in-cassini-mission-control/).
+The audio is used under the [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/),
+not the repository’s CC0 dedication. NASA, JPL and Caltech do not endorse this project.
+The transcript is our AI-assisted reconciliation, not an official NASA transcript.
 
-- [Full Cassini file](repair-cafe.opus): about two minutes, three speakers.
-- [Short excerpt](repair-cafe-excerpt.opus): the first scene, about 42 seconds.
-- [Multitrack source recording](repair-cafe.multitrack.mkv): three separate,
-  synchronized, lossless audio tracks, labelled Maya, Jonah and Tess.
-- [Authored script](repair-cafe.script.json) and [production record](repair-cafe.production.json).
+- [Download the Cassini recording](cassini-final-moments.opus): the full 65-second stereo audio, including applause.
+- [Word-timed transcript](cassini-final-moments.words.json).
+- [Production record](cassini-final-moments.production.json): source hash, models, attribution and editorial decisions. This record is also embedded in the audio file.
+- [Transcription comparisons](cassini-final-moments.evidence.json): model outputs and acoustic timing evidence, including unsuccessful attempts.
+- [Closed captions extracted from JPL’s video](cassini-final-moments.captions.srt).
 
-The public `.opus` files are produced by **Cassini itself** from the multitrack
-recording. Their transcripts are its unedited speech-recognition output.
-The script and external timing estimates are not supplied to Cassini.
+## How the transcript was reconciled
 
-## Generating the voices
+Independent full-audio passes used **Gemini 3.5 Flash**, **Gemini 3.8 Flash** and
+**OpenAI GPT Audio** through OpenRouter, plus **ElevenLabs Scribe v2** with word
+timing and diarization. They were asked to transcribe the audio without being
+supplied JPL’s transcript. GPT Audio initially returned an acknowledgment;
+its retry produced a transcript. Gemini 3.8’s first response was incomplete;
+a retry with lower reasoning effort completed it. These attempts remain in the
+comparison record. Normal site builds make no AI calls.
 
-[Eleven v3 Text to Dialogue](https://elevenlabs.io/docs/overview/capabilities/text-to-dialogue)
-generated three continuous scenes using Alice as Maya, George as Jonah, and Lily
-as Tess. Continuous dialogue preserves the model's phrasing across turns. These
-are standard preset voices representing fictional people.
+The outputs were compared with JPL’s webpage transcript and the video’s embedded
+EIA-608 captions. The captions resolve a webpage error: the opening is
+“transition to high rate mode,” not “condition high rate mode.” Scribe’s acoustic
+word boundaries supply the seek targets; the general audio models’ segment
+timestamps drift substantially and were rejected. A separate ElevenLabs forced-alignment request was attempted, but the key
+lacks the `forced_alignment` permission. No forced-alignment result was used.
+These are Scribe model estimates, not independently verified word boundaries.
 
-Four short acknowledgments were generated in separate takes with their
-surrounding conversation as context. Only the acknowledgment audio was retained.
-They are placed over the principal speaker's continuing phrase at a slightly
-lower level: Tess's “Right,” Maya's “Yeah,” Jonah's “Mm-hmm,” and Tess's “Okay.”
-The overlaps exist in the audio, before any transcription or rendering.
+The 9–13-second radio passage was also isolated, band-pass filtered at 150–3500 Hz,
+and amplified for separate passes through all three audio models. The listening
+copy contains the original, unfiltered stereo audio throughout.
 
-Main turns were separated at measured quiet boundaries into one synchronized
-track per person. Each acknowledgment went onto its own speaker's track.
-The three tracks sum back to the authored mix, within PCM quantization.
-This uses the original, unmixed TTS takes; no source-separation model is involved.
-The downloadable Matroska file contains three mono 24 kHz FLAC streams.
+## Speakers and uncertainty
 
-Scribe v2 recognition was used only to locate edits in the source takes and
-check their spoken content. Long gaps between turns were shortened to varied
-280–380 ms pauses. Within-turn hesitations remain. The opening of each scene is
-preserved, and acknowledgment clips retain quiet handles to avoid cutting
-consonants. Eleven v3's returned character timestamps were not used: they led
-the speech by up to two seconds in these takes.
+**Julie Webster** and **Earl Maize** are explicitly identified in JPL’s transcript
+and captions. Webster’s short call to the project manager and Maize’s “Go ahead”
+are assigned using Scribe’s voice grouping and the exchange’s continuity.
+**ACS 1** and the other **mission-control operator** retain role-based labels:
+we could not substantiate their personal names. Model guesses are not identity evidence.
 
-## Processing with Cassini
+At **11.18–12.50 seconds**, after “We have loss of signal at,” JPL itself marks
+unintelligible speech. Models variously propose X-band or X-ray band, followed
+by S-band, Sierra band, C-band, Z-band or “zero band.” The transcript retains
+**[unintelligible]** instead of publishing one guess as fact.
 
-Cassini reads the three participant-labelled streams, mixes the listening
-copy, recognizes each speaker separately, measures cross-track attribution,
-and bounds word ends against that speaker's audio. The recipe uses its bundled
-**Parakeet TDT 0.6B v3 fp32** recognizer through sherpa-onnx on CPU. Automatic
-speaker-name hints are disabled for this example; optional summary generation
-is off. Speaker identity comes from the source stream metadata.
-
-Processing this source exposed a Cassini windowing bug: a VAD span contained
-an acknowledgment, a long quiet gap and a later sentence. Fixed decoding windows
-cut through that sentence and lost part of it. The included
-[Cassini patch](https://github.com/codemyriad/cassini-format/blob/main/site/scripts/cassini-vad-silence.patch)
-splits long VAD spans at sustained acoustic silence before applying the usual
-windowing to continuous speech. The production record identifies the base
-revision and patch, so this is a reviewable pipeline change.
-
-Cassini then packs the listening copy and recognized words into each `.opus`
-file. The site copies those exact bytes, without retagging or editing the
-transcript. [Full transcript JSON](repair-cafe.words.json) and
-[excerpt JSON](repair-cafe-excerpt.words.json) are decoded copies of their
-embedded word items. The production record includes output hashes and the
-recognizer/attribution provenance carried by the files.
-
-Recognition and word boundaries are model estimates, not manual ground truth.
-The script is available for comparison. The recognizer repeats “until” once
-in the opening sentence; that small error is retained in both files. Cassini's
-`provenance.wordTimings.endsBoundedByAudio` records its acoustic word-end check;
-it does not promise perfect recognition or sample-accurate word starts.
-
-## The transcript interface
-
-The site mounts Cassini's actual `MeetingView` component, including its turn
-reconstruction, inline interjections, individual word hover/seek targets and
-playback highlighting. Both speakers' words can
-highlight during an overlap. Word times come from the file, with no timing
-interpolation in the player.
-
-Upstream PR #229 unintentionally removed word interactions. The restoration is
-tracked in [D-734](https://linear.app/code-myriad/issue/D-734/restore-word-level-transcript-highlighting-and-seeking-in-the-cassini).
-This site uses that same Cassini implementation; its integration patch does
-not add a separate word renderer or highlighting algorithm.
+The published text retains “Okay,” the individually spoken time digits
+“one one five five four six,” audible “uh” fillers, “Maybe a trickle,”
+“within the next” and “gonna.” Around 27–28 seconds the models disagree about
+quiet words between “but” and “just heard”; the conservative Scribe/GPT Audio
+reading is retained. See the production record for the reconciliation decisions.
+Applause remains audible at the end; it is not attributed to an individual speaker.
+Unspoken closing-credit captions are not included as dialogue.
 
 ## Rebuilding
 
-The scripts in `site/scripts/` require Python with `requests` and `numpy`, plus
-`ffmpeg` and `ffprobe`. Voice generation and the editing reference use an
-ElevenLabs key with text-to-speech and speech-to-text permissions. Normal site
-builds make no AI API calls.
+Download the original video using the URL in the production record, then run:
 
 ```bash
-python3 site/scripts/synthesize-demo.py --cache /tmp/repair-cafe-tts --generate
-python3 site/scripts/align-demo.py --cache /tmp/repair-cafe-tts
-python3 site/scripts/produce-demo.py --cache /tmp/repair-cafe-tts --out /tmp/repair-cafe-tracks
+python3 site/scripts/produce-cassini-final.py /path/to/source.m4v
+node site/scripts/gen-demo.mjs
 ```
 
-Set `ELEVENLABS_API_KEY` in the environment before generation. A matching cache
-avoids repeat API calls; changed inputs require a fresh cache. Review new takes
-because the model's seed is best effort. The alignment step rejects unexpected
-omissions or substitutions before the tracks are assembled.
+The script checks the source SHA-256, encodes the full audio to stereo Opus,
+and uses the repository’s standalone producer to embed the reviewed timed words,
+source credit and production record. Packing verifies that the Opus audio digest
+is unchanged by adding metadata. The original AAC is transcoded once; this is
+not a claim of bit-identical audio to the source video.
 
-Build Cassini from the revision in the production record in an isolated checkout,
-with the included VAD patch applied. Then run the native pipeline:
+## Earlier examples
 
-```bash
-site/scripts/process-demo-cassini.sh /path/to/cassini \
-  /tmp/repair-cafe-tracks/repair-cafe.multitrack.mkv /tmp/repair-cafe.opus
-```
-
-For the excerpt, trim all three streams to the first scene before processing
-and packing them with the same command. `publish-demo.py` copies reviewed native
-outputs into the site and exports their embedded words and provenance; its
-`--help` lists the required source and processing records. Finally run
-`node site/scripts/gen-demo.mjs` to refresh the facts quoted by the pages.
-
-## Earlier fixtures and licensing
-
-The original [Lantern Festival notes](lantern-festival.README.md) and recordings
-remain available for existing links. That older example used Kokoro-82M and
-interpolated word timings. `elements.opus` powers the separate song karaoke demo.
-
-The script, metadata and demo fixtures follow the repository's
-[licensing terms](../../../LICENSE.md). Voice models are not included. Cassini's
-component and the transcription patch are AGPL-3.0; the independent format
-readers and producer remain CC0.
+The [repair café production notes](repair-cafe.README.md),
+[repair café recording](repair-cafe.opus),
+[short excerpt](repair-cafe-excerpt.opus), and
+[Lantern Festival notes](lantern-festival.README.md) remain available.
+Those fictional fixtures retain their original licensing and production history.
+`elements.opus` powers the separate song karaoke demo.

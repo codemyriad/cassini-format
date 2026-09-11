@@ -1,6 +1,10 @@
-Start with the standalone reader to see what a file contains, then use the
-algorithm below to build your own. To listen and explore without writing code,
-[open the browser reader](/try/).
+Use this guide to get a recording's words, timings and speakers into your own
+application. Start with a working reader, use the data, then check what its
+reported state establishes. The later sections explain how to implement the
+reader yourself.
+
+To listen and read without writing code, [open the browser player](/try/).
+For the other implementation paths, see [Build with Cassini](/build/).
 
 ## Read your first file
 
@@ -9,7 +13,7 @@ on this site, then run it:
 
 ```bash
 curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-read-pure.py
-curl -fLO https://cassini-format.codemyriad.io/demo/{{demo.filename}}
+curl -fLO https://format.gocassini.com/demo/{{demo.filename}}
 python3 cassini-read-pure.py {{demo.filename}}
 ```
 
@@ -18,9 +22,88 @@ with their timestamps. The state is `unverified`: this reader verifies the
 metadata digests but does not check the audio digest. It uses only the Python
 standard library.
 
-For JavaScript, jump to [the browser reader](#in-the-browser-with-no-dependencies).
-The shell examples below use `ffprobe`, `jq`, GNU `basenc`, `awk` and `gunzip`.
-Use your own file as `meeting.opus`, or substitute `{{demo.filename}}`.
+## Use the data in Python
+
+The command above is a preview. For an integration, download the same reader
+under an importable name and write the full data to `transcript.json`:
+
+```bash
+curl -fLo cassini_reader.py https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-read-pure.py
+python3 - {{demo.filename}} <<'PY'
+import json
+import sys
+from cassini_reader import read_file
+
+result, _ = read_file(sys.argv[1])
+if not result.get("manifest") or result.get("words") is None:
+    sys.exit("No usable word transcript: " + result["state"] + " " + str(result.get("notes", [])))
+manifest = result["manifest"]
+speakers = {speaker["id"]: speaker["label"] for speaker in manifest["speakers"]}
+words = [
+    {**word, "speakerLabel": speakers.get(word["speaker"], "Unknown speaker")}
+    for word in result["words"]
+]
+with open("transcript.json", "w", encoding="utf-8") as output:
+    json.dump({"state": result["state"], "title": manifest["meeting"]["title"],
+               "transcriptId": result["default"], "speakers": manifest["speakers"],
+               "items": words}, output, ensure_ascii=False, indent=2)
+print(f"Wrote {len(words)} words to transcript.json; state: {result['state']}")
+PY
+```
+
+The example yields **{{demo.words}} words** from **{{demo.speakers}} speakers**.
+Each item retains its original `speaker`, `startMs`, `endMs` and `text`, with a
+`speakerLabel` added for your interface. Keep that ID alongside the label: names
+are for display, IDs identify speakers. `speakerLabel` here is an application
+field, not a new format requirement.
+
+The reader uses the default transcript. Preserve item order when grouping words
+or indexing them: people can overlap, so timestamps can go backwards across a
+speaker change. Substituting your own filename is the only change needed to
+read another file with a supported word transcript.
+
+## Use the data in JavaScript
+
+The [standalone JavaScript module](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-read.js)
+provides the data independently of the site's interface. See
+[the browser integration example](#in-the-browser-with-no-dependencies) for the
+complete fetch, read and turn-grouping code. It uses browser APIs and no runtime
+dependencies; building an interface is up to your application.
+
+## Choose another transcript
+
+A file can contain several transcripts. The default is the first entry in
+`manifest.transcripts` flagged `default: true`, or the first entry if none is
+flagged. Your application can offer the other supported entries as alternatives.
+
+For command-line extraction of a particular transcript, use the CC0 extractor.
+This alternative needs **ffprobe** (part of FFmpeg) as well as Python 3:
+
+```bash
+curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-extract.py
+python3 cassini-extract.py {{demo.filename}} --list
+python3 cassini-extract.py {{demo.filename}} --transcript {{demo.transcriptId}} > selected-transcript.json
+```
+
+Use an ID printed by `--list` for your own file. The output is the selected
+body, including `items`; the speaker table belongs to the manifest, which the
+extractor prints when run without `--transcript`.
+
+## Check your result
+
+Opening a transcript establishes that the reader could recover its data. The
+examples above report `unverified` because they do not compute the audio match.
+Keep that state with the data. It must not become a claim of verified audio
+when you pass the words to another part of your application.
+
+[Check a file](/verify/) walks through payload checks, an audio comparison and
+schema validation, explaining the scope of each result. To ship your own reader,
+also [run the conformance suite](/build/#check-a-file-then-test-your-implementation).
+
+The rest of this guide covers manual inspection and implementation details.
+Its shell pipelines need `ffprobe`, `jq`, GNU `basenc`, `awk` and `gunzip`;
+those tools are not dependencies of the standalone Python reader. Use your
+own file as `meeting.opus`, or substitute `{{demo.filename}}`.
 
 ## Is this one of those files?
 
@@ -90,7 +173,7 @@ document: the spec, the body format, the digest contract, both guides, every
 schema, and the tag dump of the file the front page links to. Hand it over,
 then check the result against [that file](/demo/{{demo.filename}}).
 
-Then check it against the [conformance vectors](https://github.com/codemyriad/cassini-format/tree/main/spec/conformance):
+Then check it against the [conformance vectors](/build/#check-a-file-then-test-your-implementation):
 A set of fixtures covering edge cases, with a harness that takes a reader in
 any language. See [project status](/status/) for implementation and compatibility
 notes, and run the suite against the version you plan to ship.
@@ -149,6 +232,12 @@ Eight steps, the same in every language.
 
 ## In the browser, with no dependencies
 
+Download the module alongside your application's JavaScript:
+
+```bash
+curl -fLO https://raw.githubusercontent.com/codemyriad/cassini-format/main/tools/cassini-read.js
+```
+
 `fetch` gets the bytes, `DecompressionStream` inflates, `crypto.subtle` checks
 the digests. The player on the front page uses this module to read the downloadable
 file, then displays it with Cassini’s transcript component.
@@ -164,7 +253,9 @@ of the file — the same code works over an HTTP range request.
 ```js
 import { readCassini, toTurns } from './cassini-read.js';
 
-const buf = await (await fetch('meeting.opus')).arrayBuffer();
+const response = await fetch('meeting.opus');
+if (!response.ok) throw new Error(`Could not load recording: ${response.status}`);
+const buf = await response.arrayBuffer();
 const file = await readCassini(buf);
 
 if (file.manifest && file.transcript) {
@@ -173,6 +264,12 @@ if (file.manifest && file.transcript) {
 }
 console.log(file.state); // Preserve this status in your viewer.
 ```
+
+Serve this code and `meeting.opus` from your application's HTTP server and
+run it as a JavaScript module. Use HTTPS in production (localhost also works):
+`crypto.subtle` requires a secure context. Opening an HTML file directly from
+disk is not the same as serving the application. Browser support for audio
+playback is separate from support for reading the metadata.
 
 `state` comes back alongside the data, one of the six below. `verified:
 { manifest, transcript }` says what was checked: `true` matched, `null` nothing

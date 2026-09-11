@@ -23,8 +23,12 @@
 	const current = $derived(page.url.pathname);
 	const isCurrent = (href: string) =>
 		current.startsWith(`${base}${href}`) ||
+		(href === '/using/' && current.startsWith(`${base}/status/`)) ||
+		(href === '/build/' &&
+			['/consume/', '/produce/', '/verify/'].some((path) => current.startsWith(`${base}${path}`))) ||
 		(href === '/try/' && current.startsWith(`${base}/demo/`)) ||
-		(href === '/spec/' && current.startsWith(`${base}/schema/`));
+		(href === '/spec/' &&
+			['/schema/', '/design/'].some((path) => current.startsWith(`${base}${path}`)));
 </script>
 
 <svelte:window
@@ -60,7 +64,9 @@
 			{#each nav as item (item.href)}
 				<a
 					href="{base}{item.href}"
-					aria-current={isCurrent(item.href) ? 'page' : undefined}
+					aria-current={isCurrent(item.href)
+						? current === `${base}${item.href}` ? 'page' : 'location'
+						: undefined}
 					class:on={isCurrent(item.href)}
 					onclick={() => (open = false)}>{item.label}</a
 				>

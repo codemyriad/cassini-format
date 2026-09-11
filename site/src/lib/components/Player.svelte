@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { untrack } from 'svelte';
 	import { readCassini, type ReadResult } from '$lib/reader/cassini';
 	import CassiniView from '$lib/viewer/CassiniView.svelte';
@@ -126,13 +127,17 @@
 		if (!result) return '';
 		switch (result.state) {
 			case 'unverified':
-				return 'Unverified · Audio digest not checked in this browser.';
+				return `${result.verified.manifest && result.verified.transcript ? 'Transcript and metadata checks passed. ' : ''}This browser has not checked the audio fingerprint.`;
 			case 'plain-audio':
 				return 'Plain audio · This file has no Cassini transcript. You can still listen.';
 			case 'invalid-cassini-metadata':
-				return 'invalid-cassini-metadata: the metadata could not be reconstructed. The recording still plays.';
+				return 'The embedded data could not be read. You can still listen to valid audio.';
 			case 'unknown-cassini-format':
-				return 'unknown-cassini-format: metadata in a version this reader does not implement. The recording still plays.';
+				return 'This file uses a format version this reader does not support. You can still listen to valid audio.';
+			case 'stale-audio':
+				return 'The audio does not match the stored claim. The transcript may describe a different recording.';
+			case 'ok':
+				return 'The audio matches the stored claim.';
 			default:
 				return result.state;
 		}
@@ -184,14 +189,12 @@
 		</div>
 	{/if}
 	{#if result}
-		<p class="state" role="status" data-state={result.state}>{stateLine}</p>
+		<p class="state" role="status" data-state={result.state}>{stateLine}
+			<a href="{base}/using/#what-stays-with-the-file">What this means →</a>
+		</p>
 	{/if}
 	<details class="diagnostics">
-		<summary
-			>File details <span
-				>{loading ? 'Reading…' : (result?.state ?? 'Could not read metadata')}</span
-			></summary
-		>
+		<summary>File details{#if loading}<span>Reading…</span>{/if}</summary>
 		<div class="steps">
 			{#each steps as step, i (step.label)}
 				<div class="step" data-state={step.state}>
@@ -201,6 +204,7 @@
 				</div>
 			{/each}
 		</div>
+		<p class="check-link"><a href="{base}/verify/">Check a file and understand the results →</a></p>
 	</details>
 </div>
 
@@ -221,6 +225,15 @@
 	}
 	.diagnostics {
 		border-top: 1px solid var(--rule);
+	}
+	.check-link {
+		padding: 0.75rem 1rem;
+		margin: 0;
+		font-size: 12px;
+	}
+	.state a {
+		display: inline-block;
+		margin-left: 0.3rem;
 	}
 	.diagnostics summary {
 		display: flex;

@@ -1,0 +1,743 @@
+{
+  "speakers": [
+    {
+      "id": "acs",
+      "label": "ACS 1"
+    },
+    {
+      "id": "signal",
+      "label": "Mission control"
+    },
+    {
+      "id": "webster",
+      "label": "Julie Webster"
+    },
+    {
+      "id": "maize",
+      "label": "Earl Maize"
+    }
+  ],
+  "items": [
+    {
+      "speaker": "acs",
+      "startMs": 219,
+      "endMs": 479,
+      "text": "Systems,"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 560,
+      "endMs": 1000,
+      "text": "ACS"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 1100,
+      "endMs": 1259,
+      "text": "one,"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 1339,
+      "endMs": 1399,
+      "text": "we"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 1860,
+      "endMs": 2099,
+      "text": "just"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 2180,
+      "endMs": 2319,
+      "text": "had"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 2399,
+      "endMs": 2819,
+      "text": "transition"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 2859,
+      "endMs": 2919,
+      "text": "to"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 2980,
+      "endMs": 3079,
+      "text": "high"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 3159,
+      "endMs": 3299,
+      "text": "rate"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 3359,
+      "endMs": 3559,
+      "text": "mode,"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 4360,
+      "endMs": 4599,
+      "text": "and,"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 4659,
+      "endMs": 4739,
+      "text": "uh,"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 4859,
+      "endMs": 4940,
+      "text": "we"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 5000,
+      "endMs": 5199,
+      "text": "are"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 5299,
+      "endMs": 5440,
+      "text": "in"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 5639,
+      "endMs": 5699,
+      "text": "the"
+    },
+    {
+      "speaker": "acs",
+      "startMs": 5759,
+      "endMs": 6219,
+      "text": "atmosphere."
+    },
+    {
+      "speaker": "signal",
+      "startMs": 9719,
+      "endMs": 9779,
+      "text": "We"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 9859,
+      "endMs": 9960,
+      "text": "have"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 10000,
+      "endMs": 10159,
+      "text": "loss"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 10199,
+      "endMs": 10280,
+      "text": "of"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 10340,
+      "endMs": 10659,
+      "text": "signal"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 10719,
+      "endMs": 10979,
+      "text": "at"
+    },
+    {
+      "speaker": "signal",
+      "startMs": 11179,
+      "endMs": 12500,
+      "text": "[unintelligible]",
+      "confidence": 0
+    },
+    {
+      "speaker": "webster",
+      "startMs": 14039,
+      "endMs": 14299,
+      "text": "Project"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 14380,
+      "endMs": 14759,
+      "text": "manager,"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 14880,
+      "endMs": 15039,
+      "text": "flight"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 15119,
+      "endMs": 15479,
+      "text": "director."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 16100,
+      "endMs": 16159,
+      "text": "Go"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 16199,
+      "endMs": 16459,
+      "text": "ahead."
+    },
+    {
+      "speaker": "webster",
+      "startMs": 17239,
+      "endMs": 17379,
+      "text": "Okay,"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 17459,
+      "endMs": 17579,
+      "text": "we"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 17639,
+      "endMs": 17760,
+      "text": "call"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 17859,
+      "endMs": 18020,
+      "text": "loss"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 18059,
+      "endMs": 18159,
+      "text": "of"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 18239,
+      "endMs": 18539,
+      "text": "signal"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 18619,
+      "endMs": 19000,
+      "text": "at"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 19079,
+      "endMs": 19260,
+      "text": "one"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 19319,
+      "endMs": 19619,
+      "text": "one"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 19680,
+      "endMs": 19899,
+      "text": "five"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 19939,
+      "endMs": 20219,
+      "text": "five"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 20279,
+      "endMs": 20520,
+      "text": "four"
+    },
+    {
+      "speaker": "webster",
+      "startMs": 20579,
+      "endMs": 20920,
+      "text": "six."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 22100,
+      "endMs": 22379,
+      "text": "Project"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 22459,
+      "endMs": 22819,
+      "text": "manager"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 22879,
+      "endMs": 22959,
+      "text": "on"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 23079,
+      "endMs": 23379,
+      "text": "FSO"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 23479,
+      "endMs": 23939,
+      "text": "coord."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 25059,
+      "endMs": 25239,
+      "text": "Maybe"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 25319,
+      "endMs": 25359,
+      "text": "a"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 25420,
+      "endMs": 25680,
+      "text": "trickle"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 25699,
+      "endMs": 25799,
+      "text": "of"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 25840,
+      "endMs": 26299,
+      "text": "telemetry"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 26359,
+      "endMs": 26639,
+      "text": "left,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 26779,
+      "endMs": 27000,
+      "text": "but"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 28059,
+      "endMs": 28199,
+      "text": "just"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 28279,
+      "endMs": 28680,
+      "text": "heard"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 28779,
+      "endMs": 29059,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 29559,
+      "endMs": 29819,
+      "text": "signal"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 29879,
+      "endMs": 29979,
+      "text": "from"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 30019,
+      "endMs": 30079,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 30139,
+      "endMs": 30760,
+      "text": "spacecraft"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 30939,
+      "endMs": 31059,
+      "text": "is"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 31139,
+      "endMs": 31439,
+      "text": "gone,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 31659,
+      "endMs": 32340,
+      "text": "and"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 32419,
+      "endMs": 32639,
+      "text": "within"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 32680,
+      "endMs": 32740,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 32799,
+      "endMs": 33000,
+      "text": "next"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 33099,
+      "endMs": 33520,
+      "text": "forty-five"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 33680,
+      "endMs": 34000,
+      "text": "seconds,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 34119,
+      "endMs": 34219,
+      "text": "so"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 34279,
+      "endMs": 34419,
+      "text": "will"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 34459,
+      "endMs": 34559,
+      "text": "be"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 34619,
+      "endMs": 34680,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 34739,
+      "endMs": 35500,
+      "text": "spacecraft."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 36319,
+      "endMs": 36479,
+      "text": "Uh,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 37139,
+      "endMs": 37239,
+      "text": "I"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 37279,
+      "endMs": 37500,
+      "text": "hope"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 37579,
+      "endMs": 37819,
+      "text": "you're"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 37959,
+      "endMs": 38739,
+      "text": "all"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 38860,
+      "endMs": 39579,
+      "text": "as"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 39659,
+      "endMs": 40079,
+      "text": "deeply"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 40159,
+      "endMs": 41039,
+      "text": "proud"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 41119,
+      "endMs": 41200,
+      "text": "of"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 41239,
+      "endMs": 41520,
+      "text": "this"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 41599,
+      "endMs": 42059,
+      "text": "amazing"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 42159,
+      "endMs": 42939,
+      "text": "accomplishment."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 43279,
+      "endMs": 44119,
+      "text": "Congratulations"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 44180,
+      "endMs": 44259,
+      "text": "to"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 44299,
+      "endMs": 44399,
+      "text": "you"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 44459,
+      "endMs": 44739,
+      "text": "all."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 45159,
+      "endMs": 45319,
+      "text": "This"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 45379,
+      "endMs": 45520,
+      "text": "has"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 45579,
+      "endMs": 45700,
+      "text": "been"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 45739,
+      "endMs": 45799,
+      "text": "an"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 45840,
+      "endMs": 46299,
+      "text": "incredible"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 46459,
+      "endMs": 46840,
+      "text": "mission,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 46959,
+      "endMs": 47059,
+      "text": "an"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 47099,
+      "endMs": 47559,
+      "text": "incredible"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 47700,
+      "endMs": 48439,
+      "text": "spacecraft,"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 48919,
+      "endMs": 49000,
+      "text": "and"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 49059,
+      "endMs": 49239,
+      "text": "you're"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 49319,
+      "endMs": 49659,
+      "text": "all"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 49739,
+      "endMs": 49840,
+      "text": "an"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 49899,
+      "endMs": 50519,
+      "text": "incredible"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 50579,
+      "endMs": 51000,
+      "text": "team."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 52180,
+      "endMs": 52299,
+      "text": "I'm"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 52319,
+      "endMs": 52520,
+      "text": "gonna"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 52579,
+      "endMs": 52779,
+      "text": "call"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 52840,
+      "endMs": 53020,
+      "text": "this"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 53099,
+      "endMs": 53159,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 53199,
+      "endMs": 53319,
+      "text": "end"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 53340,
+      "endMs": 53419,
+      "text": "of"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 53479,
+      "endMs": 53919,
+      "text": "mission."
+    },
+    {
+      "speaker": "maize",
+      "startMs": 55059,
+      "endMs": 55360,
+      "text": "Project"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 55439,
+      "endMs": 56079,
+      "text": "manager"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 56180,
+      "endMs": 56340,
+      "text": "off"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 56360,
+      "endMs": 56459,
+      "text": "the"
+    },
+    {
+      "speaker": "maize",
+      "startMs": 56520,
+      "endMs": 56919,
+      "text": "net."
+    }
+  ]
+}
