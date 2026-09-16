@@ -25,9 +25,13 @@ export const versions = [
 	{ id: 1, slug: 'v1', label: 'v1', status: 'current', wire: 'org.cassini.portable-meeting/1' }
 ] as const;
 
+/**
+ * Three things a specification site has to communicate: the spec, the tools for
+ * working with files, and who implements it. Implementations live on the home
+ * page rather than a route of their own.
+ */
 export const nav = [
-	{ href: '/using/', label: 'Using Cassini' },
-	{ href: '/try/', label: 'Open a file' },
-	{ href: '/build/', label: 'Build with it' },
-	{ href: '/spec/', label: 'Specification' }
+	{ href: '/spec/', label: 'Spec' },
+	{ href: '/build/', label: 'Tools' },
+	{ href: '/#implementations', label: 'Implementations' }
 ];

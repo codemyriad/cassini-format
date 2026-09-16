@@ -21,13 +21,16 @@
 	});
 
 	const current = $derived(page.url.pathname);
+	// An href with a fragment ('/#implementations') is a section of the home page,
+	// never a path of its own, so it never matches a pathname.
 	const isCurrent = (href: string) =>
-		current.startsWith(`${base}${href}`) ||
-		(href === '/using/' && current.startsWith(`${base}/status/`)) ||
+		(!href.includes('#') && current.startsWith(`${base}${href}`)) ||
 		(href === '/build/' &&
-			['/consume/', '/produce/', '/verify/'].some((path) => current.startsWith(`${base}${path}`))) ||
+			['/consume/', '/produce/'].some((path) => current.startsWith(`${base}${path}`))) ||
 		(href === '/spec/' &&
-			['/schema/', '/design/'].some((path) => current.startsWith(`${base}${path}`)));
+			['/schema/', '/design/', '/changelog/'].some((path) =>
+				current.startsWith(`${base}${path}`)
+			));
 </script>
 
 <svelte:window

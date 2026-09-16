@@ -1,5 +1,6 @@
 import demo from '$lib/generated/demo.json';
 import { highlight } from '$lib/markdown';
+import { readRepoFile } from '$lib/docs';
 
 const STD = new Set(['TITLE', 'DATE', 'comment', 'encoder', 'DESCRIPTION', 'LANGUAGE']);
 const DESC = new Set(['CASSINI_FORMAT', 'CASSINI_DECODE_HINT', 'CASSINI_PAYLOAD_ENCODING']);
@@ -26,10 +27,26 @@ function rows() {
 	return all.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
 }
 
+/**
+ * The most recent dated entry in CHANGELOG.md, for the hero pill and the spec
+ * section. It is the first `### YYYY-MM-DD` heading under "Specification
+ * changes", so adding an entry moves the date on the home page with it.
+ */
+async function latestChange() {
+	const raw = await readRepoFile('CHANGELOG.md');
+	const from = raw.indexOf('## Specification changes');
+	const m = /^###\s+(\d{4}-\d{2}-\d{2})(?:\s*[—-]\s*(.+))?$/m.exec(
+		from === -1 ? raw : raw.slice(from)
+	);
+	if (!m) throw new Error('CHANGELOG.md: no dated "### YYYY-MM-DD" entry to date the home page');
+	return { date: m[1], title: (m[2] ?? '').trim() };
+}
+
 export async function load() {
 	const manifest = demo.manifest;
 
 	return {
+		change: await latestChange(),
 		rows: rows(),
 		demo: {
 			filename: demo.generatedFrom,
@@ -43,7 +60,6 @@ export async function load() {
 				Number(demo.readableTags.CASSINI_PAYLOAD_GZIP_BYTES ?? 0),
 			title: demo.readableTags.TITLE
 		},
-		manifestHtml: await highlight(JSON.stringify(manifest, null, 2), 'json'),
-		wordHtml: await highlight(JSON.stringify(demo.firstWords[0], null, 2), 'json')
+		manifestHtml: await highlight(JSON.stringify(manifest, null, 2), 'json')
 	};
 }
