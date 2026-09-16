@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<title>Open a Cassini file — audio and transcript in your browser</title>
+	<title>Open a file — Cassini format</title>
 	<meta
 		name="description"
 		content="Find a passage in a transcript and listen to check what was actually said. Try a sample meeting or open your own Cassini file. Local files stay in your browser."
@@ -35,14 +35,15 @@
 </svelte:head>
 
 <div class="shell page-intro">
-	<p class="eyebrow eyebrow--plain">Open a recording</p>
-	<h1>Find the words.<br />Hear what was said.</h1>
+	<!-- TODO(chris): wording -->
+	<p class="eyebrow eyebrow--plain">Open a file</p>
+	<h1>Open a file.<br />Find the words.</h1>
 	<p class="lede">
 		Use the transcript to find a passage, then listen to check what was actually said.
 		Select a word to move to that moment and press Play. Try the example below or open your own file.
 	</p>
 	<p class="reader-context">This player opens text already stored in the audio file.
-		It does not transcribe recordings. <a href="{base}/using/">How the format works →</a></p>
+		It does not transcribe recordings. <a href="{base}/">How the format works →</a></p>
 </div>
 
 <div class="shell reader-page">
@@ -113,23 +114,16 @@
 		</p>{/if}
 
 	<div class="next">
-		<div>
-			<p class="eyebrow eyebrow--plain">Take it with you</p>
-			<h2>The download is the whole recording.</h2>
-			<p>Save the example and open that copy here. The recording travels with the words, so the
-				person you send it to can listen and check too. An ordinary Opus player can play the audio;
-				a Cassini reader also shows the transcript.</p>
-			<a class="button" href="{base}/using/#what-the-recipient-needs">Using and sharing a file →</a>
-		</div>
+		<!-- TODO(chris): wording -->
 		<div>
 			<p class="eyebrow eyebrow--plain">Try it with your own tools</p>
 			<h2>Read the data, or create a file.</h2>
 			<p>
-				Our guides use standalone readers and a producer to work with existing audio and timed
-				words. They also explain how to check your result. The data reader is CC0; this
-				transcript interface is a separate AGPL-3.0 component.
+				The standalone readers and the producer work with existing audio and timed words, and
+				explain how to check your result. The data reader is CC0; this transcript interface is a
+				separate AGPL-3.0 component.
 			</p>
-			<a class="button" href="{base}/build/">Choose an implementation path →</a>
+			<a class="button" href="{base}/build/">All the tools →</a>
 		</div>
 	</div>
 </div>
@@ -205,9 +199,6 @@
 		margin-top: 0.5rem;
 	}
 	.next {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 3rem;
 		border-top: 1px solid var(--rule);
 		margin-top: 4rem;
 		padding-top: 2.5rem;
@@ -224,9 +215,6 @@
 		.reader-heading {
 			flex-direction: column;
 			align-items: flex-start;
-		}
-		.next {
-			grid-template-columns: minmax(0, 1fr);
 		}
 	}
 </style>

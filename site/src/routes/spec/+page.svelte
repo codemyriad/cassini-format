@@ -19,8 +19,8 @@
 		The contracts our tools use to read and write Cassini files. Start with v1, then
 		follow the body format and verification rules it references.
 	</p>
-	<p class="orientation">Looking for a working example? <a href="{base}/build/">Start with the implementation guides</a>.
-		To understand where it fits, see <a href="{base}/using/">Using Cassini</a>.</p>
+	<p class="orientation">Looking for a working example? <a href="{base}/build/">Start with the tools</a>.
+		For the version history, see the <a href="{base}/changelog/">changelog</a>.</p>
 </div>
 
 <div class="shell reference">
@@ -32,6 +32,41 @@
 		</div>
 		<code>{site.formatId}</code>
 	</a>
+
+	<!-- TODO(chris): wording -->
+	<section aria-labelledby="versions">
+		<h2 id="versions">Versions</h2>
+		<p>
+			One published version so far. The three before it were private drafts used inside gocassini.
+		</p>
+		<ul class="versions">
+			<li>
+				<a href="{base}/spec/v1/"><strong>v1</strong></a>
+				<span>Current · published 2026-09-02</span><code>org.cassini.portable-meeting/1</code>
+			</li>
+			<li>
+				<a href="{base}/changelog/#private-draft-3--orgcassiniportable-meeting1-2026-08-29"
+					><strong>Private draft 3</strong></a
+				>
+				<span>History · 2026-08-29</span><code>org.cassini.portable-meeting/1</code>
+			</li>
+			<li>
+				<a href="{base}/changelog/#private-draft-2--orgcassiniportable-meeting2-2026-05-12"
+					><strong>Private draft 2</strong></a
+				>
+				<span>History · 2026-05-12</span><code>org.cassini.portable-meeting/2</code>
+			</li>
+			<li>
+				<a href="{base}/changelog/#private-draft-1--orgcassiniportable-meeting1-2026-03"
+					><strong>Private draft 1</strong></a
+				>
+				<span>History · 2026-03</span><code>org.cassini.portable-meeting/1</code>
+			</li>
+		</ul>
+		<p class="versions-more">
+			<a href="{base}/changelog/">Every change to the specification →</a>
+		</p>
+	</section>
 
 	<section aria-labelledby="contracts">
 		<h2 id="contracts">The supporting contracts</h2>
@@ -69,7 +104,7 @@
 				>{/each}
 		</div>
 		<div class="resource-links">
-			<a href="{base}/verify/">Check a produced file →</a>
+			<a href="{base}/produce/#checking-your-work">Check a produced file →</a>
 			<a href="{base}/build/#check-a-file-then-test-your-implementation">Run reader conformance checks →</a>
 			<a href="{base}/schema/">About the schemas →</a><a
 				href="{site.repo}/tree/main/spec/conformance">Conformance suite on GitHub ↗</a
@@ -92,8 +127,8 @@
 			><a href="{base}/produce/"
 				>Write a file <span>A complete producer and validation steps →</span></a
 			><a href="{base}/design/">Design notes <span>Tradeoffs, measurements and rationale →</span></a
-			><a href="{base}/status/"
-				>Project status <span>Adoption, compatibility and recent changes →</span></a
+			><a href="{base}/changelog/"
+				>Changelog <span>Versions of the format and every specification change →</span></a
 			><a href="{base}/llms-full.txt"
 				>The complete specification as text <span>One file for tools and coding assistants ↗</span
 				></a
@@ -257,6 +292,33 @@
 		font-size: 13px;
 		color: var(--fg-4);
 		margin-top: 0.25rem;
+	}
+	.versions {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-top: 1px solid var(--rule);
+	}
+	.versions li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.4rem 1.5rem;
+		padding-block: 0.9rem;
+		border-bottom: 1px solid var(--rule);
+		font-size: 15px;
+	}
+	.versions li > span {
+		color: var(--fg-4);
+		font-size: 13px;
+	}
+	.versions code {
+		margin-left: auto;
+		font-size: 11px;
+	}
+	.versions-more {
+		margin-top: 1rem;
+		font-size: 14px;
 	}
 	.licence {
 		margin-top: 3rem;
