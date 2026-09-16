@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { REPO } from '$lib/markdown';
+import { PUBLISHED_DESIGN, REPO } from '$lib/markdown';
 
 /**
  * SPEC.md is one document sorted into machinery, the current version, and the
@@ -59,16 +59,8 @@ export function stripDocHeader(raw: string) {
 
 export type DesignDoc = { slug: string; file: string; title: string; date: string; blurb: string };
 
-/**
- * The design notes the site publishes, in order. Other files in design/ are
- * historical and stay in the repository only.
- */
-const DESIGN_ORDER = [
-	'packet-digest',
-	'multi-transcription',
-	'operator-sealing',
-	'format-simplification-2026-09-07'
-];
+/** The published list lives next to the link rewriter that has to agree with it. */
+const DESIGN_ORDER = PUBLISHED_DESIGN;
 
 export async function listDesignDocs(): Promise<DesignDoc[]> {
 	const dir = path.join(REPO, 'design');

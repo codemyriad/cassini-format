@@ -18,14 +18,23 @@ export const REPO = path.resolve(process.cwd(), '..');
 export type Heading = { depth: number; id: string; text: string };
 
 /**
+ * The design notes the site publishes, in order. The others in design/ are
+ * historical: they stay in the repository, and a link to one from a rendered
+ * document has to point there rather than at a route that does not exist.
+ */
+export const PUBLISHED_DESIGN = [
+	'packet-digest',
+	'multi-transcription',
+	'operator-sealing',
+	'format-simplification-2026-09-07'
+];
+
+/**
  * SPEC.md and design/*.md link to each other as relative repo paths so they stay
  * navigable on GitHub. On the site those paths have to become routes. Anything
  * we do not recognise is left alone, and the prerenderer will shout if it 404s.
  */
 function rewriteHref(href: string): string | null {
-	// The karaoke page moved to /karaoke/; /demo/ is now only the static example
-	// files, so an exact /demo/ link in prose has to follow the route.
-	if (/^\/demo\/(#.*)?$/.test(href)) return href.replace('/demo/', '/karaoke/');
 	// Absolute URLs, in-page anchors, protocol-relative and site-absolute paths
 	// are already correct. Only repository-relative paths need rewriting.
 	if (/^([a-z][a-z0-9+.-]*:|#|\/)/i.test(href)) return null;
@@ -39,15 +48,18 @@ function rewriteHref(href: string): string | null {
 	if (file.endsWith('.schema.json')) return `/schema/${file}`;
 	if (file === 'SPEC.md') return `/spec/document/${anchor}`;
 	if (file === 'README.md') return `/${anchor}`;
-	if (file === 'CHANGELOG.md') return `/status/${anchor}`;
+	if (file === 'CHANGELOG.md') return `/changelog/${anchor}`;
 	// The two standalone spec documents have shorter route names than filenames.
 	if (file === 'cassini-opus-audio-integrity-v1.md') return `/spec/audio-integrity/${anchor}`;
 	if (file === 'cassini-words-v1.md') return `/spec/words-v1/${anchor}`;
+	const clean = rawPath.replace(/^\.\//, '');
 	if (file.endsWith('.md')) {
 		const slug = file.slice(0, -3);
+		if (!inSpecDir && !PUBLISHED_DESIGN.includes(slug)) {
+			return `https://github.com/codemyriad/cassini-format/blob/main/${clean}`;
+		}
 		return `/${inSpecDir ? 'spec' : 'design'}/${slug}/${anchor}`;
 	}
-	const clean = rawPath.replace(/^\.\//, '');
 	// Source files and fixtures stay pointing at the repository.
 	if (/\.(py|txt|json|go|js|mjs|ts|sh)$/.test(file)) {
 		return `https://github.com/codemyriad/cassini-format/blob/main/${clean}`;
