@@ -23,6 +23,9 @@ export type Heading = { depth: number; id: string; text: string };
  * we do not recognise is left alone, and the prerenderer will shout if it 404s.
  */
 function rewriteHref(href: string): string | null {
+	// The karaoke page moved to /karaoke/; /demo/ is now only the static example
+	// files, so an exact /demo/ link in prose has to follow the route.
+	if (/^\/demo\/(#.*)?$/.test(href)) return href.replace('/demo/', '/karaoke/');
 	// Absolute URLs, in-page anchors, protocol-relative and site-absolute paths
 	// are already correct. Only repository-relative paths need rewriting.
 	if (/^([a-z][a-z0-9+.-]*:|#|\/)/i.test(href)) return null;

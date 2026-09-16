@@ -132,8 +132,6 @@
 			<a class="button" href="{base}/build/">Choose an implementation path →</a>
 		</div>
 	</div>
-	<p class="sample-note">Another experiment with the same format:
-		<a href="{base}/demo/">a song with synchronized lyrics →</a></p>
 </div>
 
 <style>
