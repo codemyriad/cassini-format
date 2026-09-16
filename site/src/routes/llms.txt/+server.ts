@@ -15,8 +15,8 @@ export async function GET() {
 
 	const body = `# ${site.formatName} format
 
-> ${site.description} The container is Ogg, the audio is Opus, the media type is
-> audio/ogg. Metadata rides in the OpusTags comment header in two layers: plain
+> ${site.description} The media type is audio/ogg and the audio is Opus at
+> 48 kHz. Metadata rides in the OpusTags comment header in two layers: plain
 > Vorbis comments, and a gzipped base64url JSON manifest split across numbered
 > CASSINI_PAYLOAD_000..N tags. Current wire version: ${site.formatId}.
 
