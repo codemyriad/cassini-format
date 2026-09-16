@@ -29,16 +29,15 @@ It is this whole specification flattened into one document.
 - [Transcript body, cassini.words.v1](${origin}/spec/words-v1/): one item per word, with a speaker and millisecond offsets
 - [Audio digest, exact-opus-audio-v1](${origin}/spec/audio-integrity/): the byte rule that makes a recording's identity survive a tag rewrite
 
-## Guides
+- [Changelog](${origin}/changelog/): version 1, published 2026-09-02, and every specification change since
 
-- [Using Cassini](${origin}/using/): why we made it for our Nextcloud app, how a file moves between tools, and what is supported
+## Tools and guides
+
 - [Open a file](${origin}/try/): play the example or read a local file in the browser
-- [Build with Cassini](${origin}/build/): implementation paths, reusable code and conformance setup
+- [Tools](${origin}/build/): every reader and producer, with language and licence, and the conformance setup
 - [Reading a file](${origin}/consume/): extract usable data, preserve its state, and implement a reader
 - [Writing a file](${origin}/produce/): package the example, adapt your inputs, check and share
-- [Checking a file](${origin}/verify/): payload checks, audio matching, schema validation and what each result establishes
 - [Design notes](${origin}/design/): the measurements behind the non-obvious parts
-- [Status](${origin}/status/): version 1, published 2026-09-02; what is still open
 
 ## Schemas
 

@@ -15,22 +15,23 @@ npm run preview      # serve build/ locally
 
 ## Where the content comes from
 
-The homepage introduces the format through our Nextcloud Talk use case: use the
-transcript to find a passage, then listen to check what was actually said. The
-playable example and creation/sharing/reading workflow keep that purpose visible.
-`/using/` explains fit,
-compatibility and limitations; `/build/` connects the implementation guides to
-file checks and conformance tests. `/try/` opens the example or
+The home page is built around the three things a specification site has to
+communicate: the spec and what changed in it, the tools for working with files,
+and who implements it. Its example block puts the viewer, the tag dump, the
+decoded manifest and the download link together, so a visitor can see that the
+words on screen come from the tags in the file they can download. `/spec/` is the
+reference hub for the versioned contracts and schemas, and `/changelog/` renders
+`../CHANGELOG.md`. `/build/` is the tools hub: every reader and producer with its
+language and licence, plus the conformance setup. `/try/` opens the example or
 a local `.opus`/`.ogg` file in the shared transcript player; local files are
 read directly in the browser. The player uses Cassini’s transcript component,
 including inline interjections and word playback highlighting. Hover highlights
-individual words; click one to seek to it. `/demo/` keeps the separate song karaoke view. `/spec/` is the
-reference hub for the versioned contracts, schemas and conformance suite.
-`/consume/` and `/produce/` carry a visitor from sample inputs to a useful result;
-`/verify/` provides the shared checking workflow and explains the scope of each
-result. Keep prerequisites and working directories explicit when editing guides.
-The producer example downloads a matching `.words.json` alongside the demo audio;
-update both fixtures together when changing the example.
+individual words; click one to seek to it. `/karaoke/` keeps the separate song
+karaoke view, unlisted. `/consume/` and `/produce/` carry a visitor from sample
+inputs to a useful result. Keep prerequisites and working directories explicit
+when editing guides. The producer example downloads a matching `.words.json`
+alongside the demo audio; update both fixtures together when changing the
+example.
 
 Most of the site is not written here. The specification pages render
 `../SPEC.md` and `../spec/*.md` directly, and the design notes render

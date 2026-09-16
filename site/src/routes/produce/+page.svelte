@@ -18,7 +18,7 @@
 	html={data.html}
 	headings={data.headings}
 	next={[
-		{ href: '/verify/', label: 'Check your output' },
+		{ href: '/build/#check-a-file-then-test-your-implementation', label: 'Run the conformance suite' },
 		{ href: '/try/', label: 'Open and listen' },
 		{ href: '/spec/', label: 'Implement your own producer' }
 	]}

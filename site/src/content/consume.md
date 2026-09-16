@@ -110,8 +110,6 @@ Keep that state with the data. It must not become a claim of verified audio
 when you pass the words to another part of your application.
 
 <!-- TODO(chris): wording -->
-<!-- The id below only keeps /verify/'s link alive; delete it with that page. -->
-<span id="the-six-states"></span>
 Every read ends in exactly one of six states. They are named and defined, with
 the consequence of each failing digest, in
 [the specification](/spec/v1/#trust-and-integrity).
