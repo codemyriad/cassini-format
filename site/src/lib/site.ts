@@ -18,7 +18,7 @@ export const site = {
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:
-		'Audio and a timed transcript in one .opus file. Find a passage in the text, then listen to hear what was actually said. Made for our Nextcloud Talk app.'
+		'An ordinary Ogg .opus file that carries its own transcript, speakers and provenance in its tags. Open specification, version 1, with CC0 schemas and readers.'
 };
 
 export const versions = [

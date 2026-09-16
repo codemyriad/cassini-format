@@ -53,11 +53,10 @@
 </script>
 
 <svelte:head>
-	<title>Cassini — the recording, the words, one file</title>
+	<title>Cassini — a whole meeting in one file</title>
 	<meta name="description" content={site.description} />
 </svelte:head>
 
-<!-- TODO(chris): wording — the hero title and the two sentences under it -->
 <section class="hero shell" aria-labelledby="hero-title">
 	<a class="release" href="{base}/changelog/"
 		><span class="release-dot"></span> v{site.currentVersion}
@@ -67,27 +66,31 @@
 		last change {data.change.date} <span aria-hidden="true">→</span></a
 	>
 	<h1 id="hero-title">
-		The recording.<br />The words.<br /><span>One file.</span>
+		A whole meeting<br /><span>in one file.</span>
 	</h1>
 	<p class="hero-lede">
-		A Cassini portable meeting is an ordinary <code>.opus</code> file. Any player plays it, because that
-		is all it is: Ogg Opus, 48 kHz.
+		A Cassini portable meeting file is an ordinary Ogg <code>.opus</code> audio file at 48 kHz.
 	</p>
 	<p class="hero-description">
-		It also carries its own word-timestamped transcript, the speakers, and a record of what produced
-		the text, in the OpusTags header, where a player that does not care ignores them.
+		What makes it special is everything packed in alongside the audio: the transcript, the speakers,
+		a summary if you asked for one, and a record of what produced them, all written into the file's
+		own tags, right next to <code>TITLE</code> and <code>DATE</code>. No sidecar to lose.
+	</p>
+	<p class="hero-description">
+		The format is specified and published. <a href="{base}/spec/v1/">Version 1</a> is current, the
+		schemas and readers are CC0, and <a href={site.appUrl} rel="noreferrer">gocassini</a> writes every
+		Nextcloud Talk meeting it records this way.
 	</p>
 	<div class="actions">
 		<a class="button button--primary" href="{base}/spec/v1/"
 			>Read the spec <span aria-hidden="true">→</span></a
 		>
-		<a class="button" href="{base}/try/">Open a file</a>
+		<a class="button" href="{base}/build/">Build with it</a>
 	</div>
 </section>
 
 <section class="shell section" id="example" aria-labelledby="example-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">The example</p>
 		<!-- TODO(chris): wording — the one sentence that ties the two halves together -->
 		<h2 id="example-title">Everything the viewer shows comes from the OpusTags in this file.</h2>
 	</div>
@@ -157,9 +160,8 @@
 
 <section class="shell section" id="spec" aria-labelledby="spec-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">Spec</p>
 		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="spec-title">The contracts a reader and a producer follow.</h2>
+		<h2 id="spec-title">The specification a reader and a producer follow.</h2>
 	</div>
 
 	<a class="current" href="{base}/spec/v1/">
@@ -213,9 +215,8 @@
 
 <section class="shell section" id="tools" aria-labelledby="tools-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">Tools</p>
 		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="tools-title">Everything here works on an ordinary <code>.opus</code> file.</h2>
+		<h2 id="tools-title">Readers, a producer and a conformance suite.</h2>
 	</div>
 	<ul class="tools">
 		{#each tools as tool (tool.name)}
@@ -233,14 +234,12 @@
 
 <section class="shell section" id="implementations" aria-labelledby="implementations-title">
 	<div class="section-heading">
-		<p class="eyebrow eyebrow--plain">Implementations</p>
 		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="implementations-title">Who writes and reads these files.</h2>
+		<h2 id="implementations-title">gocassini is the reference implementation.</h2>
 	</div>
 
 	<div class="impl">
 		<article>
-			<h3>gocassini</h3>
 			<p>
 				<a href={site.appUrl} rel="noreferrer">gocassini</a> is the reference implementation: it records
 				a meeting, transcribes it and packs the result into one of these files. It is
@@ -253,23 +252,6 @@
 				<a href={site.implRepo} rel="noreferrer">Source on GitHub ↗</a>
 				<a href="https://apps.nextcloud.com/apps/gocassini" rel="noreferrer">Nextcloud app ↗</a>
 			</div>
-		</article>
-		<article>
-			<h3>Who uses it</h3>
-			<p>
-				We do, in gocassini. Every meeting it records is written this way. We do not yet have
-				independent adoption to report.
-			</p>
-			<p>
-				The container and transport in <code>{site.formatId}</code> remain stable.
-				<code>CASSINI_FORMAT</code>, the payload chunk naming,
-				<code>base64url+gzip+utf8json</code>, the <code>CASSINI_TX_&lt;ID&gt;_PAYLOAD_</code> prefix
-				scheme and the <code>cassini.words.v1</code> body shape are used by shipped software.
-			</p>
-			<p class="say-so">
-				If you build one, say so: a format that only one program reads is not really a format.
-				<a href="{site.repo}/issues" rel="noreferrer">Report an implementation ↗</a>
-			</p>
 		</article>
 	</div>
 </section>
@@ -332,10 +314,6 @@
 	.section-heading {
 		max-width: 760px;
 		margin-bottom: 2.25rem;
-	}
-	.section-heading .eyebrow {
-		color: var(--blue);
-		margin-bottom: 1rem;
 	}
 	.section-heading h2 {
 		margin-bottom: 0;
@@ -585,17 +563,12 @@
 
 	/* ---- implementations ---- */
 	.impl {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 2.5rem;
+		max-width: 760px;
 	}
 	.impl article {
 		border-top: 1px solid var(--rule-hi);
 		padding-top: 1.4rem;
 		min-width: 0;
-	}
-	.impl h3 {
-		margin-bottom: 0.8rem;
 	}
 	.impl p {
 		font-size: 15px;
@@ -605,9 +578,6 @@
 		flex-wrap: wrap;
 		gap: 0.5rem 1.5rem;
 		font-size: 14px;
-	}
-	.say-so {
-		margin-bottom: 0;
 	}
 
 	@media (max-width: 1050px) {
@@ -637,12 +607,8 @@
 		h1 {
 			font-size: clamp(3.4rem, 9vw, 5rem);
 		}
-		.spec-facts,
-		.impl {
+		.spec-facts {
 			grid-template-columns: minmax(0, 1fr);
-		}
-		.impl {
-			gap: 1.75rem;
 		}
 	}
 	@media (max-width: 560px) {

@@ -51,3 +51,9 @@ The [complete specification as text](/llms-full.txt) includes the contracts,
 implementation guides, schemas and sample file facts. Give it
 to your assistant, then run the same file checks and conformance suite you would
 use for any other implementation.
+
+## Report an implementation
+
+If you build one, say so: a format that only one program reads is not really a format.
+
+[Open an issue](https://github.com/codemyriad/cassini-format/issues)
