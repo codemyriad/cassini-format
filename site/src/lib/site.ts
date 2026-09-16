@@ -12,6 +12,9 @@ export const site = {
 	currentVersion: 1,
 	repo: 'https://github.com/codemyriad/cassini-format',
 	implRepo: 'https://github.com/codemyriad/gocassini',
+	/** The app that implements this format: recorder, transcriber and packer. */
+	appUrl: 'https://gocassini.com',
+	appName: 'gocassini',
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:

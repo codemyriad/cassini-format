@@ -11,7 +11,6 @@
 				<ul>
 					<li><a href="{base}/using/">Why we made it & how to use it</a></li>
 					<li><a href="{base}/try/">Open a recording</a></li>
-					<li><a href="{base}/demo/">Try synchronized lyrics</a></li>
 					<li><a href="{base}/status/">Project status & compatibility</a></li>
 				</ul>
 				<p class="origin">Made for our Nextcloud Talk app, <a href={site.implRepo}>gocassini</a>.
@@ -26,6 +25,11 @@
 					<li><a href="{base}/verify/">Check a file</a></li>
 					<li><a href="{base}/build/#check-a-file-then-test-your-implementation">Test your reader</a></li>
 					<li><a href={site.repo} rel="noreferrer">Source code on GitHub ↗</a></li>
+					<li>
+						<a href={site.appUrl} rel="noreferrer"
+							>{site.appName} — the app that implements it ↗</a
+						>
+					</li>
 				</ul>
 			</div>
 			<div>

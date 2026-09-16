@@ -4,7 +4,7 @@
 	import { nav, site } from '$lib/site';
 
 	let open = $state(false);
-	let theme = $state<'dark' | 'light'>('dark');
+	let theme = $state<'dark' | 'light'>('light');
 
 	function toggleTheme() {
 		theme = theme === 'dark' ? 'light' : 'dark';
@@ -17,7 +17,7 @@
 	}
 
 	$effect(() => {
-		theme = (document.documentElement.dataset.theme as 'dark' | 'light') ?? 'dark';
+		theme = (document.documentElement.dataset.theme as 'dark' | 'light') ?? 'light';
 	});
 
 	const current = $derived(page.url.pathname);
@@ -26,7 +26,6 @@
 		(href === '/using/' && current.startsWith(`${base}/status/`)) ||
 		(href === '/build/' &&
 			['/consume/', '/produce/', '/verify/'].some((path) => current.startsWith(`${base}${path}`))) ||
-		(href === '/try/' && current.startsWith(`${base}/demo/`)) ||
 		(href === '/spec/' &&
 			['/schema/', '/design/'].some((path) => current.startsWith(`${base}${path}`)));
 </script>
@@ -43,21 +42,21 @@
 <header class="nav">
 	<div class="shell nav__in">
 		<a class="brand" href="{base}/" aria-label="{site.name} portable meeting format, home">
-			<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-				<circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.6" />
-				<ellipse
-					cx="12"
-					cy="12"
-					rx="10.4"
-					ry="3.6"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.3"
-					transform="rotate(-19 12 12)"
-					opacity="0.75"
-				/>
-			</svg>
-			<span>{site.name}</span><span class="brand__dim">/format</span>
+			<img
+				class="brand__mark brand__mark--light"
+				src="{base}/brand/logo-light.svg"
+				alt=""
+				width="596"
+				height="120"
+			/>
+			<img
+				class="brand__mark brand__mark--dark"
+				src="{base}/brand/logo-colour.svg"
+				alt=""
+				width="602"
+				height="120"
+			/>
+			<span class="brand__dim">Format</span>
 		</a>
 
 		<nav id="main-navigation" class="nav__links" class:nav__links--open={open} aria-label="Main">
@@ -72,6 +71,13 @@
 				>
 			{/each}
 			<a href={site.repo} rel="noreferrer">GitHub<span class="ext">↗</span></a>
+			<a
+				href={site.appUrl}
+				rel="noreferrer"
+				aria-label="{site.appName}, the app that implements this format"
+				title="The app that implements this format"
+				onclick={() => (open = false)}>{site.appName}<span class="ext">↗</span></a
+			>
 		</nav>
 
 		<div class="nav__end">
@@ -149,12 +155,27 @@
 		text-decoration: none;
 		color: var(--blue);
 	}
-	.brand svg {
-		color: var(--blue);
+	/* The lockup is gocassini.com's own asset. The colour version carries the
+	   brand blue and needs a dark ground; the light theme gets the mono one. */
+	.brand__mark {
+		height: 22px;
+		width: auto;
+		display: block;
+	}
+	.brand__mark--dark {
+		display: none;
+	}
+	:global(html[data-theme='dark']) .brand__mark--light {
+		display: none;
+	}
+	:global(html[data-theme='dark']) .brand__mark--dark {
+		display: block;
 	}
 	.brand__dim {
 		color: var(--fg-4);
 		font-weight: 400;
+		padding-left: 0.55rem;
+		border-left: 1px solid var(--rule-hi);
 	}
 	.nav__links {
 		display: flex;
