@@ -26,12 +26,21 @@ built from this repository.
 
 ## Try it on a file
 
+The site lists every tool, with its language and licence, at
+<https://format.gocassini.com/build/>, including a browser reader that needs no
+install. From this repository:
+
 ```bash
 tools/cassini-extract.py meeting.opus --tags   # the descriptor tags
 tools/cassini-extract.py meeting.opus --list   # which transcripts are inside
 tools/cassini-extract.py meeting.opus          # the manifest as JSON
 tools/cassini-read-pure.py meeting.opus        # no ffprobe: parses the container itself
 ```
+
+## Versions
+
+Version 1, published 2026-09-02, simplified 2026-09-07. The change history is in
+[`CHANGELOG.md`](CHANGELOG.md).
 
 ## The shape of it
 
@@ -66,9 +75,11 @@ Three commitments run through it:
 
 ## Implementations
 
-The reference producer is [gocassini](https://github.com/codemyriad/gocassini),
-which records, transcribes and packs these files. The readers in `tools/` and
-on the site are the others. If you build one, say so: a format that only one
-program reads is not really a format.
+[gocassini](https://gocassini.com) is the reference implementation: it records
+a meeting, transcribes it and packs the result into one of these files. It is
+[open source](https://github.com/codemyriad/gocassini) and ships as a
+[Nextcloud app](https://apps.nextcloud.com/apps/gocassini). The readers in
+`tools/` and on the site are the others. If you build one, say so: a format that
+only one program reads is not really a format.
 
 Issues and pull requests welcome.

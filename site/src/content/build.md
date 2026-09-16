@@ -1,39 +1,24 @@
-The format is the contract between applications. You can reuse a standalone
-reader or producer, or implement that contract yourself. Start with the outcome
-you need; each guide explains its inputs, gives a working path, and connects to
-the checks that tell you what you have built.
+<!-- TODO(chris): wording -->
+Everything here works on an ordinary `.opus` file. The readers and the producer
+are standalone: copy one into your project, or use it to check what you built.
 
-To explore a recording without code, [open the browser player](/try/).
-If you are deciding whether the format fits, start with [Using Cassini](/using/).
+| Tool | What it does | Language | Licence | Link |
+| --- | --- | --- | --- | --- |
+| Browser reader | Opens a file and plays it with its transcript, without installing anything | JavaScript | CC0 reader, AGPL-3.0 transcript component | [Open a file](/try/) |
+| `cassini-read-pure.py` | Reads a file with no external tools; parses the Ogg container itself | Python, stdlib only | CC0 | [tools/](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-read-pure.py) |
+| `cassini-extract.py` | Prints the tags, the manifest or one transcript; `--check` verifies the payload digests | Python + ffprobe | CC0 | [tools/](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-extract.py) |
+| `cassini-pack.py` | Packs Ogg Opus audio and timed words into a Cassini file | Python, stdlib only | CC0 | [tools/](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-pack.py) |
+| `cassini-opus-digest.py` | Computes `exact-opus-audio-v1` from the spec alone | Python, stdlib only | CC0 | [tools/](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-opus-digest.py) |
+| `cassini-read.js` | Reads a file in the browser: `fetch`, `DecompressionStream`, `crypto.subtle` | JavaScript, no dependencies | CC0 | [tools/](https://github.com/codemyriad/cassini-format/blob/main/tools/cassini-read.js) |
+| Conformance suite | Test vectors and an adapter protocol for testing a reader in any language | Python harness | CC0 | [Run it](#check-a-file-then-test-your-implementation) |
+| ffprobe one-liner | Dumps the payload with no script and no library | Shell | — | [The payload, in one pipeline](/consume/#the-payload-in-one-pipeline) |
 
-## Choose what you want to build
-
-| Your goal | Start here | What you will have |
-| --- | --- | --- |
-| Use a recording's transcript in your application | [Read a file in code](/consume/) | Words, timestamps and speaker data in Python or JavaScript, with the reader's reported state. |
-| Export recordings from your application | [Create a Cassini file](/produce/) | One `.opus` file containing your existing audio and timed words, with the audio packets preserved. |
-| Establish that a file is ready to share | [Check a file](/verify/) | Separate checks for readable metadata, audio matching, and JSON structure, with the limits of each result. |
-| Write an independent implementation | [Specification & schemas](/spec/) | The normative contracts, plus the conformance workflow below to test reader behavior. |
-
-## Know which pieces you are reusing
-
-The standalone Python reader, Python producer and JavaScript reader are CC0.
-They use standard-library or browser APIs. Their guides list any additional
-tools needed for optional inspection and validation steps.
-
-The transcript interface displayed on this site is a separate component from
-the gocassini application, licensed under AGPL-3.0. You can use the CC0 reader
-to obtain data and build an interface of your own. The format does not require
-the particular viewer shown in the demo.
-
-Use the **guides** to get from inputs to a result. Use the **specification** to
-settle required behavior and edge cases. Use the **design notes** to understand
-why the contract took its present shape. The [project status](/status/) explains
-which revisions existing implementations support.
+The guides show them in use: [read a file in code](/consume/) and
+[create a Cassini file](/produce/).
 
 ## Check a file, then test your implementation
 
-[Checking a file](/verify/) answers questions about that recording. A reader
+Checking a file answers questions about that recording. A reader
 also needs to behave correctly when metadata is absent, newer than it understands,
 or damaged. The conformance suite exercises those cases and distinguishes required
 behavior from advisory warnings.
@@ -63,6 +48,6 @@ reader or the contract changes, and include your own representative files.
 ## Build with a coding assistant
 
 The [complete specification as text](/llms-full.txt) includes the contracts,
-implementation and verification guides, schemas and sample file facts. Give it
+implementation guides, schemas and sample file facts. Give it
 to your assistant, then run the same file checks and conformance suite you would
 use for any other implementation.
