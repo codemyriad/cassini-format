@@ -1,18 +1,20 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
 		<script>
-			// Pick the theme before first paint so the page never flashes.
+			// Pick the theme before first paint so the page never flashes. Light is the
+			// default, as it is on gocassini.com; the OS preference or a saved choice
+			// switches to dark.
 			try {
 				const saved = localStorage.getItem('cassini-theme');
 				const wants =
-					saved ?? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+					saved ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 				document.documentElement.dataset.theme = wants;
 			} catch (e) {
-				/* private mode: stay dark */
+				/* private mode: stay light */
 			}
 		</script>
 		%sveltekit.head%

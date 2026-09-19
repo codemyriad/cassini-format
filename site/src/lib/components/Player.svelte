@@ -190,7 +190,7 @@
 	{/if}
 	{#if result}
 		<p class="state" role="status" data-state={result.state}>{stateLine}
-			<a href="{base}/using/#what-stays-with-the-file">What this means →</a>
+			<a href="{base}/spec/v1/#trust-and-integrity">What this means →</a>
 		</p>
 	{/if}
 	<details class="diagnostics">
@@ -204,7 +204,7 @@
 				</div>
 			{/each}
 		</div>
-		<p class="check-link"><a href="{base}/verify/">Check a file and understand the results →</a></p>
+		<p class="check-link"><a href="{base}/consume/#check-your-result">Check a file and understand the results →</a></p>
 	</details>
 </div>
 

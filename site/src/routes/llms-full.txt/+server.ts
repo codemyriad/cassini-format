@@ -89,11 +89,11 @@ A REAL FILE TO CHECK AGAINST
 	parts.push(rule('GUIDE — reading a file'));
 	parts.push(await siteContent('consume'));
 
-	parts.push(rule('GUIDE — checking a file'));
-	parts.push(await siteContent('verify'));
-
-	parts.push(rule('IMPLEMENTATION PATHS AND CONFORMANCE SETUP'));
+	parts.push(rule('TOOLS AND CONFORMANCE SETUP'));
 	parts.push(await siteContent('build'));
+
+	parts.push(rule('CHANGELOG — CHANGELOG.md'));
+	parts.push(await readRepoFile('CHANGELOG.md'));
 
 	for (const s of await listSchemas()) {
 		parts.push(rule(`SCHEMA — ${s.file}`));

@@ -32,30 +32,18 @@
 	let active = $state('');
 	let contentsOpen = $state(false);
 	const inReference = $derived(
-		['/spec/', '/design/'].some((path) => page.url.pathname.startsWith(`${base}${path}`))
-	);
-	const inOverview = $derived(
-		['/using/', '/status/'].some((path) => page.url.pathname.startsWith(`${base}${path}`))
+		['/spec/', '/design/', '/changelog/'].some((path) =>
+			page.url.pathname.startsWith(`${base}${path}`)
+		)
 	);
 	const section = $derived(
-		inReference
-			? { href: '/spec/', label: 'Specification' }
-			: inOverview
-				? { href: '/using/', label: 'Using Cassini' }
-				: { href: '/build/', label: 'Build with Cassini' }
+		inReference ? { href: '/spec/', label: 'Spec' } : { href: '/build/', label: 'Tools' }
 	);
 	const onward = $derived(
-		next ??
-			(inOverview
-				? [
-						{ href: '/try/', label: 'Open a recording' },
-						{ href: '/build/', label: 'Build support for Cassini' }
-					]
-				: [
-						{ href: '/build/', label: 'Choose an implementation path' },
-						{ href: '/verify/', label: 'Check a file' },
-						{ href: '/spec/', label: 'Specification & schemas' }
-					])
+		next ?? [
+			{ href: '/build/', label: 'Tools' },
+			{ href: '/spec/', label: 'Specification & schemas' }
+		]
 	);
 
 	$effect(() => {

@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects. One rule per line: from, to, status.
+# The karaoke page moved out of the main navigation on 2026-09-16.
+/demo/  /karaoke/  301
+# Pages cut in the 2026-09-16 restructure. /using/ was workflow prose, /status/
+# became the Implementations section of the home page, and /verify/'s checks
+# moved into the two guides.
+/using/  /  301
+/status/  /#implementations  301
+/verify/  /consume/#check-your-result  301

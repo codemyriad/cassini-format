@@ -12,19 +12,25 @@ export const site = {
 	currentVersion: 1,
 	repo: 'https://github.com/codemyriad/cassini-format',
 	implRepo: 'https://github.com/codemyriad/gocassini',
+	/** The app that implements this format: recorder, transcriber and packer. */
+	appUrl: 'https://gocassini.com',
+	appName: 'gocassini',
 	company: 'Code Myriad',
 	companyUrl: 'https://codemyriad.io',
 	description:
-		'Audio and a timed transcript in one .opus file. Find a passage in the text, then listen to hear what was actually said. Made for our Nextcloud Talk app.'
+		'An ordinary Ogg .opus file that carries its own transcript, speakers and provenance in its tags. Open specification, version 1, with CC0 schemas and readers.'
 };
 
 export const versions = [
 	{ id: 1, slug: 'v1', label: 'v1', status: 'current', wire: 'org.cassini.portable-meeting/1' }
 ] as const;
 
+/**
+ * Three things a specification site has to communicate: the spec, the tools for
+ * working with files, and who implements it. Implementations live on the home
+ * page and in the footer rather than a route or nav item of their own.
+ */
 export const nav = [
-	{ href: '/using/', label: 'Using Cassini' },
-	{ href: '/try/', label: 'Open a file' },
-	{ href: '/build/', label: 'Build with it' },
-	{ href: '/spec/', label: 'Specification' }
+	{ href: '/spec/', label: 'Spec' },
+	{ href: '/build/', label: 'Tools' }
 ];

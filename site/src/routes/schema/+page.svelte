@@ -21,7 +21,7 @@
 	<p>These schemas describe producer output. A reader also follows the
 		<a href="{base}/spec/v1/#trust-and-integrity">recovery rules in the specification</a>;
 		every schema error does not imply that the whole recording must be rejected.
-		<a href="{base}/verify/#validate-producer-output">Follow the validation walkthrough →</a></p>
+		<a href="{base}/produce/#checking-your-work">Follow the validation walkthrough →</a></p>
 
 	<div class="schemas">
 		{#each data.schemas as s (s.file)}
