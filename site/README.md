@@ -95,8 +95,13 @@ Cassini’s AGPL-3.0 component; its vendored source and license are included in
 URL, which every static host does by default. `404.html` is the not-found page.
 
 Production uses Cloudflare Pages Direct Upload, project `cassini-format`.
-Build from a clean checkout of merged `main` (including Git LFS demo assets),
-so unrelated local static files cannot enter the deployment:
+Every push to `main` deploys automatically through
+`.github/workflows/site.yml`, which also builds every pull request. It needs
+the repository secrets `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit on the
+Code Myriad account) and `CLOUDFLARE_ACCOUNT_ID`.
+
+To deploy by hand, build from a clean checkout of merged `main` (including Git
+LFS demo assets), so unrelated local static files cannot enter the deployment:
 
 ```bash
 npm ci
