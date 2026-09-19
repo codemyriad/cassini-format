@@ -28,10 +28,9 @@ export const versions = [
 /**
  * Three things a specification site has to communicate: the spec, the tools for
  * working with files, and who implements it. Implementations live on the home
- * page rather than a route of their own.
+ * page and in the footer rather than a route or nav item of their own.
  */
 export const nav = [
 	{ href: '/spec/', label: 'Spec' },
-	{ href: '/build/', label: 'Tools' },
-	{ href: '/#implementations', label: 'Implementations' }
+	{ href: '/build/', label: 'Tools' }
 ];

@@ -58,13 +58,6 @@
 </svelte:head>
 
 <section class="hero shell" aria-labelledby="hero-title">
-	<a class="release" href="{base}/changelog/"
-		><span class="release-dot"></span> v{site.currentVersion}
-		<span class="release-divider">·</span>
-		<code>{site.formatId}</code>
-		<span class="release-divider">·</span>
-		last change {data.change.date} <span aria-hidden="true">→</span></a
-	>
 	<h1 id="hero-title">
 		A whole meeting<br /><span>in one file.</span>
 	</h1>
@@ -76,11 +69,13 @@
 		a summary if you asked for one, and a record of what produced them, all written into the file's
 		own tags, right next to <code>TITLE</code> and <code>DATE</code>. No sidecar to lose.
 	</p>
-	<p class="hero-description">
-		The format is specified and published. <a href="{base}/spec/v1/">Version 1</a> is current, the
-		schemas and readers are CC0, and <a href={site.appUrl} rel="noreferrer">gocassini</a> writes every
-		Nextcloud Talk meeting it records this way.
-	</p>
+	<a class="release" href="{base}/changelog/"
+		><span class="release-dot"></span> v{site.currentVersion}
+		<span class="release-divider">·</span>
+		<code>{site.formatId}</code>
+		<span class="release-divider">·</span>
+		last change {data.change.date} <span aria-hidden="true">→</span></a
+	>
 	<div class="actions">
 		<a class="button button--primary" href="{base}/spec/v1/"
 			>Read the spec <span aria-hidden="true">→</span></a
@@ -91,8 +86,7 @@
 
 <section class="shell section" id="example" aria-labelledby="example-title">
 	<div class="section-heading">
-		<!-- TODO(chris): wording — the one sentence that ties the two halves together -->
-		<h2 id="example-title">Everything the viewer shows comes from the OpusTags in this file.</h2>
+		<h2 id="example-title">An example file</h2>
 	</div>
 
 	<div class="proof">
@@ -160,17 +154,15 @@
 
 <section class="shell section" id="spec" aria-labelledby="spec-title">
 	<div class="section-heading">
-		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="spec-title">The specification a reader and a producer follow.</h2>
+		<h2 id="spec-title">Specification</h2>
 	</div>
 
 	<a class="current" href="{base}/spec/v1/">
-		<div>
-			<p class="eyebrow eyebrow--plain">Current version · Published 2 September 2026</p>
-			<h3>Cassini v1 <span aria-hidden="true">→</span></h3>
-			<p>The file structure, metadata, producer requirements and reader behavior.</p>
-		</div>
-		<code>{site.formatId}</code>
+		<p class="eyebrow eyebrow--plain">Current version · Published 2 September 2026</p>
+		<h3>Cassini v1 <span aria-hidden="true">→</span></h3>
+		<p class="current-what">
+			The file structure, metadata, producer requirements and reader behavior.
+		</p>
 	</a>
 
 	<div class="cards">
@@ -195,28 +187,11 @@
 			<code>changelog</code>
 		</a>
 	</div>
-
-	<div class="spec-facts">
-		<p>
-			The digest is a join key, not a seal. A SHA-256 over the Opus packets says whether this
-			transcript describes this recording. It catches accidents, not adversaries.
-		</p>
-		<p>
-			Audio edits can leave the embedded transcript out of date. Software may also strip metadata, so
-			check files after editing or converting them.
-		</p>
-	</div>
-
-	<p class="spec-llms">
-		<a href="{base}/llms-full.txt">The complete specification as text</a> — one file for tools and coding
-		assistants.
-	</p>
 </section>
 
 <section class="shell section" id="tools" aria-labelledby="tools-title">
 	<div class="section-heading">
-		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="tools-title">Readers, a producer and a conformance suite.</h2>
+		<h2 id="tools-title">Tools</h2>
 	</div>
 	<ul class="tools">
 		{#each tools as tool (tool.name)}
@@ -234,18 +209,14 @@
 
 <section class="shell section" id="implementations" aria-labelledby="implementations-title">
 	<div class="section-heading">
-		<!-- TODO(chris): wording — the section heading and its one line -->
-		<h2 id="implementations-title">gocassini is the reference implementation.</h2>
+		<h2 id="implementations-title">Implementations</h2>
 	</div>
 
 	<div class="impl">
 		<article>
 			<p>
-				<a href={site.appUrl} rel="noreferrer">gocassini</a> is the reference implementation: it records
-				a meeting, transcribes it and packs the result into one of these files. It is
-				<a href={site.implRepo} rel="noreferrer">open source</a>
-				and ships as a
-				<a href="https://apps.nextcloud.com/apps/gocassini" rel="noreferrer">Nextcloud app</a>.
+				gocassini is the reference implementation. It records Nextcloud Talk calls, transcribes them
+				and saves each meeting as a Cassini file. Open source, installed as a Nextcloud app.
 			</p>
 			<div class="impl-links">
 				<a href={site.appUrl} rel="noreferrer">gocassini.com ↗</a>
@@ -264,6 +235,7 @@
 	}
 	.release {
 		display: inline-flex;
+		margin-top: 1.6rem;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.5rem;
@@ -288,7 +260,7 @@
 		font-size: clamp(3rem, 5.3vw, 4.8rem);
 		line-height: 1.04;
 		letter-spacing: -0.06em;
-		margin: 1.6rem 0;
+		margin: 0 0 1.6rem;
 	}
 	h1 > span {
 		color: var(--blue);
@@ -305,7 +277,7 @@
 		font-size: 16px;
 	}
 	.hero .actions {
-		margin-top: 1.8rem;
+		margin-top: 1.1rem;
 	}
 
 	.section {
@@ -438,12 +410,12 @@
 
 	/* ---- spec ---- */
 	.current {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-areas: 'meta title' 'what title';
 		align-items: center;
-		justify-content: space-between;
-		gap: 1.5rem;
-		padding: 2rem;
+		gap: 0.4rem 1.5rem;
+		padding: 1.25rem 1.75rem;
 		border: 1px solid var(--blue-rule);
 		border-radius: 7px;
 		background: var(--blue-wash);
@@ -454,23 +426,25 @@
 		border-color: var(--blue);
 	}
 	.current .eyebrow {
+		grid-area: meta;
+		margin: 0;
 		color: var(--blue);
 		line-height: 1.6;
 	}
 	.current h3 {
-		margin: 1rem 0 0.65rem;
+		grid-area: title;
+		margin: 0;
 		font-size: 25px;
+		white-space: nowrap;
 	}
 	.current h3 span {
 		color: var(--blue);
 		margin-left: 0.5rem;
 	}
-	.current p {
-		margin-bottom: 0;
+	.current-what {
+		grid-area: what;
+		margin: 0;
 		font-size: 15px;
-	}
-	.current > code {
-		font-size: 11px;
 	}
 	.cards {
 		display: grid;
@@ -504,22 +478,6 @@
 		margin-top: auto;
 		font-size: 11px;
 		align-self: flex-start;
-	}
-	.spec-facts {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1.5rem 2.5rem;
-		margin-top: 2.25rem;
-		padding-top: 1.75rem;
-		border-top: 1px solid var(--rule);
-	}
-	.spec-facts p {
-		margin: 0;
-		font-size: 15px;
-	}
-	.spec-llms {
-		margin-top: 1.5rem;
-		font-size: 14px;
 	}
 
 	/* ---- tools ---- */
@@ -607,9 +565,6 @@
 		h1 {
 			font-size: clamp(3.4rem, 9vw, 5rem);
 		}
-		.spec-facts {
-			grid-template-columns: minmax(0, 1fr);
-		}
 	}
 	@media (max-width: 560px) {
 		.cards {
@@ -620,6 +575,8 @@
 		}
 		.current {
 			padding: 1.25rem;
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas: 'meta' 'title' 'what';
 		}
 	}
 </style>
