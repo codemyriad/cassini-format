@@ -13,32 +13,20 @@
 </svelte:head>
 
 <div class="shell page-intro">
-	<p class="eyebrow eyebrow--plain">Reference</p>
-	<h1>The format, fully specified.</h1>
-	<p class="lede">
-		The contracts our tools use to read and write Cassini files. Start with v1, then
-		follow the body format and verification rules it references.
-	</p>
-	<p class="orientation">Looking for a working example? <a href="{base}/build/">Start with the tools</a>.
-		For the version history, see the <a href="{base}/changelog/">changelog</a>.</p>
+	<h1>Specification</h1>
 </div>
 
 <div class="shell reference">
 	<a class="current" href="{base}/spec/v1/">
-		<div>
-			<p class="eyebrow eyebrow--plain">Current version · Published 2 September 2026</p>
-			<h2>Cassini v1 <span aria-hidden="true">→</span></h2>
-			<p>The file structure, metadata, producer requirements and reader behavior.</p>
-		</div>
-		<code>{site.formatId}</code>
+		<p class="eyebrow eyebrow--plain">Current version · Published 2 September 2026</p>
+		<h2>Cassini v1 <span aria-hidden="true">→</span></h2>
+		<p class="current-what">
+			The file structure, metadata, producer requirements and reader behavior.
+		</p>
 	</a>
 
-	<!-- TODO(chris): wording -->
 	<section aria-labelledby="versions">
 		<h2 id="versions">Versions</h2>
-		<p>
-			One published version so far. The three before it were private drafts used inside gocassini.
-		</p>
 		<ul class="versions">
 			<li>
 				<a href="{base}/spec/v1/"><strong>v1</strong></a>
@@ -69,11 +57,10 @@
 	</section>
 
 	<section aria-labelledby="contracts">
-		<h2 id="contracts">The supporting contracts</h2>
+		<h2 id="contracts">Supporting contracts</h2>
 		<div class="resources">
 			<a href="{base}/spec/words-v1/"
-				><span class="number">01</span>
-				<div>
+				><div>
 					<h3>Transcript body</h3>
 					<p>A word, its speaker, and start and end times in milliseconds.</p>
 					<code>cassini.words.v1</code>
@@ -81,8 +68,7 @@
 				<span aria-hidden="true">↗</span></a
 			>
 			<a href="{base}/spec/audio-integrity/"
-				><span class="number">02</span>
-				<div>
+				><div>
 					<h3>Audio digest</h3>
 					<p>The exact bytes used to match a transcript to a recording, independent of its tags.</p>
 					<code>exact-opus-audio-v1</code>
@@ -94,8 +80,6 @@
 
 	<section aria-labelledby="validation">
 		<h2 id="validation">Validate your implementation</h2>
-		<p>Schemas describe the JSON a producer should write. Reader behavior also follows the
-			prose rules for recovery and unknown data. Conformance vectors exercise that behavior.</p>
 		<div class="schema-list">
 			{#each data.schemas as schema (schema.file)}<a href="{base}/schema/{schema.file}"
 					><span><strong>{schema.title}</strong><small>{schema.file}</small></span><span
@@ -113,22 +97,13 @@
 	</section>
 
 	<section class="further" aria-labelledby="further">
-		<div>
-			<h2 id="further">A little more context</h2>
-			<p>
-				The guides walk through an implementation. Design notes explain the decisions behind the
-				contract.
-			</p>
-		</div>
+		<h2 id="further">Further reading</h2>
 		<nav aria-label="Related resources">
-			<a href="{base}/build/">Implementation paths <span>Choose a guide and follow it through to a result →</span></a>
 			<a href="{base}/consume/"
 				>Read a file <span>Python, JavaScript and the decoding algorithm →</span></a
 			><a href="{base}/produce/"
 				>Write a file <span>A complete producer and validation steps →</span></a
 			><a href="{base}/design/">Design notes <span>Tradeoffs, measurements and rationale →</span></a
-			><a href="{base}/changelog/"
-				>Changelog <span>Versions of the format and every specification change →</span></a
 			><a href="{base}/llms-full.txt"
 				>The complete specification as text <span>One file for tools and coding assistants ↗</span
 				></a
@@ -144,28 +119,21 @@
 </div>
 
 <style>
-	.orientation {
-		font-size: 14px;
-		max-width: 75ch;
-		margin-bottom: 0;
-	}
 	.reference section {
-		margin-top: 3.5rem;
+		margin-top: 2.75rem;
 	}
 	.reference section > h2 {
 		font-size: 25px;
 		margin-bottom: 1rem;
 	}
-	.reference section > p {
-		font-size: 15px;
-	}
+	/* Same compact card as the home page's specification section. */
 	.current {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-areas: 'meta title' 'what title';
 		align-items: center;
-		justify-content: space-between;
-		gap: 1.5rem;
-		padding: 2rem;
+		gap: 0.4rem 1.5rem;
+		padding: 1.25rem 1.75rem;
 		border: 1px solid var(--blue-rule);
 		border-radius: 7px;
 		background: var(--blue-wash);
@@ -176,22 +144,25 @@
 		border-color: var(--blue);
 	}
 	.current .eyebrow {
+		grid-area: meta;
+		margin: 0;
 		color: var(--blue);
 		line-height: 1.6;
 	}
 	.current h2 {
-		margin: 1rem 0 0.65rem;
+		grid-area: title;
+		margin: 0;
+		font-size: 25px;
+		white-space: nowrap;
 	}
 	.current h2 span {
 		color: var(--blue);
 		margin-left: 0.5rem;
 	}
-	.current p {
-		margin-bottom: 0;
+	.current-what {
+		grid-area: what;
+		margin: 0;
 		font-size: 15px;
-	}
-	.current > code {
-		font-size: 11px;
 	}
 	.resources {
 		display: grid;
@@ -202,7 +173,7 @@
 		display: flex;
 		gap: 1rem;
 		align-items: baseline;
-		padding: 1.5rem;
+		padding: 1.25rem;
 		border: 1px solid var(--rule);
 		border-radius: 6px;
 		color: inherit;
@@ -215,12 +186,8 @@
 		margin-left: auto;
 		color: var(--blue);
 	}
-	.number {
-		font: 11px var(--mono);
-		color: var(--fg-4);
-	}
 	.resources h3 {
-		margin-bottom: 0.6rem;
+		margin-bottom: 0.4rem;
 	}
 	.resources p {
 		font-size: 15px;
@@ -236,7 +203,7 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		padding-block: 1.15rem;
+		padding-block: 0.8rem;
 		border-bottom: 1px solid var(--rule);
 	}
 	.schema-list a strong {
@@ -247,7 +214,7 @@
 		display: block;
 		font: 11px var(--mono);
 		color: var(--fg-4);
-		margin-top: 0.5rem;
+		margin-top: 0.3rem;
 		overflow-wrap: anywhere;
 	}
 	.schema-size {
@@ -262,30 +229,14 @@
 		font-size: 14px;
 		margin-top: 1rem;
 	}
-	.further {
-		display: grid;
-		grid-template-columns: 0.9fr 1.1fr;
-		gap: 4rem;
-		border-top: 1px solid var(--rule);
-		padding-top: 3rem;
-	}
-	.further h2 {
-		font-size: 25px;
-		margin-bottom: 1rem;
-	}
-	.further p {
-		font-size: 15px;
-	}
 	.further nav {
 		display: grid;
+		border-top: 1px solid var(--rule);
 	}
 	.further nav a {
 		border-bottom: 1px solid var(--rule);
-		padding: 0.9rem 0;
+		padding: 0.8rem 0;
 		font-size: 16px;
-	}
-	.further nav a:first-child {
-		padding-top: 0;
 	}
 	.further nav span {
 		display: block;
@@ -304,7 +255,7 @@
 		flex-wrap: wrap;
 		align-items: baseline;
 		gap: 0.4rem 1.5rem;
-		padding-block: 0.9rem;
+		padding-block: 0.7rem;
 		border-bottom: 1px solid var(--rule);
 		font-size: 15px;
 	}
@@ -326,14 +277,12 @@
 		color: var(--fg-4);
 	}
 	@media (max-width: 720px) {
-		.resources,
-		.further {
+		.resources {
 			grid-template-columns: minmax(0, 1fr);
 		}
-		.further {
-			gap: 1.5rem;
-		}
 		.current {
+			grid-template-areas: 'meta' 'title' 'what';
+			grid-template-columns: minmax(0, 1fr);
 			padding: 1.25rem;
 		}
 	}
