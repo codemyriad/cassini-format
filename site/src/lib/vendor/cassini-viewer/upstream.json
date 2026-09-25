@@ -1,12 +1,12 @@
 {
   "repository": "https://github.com/codemyriad/gocassini",
-  "commit": "297d57b6b2520829072ea8d270eb8e7e693e3599",
+  "commit": "6b85943566a46450cf76fcd295e57d9e789b724c",
   "license": "AGPL-3.0",
   "files": {
     "src/components/MeetingView.svelte": {
       "source": "cassini-viewer/src/components/MeetingView.svelte",
-      "sha256": "d23e00bf1eaaef55e3ba9f38266201bcd921c73455cbb0a59f98d80b004cf944",
-      "patchedSha256": "e5c4e07b262e6d566979104aacc53a5660d42a18ddbe884c0280396877e9e4ad"
+      "sha256": "7536bcc6ce89455cc5df25f47b4ca693c3ce588aa569cfcb9b1c2b9935f4fddb",
+      "patchedSha256": "295cf50842dc8d446eefdee381fd6de878606b4ad772dbeecccc62cf098a60bf"
     },
     "src/core/types.ts": {
       "source": "cassini-viewer/src/core/types.ts",
@@ -14,7 +14,7 @@
     },
     "src/core/transcript.ts": {
       "source": "cassini-viewer/src/core/transcript.ts",
-      "sha256": "46aa740f210c96bec0278e702ae11082a80365b29c8585ba36a7d4bc56342836"
+      "sha256": "6b904e99646621e98aea5bcb8e150a704c4292f711f66e778ebe72382349065a"
     },
     "src/core/overlap.ts": {
       "source": "cassini-viewer/src/core/overlap.ts",
@@ -30,20 +30,20 @@
     },
     "src/viewer/loadArtifact.ts": {
       "source": "cassini-viewer/src/viewer/loadArtifact.ts",
-      "sha256": "ec2d0e819970f669c5897087bac3422197c7fd16907ba64a94bd8513a74af46e"
+      "sha256": "fa751c1bcdf0ba9834bbec3de7390439384d29c1e77a6b82401a644b450340b0"
     },
     "src/viewer/portable.ts": {
       "source": "cassini-viewer/src/viewer/portable.ts",
-      "sha256": "05893555108f40d4de0c413f05472852376ea6b7388428bc930385b8f1b25b3e",
-      "patchedSha256": "5f6d789a85875f5c81f5d284ab839ad174a7bae4632c095a27b9a13e47414150"
+      "sha256": "a8406b884c329fd144703c9ce97efa5c4909a21d0abbbb729be0074a5b22439b",
+      "patchedSha256": "bb23a34e0995abfb0854e75bc16bdac458b99cd8b52f0bf2e5557fe48b6811a4"
     },
     "src/viewer/dataProvider.ts": {
       "source": "cassini-viewer/src/viewer/dataProvider.ts",
-      "sha256": "b2b4232533bef0bf239577a9c1f2c59e31bc72bfead8472855f5ceb3194d0768"
+      "sha256": "46c471d6afc9e02efb4dba6be4e505b4ea0ee8ba8d236db47953fb387772262b"
     },
     "src/viewer/catalog.ts": {
       "source": "cassini-viewer/src/viewer/catalog.ts",
-      "sha256": "cc4bceac152b810f2e312a8c8f8ece0e5490002c55d6817fdd5893773f08d907"
+      "sha256": "6c29f4651f0ed9d420e7de71c1ac605a9eaf20b371675ff93e9cea5ac616210a"
     },
     "src/viewer/appBase.ts": {
       "source": "cassini-viewer/src/viewer/appBase.ts",
@@ -59,7 +59,7 @@
     },
     "src/app.css": {
       "source": "cassini-viewer/src/app.css",
-      "sha256": "183625f34f1f5053774a13e10485a155c8c23c3eab5f5d2eef04240a1bc9fb00"
+      "sha256": "55d005530c2ba281e3d76108db12b749daa7dce148c8a133a5b1242f6052e631"
     },
     "src/core/overlap.test.ts": {
       "source": "cassini-viewer/src/core/overlap.test.ts",
@@ -71,7 +71,7 @@
     },
     "src/core/transcript.test.ts": {
       "source": "cassini-viewer/src/core/transcript.test.ts",
-      "sha256": "5a08fc4ee880aa89b8f6f2194452282501e9cd92fd414876ea6bafa1221040b2"
+      "sha256": "99bd368d63f269bfd57512d77524f5e7a4ac827203bfc752cf85734d085cde5e"
     },
     "src/core/timing.test.ts": {
       "source": "cassini-viewer/src/core/timing.test.ts",
@@ -87,15 +87,15 @@
     },
     "src/components/TranscriptWords.svelte": {
       "source": "cassini-viewer/src/components/TranscriptWords.svelte",
-      "sha256": "7dbf259b5eae2b8cf58208b89c92e8627b721b50ce393a5b2f4f55439804d06a"
+      "sha256": "7a1b21858c8c5ea0aba936aa692d2263d7c30d4d66cbd657edef8fb53da061ef"
     },
     "src/components/TranscriptWords.test.ts": {
       "source": "cassini-viewer/src/components/TranscriptWords.test.ts",
-      "sha256": "3741562f001ccbdfdf0c37ec72b38141a7193f8226806d6360ba10b7493a7637"
+      "sha256": "7b1c9db0b151b0c581b8d06785bcd690809c326f88ed86f3f6250d7aed69abb6"
     },
     "src/components/MeetingView.transcript.test.ts": {
       "source": "cassini-viewer/src/components/MeetingView.transcript.test.ts",
-      "sha256": "4a5ad8979bb790b7d7d3833df46e1592ba13a346eea64dd2bae8a9196f9e2140"
+      "sha256": "7f18df15dd6c5c7084feb88e494f2a74e10867ceec98d3ba6af78f18025b97a1"
     },
     "src/core/wordHighlight.ts": {
       "source": "cassini-viewer/src/core/wordHighlight.ts",
@@ -112,6 +112,106 @@
     "src/core/wordInteraction.test.ts": {
       "source": "cassini-viewer/src/core/wordInteraction.test.ts",
       "sha256": "0b6c025b134760d628828ac2de3406fab6a6004ac66c7a7a8f051dd597214b4c"
+    },
+    "src/viewer/meetingExport.ts": {
+      "source": "cassini-viewer/src/viewer/meetingExport.ts",
+      "sha256": "f5b765546951a1ed1c607b9d968f6674604f6e1c049914a08fab1517eb9e43b0"
+    },
+    "src/viewer/exportTransfer.ts": {
+      "source": "cassini-viewer/src/viewer/exportTransfer.ts",
+      "sha256": "a0de88ca7f8cee37b9b0d6a0360ebd339639312114017ed1ff162b73c869f9cc"
+    },
+    "src/components/marking/session.ts": {
+      "source": "cassini-viewer/src/components/marking/session.ts",
+      "sha256": "67493c06c85651e35568676202563d16a5bef97c48d4bfd544e4a4336b4b14ef"
+    },
+    "src/core/marking.ts": {
+      "source": "cassini-viewer/src/core/marking.ts",
+      "sha256": "695ed5df3150feeafa75e62a7d1253e8950e157cc8b2f3bb13f54f66a15d8a16"
+    },
+    "src/viewer/annotations.ts": {
+      "source": "cassini-viewer/src/viewer/annotations.ts",
+      "sha256": "241f8156ed0bda068c5b49fdc85cc795939cc2cbdd670a59e070c25f308058b7"
+    },
+    "src/viewer/tagPalette.ts": {
+      "source": "cassini-viewer/src/viewer/tagPalette.ts",
+      "sha256": "b027095f9c03d19633da76b7c5ad9d5bb77b3dca4fe9fdc74332ff2c51d3e93c"
+    },
+    "src/components/tags/TagChip.svelte": {
+      "source": "cassini-viewer/src/components/tags/TagChip.svelte",
+      "sha256": "9e1cfbc7a75e21a3860d1c18dc27ec84f36d7c313a3b9ec75732d1bb68f6099f"
+    },
+    "src/components/tags/TagIcon.svelte": {
+      "source": "cassini-viewer/src/components/tags/TagIcon.svelte",
+      "sha256": "9fa00477d337a011729964a87a0cd580a39651ec1a1d0ed69369340f1d48bf5d"
+    },
+    "src/viewer/insights.ts": {
+      "source": "cassini-viewer/src/viewer/insights.ts",
+      "sha256": "014f393f41e0e23d1f23660dfa5fcb9930de42e618eaa4035e57d0717e6da0ea"
+    },
+    "src/viewer/meetingSearch.ts": {
+      "source": "cassini-viewer/src/viewer/meetingSearch.ts",
+      "sha256": "3a67dbbbe8dcc61942023f240ee06a787a41c639608ae69973f6fe9b850f7e40"
+    },
+    "src/viewer/rooms.ts": {
+      "source": "cassini-viewer/src/viewer/rooms.ts",
+      "sha256": "4d9d79c6175e6ea67004a49d3bcc26ee80844afbe814bbab4fe4de6836df968c"
+    },
+    "src/components/ui/CloseButton.svelte": {
+      "source": "cassini-viewer/src/components/ui/CloseButton.svelte",
+      "sha256": "c7b6c5e816874e08b03bd4df1f373fd18e61cd61f13fd58400cc2ad0d1de7539"
+    },
+    "src/components/marking/MeetingTags.svelte": {
+      "source": "cassini-viewer/src/components/marking/MeetingTags.svelte",
+      "sha256": "bca662be60459f7b65f9fc4a0d5b0f946da4a3dbc8b8c75ec768a60f701e024f"
+    },
+    "src/components/marking/TranscriptFrame.svelte": {
+      "source": "cassini-viewer/src/components/marking/TranscriptFrame.svelte",
+      "sha256": "6250f34ee4ff1bec07679230250f8119cb0b14da241c841fb6dbc687099a6ec8"
+    },
+    "src/core/find.ts": {
+      "source": "cassini-viewer/src/core/find.ts",
+      "sha256": "0d2543f9f355a2ee16047bee0ba1dabed6430d7f13bd6da4b0b61f4f19bd3460"
+    },
+    "src/components/marking/MarkBrackets.svelte": {
+      "source": "cassini-viewer/src/components/marking/MarkBrackets.svelte",
+      "sha256": "3690011c11949b3bd97894e4d11a3b5f80e1fbbdecce122ca0812f22a59153b5"
+    },
+    "src/components/marking/MarkingRail.svelte": {
+      "source": "cassini-viewer/src/components/marking/MarkingRail.svelte",
+      "sha256": "62d7ee47781cb68fcc536b4caf8a1feeb18e6fdafe14733b94b37f7bbbdc3b50"
+    },
+    "src/components/marking/SectionsNav.svelte": {
+      "source": "cassini-viewer/src/components/marking/SectionsNav.svelte",
+      "sha256": "f8b95ef51600b20cfbe2aca844dd0604aabbf311398a63b5aec429376d946e4b"
+    },
+    "src/components/marking/StretchToolbar.svelte": {
+      "source": "cassini-viewer/src/components/marking/StretchToolbar.svelte",
+      "sha256": "6687c17f6b2015d11c9ff452f8faa003d24acadb2722b72fc33b79b0c05e30ea"
+    },
+    "src/components/marking/TranscriptToolbar.svelte": {
+      "source": "cassini-viewer/src/components/marking/TranscriptToolbar.svelte",
+      "sha256": "e39dd811fc96858f15cb973e007cd88be4e3a30698dedf7cd055ab3636d79535"
+    },
+    "src/components/ui/Kbd.svelte": {
+      "source": "cassini-viewer/src/components/ui/Kbd.svelte",
+      "sha256": "cae2dac2fc300b599573e2b99385d4ef9f9549af1e4daf150b157aa7607118e4"
+    },
+    "src/components/tags/TagPicker.svelte": {
+      "source": "cassini-viewer/src/components/tags/TagPicker.svelte",
+      "sha256": "91bf2198dba13914952d86c327882018c7dbb67f3f45bd5155f2a98892b10839"
+    },
+    "src/components/ui/ActionButton.svelte": {
+      "source": "cassini-viewer/src/components/ui/ActionButton.svelte",
+      "sha256": "92a180e186ea2908e417865cf41ba27239902cae4898d8528e64aa87001bf969"
+    },
+    "src/components/tags/ColorSwatchPicker.svelte": {
+      "source": "cassini-viewer/src/components/tags/ColorSwatchPicker.svelte",
+      "sha256": "156f3a1ec6c1f1c25a6ba511c914885dd45b752598da40760e70f66599d3895e"
+    },
+    "src/components/tags/popover.ts": {
+      "source": "cassini-viewer/src/components/tags/popover.ts",
+      "sha256": "f9471a51a000b8fc31f18ed0025eb4b464e103d6ea58f6879b13de259dd38b67"
     }
   }
 }

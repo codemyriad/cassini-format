@@ -20,6 +20,7 @@ import {
   searchSegments,
   validateDisplayTranscriptV1,
   validateTranscriptWordsV1,
+  filterDisplaySegmentsByQuery,
 } from "./transcript";
 
 const fixture = validateTranscriptWordsV1({
@@ -1027,5 +1028,119 @@ describe("canonicalWordsForBlock rejects resolvable but incompatible references"
     expect(canonicalWordsForBlock(portableIndex, staleToken).map((word) => word.id)).toEqual([
       "seg_000000:w_0",
     ]);
+  });
+});
+
+describe("filterDisplaySegmentsByQuery", () => {
+  const index = buildTranscriptIndex({
+    version: "transcript.words.v1",
+    media: { src: "m.opus", durationMs: 60_000 },
+    speakers: [
+      { id: "s1", label: "Ana" },
+      { id: "s2", label: "Ben" },
+    ],
+    segments: [
+      {
+        id: "seg1",
+        speaker: "s1",
+        startMs: 0,
+        endMs: 2_000,
+        text: "we discussed the acquisition",
+        words: [],
+      },
+      { id: "seg2", speaker: "s2", startMs: 3_000, endMs: 5_000, text: "and the roadmap", words: [] },
+      { id: "seg3", speaker: "s1", startMs: 6_000, endMs: 8_000, text: "nothing else", words: [] },
+    ],
+  });
+
+  // A block can be built from several canonical segments, so it survives when
+  // ANY of them matched — matching a block's own rendered text would miss a
+  // word the display projection reworded away.
+  const blocks = [
+    { sourceSegmentIds: ["seg1", "seg2"] },
+    { sourceSegmentIds: ["seg3"] },
+  ];
+
+  it("keeps a block when any segment it was built from matches", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "acquisition")).toEqual([blocks[0]]);
+  });
+
+  it("requires every word of the query, not any", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "acquisition roadmap")).toEqual([]);
+    expect(filterDisplaySegmentsByQuery(index, blocks, "discussed acquisition")).toEqual([
+      blocks[0],
+    ]);
+  });
+
+  // The opposite of searchSegments, deliberately: this filters a transcript
+  // somebody is reading, and an empty box means "no filter", not "no matches".
+  it("returns everything for a blank query", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "   ")).toEqual(blocks);
+    expect(filterDisplaySegmentsByQuery(index, blocks, "")).toEqual(blocks);
+  });
+
+  it("returns everything when there is no index to search", () => {
+    expect(filterDisplaySegmentsByQuery(null, blocks, "acquisition")).toEqual(blocks);
+  });
+
+  it("returns nothing when the query matches nothing", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "severance")).toEqual([]);
+  });
+});
+
+// Find-on-page over a REAL portable meeting, where the index holds one word
+// per segment. This is the shape the previous implementation could not serve:
+// no canonical segment holds two words, so every multi-word query returned
+// nothing at all.
+describe("filterDisplaySegmentsByQuery over word-level segments", () => {
+  const index = buildTranscriptIndex({
+    version: "transcript.words.v1",
+    media: { src: "m.opus", durationMs: 60_000 },
+    speakers: [{ id: "s1", label: "Ana" }],
+    segments: [
+      { id: "w1", speaker: "s1", startMs: 0, endMs: 500, text: "ship", words: [] },
+      { id: "w2", speaker: "s1", startMs: 500, endMs: 1000, text: "the", words: [] },
+      { id: "w3", speaker: "s1", startMs: 1000, endMs: 1500, text: "roadmap", words: [] },
+      { id: "w4", speaker: "s1", startMs: 2000, endMs: 2500, text: "whatever", words: [] },
+    ],
+  });
+
+  const blocks = [
+    { sourceSegmentIds: ["w1", "w2", "w3"], speakerLabel: "Ana", text: "ship the roadmap" },
+    { sourceSegmentIds: ["w4"], speakerLabel: "Ana", text: "whatever" },
+  ];
+
+  it("finds a phrase of several words", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "ship the roadmap")).toEqual([blocks[0]]);
+    expect(filterDisplaySegmentsByQuery(index, blocks, "the roadmap")).toEqual([blocks[0]]);
+  });
+
+  it("still finds a single word", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "roadmap")).toEqual([blocks[0]]);
+  });
+
+  // Browser-find behaviour, and wanted: you are looking for something you can
+  // see, so a substring inside a longer word counts.
+  it("matches a substring inside a word, as Ctrl+F does", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "hate")).toEqual([blocks[1]]);
+  });
+
+  it("finds a speaker by name", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "Ana")).toEqual(blocks);
+  });
+
+  it("does not match words that are not next to each other", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "ship roadmap")).toEqual([]);
+  });
+
+  it("is case-insensitive, like the browser's own find", () => {
+    expect(filterDisplaySegmentsByQuery(index, blocks, "ShIp ThE RoAdMaP")).toEqual([blocks[0]]);
+  });
+
+  // The canonical path stays as a safety net: a term the display projection
+  // reworded away is still findable through what was actually said.
+  it("keeps finding a canonical word the rendered turn no longer shows", () => {
+    const reworded = [{ sourceSegmentIds: ["w3"], speakerLabel: "Ana", text: "the plan" }];
+    expect(filterDisplaySegmentsByQuery(index, reworded, "roadmap")).toEqual(reworded);
   });
 });

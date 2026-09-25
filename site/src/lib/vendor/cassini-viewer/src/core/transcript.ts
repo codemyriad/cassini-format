@@ -923,6 +923,63 @@ export function searchSegments(
   return segments.filter((segment) => tokens.every((token) => segment.searchText.includes(token)));
 }
 
+/**
+ * Narrow a meeting's rendered blocks to the ones matching a query.
+ *
+ * This is find-on-page, and it is meant to feel like the browser's own Ctrl+F:
+ * you are looking for something you can SEE, so the query matches as a plain
+ * substring of the rendered turn. That is why "hate" finds "whatever" — the
+ * same as the browser, and not a defect.
+ *
+ * It matches on two haystacks, and needs both.
+ *
+ * The rendered turn is what the reader is looking at, and it is contiguous —
+ * which is the only way a query of more than one word can ever match. Matching
+ * canonical segments alone could not: for a portable meeting the index holds
+ * ONE WORD PER SEGMENT (buildTranscriptWordsFromPortable rejects an item
+ * carrying more), so no canonical segment contains two words and every
+ * multi-word query returned nothing at all.
+ *
+ * The canonical words are kept as well, because the display projection can
+ * reword: a term that survives in what was actually said but not in the
+ * rendered turn stays findable, which is the property the previous
+ * segment-only implementation existed to protect. Keeping both is strictly
+ * more permissive than either, so nothing that used to be findable stops being.
+ *
+ * A blank query returns everything rather than nothing: this filters a
+ * transcript somebody is reading, and an empty box means "no filter". That is
+ * the opposite of searchSegments, whose empty query means "no matches" — it
+ * answers a different question, and the difference is why this wrapper exists
+ * rather than callers each deciding.
+ */
+export function filterDisplaySegmentsByQuery<
+  B extends {
+    readonly sourceSegmentIds: readonly string[];
+    readonly text?: string;
+    readonly speakerLabel?: string;
+  },
+>(index: TranscriptIndex | null, blocks: readonly B[], query: string): B[] {
+  const needle = query.trim().toLowerCase();
+  if (!index || needle === "") {
+    return [...blocks];
+  }
+  const matched = new Set(searchSegments(index, query, []).map((segment) => segment.id));
+  return blocks.filter(
+    (block) =>
+      renderedHaystack(block).includes(needle) ||
+      block.sourceSegmentIds.some((id) => matched.has(id)),
+  );
+}
+
+// The turn as the reader sees it, with the speaker's name in front so a name
+// still finds their turns — the same text searchSegments puts in searchText.
+function renderedHaystack(block: {
+  readonly text?: string;
+  readonly speakerLabel?: string;
+}): string {
+  return `${block.speakerLabel ?? ""} ${block.text ?? ""}`.toLowerCase();
+}
+
 export function formatClockTime(ms: number): string {
   const totalSeconds = Math.max(0, Math.floor(ms / 1000));
   const hours = Math.floor(totalSeconds / 3600);

@@ -27,6 +27,17 @@ export interface PortableTranscriptEntry {
   payloadRef: PortablePayloadRef;
 }
 
+/**
+ * A file the producer sealed into the manifest verbatim (today only
+ * `summary.md`). Written by internal/cassini/portable_meeting.go as an untyped
+ * map, so every field is optional on the wire.
+ */
+export interface PortableAttachment {
+  name?: string;
+  mime?: string;
+  contentBase64?: string;
+}
+
 export interface PortableMeetingManifest {
   kind?: string;
   version?: number;
@@ -69,9 +80,17 @@ export interface PortableMeetingManifest {
     sourceTranscriptVersion?: string;
     sourceReadableTranscriptVersion?: string;
   };
+  processing?: unknown;
   provenance?: unknown;
   transcripts?: PortableTranscriptEntry[];
   readableTranscripts?: PortableTranscriptEntry[];
+  attachments?: PortableAttachment[];
+  /**
+   * The optional tags-and-marks member (D-737). Deliberately `unknown`: it is
+   * versioned by its own format string, so nothing should read it except
+   * through readPortableAnnotations, which applies that rule.
+   */
+  annotations?: unknown;
 }
 
 export interface PortableTranscriptDescriptor {
@@ -375,6 +394,220 @@ export function getDefaultTranscriptId(manifest: PortableMeetingManifest): strin
     throw new Error("portable manifest has no transcripts[]");
   }
   return pickDefaultTranscript(transcripts).id;
+}
+
+const SUMMARY_ATTACHMENT_NAME = "summary.md";
+
+/**
+ * Returns the meeting summary the producer sealed into the file as the
+ * `summary.md` attachment, or `null` when the file carries none. Matched by
+ * name only (case-insensitive, like the Go reader in
+ * internal/inspect/extract_meeting.go), not by mime. Never throws: an
+ * attachment that is empty or undecodable (bad base64, invalid UTF-8) reads as
+ * no summary, so a damaged attachment costs the summary panel and nothing else.
+ *
+ * The content is base64.StdEncoding (padded, `+/`), matching the writer in
+ * internal/cassini/portable_meeting.go — not the base64url the
+ * CASSINI_PAYLOAD_* chunks use. decodeBase64Url accepts both alphabets.
+ */
+export function readPortableSummaryMarkdown(manifest: PortableMeetingManifest): string | null {
+  const attachments = Array.isArray(manifest.attachments) ? manifest.attachments : [];
+  for (const attachment of attachments) {
+    if (!attachment || typeof attachment !== "object") {
+      continue;
+    }
+    const name = typeof attachment.name === "string" ? attachment.name.trim().toLowerCase() : "";
+    if (name !== SUMMARY_ATTACHMENT_NAME || typeof attachment.contentBase64 !== "string") {
+      continue;
+    }
+    let text: string;
+    try {
+      text = new TextDecoder("utf-8", { fatal: true }).decode(
+        decodeBase64Url(attachment.contentBase64),
+      );
+    } catch {
+      continue;
+    }
+    if (text.trim() !== "") {
+      return text;
+    }
+  }
+  return null;
+}
+
+/** The only annotations format this build reads (D-737). */
+export const PORTABLE_ANNOTATIONS_FORMAT_V1 = "cassini.annotations.v1";
+
+/** A tag definition within one recording. The same tag across recordings is the same (tagNamespace, id). */
+export interface PortableAnnotationTag {
+  readonly id: string;
+  readonly label: string;
+  readonly color?: string;
+  readonly icon?: string;
+}
+
+/**
+ * What a mark applies to. A time range is half-open, [startMs, endMs), in
+ * elapsed playback milliseconds after Opus pre-skip, the clock the word
+ * timings use. "meeting" is the whole meeting, and is a different claim from a
+ * range that happens to span it.
+ */
+export type PortableAnnotationTarget =
+  | { readonly kind: "meeting" }
+  | { readonly kind: "time-range"; readonly startMs: number; readonly endMs: number };
+
+export interface PortableAnnotationItem {
+  readonly id: string;
+  readonly tagId: string;
+  readonly target: PortableAnnotationTarget;
+  readonly createdAtUtc: string;
+  /**
+   * `id` is the Nextcloud user who made the mark. `kind` is self-declared
+   * (person or agent today); a kind this build does not know is kept, not
+   * rejected, because readers tolerate new kinds.
+   */
+  readonly actor: { readonly kind: string; readonly id: string };
+  readonly operationId: string;
+}
+
+export interface PortableAnnotations {
+  readonly format: typeof PORTABLE_ANNOTATIONS_FORMAT_V1;
+  readonly revision: number;
+  /** The binding: the audio digest these marks were made against. */
+  readonly audioOpusSha256: string;
+  readonly tagNamespace: string;
+  readonly tags: readonly PortableAnnotationTag[];
+  readonly items: readonly PortableAnnotationItem[];
+  /**
+   * True when the binding equals this recording's integrity.opusAudioSha256.
+   * When false the marks were made against other audio, and a renderer must
+   * not draw any time-range target against this recording.
+   */
+  readonly resolved: boolean;
+}
+
+/**
+ * Returns the tags and marks a portable meeting carries, or `null` when it
+ * carries none this build can show. Read-only, and it never throws, like
+ * readPortableSummaryMarkdown: the format's rule is that marks a reader cannot
+ * use cost the marks and nothing else, so no shape of this member may stop a
+ * recording from opening.
+ *
+ * - absent, null or not an object: `null`
+ * - a format other than cassini.annotations.v1: `null`, and the whole member is
+ *   ignored, as the format requires
+ * - a v1 document is kept, entry by entry: a tag without a string id and label
+ *   is skipped, and so is a mark whose tag is not defined here, whose id
+ *   repeats, or whose target is not a recognisable meeting or integer
+ *   0 <= startMs < endMs range. What survives is returned.
+ *
+ * `resolved` is computed the way internal/portable's Resolved computes it, so
+ * the viewer and the Go reader always agree about which marks may be drawn.
+ */
+export function readPortableAnnotations(
+  manifest: PortableMeetingManifest,
+): PortableAnnotations | null {
+  const member = asAnnotationRecord(manifest.annotations);
+  if (!member || member.format !== PORTABLE_ANNOTATIONS_FORMAT_V1) {
+    return null;
+  }
+
+  const tags: PortableAnnotationTag[] = [];
+  const tagIds = new Set<string>();
+  for (const entry of Array.isArray(member.tags) ? member.tags : []) {
+    const tag = asAnnotationRecord(entry);
+    if (!tag || !isNonEmptyAnnotationString(tag.id) || typeof tag.label !== "string" || tagIds.has(tag.id)) {
+      continue;
+    }
+    tagIds.add(tag.id);
+    // Preserve archived appearance, including an explicitly cleared icon.
+    // Unknown strings survive for forwards compatibility; malformed optional
+    // values are ignored without losing the tag or its marks.
+    tags.push({
+      id: tag.id,
+      label: tag.label,
+      ...(typeof tag.color === "string" ? { color: tag.color } : {}),
+      ...(typeof tag.icon === "string" ? { icon: tag.icon } : {}),
+    });
+  }
+
+  const items: PortableAnnotationItem[] = [];
+  const itemIds = new Set<string>();
+  for (const entry of Array.isArray(member.items) ? member.items : []) {
+    const item = asAnnotationRecord(entry);
+    if (
+      !item ||
+      !isNonEmptyAnnotationString(item.id) ||
+      itemIds.has(item.id) ||
+      typeof item.tagId !== "string" ||
+      !tagIds.has(item.tagId)
+    ) {
+      continue;
+    }
+    const target = readPortableAnnotationTarget(item.target);
+    if (!target) {
+      continue;
+    }
+    itemIds.add(item.id);
+    const actor = asAnnotationRecord(item.actor);
+    items.push({
+      id: item.id,
+      tagId: item.tagId,
+      target,
+      createdAtUtc: typeof item.createdAtUtc === "string" ? item.createdAtUtc : "",
+      actor: {
+        kind: typeof actor?.kind === "string" ? actor.kind : "",
+        id: typeof actor?.id === "string" ? actor.id : "",
+      },
+      operationId: typeof item.operationId === "string" ? item.operationId : "",
+    });
+  }
+
+  const binding = typeof member.audioOpusSha256 === "string" ? member.audioOpusSha256 : "";
+  const audio = String(manifest.integrity?.opusAudioSha256 ?? "").trim().toLowerCase();
+  return {
+    format: PORTABLE_ANNOTATIONS_FORMAT_V1,
+    revision: Number.isInteger(member.revision) ? (member.revision as number) : 0,
+    audioOpusSha256: binding,
+    tagNamespace: typeof member.tagNamespace === "string" ? member.tagNamespace : "",
+    tags,
+    items,
+    resolved: binding !== "" && binding === audio,
+  };
+}
+
+function readPortableAnnotationTarget(value: unknown): PortableAnnotationTarget | null {
+  const target = asAnnotationRecord(value);
+  if (!target) {
+    return null;
+  }
+  if (target.kind === "meeting") {
+    // A meeting target that carries times is making two claims at once; the
+    // writer rejects it, so a reader cannot know which one was meant.
+    return target.startMs === undefined && target.endMs === undefined ? { kind: "meeting" } : null;
+  }
+  if (target.kind === "time-range") {
+    const { startMs, endMs } = target;
+    if (
+      Number.isSafeInteger(startMs) &&
+      Number.isSafeInteger(endMs) &&
+      (startMs as number) >= 0 &&
+      (startMs as number) < (endMs as number)
+    ) {
+      return { kind: "time-range", startMs: startMs as number, endMs: endMs as number };
+    }
+  }
+  return null;
+}
+
+function asAnnotationRecord(value: unknown): Record<string, unknown> | null {
+  return value !== null && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function isNonEmptyAnnotationString(value: unknown): value is string {
+  return typeof value === "string" && value !== "";
 }
 
 function humanizeTranscriptId(value: string): string {

@@ -17,7 +17,7 @@
 	background: transparent;
 }
 /* The surrounding page provides a title and file diagnostics. */
-.meeting-viewer > div > header,
+.meeting-viewer > div > header > div:first-child,
 .meeting-viewer > div > div > header,
 .meeting-viewer [data-transcript-content] > section.grid {
 	display: none;
@@ -28,9 +28,6 @@
 .meeting-viewer [data-transcript-content] {
 	margin: 1.25rem;
 	gap: 1rem;
-}
-.meeting-viewer [data-transcript-content] > div:first-child {
-	display: none;
 }
 .meeting-viewer [role='log'] {
 	gap: 1.2rem;

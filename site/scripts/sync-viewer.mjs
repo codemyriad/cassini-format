@@ -19,7 +19,7 @@ function embedPatch(source) {
   // Format-site embedding: keep shortcuts and follow scrolling inside this panel.
   export let contained = false;`],
 		['    enriched: MeetingCatalogEntry;', '    enriched: MeetingCatalogEntry;\n    playbackerror: string;'],
-		['  <main class="flex flex-col gap-3.5 m-4 min-[981px]:m-8">', '  <svelte:element this={contained ? "div" : "main"} data-transcript-content class="flex flex-col gap-3.5 m-4 min-[981px]:m-8">'],
+		['  <main class="mv-main flex flex-col m-4 min-[981px]:mx-6 min-[981px]:mb-8">', '  <svelte:element this={contained ? "div" : "main"} data-transcript-content class="mv-main flex flex-col m-4 min-[981px]:mx-6 min-[981px]:mb-8">'],
 		['  </main>', '  </svelte:element>'],
 		['      void audioEl.play();', `      void audioEl.play().catch(() => {
         dispatch("playbackerror", "Playback could not start. Try again or download the audio file.");
