@@ -13,6 +13,12 @@ npm run build        # -> build/
 npm run preview      # serve build/ locally
 ```
 
+## Meeting downloads
+
+The shared viewer can copy or download the displayed transcript as Markdown
+(`.md`) and download the original meeting audio file. This works for the
+example recording and files opened locally in the browser.
+
 ## Where the content comes from
 
 The home page is built around the three things a specification site has to
