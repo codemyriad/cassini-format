@@ -4,17 +4,17 @@
 </script>
 
 <svelte:head>
-	<title>Build with Cassini — choose an implementation path</title>
+	<title>Tools — Cassini format</title>
 	<meta
 		name="description"
-		content="Read transcripts, produce portable recordings, or implement Cassini in your own stack. Working guides connect to file checks and conformance tests."
+		content="Standalone readers, a producer, the audio digest tool, the conformance suite and a one-line ffprobe recipe for working with Cassini .opus files."
 	/>
 </svelte:head>
 
 <Doc
-	title="Try it in your own tools."
-	kicker="Build with Cassini"
-	lede="Start with the data you have and the result you need. Reuse the tools, understand the contract, and check your work."
+	title="Tools"
+	kicker="Working with a file"
+	lede="Standalone readers and a producer you can copy, the conformance suite that tests an implementation, and one ffprobe line that needs nothing at all."
 	html={data.html}
 	headings={data.headings}
 	wrapTables

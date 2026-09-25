@@ -251,6 +251,8 @@
 		name="description"
 		content="The Element Song by Tom Lehrer with word-timed lyrics embedded in a single Ogg Opus file, read and played in the browser."
 	/>
+	<!-- Unlisted: nothing on the site links here, and it should not be indexed. -->
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <svelte:window on:keydown={onKey} />

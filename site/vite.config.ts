@@ -27,7 +27,10 @@ export default defineConfig({
 				// These two turn the build into a link and anchor checker for the spec.
 				handleHttpError: 'fail',
 				handleMissingId: 'fail',
-				entries: ['*']
+				// '*' covers every route reachable by crawling. /karaoke/ is unlisted
+				// (noindex, no link from the nav or the footer), so it is named here or
+				// the static build would not emit it.
+				entries: ['*', '/karaoke/']
 			},
 			alias: { $repo: '../' }
 		})

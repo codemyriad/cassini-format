@@ -18,7 +18,7 @@
 	html={data.html}
 	headings={data.headings}
 	next={[
-		{ href: '/verify/', label: 'Check the file and audio match' },
+		{ href: '/spec/v1/#trust-and-integrity', label: 'What each read state means' },
 		{ href: '/build/#check-a-file-then-test-your-implementation', label: 'Test your reader' },
 		{ href: '/produce/', label: 'Create a file' }
 	]}

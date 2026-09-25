@@ -6,38 +6,41 @@
 <footer class="foot">
 	<div class="shell">
 		<div class="cols">
-			<div class="status">
-				<p class="eyebrow eyebrow--plain">Use the format</p>
-				<ul>
-					<li><a href="{base}/using/">Why we made it & how to use it</a></li>
-					<li><a href="{base}/try/">Open a recording</a></li>
-					<li><a href="{base}/demo/">Try synchronized lyrics</a></li>
-					<li><a href="{base}/status/">Project status & compatibility</a></li>
-				</ul>
-				<p class="origin">Made for our Nextcloud Talk app, <a href={site.implRepo}>gocassini</a>.
-					We use it for our meetings and have published it for others to try.</p>
-			</div>
 			<div>
-				<p class="eyebrow eyebrow--plain">Build with it</p>
+				<p class="eyebrow eyebrow--plain">Spec</p>
 				<ul>
-					<li><a href="{base}/build/">Choose an implementation path</a></li>
-					<li><a href="{base}/consume/">Read a file in code</a></li>
-					<li><a href="{base}/produce/">Create a Cassini file</a></li>
-					<li><a href="{base}/verify/">Check a file</a></li>
-					<li><a href="{base}/build/#check-a-file-then-test-your-implementation">Test your reader</a></li>
-					<li><a href={site.repo} rel="noreferrer">Source code on GitHub ↗</a></li>
-				</ul>
-			</div>
-			<div>
-				<p class="eyebrow eyebrow--plain">Reference</p>
-				<ul>
-					<li><a href="{base}/spec/">Specification overview</a></li>
 					<li><a href="{base}/spec/v1/">Version 1 specification</a></li>
 					<li><a href="{base}/spec/words-v1/">Transcript body</a></li>
 					<li><a href="{base}/spec/audio-integrity/">Audio digest</a></li>
 					<li><a href="{base}/schema/">JSON Schemas</a></li>
+					<li><a href="{base}/changelog/">Changelog</a></li>
 					<li><a href="{base}/design/">Design notes</a></li>
 					<li><a href="{base}/llms-full.txt">Complete specification as text</a></li>
+				</ul>
+			</div>
+			<div>
+				<p class="eyebrow eyebrow--plain">Tools</p>
+				<ul>
+					<li><a href="{base}/try/">Open a file</a></li>
+					<li><a href="{base}/consume/">Read a file in code</a></li>
+					<li><a href="{base}/produce/">Create a Cassini file</a></li>
+					<li>
+						<a href="{base}/build/#check-a-file-then-test-your-implementation">Conformance</a>
+					</li>
+					<li><a href={site.repo} rel="noreferrer">Source on GitHub ↗</a></li>
+				</ul>
+			</div>
+			<div>
+				<p class="eyebrow eyebrow--plain">Implementations</p>
+				<ul>
+					<li><a href={site.appUrl} rel="noreferrer">{site.appName} ↗</a></li>
+					<li><a href={site.implRepo} rel="noreferrer">{site.appName} on GitHub ↗</a></li>
+					<li>
+						<a href="https://apps.nextcloud.com/apps/gocassini" rel="noreferrer"
+							>Nextcloud App Store ↗</a
+						>
+					</li>
+					<li><a href="{site.repo}/issues" rel="noreferrer">Report an implementation ↗</a></li>
 				</ul>
 			</div>
 		</div>
@@ -92,7 +95,7 @@
 	}
 	.cols {
 		display: grid;
-		grid-template-columns: 1.3fr 1fr 1fr;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 2.5rem;
 	}
 	@media (max-width: 820px) {
@@ -116,13 +119,6 @@
 	}
 	ul a:hover {
 		color: var(--fg);
-	}
-	.status .origin {
-		margin-top: 1.2rem;
-		color: var(--fg-3);
-		max-width: 52ch;
-		margin-bottom: 0.7rem;
-		font-size: 12.5px;
 	}
 	.rule {
 		height: 1px;
