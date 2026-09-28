@@ -47,6 +47,11 @@ jobs:
       - name: Tests
         run: npm test
 
+      # The site asks the pinned Cassini embed for features only some published
+      # versions have; a pin without them would load and quietly misbehave.
+      - name: The pinned Cassini embed has what the site uses
+        run: npm run check:embed
+
       - name: Build
         run: npm run build
         env:

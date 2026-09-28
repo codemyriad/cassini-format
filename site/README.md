@@ -139,7 +139,8 @@ renderer of its own and no copy of the viewer's source.
 
 `src/lib/viewer/embed.ts` pins one exact viewer version. To move to a newer
 viewer, change `CASSINI_EMBED_VERSION` there, then check the example and a
-local file on `/try/`. To try an unreleased viewer, build it in a gocassini
+local file on `/try/`. `npm run check:embed`, which CI runs too, fails if the
+pinned build lacks a feature `CassiniEmbed.svelte` uses. To try an unreleased viewer, build it in a gocassini
 checkout with `npm run build:public -w cassini-viewer`, serve `dist/public/`,
 and point the site at it:
 

@@ -13,7 +13,8 @@
     "gen:demo": "node scripts/gen-demo.mjs",
     "gen:reader": "node scripts/gen-reader.mjs",
     "check:reader": "node scripts/gen-reader.mjs --check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:embed": "node scripts/check-embed.mjs"
   },
   "devDependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",
