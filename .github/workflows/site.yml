@@ -1,0 +1,57 @@
+name: Site
+
+# Builds format.gocassini.com on every pull request and deploys it to
+# Cloudflare Pages (project cassini-format) on every push to main.
+#
+# No paths filter: the site renders SPEC.md, spec/, design/ and CHANGELOG.md,
+# and the build fails on a dead link or anchor in them (see site/README.md), so
+# a spec-only change needs the build as much as a site change does.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The demo audio is in LFS; without it the site ships pointer files.
+          lfs: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          SITE_URL: https://format.gocassini.com
+
+      - name: Deploy to Cloudflare Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: >-
+          npx --yes wrangler@4 pages deploy build
+          --project-name cassini-format
+          --branch main
+          --commit-hash ${{ github.sha }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
