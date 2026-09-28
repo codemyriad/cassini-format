@@ -7,7 +7,9 @@
 // CassiniEmbed.svelte relies on features of the embed contract that only some
 // published versions have. A pin to a version without them still loads, but
 // renders the wrong layout, ignores the site's palette and theme, and never
-// reports playback errors. This fails the build instead. Each feature below
+// reports playback errors. This fails CI (and the manual deploy steps in
+// README.md) instead; `npm run build` does not run it, because it needs the
+// network. Each feature below
 // leaves a string in the minified bundle that no older build contains.
 
 import { readFileSync } from 'node:fs';
