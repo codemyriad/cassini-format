@@ -107,6 +107,7 @@ LFS demo assets), so unrelated local static files cannot enter the deployment:
 
 ```bash
 npm ci
+npm run check:embed
 SITE_URL=https://format.gocassini.com npm run build
 wrangler pages deploy build --project-name cassini-format --branch main
 ```
