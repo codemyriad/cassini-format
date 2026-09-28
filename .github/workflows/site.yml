@@ -1,7 +1,7 @@
 name: Site
 
-# Builds format.gocassini.com on every pull request and deploys it to
-# Cloudflare Pages (project cassini-format) on every push to main.
+# Type-checks, tests and builds format.gocassini.com on every pull request, and
+# deploys it to Cloudflare Pages (project cassini-format) on every push to main.
 #
 # No paths filter: the site renders SPEC.md, spec/, design/ and CHANGELOG.md,
 # and the build fails on a dead link or anchor in them (see site/README.md), so
@@ -39,6 +39,13 @@ jobs:
           cache-dependency-path: site/package-lock.json
 
       - run: npm ci
+
+      # Both run before the build so a failure never reaches the deploy step.
+      - name: Type check
+        run: npm run check
+
+      - name: Viewer tests
+        run: npm run test:viewer
 
       - name: Build
         run: npm run build

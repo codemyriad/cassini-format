@@ -1,0 +1,11 @@
+version: 2
+updates:
+  # Keeps the workflow's actions current, so runtime deprecations (like the
+  # Node 20 one fixed in #5) arrive as PRs instead of CI warnings.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

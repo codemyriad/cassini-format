@@ -96,7 +96,9 @@ URL, which every static host does by default. `404.html` is the not-found page.
 
 Production uses Cloudflare Pages Direct Upload, project `cassini-format`.
 Every push to `main` deploys automatically through
-`.github/workflows/site.yml`, which also builds every pull request. It needs
+`.github/workflows/site.yml`, which also builds every pull request. Before
+building, it runs `npm run check` and `npm run test:viewer`; a failure in
+either stops the deploy. It needs
 the repository secrets `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit on the
 Code Myriad account) and `CLOUDFLARE_ACCOUNT_ID`.
 
