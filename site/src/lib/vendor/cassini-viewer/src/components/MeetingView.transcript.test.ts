@@ -37,7 +37,7 @@ function wordsOf(block: OverlapBlock): string {
  * when a reader selects across the paragraph.
  */
 function renderRow(row: TranscriptRow<OverlapBlock>): { header: string; paragraph: string } {
-  const over = row.over.length > 0 ? `  over ${row.over.join(" and ")}` : "";
+  const over = row.over.length > 0 ? `  (over ${row.over.join(" and ")})` : "";
   const paragraph = row.members
     .map((member) =>
       member.kind === "speech"
@@ -79,8 +79,8 @@ describe("what the transcript pane renders", () => {
     // One header apiece, and the fragments carry none of their own: a row is
     // rendered as a single <p>, so there is nothing else it could be.
     expect(collision.map((row) => renderRow(row).header)).toEqual([
-      "Cara Lindqvist  0:40  over Ben Okafor",
-      "Ben Okafor  0:43  over Cara Lindqvist",
+      "Cara Lindqvist  0:40  (over Ben Okafor)",
+      "Ben Okafor  0:43  (over Cara Lindqvist)",
     ]);
   });
 
@@ -193,6 +193,10 @@ describe("the transcript pane's markup", () => {
     expect(template).toContain("{@render blockProse(member.block)}");
     expect(template).toContain("{@render blockProse(chipBlock)}");
     expect(template).not.toContain("highlightWords");
+    // On a narrow screen the frame hands back the tags to draw in the text,
+    // and every block of prose passes them on.
+    expect(template).toContain("let:chips\n        let:openMark");
+    expect(template).toContain("{chips}\n              {openMark}");
   });
 
   it("carries none of the badges, borders or indentation the durations lived on", () => {
@@ -211,21 +215,59 @@ describe("the transcript pane's markup", () => {
 
   it("gives every chip a screen-reader prefix that never reaches the clipboard", () => {
     // Read aloud as "Interjection by Ben Okafor: Right.", copied as
-    // "(Ben Okafor: Right.)" — the prefix is select-none, the parens are real
-    // text nodes marked aria-hidden so they are punctuation, not words.
+    // "(Ben Okafor: Right.)" — the prefix is select-none, and the parens and
+    // colon are still real text for a copy, but no longer drawn: the name is a
+    // chip like the one a turn opens with.
     expect(template).toContain('<span class="sr-only select-none">Interjection by </span>');
-    expect(template).toContain('<span aria-hidden="true">(</span>');
-    expect(template).toContain('<span aria-hidden="true">)</span>');
+    expect(template).toContain('<span class="sr-only" aria-hidden="true">(</span>');
+    expect(template).toContain('<span class="sr-only" aria-hidden="true">)</span>');
+    expect(template).toContain('class="mv-speaker-name mv-speaker-inline"');
   });
 
   it("keeps the transcript pane a live region with static rows inside it", () => {
     expect(template).toContain('role="log"');
-    expect(template).toContain('<span class="sr-only">Simultaneous speech: </span>over ');
+    // Bracketed as an aside to the header, the brackets kept from the reader.
+    expect(template).toContain('<span class="sr-only">Simultaneous speech: </span><span aria-hidden="true">(</span>over ');
   });
 
   it("wires follow-scroll and nested crosstalk to the rendered turn", () => {
     expect(template).toContain("followRowKeyForBlocks(transcriptRows, activeSegments)");
     expect(template).toContain("isLikelyCrosstalkAcrossBlocks(member.blocks)");
     expect(template).toContain("likelyCrosstalkTitle(member.speakerLabel)");
+  });
+});
+
+describe("finding words in the open meeting", () => {
+  const source = readFileSync(
+    new URL("./MeetingView.svelte", import.meta.url).pathname,
+    "utf8",
+  );
+
+  it("builds the rendered rows from the filtered set, not the whole transcript", () => {
+    // The filter is worthless if the rows are still built from everything: the
+    // box would accept input, the count would change, and the page would not.
+    expect(source).toContain("buildTranscriptRows(visibleSegments)");
+    expect(source).toContain("filterDisplaySegmentsByQuery(");
+  });
+
+  it("tells an empty search apart from an empty transcript", () => {
+    // "No transcript loaded yet" as the answer to a search would say the
+    // meeting has no words in it, which is a different and alarming claim.
+    expect(source).toContain("No transcript loaded yet.");
+    expect(source).toContain("Nothing in this transcript matches");
+  });
+
+  it("hides turns only when asked, so find on its own never shortens the meeting", () => {
+    expect(source).toContain("let onlyMatching = false;");
+    expect(source).toContain(
+      "$: visibleSegments = onlyMatching\n    ? filterDisplaySegmentsByQuery(transcriptIndex, displaySegments, transcriptQuery)\n    : displaySegments;",
+    );
+    expect(source).toContain("bind:onlyMatching");
+  });
+
+  it("finds over the canonical words, through the rows on the page", () => {
+    expect(source).toContain(
+      "findStops(transcriptIndex, transcriptRows, wordPartsByBlock, transcriptQuery)",
+    );
   });
 });

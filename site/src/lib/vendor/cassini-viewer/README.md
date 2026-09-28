@@ -3,7 +3,7 @@
 This directory vendors the exported `MeetingView.svelte` and its supporting
 transcript model from [codemyriad/gocassini](https://github.com/codemyriad/gocassini),
 pinned to commit
-[`297d57b6b2520829072ea8d270eb8e7e693e3599`](https://github.com/codemyriad/gocassini/tree/297d57b6b2520829072ea8d270eb8e7e693e3599/cassini-viewer).
+[`6b85943566a46450cf76fcd295e57d9e789b724c`](https://github.com/codemyriad/gocassini/tree/6b85943566a46450cf76fcd295e57d9e789b724c/cassini-viewer).
 It is licensed under **AGPL-3.0**, with the complete upstream license retained in
 [LICENSE](LICENSE). It is an explicit exception to the format repository's CC0
 reference-code license.
