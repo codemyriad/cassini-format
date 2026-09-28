@@ -84,9 +84,9 @@ plain `npm run build` does not.
 
 See `static/demo/README.md` for the script and how the audio was made.
 
-The standalone readers and producer are CC0. The transcript interface is
-Cassini’s AGPL-3.0 component; its vendored source and license are included in
-`src/lib/vendor/cassini-viewer/`.
+The standalone readers and producer are CC0. The transcript player is Cassini's
+AGPL-3.0 viewer, loaded from `dist.gocassini.com` and not part of this
+repository; see [the Cassini transcript component](#the-cassini-transcript-component).
 
 ## Deploying
 
@@ -97,7 +97,7 @@ URL, which every static host does by default. `404.html` is the not-found page.
 Production uses Cloudflare Pages Direct Upload, project `cassini-format`.
 Every push to `main` deploys automatically through
 `.github/workflows/site.yml`, which also builds every pull request. Before
-building, it runs `npm run check` and `npm run test:viewer`; a failure in
+building, it runs `npm run check` and `npm test`; a failure in
 either stops the deploy. It needs
 the repository secrets `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit on the
 Code Myriad account) and `CLOUDFLARE_ACCOUNT_ID`.
@@ -107,6 +107,7 @@ LFS demo assets), so unrelated local static files cannot enter the deployment:
 
 ```bash
 npm ci
+npm run check:embed
 SITE_URL=https://format.gocassini.com npm run build
 wrangler pages deploy build --project-name cassini-format --branch main
 ```
@@ -128,38 +129,31 @@ BASE_PATH=/cassini-format npm run build
 
 ## The Cassini transcript component
 
-The players mount Cassini's actual exported `MeetingView.svelte`, including its
-turn reconstruction, inline interjections, overlap labels, playback and follow
-behavior. This is a pinned source dependency, not a second transcript renderer.
-`src/lib/vendor/cassini-viewer/upstream.json` records the upstream commit and
-SHA-256 of every source file. The vendored component and model are **AGPL-3.0**;
-their upstream license is retained in that directory. This exception does not
-change the CC0 license of `src/lib/reader/cassini.ts` or the standalone readers.
+The players show recordings in Cassini's published viewer, the
+`<cassini-meeting>` embed. The site loads it the way any page does, with one
+script from `https://dist.gocassini.com/embed/<version>/viewer.js`. Its contract
+is gocassini's
+[`cassini-viewer/ATTRIBUTES.md`](https://github.com/codemyriad/gocassini/blob/main/cassini-viewer/ATTRIBUTES.md).
+Turn reconstruction, inline interjections, overlap labels, word seeking,
+playback and follow behavior are all Cassini's. The site has no transcript
+renderer of its own and no copy of the viewer's source.
 
-`src/lib/viewer/artifact.ts` adapts the format reader's verified manifest and
-words through Cassini's own portable projection. `CassiniView.svelte` mounts the
-component in a shadow root so its own stylesheet cannot affect the surrounding
-site; `embedding.css` only adapts the card layout and theme. Local files remain
-in browser memory and use a blob URL for playback.
-
-Word hover, seeking and playback highlighting come from Cassini's shared
-component, restored under [D-734](https://linear.app/code-myriad/issue/D-734/restore-word-level-transcript-highlighting-and-seeking-in-the-cassini).
-The site does not maintain a separate word renderer or playback index.
-The reproducible patch in `scripts/sync-viewer.mjs` adds only embedding fixes
-(scoped Space shortcuts, scrolling within the panel, playback errors) and
-TypeScript narrowing. Cassini owns word interactions, transcript wording,
-turn reconstruction and interjection placement. To update from a Cassini checkout:
+`src/lib/viewer/embed.ts` pins one exact viewer version. To move to a newer
+viewer, change `CASSINI_EMBED_VERSION` there, then check the example and a
+local file on `/try/`. `npm run check:embed`, which CI runs too, fails if the
+pinned build lacks a feature `CassiniEmbed.svelte` uses. To try an unreleased viewer, build it in a gocassini
+checkout with `npm run build:public -w cassini-viewer`, serve `dist/public/`,
+and point the site at it:
 
 ```bash
-node scripts/sync-viewer.mjs --from /path/to/gocassini --ref COMMIT
-npm run gen:viewer-css
-npm run test:viewer
-npm run check
-npm run build
+VITE_CASSINI_EMBED_SRC=http://localhost:4178/embed/viewer.js npm run dev
 ```
 
-`npm run build` checks the pinned source hashes and regenerates the component
-stylesheet. `npm run test:viewer` runs the upstream timing, overlap, playhead and
-transcript regression suites plus the format adapter and word playback tests. The
-upstream test files are excluded from the site's TypeScript diagnostics and run
-with their native Vitest runner.
+`src/lib/viewer/CassiniEmbed.svelte` gives the element a blob URL of the bytes
+the page has already read, so a local file never leaves the browser and the
+example is not downloaded twice. It uses `layout="inline"`, because the page
+around it shows the title and file details. It sets the embed's
+`--cassini-color-*` properties from the site's palette, and follows the site's
+light/dark switch through `theme`. The viewer draws inside its own shadow root,
+so neither stylesheet reaches the other. It hides the "Recorded with Cassini"
+badge, because a file opened on `/try/` may come from any producer.

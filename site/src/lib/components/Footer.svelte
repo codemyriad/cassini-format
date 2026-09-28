@@ -79,8 +79,9 @@
 				>. Schemas, test vectors and standalone readers/producer
 				<a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="noreferrer"
 					>CC0&nbsp;1.0</a
-				>. Cassini’s transcript component
-				<a href="{site.repo}/blob/main/site/src/lib/vendor/cassini-viewer/README.md">AGPL-3.0</a>.
+				>. The transcript player is
+				<a href="https://gocassini.com" rel="noreferrer">Cassini</a>’s published viewer
+				(AGPL-3.0), loaded from dist.gocassini.com.
 			</p>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/gen-reader.mjs --check && npm run check:viewer && npm run gen:viewer-css && vite build",
+    "build": "node scripts/gen-reader.mjs --check && vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -13,9 +13,8 @@
     "gen:demo": "node scripts/gen-demo.mjs",
     "gen:reader": "node scripts/gen-reader.mjs",
     "check:reader": "node scripts/gen-reader.mjs --check",
-    "gen:viewer-css": "tailwindcss -i src/lib/vendor/cassini-viewer/src/app.css -o src/lib/viewer/viewer.css --minify",
-    "check:viewer": "node scripts/sync-viewer.mjs --check",
-    "test:viewer": "vitest run src/lib/vendor/cassini-viewer/src/core src/lib/vendor/cassini-viewer/src/components src/lib/viewer"
+    "test": "vitest run",
+    "check:embed": "node scripts/check-embed.mjs"
   },
   "devDependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",
@@ -24,9 +23,7 @@
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.63.0",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
-    "@tailwindcss/cli": "^4.3.3",
     "@types/node": "^26.4.0",
-    "daisyui": "^5.7.28",
     "gray-matter": "^4.0.3",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-raw": "^7.0.0",
@@ -39,7 +36,6 @@
     "shiki": "^4.4.3",
     "svelte": "^5.56.1",
     "svelte-check": "^4.6.0",
-    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
@@ -47,8 +43,6 @@
     "vitest": "^4.1.11"
   },
   "dependencies": {
-    "@lucide/svelte": "^1.42.0",
-    "dompurify": "^3.4.15",
     "marked": "^18.0.11"
   }
 }

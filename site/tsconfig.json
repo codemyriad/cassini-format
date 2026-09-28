@@ -16,7 +16,6 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    "src/lib/vendor/**/*.test.ts"
+    "node_modules"
   ]
 }
