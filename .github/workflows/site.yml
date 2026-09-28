@@ -44,8 +44,8 @@ jobs:
       - name: Type check
         run: npm run check
 
-      - name: Viewer tests
-        run: npm run test:viewer
+      - name: Tests
+        run: npm test
 
       - name: Build
         run: npm run build

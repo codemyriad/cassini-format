@@ -2,8 +2,7 @@
 	import { base } from '$app/paths';
 	import { untrack } from 'svelte';
 	import { readCassini, type ReadResult } from '$lib/reader/cassini';
-	import CassiniView from '$lib/viewer/CassiniView.svelte';
-	import { toViewerArtifact } from '$lib/viewer/artifact';
+	import CassiniEmbed from '$lib/viewer/CassiniEmbed.svelte';
 
 	let {
 		src,
@@ -25,6 +24,7 @@
 	let objectUrl = $state('');
 	let loading = $state(true);
 	let playbackError = $state('');
+	let viewerError = $state('');
 
 	// untrack matters here: mark() READS steps, and it is called from inside the
 	// $effect that loads the file. Without it the read registers as a dependency,
@@ -44,6 +44,7 @@
 			result = null;
 			error = '';
 			playbackError = '';
+			viewerError = '';
 			objectUrl = '';
 			loading = true;
 			steps = steps.map((step) => ({ label: step.label, state: 'wait' }));
@@ -119,8 +120,11 @@
 		};
 	});
 
-	const artifact = $derived(
-		result?.manifest && result.transcript ? toViewerArtifact(result, objectUrl) : null
+	// The viewer reads the file itself, from the bytes already in memory. It is
+	// shown when this page's own reader recovered a transcript: the steps below
+	// are the page's account of the file, and the viewer is Cassini's.
+	const showViewer = $derived(
+		Boolean(result?.manifest && result.transcript && objectUrl) && !viewerError
 	);
 
 	const stateLine = $derived.by(() => {
@@ -152,6 +156,7 @@
 		</p>
 	{/if}
 	{#if playbackError}<p class="err" role="alert">{playbackError}</p>{/if}
+	{#if viewerError}<p class="err" role="alert">{viewerError} You can still listen.</p>{/if}
 
 	{#if result?.warnings.length}
 		<ul class="warn">
@@ -161,13 +166,19 @@
 		</ul>
 	{/if}
 
-	{#if artifact}
-		<CassiniView {artifact} {compact} onplaybackerror={(message) => (playbackError = message)} />
+	{#if showViewer}
+		<CassiniEmbed
+			src={objectUrl}
+			title={fallbackTitle}
+			{compact}
+			onplaybackerror={(message) => (playbackError = message)}
+			onunavailable={(message) => (viewerError = message)}
+		/>
 	{:else}
 		<div class="fallback">
 			{#if loading}
 				<p class="loading" role="status">Reading {fallbackTitle || 'the recording'}…</p>
-			{:else if result}
+			{:else if result && !viewerError}
 				<p class="loading">
 					{result.state === 'plain-audio'
 						? 'No embedded transcript in this file.'
