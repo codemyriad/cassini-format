@@ -10,6 +10,34 @@ says how a reader tells them apart.
 The wire format did not move. These change what the documents say about it, and
 what the schemas accept.
 
+### 2026-11-09 — when the recording started
+
+Version 1 had no member for when a meeting happened. `createdAtUtc` is when the
+file was stamped, which for a server recording is after transcription, and
+`recordedAtLocal` is a label in a zone the file does not name. A server that
+does not know the recording site's zone wrote its own clock's digits there.
+
+* `meeting.recordedAtUtc`, optional: the instant of playback position 0 of the
+  audio, RFC 3339 UTC. A word's wall-clock time is `recordedAtUtc` plus its
+  `startMs`. It may be added to an existing file from trustworthy records; the
+  meeting id does not change. The schema accepts it.
+* `CASSINI_RECORDED_AT_UTC`, an optional mirror tag carrying the same string.
+* `DATE` is defined: when the recording started, RFC 3339, as the Vorbis
+  comment field means it. A producer that does not know the start writes
+  `createdAtUtc`, as every producer has until now.
+* Producers SHOULD NOT write `recordedAtLocal` unless they know the recording
+  site's zone. Consumers still MUST NOT convert it.
+* [When the meeting happened](SPEC.md#when-the-meeting-happened): a consumer
+  uses `recordedAtUtc`, else a `DATE` with an offset that is not
+  `createdAtUtc`, else `recordedAtLocal` as an unconverted label, and never
+  presents `createdAtUtc` as the meeting time.
+* `tools/cassini-pack.py --recorded-at-utc`, a meeting-time line in
+  `tools/cassini-read-pure.py`, `meetingStart()` in the browser reader, and
+  conformance vectors 027 and 028.
+
+The container, chunk transport, audio digest and `/1` identifier are unchanged.
+A reader that predates this ignores the new member and tag, as it must.
+
 ### 2026-09-07 — simplification
 
 Compared with gocassini `main` at `e4856e9fac32c447d6c5e023681433319d7ea3c8`.
