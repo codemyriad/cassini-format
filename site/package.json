@@ -15,7 +15,7 @@
     "check:reader": "node scripts/gen-reader.mjs --check",
     "gen:viewer-css": "tailwindcss -i src/lib/vendor/cassini-viewer/src/app.css -o src/lib/viewer/viewer.css --minify",
     "check:viewer": "node scripts/sync-viewer.mjs --check",
-    "test:viewer": "vitest run src/lib/vendor/cassini-viewer/src/core src/lib/vendor/cassini-viewer/src/components src/lib/viewer"
+    "test:viewer": "vitest run src/lib/vendor/cassini-viewer/src/core src/lib/vendor/cassini-viewer/src/components src/lib/viewer src/lib/reader"
   },
   "devDependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",

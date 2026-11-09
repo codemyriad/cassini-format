@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { untrack } from 'svelte';
-	import { readCassini, type ReadResult } from '$lib/reader/cassini';
+	import { meetingStart, readCassini, type ReadResult } from '$lib/reader/cassini';
 	import CassiniView from '$lib/viewer/CassiniView.svelte';
 	import { toViewerArtifact } from '$lib/viewer/artifact';
 
@@ -123,6 +123,21 @@
 		result?.manifest && result.transcript ? toViewerArtifact(result, objectUrl) : null
 	);
 
+	// An instant is shown in this browser's zone; a recordedAtLocal label as written.
+	const recorded = $derived.by(() => {
+		const start = result?.manifest ? meetingStart(result) : null;
+		if (!start) return '';
+		const when =
+			start.instantMs === null
+				? `${start.value.replace('T', ' ')} (site's local time, zone not stated)`
+				: new Date(start.instantMs).toLocaleString(undefined, {
+						dateStyle: 'medium',
+						timeStyle: 'medium',
+						timeZoneName: 'short'
+					});
+		return `${when}, from ${start.source}`;
+	});
+
 	const stateLine = $derived.by(() => {
 		if (!result) return '';
 		switch (result.state) {
@@ -204,6 +219,7 @@
 				</div>
 			{/each}
 		</div>
+		{#if recorded}<p class="check-link">Recorded {recorded}</p>{/if}
 		<p class="check-link"><a href="{base}/consume/#check-your-result">Check a file and understand the results →</a></p>
 	</details>
 </div>

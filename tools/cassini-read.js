@@ -388,6 +388,44 @@ export async function readCassini(buf) {
         verified: { manifest: true, transcript: body.verified }
     });
 }
+const RFC3339_OFFSET = /^(\d{4}-\d{2}-\d{2})[Tt ](\d{2}:\d{2}:\d{2})(\.\d+)?([Zz]|[+-]\d{2}:\d{2})$/;
+/** RFC 3339 with an offset, to epoch milliseconds. Anything else is null. */
+function instantMs(text) {
+    if (typeof text !== 'string')
+        return null;
+    const m = RFC3339_OFFSET.exec(text.trim());
+    if (!m)
+        return null;
+    const frac = (m[3] ?? '.0').slice(0, 4);
+    const zone = m[4] === 'z' ? 'Z' : m[4];
+    const ms = Date.parse(`${m[1]}T${m[2]}${frac}${zone}`);
+    return Number.isNaN(ms) ? null : ms;
+}
+/**
+ * When the meeting happened, by SPEC.md "When the meeting happened":
+ * `meeting.recordedAtUtc`, else a `DATE` with an offset that is not
+ * `createdAtUtc`, else `meeting.recordedAtLocal` as a label that is never
+ * converted. `createdAtUtc` is when the file was stamped, never the answer.
+ * An instant is rendered in the reader's zone; a label is shown as written.
+ */
+export function meetingStart(read) {
+    const meeting = read.manifest?.meeting ?? {};
+    const utc = meeting.recordedAtUtc;
+    const utcMs = instantMs(utc);
+    if (typeof utc === 'string' && utcMs !== null && utc.trim().endsWith('Z')) {
+        return { source: 'recordedAtUtc', value: utc.trim(), instantMs: utcMs };
+    }
+    const date = read.tags.get('DATE')?.[0];
+    const dateMs = instantMs(date);
+    if (date !== undefined && dateMs !== null && dateMs !== instantMs(meeting.createdAtUtc)) {
+        return { source: 'DATE', value: date.trim(), instantMs: dateMs };
+    }
+    const local = meeting.recordedAtLocal;
+    if (typeof local === 'string' && local) {
+        return { source: 'recordedAtLocal', value: local, instantMs: null };
+    }
+    return null;
+}
 /**
  * Group words into speaker turns.
  *

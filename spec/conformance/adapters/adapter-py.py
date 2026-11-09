@@ -58,6 +58,8 @@ try:
             counts[e["id"]] = len(body.get("items") or [])
         bodies[e["id"]] = body
     obs["wordCounts"] = counts
+    source, value = cx.meeting_start(tags, manifest)
+    obs["meetingStart"] = {"source": source, "value": value} if source else None
     obs["_manifest"], obs["_transcripts"] = manifest, bodies
 except cx.UnknownFormat as exc:
     # A major version this reader does not implement: play the audio, say so,
