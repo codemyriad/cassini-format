@@ -21,6 +21,7 @@ Usage:
   cassini-extract.py FILE --transcript    # print the DEFAULT transcript body
   cassini-extract.py FILE --transcript ID # print one transcript body as JSON
   cassini-extract.py FILE --check         # decode and verify every chunk set
+  cassini-extract.py FILE --when          # when the meeting happened, and from what
 
 SPDX-License-Identifier: CC0-1.0
 """
@@ -28,9 +29,11 @@ SPDX-License-Identifier: CC0-1.0
 import argparse
 import base64
 import binascii
+import datetime
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import zlib
@@ -259,6 +262,41 @@ def load_transcript(tags, manifest, wanted):
     raise CassiniError(f"no transcript {wanted!r} in this file (have: {ids})")
 
 
+RFC3339_OFFSET = re.compile(r"(\d{4}-\d{2}-\d{2})[Tt ](\d{2}:\d{2}:\d{2})(\.\d+)?([Zz]|[+-]\d{2}:\d{2})")
+
+
+def _instant(text):
+    """RFC 3339 with an offset -> aware datetime, else None."""
+    m = RFC3339_OFFSET.fullmatch((text or "").strip())
+    if not m:
+        return None
+    frac = (m.group(3) or ".0")[:7].ljust(7, "0")      # microseconds at most
+    zone = "+00:00" if m.group(4) in ("Z", "z") else m.group(4)
+    try:
+        return datetime.datetime.fromisoformat(f"{m.group(1)}T{m.group(2)}{frac}{zone}")
+    except ValueError:
+        return None
+
+
+def meeting_start(tags, manifest):
+    """When the meeting happened, as SPEC.md 'When the meeting happened' says:
+    (source, value), or (None, None). recordedAtUtc first; then a DATE with an
+    offset that is not createdAtUtc; then recordedAtLocal as an unconverted
+    label. createdAtUtc is when the file was stamped and is never the answer."""
+    meeting = manifest.get("meeting") or {}
+    utc = meeting.get("recordedAtUtc")
+    if isinstance(utc, str) and _instant(utc) and utc.strip().endswith("Z"):
+        return "recordedAtUtc", utc.strip()
+    date = _instant(tags.get("DATE"))
+    created = _instant(meeting.get("createdAtUtc"))
+    if date and date != created:
+        return "DATE", tags["DATE"].strip()
+    local = meeting.get("recordedAtLocal")
+    if isinstance(local, str) and local:
+        return "recordedAtLocal", local
+    return None, None
+
+
 def run(args):
     tags = read_tags(args.file)
 
@@ -275,6 +313,11 @@ def run(args):
 
     manifest = load_manifest(tags)
     default_id = default_transcript_id(tags, manifest)
+
+    if args.when:
+        source, value = meeting_start(tags, manifest)
+        print(f"{source}\t{value}" if source else "unknown")
+        return
 
     if args.list:
         for entry in transcript_entries(manifest):
@@ -316,6 +359,8 @@ def main():
                     help="print the Cassini descriptor tags instead of the manifest")
     ap.add_argument("--list", action="store_true",
                     help="list the transcript ids this file carries")
+    ap.add_argument("--when", action="store_true",
+                    help="print when the meeting happened and which field says so")
     ap.add_argument("--check", action="store_true",
                     help="decode every chunk set and verify its sha256 and byte counts")
     ap.add_argument("--transcript", metavar="ID", nargs="?", const="",

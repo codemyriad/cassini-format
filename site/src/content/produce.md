@@ -61,6 +61,14 @@ The packer also accepts `segments` instead of `items`:
 }
 ```
 
+If you know when the recording started, add `--recorded-at-utc` with that
+instant in UTC, for example `--recorded-at-utc 2026-09-09T08:00:03.250Z`. It
+is the moment of millisecond 0 of the audio, so readers can put each word on
+the clock. The packer writes it as `meeting.recordedAtUtc`,
+`CASSINI_RECORDED_AT_UTC` and `DATE`. Without it, `DATE` is `--created-at`,
+which is when you packed the file, not when the meeting happened; see
+[When the meeting happened](/spec/v1/#when-the-meeting-happened).
+
 Use these exact field names and millisecond units when adapting speech-recognition
 output. This is a supported JSON input shape, not a general importer for every
 transcription service. Speaker attribution and transcription accuracy remain

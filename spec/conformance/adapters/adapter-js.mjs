@@ -2,7 +2,7 @@
  * Takes one .opus path, prints one observation object, exits 0.
  * SPDX-License-Identifier: CC0-1.0 */
 import { readFileSync } from 'node:fs';
-import { readCassini } from '../../../tools/cassini-read.js';
+import { meetingStart, readCassini } from '../../../tools/cassini-read.js';
 
 const obs = { reader: 'tools/cassini-read.js', profile: 'metadata' };
 const CODE = (m) =>
@@ -43,6 +43,7 @@ try {
       // this reader decodes only the default body, so it can only count that one
       wordCounts: r.transcript ? { [r.transcript.entry?.id ?? 'transcript']: r.transcript.words.length } : {},
       speakerIds: (r.manifest?.speakers ?? []).map((s) => s.id),
+      ...(r.manifest ? { meetingStart: ((m) => m && { source: m.source, value: m.value })(meetingStart(r)) } : {}),
       // The reader names its own reasons; the adapter just passes them through.
       // An unavailable transcript is reported as an error too: the file is
       // fine, but the reader must say which body it could not load.

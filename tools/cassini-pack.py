@@ -2,7 +2,8 @@
 """A complete Cassini producer in pure Python, standard library only.
 
     cassini-pack.py AUDIO.opus TRANSCRIPT.json OUT.opus \\
-        --title "Weekly Sync" --created-at 2026-04-15T09:12:00Z
+        --title "Weekly Sync" --created-at 2026-04-15T09:12:00Z \\
+        [--recorded-at-utc 2026-04-15T08:00:03.250Z]
 
 Takes an Ogg Opus file and a word-timed transcript JSON — either a flat
 {"speakers": [...], "items": [{speaker,startMs,endMs,text}]} or the segmented
@@ -32,6 +33,7 @@ DECODE_HINT = ("Concatenate CASSINI_PAYLOAD_000..N for the manifest; for a trans
                "body concatenate CASSINI_TX_<ID>_PAYLOAD_000..N. Each chunk set: "
                "base64url decode, gzip decompress, parse UTF-8 JSON.")
 # Ids that would collide with a descriptor tag name.
+UTC_INSTANT = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z")
 RESERVED_IDS = {"payload", "format", "audio", "meeting", "integrity", "transcript",
                 "provenance", "summary", "attachments", "speakers"}
 
@@ -182,7 +184,13 @@ def chunk_tags(prefix, mime, raw, gz, chunks, sha):
 
 
 def pack(src, transcript_path, out, title, created_at, tx_id="words",
-         recorded_at_local=None):
+         recorded_at_local=None, recorded_at_utc=None):
+    """recorded_at_utc is the instant of playback position 0. It becomes
+    meeting.recordedAtUtc, CASSINI_RECORDED_AT_UTC and DATE; without it DATE
+    falls back to created_at, which says nothing about when the meeting was."""
+    if recorded_at_utc is not None and not UTC_INSTANT.fullmatch(recorded_at_utc):
+        raise ValueError("--recorded-at-utc must be RFC 3339 UTC ending in Z, "
+                         f"not {recorded_at_utc!r}")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,31}", tx_id) or tx_id in RESERVED_IDS:
         raise ValueError(f"invalid transcript id {tx_id!r}")
     prefix = "CASSINI_TX_" + tx_id.upper().replace("-", "_") + "_PAYLOAD_"
@@ -221,12 +229,14 @@ def pack(src, transcript_path, out, title, created_at, tx_id="words",
                            "gzipBytes": len(b_gz),
                            "mime": "application/vnd.cassini.transcript-words+json",
                            "encoding": "base64url+gzip+utf8json"}}]}
+    if recorded_at_utc:
+        manifest["meeting"]["recordedAtUtc"] = recorded_at_utc
     if recorded_at_local:
         manifest["meeting"]["recordedAtLocal"] = recorded_at_local
     m_raw, m_gz, m_chunks, m_sha = encode_payload(manifest)
 
     comments = [
-        ("TITLE", title), ("DATE", created_at), ("DESCRIPTION", DESCRIPTION),
+        ("TITLE", title), ("DATE", recorded_at_utc or created_at), ("DESCRIPTION", DESCRIPTION),
         ("ENCODER", VENDOR),
         ("CASSINI_FORMAT", "org.cassini.portable-meeting/1"),
         ("CASSINI_PROFILE", "ogg-opus"),
@@ -245,6 +255,8 @@ def pack(src, transcript_path, out, title, created_at, tx_id="words",
         ("CASSINI_PAYLOAD_SCHEMA",
          "https://format.gocassini.com/schema/cassini-portable-meeting-manifest-v1.schema.json"),
     ]
+    if recorded_at_utc:
+        comments.append(("CASSINI_RECORDED_AT_UTC", recorded_at_utc))
     if recorded_at_local:
         comments.append(("CASSINI_RECORDED_AT_LOCAL", recorded_at_local))
     comments += chunk_tags("CASSINI_PAYLOAD_",
@@ -292,11 +304,14 @@ if __name__ == "__main__":
     ap.add_argument("audio"), ap.add_argument("transcript"), ap.add_argument("out")
     ap.add_argument("--title", required=True)
     ap.add_argument("--created-at", required=True, metavar="RFC3339")
-    ap.add_argument("--recorded-at-local", metavar="ISO8601")
+    ap.add_argument("--recorded-at-utc", metavar="RFC3339Z",
+                    help="when playback position 0 was recorded; also sets DATE")
+    ap.add_argument("--recorded-at-local", metavar="ISO8601",
+                    help="the site's wall clock; only when its zone is known")
     ap.add_argument("--transcript-id", default="words")
     a = ap.parse_args()
     try:
         pack(a.audio, a.transcript, a.out, a.title, a.created_at,
-             a.transcript_id, a.recorded_at_local)
+             a.transcript_id, a.recorded_at_local, a.recorded_at_utc)
     except ValueError as exc:
         sys.exit(f"cassini-pack: {exc}")

@@ -4,7 +4,7 @@ Date: 2026-09-02
 
 Status: published, version 1
 
-Revised: 2026-09-07. [Compatibility and implementation notes](design/format-simplification-2026-09-07.md#compatibility-and-cassini-follow-up).
+Revised: 2026-11-09. [Changes](CHANGELOG.md#specification-changes-that-are-not-format-changes); the 2026-09-07 revision's [compatibility and implementation notes](design/format-simplification-2026-09-07.md#compatibility-and-cassini-follow-up).
 
 A Cassini portable meeting is an ordinary Ogg Opus file that also carries its
 own transcript. Who spoke, what they said word by word with timestamps, and what
@@ -266,8 +266,8 @@ Producers SHOULD write them; consumers MUST NOT require them.
 | `CASSINI_CREATED_AT` | RFC 3339 UTC |
 | `CASSINI_SPEAKER_COUNT` | decimal |
 
-Five optional tags mirror the origin fields of `meeting`. Each is written only
-when its value is known: absent, never empty.
+Six optional tags mirror the origin and time fields of `meeting`. Each is
+written only when its value is known: absent, never empty.
 
 | Tag | Mirrors |
 |---|---|
@@ -275,10 +275,18 @@ when its value is known: absent, never empty.
 | `CASSINI_JOB_ID` | `meeting.jobId` |
 | `CASSINI_ATTEMPT_NUMBER` | `meeting.attemptNumber` |
 | `CASSINI_PROCESSED_AT` | `meeting.processedAtUtc` |
+| `CASSINI_RECORDED_AT_UTC` | `meeting.recordedAtUtc` |
 | `CASSINI_RECORDED_AT_LOCAL` | `meeting.recordedAtLocal` |
 
 Producers SHOULD also write `TITLE`, `DATE` and a one-line `DESCRIPTION` saying
 how to decode the payload, so that ordinary tools show something useful.
+
+`DATE` is when the recording started, in RFC 3339. That is the Vorbis comment
+meaning of `DATE`, the date the track was recorded. A producer that writes
+`meeting.recordedAtUtc` SHOULD write the same string in `DATE`. A producer that
+does not know when the recording started writes `createdAtUtc`, which is what
+files written before this was defined carry; a `DATE` that names the same
+instant as `createdAtUtc` therefore says nothing about the recording.
 
 All of these are copies. The manifest is the record; see
 [When a tag and the manifest disagree](#when-a-tag-and-the-manifest-disagree).
@@ -424,9 +432,20 @@ Required:
 
 Optional:
 
+- `recordedAtUtc`: RFC 3339 UTC, ending in `Z`, fractional seconds allowed.
+  The instant of playback position 0 of this file's audio, so a word's
+  wall-clock time is `recordedAtUtc` plus its `startMs`. Producers SHOULD be
+  accurate to within a few seconds, and SHOULD leave it out rather than guess.
+  A tool MAY add it to an existing file from trustworthy records, such as a
+  recorder's job log. That is a manifest edit like any other: `meeting.id` and
+  the audio digest do not change, and `CASSINI_PAYLOAD_SHA256` and
+  `CASSINI_PAYLOAD_RAW_BYTES` are recomputed.
 - `recordedAtLocal`: wall-clock time at the recording site,
   `YYYY-MM-DDTHH:MM:SS`, no offset and no zone. It is a label, not an
-  instant: consumers MUST NOT convert it to one.
+  instant: consumers MUST NOT convert it to one. A producer SHOULD NOT write
+  it unless it knows the recording site's zone. A server clock's digits are
+  not the site's wall clock, and a label that looks local but is not is worse
+  than none. A producer that knows the instant writes `recordedAtUtc`.
 - `processedAtUtc`: RFC 3339 UTC.
 - `roomId`: a one-way derivation of the room's identity, `rm_<16 lowercase
   hex>`. Never the identity itself: a Nextcloud Talk conversation token is also
@@ -434,6 +453,19 @@ Optional:
   NOT write a raw room token in any tag or manifest member.
 - `jobId`, `attemptNumber`: the producer job, and which attempt, 1-based. A
   consumer MUST treat a non-positive `attemptNumber` as absent.
+
+#### When the meeting happened
+
+A consumer that shows when the meeting happened, or sorts or groups meetings by
+it, SHOULD take the first of these that the file carries:
+
+1. `meeting.recordedAtUtc`. An instant: render it in the reader's zone.
+2. `DATE`, when it is RFC 3339 with an offset (`Z` or `±HH:MM`) and does not
+   name the same instant as `createdAtUtc`. An instant.
+3. `meeting.recordedAtLocal`, shown as written. A label, never converted.
+
+When none applies, the meeting time is unknown. A consumer SHOULD NOT present
+`createdAtUtc` as when the meeting happened.
 
 ### `audio`
 

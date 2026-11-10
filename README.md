@@ -39,7 +39,8 @@ tools/cassini-read-pure.py meeting.opus        # no ffprobe: parses the containe
 
 ## Versions
 
-Version 1, published 2026-09-02, simplified 2026-09-07. The change history is in
+Version 1, published 2026-09-02, simplified 2026-09-07, recording start
+added 2026-11-09. The change history is in
 [`CHANGELOG.md`](CHANGELOG.md).
 
 ## The shape of it
