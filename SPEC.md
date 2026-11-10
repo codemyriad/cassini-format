@@ -464,7 +464,7 @@ it, SHOULD take the first of these that the file carries:
    name the same instant as `createdAtUtc`. An instant.
 3. `meeting.recordedAtLocal`, shown as written. A label, never converted.
 
-When none applies, the meeting time is unknown. A consumer MUST NOT present
+When none applies, the meeting time is unknown. A consumer SHOULD NOT present
 `createdAtUtc` as when the meeting happened.
 
 ### `audio`

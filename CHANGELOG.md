@@ -29,8 +29,8 @@ does not know the recording site's zone wrote its own clock's digits there.
   site's zone. Consumers still MUST NOT convert it.
 * [When the meeting happened](SPEC.md#when-the-meeting-happened): a consumer
   uses `recordedAtUtc`, else a `DATE` with an offset that is not
-  `createdAtUtc`, else `recordedAtLocal` as an unconverted label, and never
-  presents `createdAtUtc` as the meeting time.
+  `createdAtUtc`, else `recordedAtLocal` as an unconverted label, and SHOULD
+  NOT present `createdAtUtc` as the meeting time.
 * `tools/cassini-pack.py --recorded-at-utc`, a meeting-time line in
   `tools/cassini-read-pure.py`, `meetingStart()` in the browser reader, and
   conformance vectors 027 and 028.
